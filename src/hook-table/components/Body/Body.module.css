@@ -1,0 +1,43 @@
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.row td {
+  position: relative;
+}
+
+.row {
+  border-bottom: 1px solid transparent;
+}
+
+.row:not(:last-child) {
+  border-color: var(--accent);
+}
+
+.row:hover {
+  background-color: var(--accent);
+  border-color: transparent;
+}
+
+/* Select previous element */
+.row:has(+ .row:hover) {
+  border-color: transparent;
+}
+
+.row:hover td:first-child {
+  border-top-left-radius: var(--border-radius-md);
+  border-bottom-left-radius: var(--border-radius-md);
+}
+
+.row:hover td:last-child {
+  border-bottom-right-radius: var(--border-radius-md);
+  border-top-right-radius: var(--border-radius-md);
+}
