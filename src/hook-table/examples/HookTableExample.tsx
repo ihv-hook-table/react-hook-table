@@ -21,13 +21,13 @@ export const HookTableExample = () => {
     <Table data={data} isLoading={false}>
       <Column
         accessor="id"
-        label="ID"
+        label={["ID", "Test"]}
         footer={{ value: "Total", colSpan: 2 }}
       />
       <Column accessor="item" label="Item" />
       <Column
         accessor="amount"
-        label="Amount"
+        label={"Amount"}
         alignment="right"
         footer={{ fn: "sum" }}
       />

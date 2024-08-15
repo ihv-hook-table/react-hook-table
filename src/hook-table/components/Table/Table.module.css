@@ -8,6 +8,7 @@
 
 .root th {
   padding: 0.5rem 1rem;
+  vertical-align: text-top;
 }
 
 .root td {

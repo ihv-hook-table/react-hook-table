@@ -1,16 +1,13 @@
 import { useMemo } from "react";
 import { TableProps, TableRowType } from "../types";
-import { Footer } from "../components/Footer/Footer";
-import { Header } from "../components/Header/Header";
-import { Table } from "../components/Table/Table";
-import { Body } from "../components/Body/Body";
-import { getPropsFromChildren } from "../helpers/table";
+import { Body, Footer, Header, Table } from "../components";
+import { getChildrenProps } from "../helpers/table";
 
 export const useCreateTable = <T extends TableRowType = TableRowType>() => {
   const HookTable = useMemo(
     () =>
       ({ children, data, isLoading, ...rest }: TableProps<T>) => {
-        const columns = getPropsFromChildren(children);
+        const columns = getChildrenProps(children);
 
         return (
           <Table {...rest}>

@@ -9,12 +9,12 @@ type Props<T extends TableRowType = TableRowType> = {
 
 export const Header = <T extends TableRowType = TableRowType>({
   columns,
-}: Props<T>) => {
-  return (
-    <thead>
-      <tr className={classes.header}>
-        {columns?.map((col, idx) => <HeaderCell key={idx} column={col} />)}
-      </tr>
-    </thead>
-  );
-};
+}: Props<T>) => (
+  <thead>
+    <tr className={classes.header}>
+      {columns?.map((col, idx) => (
+        <HeaderCell key={idx} column={col} />
+      ))}
+    </tr>
+  </thead>
+);

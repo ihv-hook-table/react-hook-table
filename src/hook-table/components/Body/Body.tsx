@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { ReactNode } from "react";
 import clsx from "clsx";
 // import ToolsMenu from "../table-tools/table-tools";
@@ -15,7 +14,7 @@ type Props<T extends TableRowType = TableRowType> = {
 export const Body = <T extends TableRowType = TableRowType>({
   columns,
   data,
-  isLoading,
+  isLoading = false,
 }: Props<T>) => {
   if (!data || !columns || isLoading) {
     return (
@@ -32,22 +31,28 @@ export const Body = <T extends TableRowType = TableRowType>({
     );
   }
 
+  const isNoResults = !data || !data.length || !columns || isLoading;
+
+  if (isNoResults) {
+    return <NoResults isLoading={isLoading} />;
+  }
+
   return (
     <tbody>
-      {data.map((item, index) => (
+      {data.map((rowData, index) => (
         <tr key={index} className={clsx(classes.row)}>
           {columns.map(({ accessor, alignment = "left", children }) => {
-            let element: ReactNode;
+            let value: ReactNode;
 
             const childElements =
-              children && typeof children === "function" && children(item);
+              children && typeof children === "function" && children(rowData);
 
             if (childElements) {
-              element = childElements;
+              value = childElements;
             }
 
             if (!children && !!accessor) {
-              element = item[accessor] as ReactNode;
+              value = rowData[accessor] as ReactNode;
             }
 
             return (
@@ -55,7 +60,7 @@ export const Body = <T extends TableRowType = TableRowType>({
                 key={String(accessor)}
                 className={clsx(alignment && classes[`align-${alignment}`])}
               >
-                {!!element || element === 0 ? element : "-"}
+                {!!value || value === 0 ? value : "-"}
               </td>
             );
           })}
@@ -64,3 +69,13 @@ export const Body = <T extends TableRowType = TableRowType>({
     </tbody>
   );
 };
+
+const NoResults = ({ isLoading }: { isLoading: boolean }) => (
+  <tbody>
+    <tr>
+      <td colSpan={1} className={classes["align-center"]}>
+        {isLoading ? "Loading" : "No results"}
+      </td>
+    </tr>
+  </tbody>
+);

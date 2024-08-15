@@ -1,17 +1,19 @@
 import { ReactNode } from "react";
 
-// Utility types
-
+/**
+ * Utility types
+ */
 export type TableRowType = Record<PropertyKey, unknown>;
 
-export type TableChildren<T extends TableRowType = TableRowType> =
+export type ColumnChildren<T extends TableRowType = TableRowType> =
   | ReactNode
   | ((rowData: T) => ReactNode);
 
 export type AlignmentType = "left" | "center" | "right";
 
-// Table component prop types
-
+/**
+ * Table component prop types
+ */
 type FooterProps = {
   alignment?: AlignmentType;
   colSpan?: number;
@@ -22,15 +24,15 @@ type FooterProps = {
 export type ColumnProps<T extends TableRowType = TableRowType> = {
   accessor?: keyof T;
   footer?: FooterProps;
-  label?: string;
+  label?: string | string[];
   toolbar?: boolean;
   keyPrefix?: string;
   alignment?: AlignmentType;
-  children?: TableChildren<T>;
+  children?: ColumnChildren<T>;
 };
 
 export type TableProps<T extends TableRowType = TableRowType> = {
-  children: TableChildren<T>;
+  children: ReactNode;
   data?: T[];
   isLoading?: boolean;
   hideHeader?: boolean;

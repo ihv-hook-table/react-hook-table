@@ -1,9 +1,6 @@
 import { isValidElement, ReactNode } from "react";
-import { TableRowType } from "../types";
 
-export const getPropsFromChildren = <T extends TableRowType = TableRowType>(
-  columns: ReactNode | ReactNode[] | ((rowData: T) => ReactNode)
-) => {
+export const getChildrenProps = (columns: ReactNode) => {
   const mappedValues = (values: ReactNode[]) =>
     values?.map((child) => {
       if (isValidElement(child)) {
@@ -21,11 +18,6 @@ export const getPropsFromChildren = <T extends TableRowType = TableRowType>(
   if (typeof columns === "object") {
     return mappedValues([columns]);
   }
-
-  // Is this needed - TODO: Check
-  // if (columns && isValidElement(columns) && !!columns.props.children) {
-  //   return mappedValues(columns.props.children);
-  // }
 
   return [];
 };
