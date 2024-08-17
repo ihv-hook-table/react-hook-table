@@ -1,8 +1,8 @@
-import clsx from "clsx";
-import { ColumnProps, TableRowType } from "../../types";
-import { getFooterValue } from "../../helpers/calculations";
+import clsx from 'clsx';
+import { ColumnProps, TableRowType } from '../../types';
+import { getFooterValue } from '../../helpers/calculations';
 
-import classes from "./Footer.module.css";
+import classes from './Footer.module.css';
 
 type Props<T extends TableRowType = TableRowType> = {
   columns: ColumnProps<T>[];
@@ -35,19 +35,22 @@ const Cell = <T extends TableRowType = TableRowType>({
   column,
   data,
 }: CellProps<T>) => {
-  const { alignment = "left", footer } = column || {};
-
-  const footerAlignment = footer?.alignment ?? alignment;
+  const { alignment = 'left', footer } = column || {};
 
   if (!footer) {
     return null;
   }
 
+  const footerAlignment =
+    typeof footer !== 'string' && footer?.alignment
+      ? footer.alignment
+      : alignment;
+
+  const colSpan =
+    typeof footer !== 'string' && footer?.colSpan ? footer.colSpan : 1;
+
   return (
-    <th
-      className={clsx(classes[`align-${footerAlignment}`])}
-      colSpan={footer?.colSpan ?? 1}
-    >
+    <th className={clsx(classes[`align-${footerAlignment}`])} colSpan={colSpan}>
       {String(getFooterValue<T>({ column, data }))}
     </th>
   );

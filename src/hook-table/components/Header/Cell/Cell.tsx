@@ -1,51 +1,56 @@
-import clsx from "clsx";
-import { ColumnProps, TableRowType } from "../../../types";
+import clsx from 'clsx';
+import { ColumnProps, TableRowType } from '../../../types';
 
-import classes from "./Cell.module.css";
+import classes from './Cell.module.css';
 
 type HeaderCellProps<T extends TableRowType = TableRowType> = {
   column: ColumnProps<T>;
 };
 
-const getLabel = (label?: string | string[]) => {
-  if (!label) return undefined;
-  if (typeof label === "string") return label;
+const getLabel = <T extends TableRowType = TableRowType>({
+  label,
+}: ColumnProps<T>) => {
+  if (typeof label === 'string') return label;
   if (Array.isArray(label) && label.length === 1) return label[0];
 
   return label;
 };
 
-const CellInner = <T extends TableRowType = TableRowType>(
-  column: ColumnProps<T>
+const CellValue = <T extends TableRowType = TableRowType>(
+  column: ColumnProps<T>,
 ) => {
-  const { label, accessor } = column || {};
-  const adjustedLabel = getLabel(label);
+  const adjustedLabel = getLabel(column);
 
-  if (!adjustedLabel && !!accessor) return String(accessor);
-  if (typeof adjustedLabel === "string") return adjustedLabel;
+  if (typeof adjustedLabel === 'string') return adjustedLabel;
 
-  const hasSecondaryLabels = !!adjustedLabel && adjustedLabel.length > 1;
+  return adjustedLabel.map((label, idx) => {
+    const isSecondaryLabel = idx !== 0;
 
-  return adjustedLabel?.map((label, idx) => (
-    <div
-      key={idx}
-      className={clsx(
-        hasSecondaryLabels && idx !== 0 && classes.secondaryLabel
-      )}
-    >
-      {label}
-    </div>
-  ));
+    return (
+      <div
+        key={idx}
+        className={clsx(isSecondaryLabel && classes.secondaryLabel)}
+      >
+        {label}
+      </div>
+    );
+  });
 };
 
-export const HeaderCell = <T extends TableRowType = TableRowType>({
+export const Cell = <T extends TableRowType = TableRowType>({
   column,
-}: HeaderCellProps<T>) => {
-  const { alignment = "left" } = column || {};
+  isMulti,
+}: HeaderCellProps<T> & { isMulti: boolean }) => {
+  const { alignment = 'left' } = column || {};
 
   return (
-    <th className={clsx(alignment && classes[`align-${alignment}`])}>
-      <CellInner {...column} />
+    <th
+      className={clsx(
+        classes[`align-${alignment}`],
+        isMulti && classes.multiLine,
+      )}
+    >
+      <CellValue {...column} />
     </th>
   );
 };

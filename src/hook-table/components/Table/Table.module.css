@@ -2,17 +2,16 @@
   width: 100%;
   border-collapse: collapse;
   font-weight: 500;
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
+  font-size: 1rem;
+  line-height: 1rem;
 }
 
-.root th {
-  padding: 0.5rem 1rem;
-  vertical-align: text-top;
-}
-
+.root th,
 .root td {
-  vertical-align: middle;
-  height: 3rem;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
+  height: 34px;
+}
+
+.root tr {
+  border-bottom: 1px solid lightgray;
 }

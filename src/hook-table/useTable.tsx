@@ -1,8 +1,8 @@
-import { TableRowType } from "./types";
-import { useCreateTable } from "./hooks/useCreateTable";
-import { useCreateColumn } from "./hooks/useCreateColumn";
+import { TableRowType } from './types';
+import { useCreateColumn, useCreateTable } from './components';
 
 export const useTable = <T extends TableRowType = TableRowType>() => {
+  console.log(navigator.language);
   const { Table } = useCreateTable<T>();
   const { Column } = useCreateColumn<T>();
 

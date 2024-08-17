@@ -1,7 +1,7 @@
-import { useMemo } from "react";
-import { TableProps, TableRowType } from "../types";
-import { Body, Footer, Header, Table } from "../components";
-import { getChildrenProps } from "../helpers/table";
+import { useMemo } from 'react';
+import { TableProps, TableRowType } from '../types';
+import { Body, Footer, Header, Table } from '../components';
+import { getChildrenProps } from '../helpers/table';
 
 export const useCreateTable = <T extends TableRowType = TableRowType>() => {
   const HookTable = useMemo(
@@ -17,7 +17,7 @@ export const useCreateTable = <T extends TableRowType = TableRowType>() => {
           </Table>
         );
       },
-    []
+    [],
   );
 
   return { Table: HookTable };
