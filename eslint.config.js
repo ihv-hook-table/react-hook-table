@@ -6,7 +6,11 @@ import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default tseslint.config({
-  extends: [js.configs.recommended, ...tseslint.configs.recommended],
+  extends: [
+    js.configs.recommended,
+    ...tseslint.configs.recommended,
+    eslintConfigPrettier,
+  ],
   files: ['**/*.{ts,tsx}'],
   ignores: ['dist'],
   languageOptions: {
@@ -24,5 +28,4 @@ export default tseslint.config({
       { allowConstantExport: true },
     ],
   },
-  eslintConfigPrettier,
 });

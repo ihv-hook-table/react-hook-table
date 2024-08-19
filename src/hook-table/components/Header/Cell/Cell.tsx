@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { ColumnProps, TableRowType } from '../../../types';
 
 import classes from './Cell.module.css';
+import { isStringType } from '../../../utils';
 
 type HeaderCellProps<T extends TableRowType = TableRowType> = {
   column: ColumnProps<T>;
@@ -10,8 +11,7 @@ type HeaderCellProps<T extends TableRowType = TableRowType> = {
 const getLabel = <T extends TableRowType = TableRowType>({
   label,
 }: ColumnProps<T>) => {
-  if (typeof label === 'string') return label;
-  if (Array.isArray(label) && label.length === 1) return label[0];
+  if (isStringType(label)) return [label];
 
   return label;
 };
@@ -19,9 +19,7 @@ const getLabel = <T extends TableRowType = TableRowType>({
 const CellValue = <T extends TableRowType = TableRowType>(
   column: ColumnProps<T>,
 ) => {
-  const adjustedLabel = getLabel(column);
-
-  if (typeof adjustedLabel === 'string') return adjustedLabel;
+  const adjustedLabel = getLabel(column) || '';
 
   return adjustedLabel.map((label, idx) => {
     const isSecondaryLabel = idx !== 0;
@@ -46,6 +44,7 @@ export const Cell = <T extends TableRowType = TableRowType>({
   return (
     <th
       className={clsx(
+        classes.root,
         classes[`align-${alignment}`],
         isMulti && classes.multiLine,
       )}

@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
 import clsx from 'clsx';
 import { ColumnProps, TableRowType } from '../../types';
+import { Value } from '../Value/Value';
+import { deepGet, isArrayType, isFunction, isStringType } from '../../utils';
 
 import classes from './Body.module.css';
-import { Value } from '../Value/Value';
 
 type Props<T extends TableRowType = TableRowType> = {
   columns: ColumnProps<T>[];
@@ -23,58 +24,60 @@ export const Body = <T extends TableRowType = TableRowType>({
   }
 
   const hasMultipleValues = columns.some(
-    ({ accessor }) => Array.isArray(accessor) && accessor.length > 1,
+    ({ accessor }) => isArrayType(accessor) && accessor.length > 1,
   );
 
   return (
     <tbody>
-      {data.map((rowData, index) => (
-        <tr key={index} className={clsx(classes.row)}>
-          {columns.map(({ accessor, alignment = 'left', children }) => {
-            let value: ReactNode;
+      {data.map((rowData, dataIndex) => (
+        <tr key={dataIndex} className={clsx(classes.row)}>
+          {columns.map(
+            ({ accessor, alignment = 'left', children }, colIndex) => {
+              let value: ReactNode;
 
-            const childElements =
-              children && typeof children === 'function' && children(rowData);
+              const childElements = isFunction(children) && children(rowData);
 
-            if (childElements) {
-              value = childElements;
-            }
-
-            if (!children && !!accessor) {
-              if (typeof accessor === 'string') {
-                value = <Value value={rowData[accessor]} />;
+              if (childElements) {
+                value = childElements;
               }
 
-              if (Array.isArray(accessor) && accessor.length === 1) {
-                value = <Value value={rowData[accessor[0]]} />;
+              if (!children && !!accessor) {
+                if (isStringType(accessor)) {
+                  value = <Value value={deepGet(rowData, accessor)} />;
+                }
+
+                // This might not be needed anymore
+                if (isArrayType(accessor) && accessor.length === 1) {
+                  value = <Value value={deepGet(rowData, accessor[0])} />;
+                }
+
+                if (isArrayType(accessor)) {
+                  value = accessor.map((acc, valueIndex) => {
+                    const isSecondaryValue = valueIndex !== 0;
+                    return (
+                      <Value
+                        value={deepGet(rowData, acc)}
+                        isSecondaryValue={isSecondaryValue}
+                        key={valueIndex}
+                      />
+                    );
+                  });
+                }
               }
 
-              if (Array.isArray(accessor) && accessor.length > 1) {
-                value = accessor.map((acc, idx) => {
-                  const isSecondaryValue = idx !== 0;
-                  return (
-                    <Value
-                      value={rowData[acc]}
-                      isSecondaryValue={isSecondaryValue}
-                      key={idx}
-                    />
-                  );
-                });
-              }
-            }
-
-            return (
-              <td
-                key={String(accessor)}
-                className={clsx(
-                  alignment && classes[`align-${alignment}`],
-                  hasMultipleValues && classes.top,
-                )}
-              >
-                {value}
-              </td>
-            );
-          })}
+              return (
+                <td
+                  key={colIndex}
+                  className={clsx(
+                    alignment && classes[`align-${alignment}`],
+                    hasMultipleValues && classes.top,
+                  )}
+                >
+                  {value}
+                </td>
+              );
+            },
+          )}
         </tr>
       ))}
     </tbody>

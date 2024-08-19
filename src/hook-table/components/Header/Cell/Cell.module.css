@@ -1,3 +1,7 @@
+.root {
+  text-wrap: nowrap;
+}
+
 .align-left {
   text-align: left;
 }

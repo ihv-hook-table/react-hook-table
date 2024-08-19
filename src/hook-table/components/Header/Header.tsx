@@ -1,4 +1,5 @@
 import { ColumnProps, TableRowType } from '../../types';
+import { isArrayType } from '../../utils';
 import { Cell } from './Cell/Cell';
 
 import classes from './Header.module.css';
@@ -11,7 +12,7 @@ export const Header = <T extends TableRowType = TableRowType>({
   columns,
 }: Props<T>) => {
   const hasMultiLabels = columns.some(
-    ({ label }) => Array.isArray(label) && label.length > 1,
+    ({ label }) => isArrayType(label) && label.length > 1,
   );
 
   return (
@@ -23,6 +24,7 @@ export const Header = <T extends TableRowType = TableRowType>({
               'You can only use one of `accessor` or `id` in a column',
             );
           }
+
           return <Cell key={idx} column={col} isMulti={hasMultiLabels} />;
         })}
       </tr>

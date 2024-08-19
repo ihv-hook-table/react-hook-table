@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 /**
  * Utility types
@@ -11,18 +11,23 @@ export type ColumnChildren<T extends TableRowType = TableRowType> =
 
 export type AlignmentType = 'left' | 'center' | 'right';
 
+export type NestedKeyOf<T, K = keyof T> = K extends keyof T & (string | number)
+  ? `${K}` | (T[K] extends object ? `${K}.${NestedKeyOf<T[K]>}` : never)
+  : never;
+
 /**
  * Table component prop types
  */
-type FooterProps = {
+type FooterProps<T extends TableRowType = TableRowType> = {
   alignment?: AlignmentType;
   colSpan?: number;
   value?: unknown;
   fn?: 'sum' | 'average';
+  accessor?: NestedKeyOf<T>;
 };
 
 type AccessorPropsWithoutId<T extends TableRowType = TableRowType> = {
-  accessor: keyof T | (keyof T)[];
+  accessor: NestedKeyOf<T> | NestedKeyOf<T>[];
   children?: ReactNode;
   id?: never;
 };
@@ -34,7 +39,7 @@ type AccessorPropsWithId<T extends TableRowType = TableRowType> = {
 };
 
 export type ColumnProps<T extends TableRowType = TableRowType> = {
-  footer?: string | FooterProps;
+  footer?: string | FooterProps<T>;
   label: string | string[];
   toolbar?: boolean;
   keyPrefix?: string;

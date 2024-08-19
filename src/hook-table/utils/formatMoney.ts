@@ -5,16 +5,17 @@ const DECIMALS = {
 };
 
 type Props = {
-  currency: keyof typeof DECIMALS;
+  currency: string;
   amount?: number;
 };
 
 export const formatMoney = ({ currency, amount }: Props) => {
-  const value = !!amount
+  const value = amount
     ? new Intl.NumberFormat(navigator.language, {
         style: 'currency',
         currency,
-        minimumFractionDigits: DECIMALS[currency],
+        minimumFractionDigits:
+          typeof currency === 'string' ? 2 : DECIMALS[currency],
       })
         .format(amount)
         .replace('BTC', 'Ƀ')

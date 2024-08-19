@@ -1,8 +1,10 @@
-import { isValidElement, ReactNode } from "react";
+import { isValidElement, ReactNode } from 'react';
+import { isArrayType } from './isArrayType';
+import { isObject } from './isObject';
 
 export const getChildrenProps = (columns: ReactNode) => {
   const mappedValues = (values: ReactNode[]) =>
-    values?.map((child) => {
+    values?.map(child => {
       if (isValidElement(child)) {
         return child.props;
       }
@@ -10,12 +12,12 @@ export const getChildrenProps = (columns: ReactNode) => {
     });
 
   // If multiple columns are passed as children
-  if (Array.isArray(columns)) {
+  if (isArrayType<ReactNode>(columns)) {
     return mappedValues(columns);
   }
 
   //If a single column is passed as children
-  if (typeof columns === "object") {
+  if (isObject(columns)) {
     return mappedValues([columns]);
   }
 

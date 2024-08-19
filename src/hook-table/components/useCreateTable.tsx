@@ -1,7 +1,10 @@
 import { useMemo } from 'react';
 import { TableProps, TableRowType } from '../types';
-import { Body, Footer, Header, Table } from '../components';
-import { getChildrenProps } from '../helpers/table';
+import { getChildrenProps } from '../utils/getChildrenProps';
+import { Table } from './Table/Table';
+import { Header } from './Header/Header';
+import { Body } from './Body/Body';
+import { Footer } from './Footer/Footer';
 
 export const useCreateTable = <T extends TableRowType = TableRowType>() => {
   const HookTable = useMemo(

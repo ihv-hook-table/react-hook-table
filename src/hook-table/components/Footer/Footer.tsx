@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ColumnProps, TableRowType } from '../../types';
-import { getFooterValue } from '../../helpers/calculations';
+import { getFooterValue } from '../../utils/calculations';
 
 import classes from './Footer.module.css';
 
