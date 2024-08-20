@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { ColumnProps, TableRowType } from '../../../types';
+import { isStringType } from '../../../utils';
 
 import classes from './Cell.module.css';
-import { isStringType } from '../../../utils';
 
 type HeaderCellProps<T extends TableRowType = TableRowType> = {
   column: ColumnProps<T>;

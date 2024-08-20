@@ -1,7 +1,7 @@
-import { DetailedHTMLProps, forwardRef, Ref, TableHTMLAttributes } from "react";
-import clsx from "clsx";
+import { DetailedHTMLProps, forwardRef, Ref, TableHTMLAttributes } from 'react';
+import clsx from 'clsx';
 
-import classes from "./Table.module.css";
+import classes from './Table.module.css';
 
 export type Props = DetailedHTMLProps<
   TableHTMLAttributes<HTMLTableElement>,
@@ -11,5 +11,5 @@ export type Props = DetailedHTMLProps<
 export const Table = forwardRef(
   ({ className, ...rest }: Props, ref: Ref<HTMLTableElement>) => (
     <table {...rest} ref={ref} className={clsx(classes.root, className)} />
-  )
+  ),
 );

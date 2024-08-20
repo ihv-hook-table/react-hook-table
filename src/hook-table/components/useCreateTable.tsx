@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { TableProps, TableRowType } from '../types';
-import { getChildrenProps } from '../utils/getChildrenProps';
+import { getChildrenProps } from '../utils';
 import { Table } from './Table/Table';
 import { Header } from './Header/Header';
 import { Body } from './Body/Body';
