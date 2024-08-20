@@ -1,7 +1,8 @@
+import { ReactNode } from 'react';
 import clsx from 'clsx';
+import { isBooleanType, isObjectType } from '../../utils';
 
 import classes from './Value.module.css';
-import { ReactNode } from 'react';
 
 export type ValueProps = {
   isSecondaryValue?: boolean;
@@ -9,13 +10,13 @@ export type ValueProps = {
 };
 
 export const Value = ({ isSecondaryValue, value }: ValueProps) => {
-  if (typeof value === 'object') {
+  if (isObjectType(value)) {
     throw new Error('The value cannot be an object');
   }
 
   return (
     <div className={clsx(isSecondaryValue && classes.secondaryValue)}>
-      {!!value || value === 0 || typeof value === 'boolean'
+      {!!value || value === 0 || isBooleanType(value)
         ? (value as ReactNode)
         : '-'}
     </div>

@@ -1,3 +1,5 @@
+import { isStringType } from './isStringType';
+
 const DECIMALS = {
   BTC: 8,
   ETH: 18,
@@ -14,8 +16,7 @@ export const formatMoney = ({ currency, amount }: Props) => {
     ? new Intl.NumberFormat(navigator.language, {
         style: 'currency',
         currency,
-        minimumFractionDigits:
-          typeof currency === 'string' ? 2 : DECIMALS[currency],
+        minimumFractionDigits: isStringType(currency) ? 2 : DECIMALS[currency],
       })
         .format(amount)
         .replace('BTC', 'Ƀ')

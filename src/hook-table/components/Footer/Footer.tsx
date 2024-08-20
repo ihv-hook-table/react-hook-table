@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ColumnProps, TableRowType } from '../../types';
-import { getFooterValue } from '../../utils/getFooterValue';
+import { getFooterValue, isStringType } from '../../utils';
 
 import classes from './Footer.module.css';
 
@@ -42,12 +42,9 @@ const Cell = <T extends TableRowType = TableRowType>({
   }
 
   const footerAlignment =
-    typeof footer !== 'string' && footer?.alignment
-      ? footer.alignment
-      : alignment;
+    !isStringType(footer) && footer?.alignment ? footer.alignment : alignment;
 
-  const colSpan =
-    typeof footer !== 'string' && footer?.colSpan ? footer.colSpan : 1;
+  const colSpan = !isStringType(footer) && footer?.colSpan ? footer.colSpan : 1;
 
   return (
     <th className={clsx(classes[`align-${footerAlignment}`])} colSpan={colSpan}>
