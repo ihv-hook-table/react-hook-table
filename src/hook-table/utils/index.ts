@@ -1,7 +1,7 @@
 export { deepGet } from './deepGet';
 export { formatMoney } from './formatMoney';
 export { getChildrenProps } from './getChildrenProps';
-export { getFooterValue } from './calculations';
+export { getFooterValue } from './getFooterValue';
 export { isArrayType } from './isArrayType';
 export { isDateObject } from './isDateObject';
 export { isFunction } from './isFunction';

@@ -1,10 +1,11 @@
 import clsx from 'clsx';
 
 import classes from './Value.module.css';
+import { ReactNode } from 'react';
 
 export type ValueProps = {
   isSecondaryValue?: boolean;
-  value: any;
+  value: unknown;
 };
 
 export const Value = ({ isSecondaryValue, value }: ValueProps) => {
@@ -14,7 +15,9 @@ export const Value = ({ isSecondaryValue, value }: ValueProps) => {
 
   return (
     <div className={clsx(isSecondaryValue && classes.secondaryValue)}>
-      {!!value || value === 0 || typeof value === 'boolean' ? value : '-'}
+      {!!value || value === 0 || typeof value === 'boolean'
+        ? (value as ReactNode)
+        : '-'}
     </div>
   );
 };

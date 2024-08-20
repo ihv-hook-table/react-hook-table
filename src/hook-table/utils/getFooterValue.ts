@@ -10,21 +10,30 @@ type GetFooterValueProps<T extends TableRowType = TableRowType> = {
   data?: T[];
 };
 
-export const getFooterValue = <T extends TableRowType = TableRowType>({
-  column,
-  data,
-}: GetFooterValueProps<T>) => {
+const getFooterAccessor = <T extends TableRowType = TableRowType>(
+  column: ColumnProps<T>,
+) => {
   const { accessor, footer } = column;
 
   const footerAccessor = isStringType(footer) ? footer : footer?.accessor;
   const colAccessor = isStringType(accessor) ? accessor : undefined;
-  const correctAccessor = footerAccessor || colAccessor;
 
-  if (correctAccessor && data && typeof footer !== 'string') {
+  return footerAccessor || colAccessor;
+};
+
+export const getFooterValue = <T extends TableRowType = TableRowType>({
+  column,
+  data,
+}: GetFooterValueProps<T>) => {
+  const { footer } = column;
+
+  const footerAccessor = getFooterAccessor(column);
+
+  if (footerAccessor && data && !isStringType(footer)) {
     switch (footer?.fn) {
       case 'sum':
         return data.reduce((prev, currentValue) => {
-          const value = deepGet(currentValue, correctAccessor) || 0;
+          const value = deepGet(currentValue, footerAccessor) || 0;
 
           if (isObjectType(value)) {
             throw new Error(
@@ -43,7 +52,7 @@ export const getFooterValue = <T extends TableRowType = TableRowType>({
       case 'average':
         return (
           data.reduce((sum, currentValue) => {
-            const value = deepGet(currentValue, correctAccessor) || 0;
+            const value = deepGet(currentValue, footerAccessor) || 0;
 
             if (isObjectType(value)) {
               throw new Error(

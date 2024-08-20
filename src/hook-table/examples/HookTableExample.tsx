@@ -101,7 +101,7 @@ export const HookTableExample = () => {
       />
       <Column accessor="date" label={'Date'} />
       <Column accessor="item" label={'Item'} />
-      <Column accessor="qty" label={'Quantity'} />
+      <Column accessor="qty" label={'Quantity'} alignment="center" />
       <Column
         id="price"
         label={'Long price label'}

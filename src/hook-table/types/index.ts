@@ -3,17 +3,18 @@ import { ReactNode } from 'react';
 /**
  * Utility types
  */
-export type TableRowType = Record<PropertyKey, unknown>;
+
+export type AlignmentType = 'left' | 'center' | 'right';
 
 export type ColumnChildren<T extends TableRowType = TableRowType> =
   | ReactNode
   | ((rowData: T) => ReactNode);
 
-export type AlignmentType = 'left' | 'center' | 'right';
-
 export type NestedKeyOf<T, K = keyof T> = K extends keyof T & (string | number)
   ? `${K}` | (T[K] extends object ? `${K}.${NestedKeyOf<T[K]>}` : never)
   : never;
+
+export type TableRowType = Record<PropertyKey, unknown>;
 
 /**
  * Table component prop types
@@ -39,11 +40,11 @@ type AccessorPropsWithId<T extends TableRowType = TableRowType> = {
 };
 
 export type ColumnProps<T extends TableRowType = TableRowType> = {
+  alignment?: AlignmentType;
   footer?: string | FooterProps<T>;
+  formatter?: 'money';
   label: string | string[];
   toolbar?: boolean;
-  keyPrefix?: string;
-  alignment?: AlignmentType;
 } & (AccessorPropsWithoutId<T> | AccessorPropsWithId<T>);
 
 export type TableProps<T extends TableRowType = TableRowType> = {
