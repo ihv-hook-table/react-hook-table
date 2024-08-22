@@ -10,7 +10,7 @@ export const useCreateTable = <T extends TableRowType = TableRowType>() => {
   const HookTable = useMemo(
     () =>
       ({ children, data, isLoading, ...rest }: TableProps<T>) => {
-        const columns = getChildrenProps(children);
+        const columns = getChildrenProps<T>(children);
 
         return (
           <Table {...rest}>

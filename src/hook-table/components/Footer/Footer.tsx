@@ -9,7 +9,11 @@ type Props<T extends TableRowType = TableRowType> = {
   isLoading?: boolean;
 };
 
-export const Footer = ({ columns, data, isLoading }: Props) => {
+export const Footer = <T extends TableRowType = TableRowType>({
+  columns,
+  data,
+  isLoading,
+}: Props<T>) => {
   if (!data || !columns || isLoading) {
     return null;
   }
