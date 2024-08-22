@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, forwardRef, Ref, TableHTMLAttributes } from 'react';
-import clsx from 'clsx';
+import { clsx } from '../../utils';
 
 import classes from './Table.module.css';
 

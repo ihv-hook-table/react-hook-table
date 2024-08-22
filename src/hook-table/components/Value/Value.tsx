@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import clsx from 'clsx';
-import { isBooleanType, isObjectType } from '../../utils';
+import { isBooleanType, isObjectType, clsx } from '../../utils';
 
 import classes from './Value.module.css';
 

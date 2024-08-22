@@ -1,5 +1,6 @@
 import { formatMoney } from '../utils';
 import { useTable } from '../useTable';
+import { Value } from '../components/Value/Value';
 
 type TableData = {
   id: string;
@@ -97,21 +98,27 @@ export const HookTableExample = () => {
       <Column
         accessor={['id', 'date']}
         label={['ID', 'Date']}
-        footer={{ value: 'Total', colSpan: 4 }}
+        footer={{ value: 'Total', colSpan: 3 }}
       />
-      <Column accessor="date" label={'Date'} />
-      <Column accessor="item" label={'Item'} />
-      <Column accessor="qty" label={'Quantity'} alignment="center" />
+      <Column accessor="date" label="Date" />
+      <Column accessor="item" label="Item" />
+      <Column
+        accessor="qty"
+        label="Quantity"
+        alignment="center"
+        footer={{ fn: 'sum' }}
+      />
       <Column
         id="price"
-        label={'Long price label'}
+        label="Long price label"
         alignment="right"
         footer={{
-          fn: 'sum',
+          fn: 'sumMoney',
+          sumCurrency: 'EUR',
           accessor: 'price.amount',
         }}
       >
-        {({ price }) => formatMoney(price)}
+        {({ price }) => <Value value={formatMoney(price)} />}
       </Column>
     </Table>
   );

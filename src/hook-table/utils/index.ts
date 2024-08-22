@@ -1,4 +1,5 @@
 export { addNumbers } from './addNumbers';
+export { clsx } from './clsx';
 export { compact } from './compact';
 export { deepGet } from './deepGet';
 export { formatMoney } from './formatMoney';

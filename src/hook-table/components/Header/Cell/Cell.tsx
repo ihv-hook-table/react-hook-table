@@ -1,6 +1,5 @@
-import clsx from 'clsx';
 import { ColumnProps, TableRowType } from '../../../types';
-import { isStringType } from '../../../utils';
+import { isStringType, clsx } from '../../../utils';
 
 import classes from './Cell.module.css';
 

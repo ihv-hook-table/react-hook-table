@@ -7,7 +7,7 @@ export const getFooterAccessor = <T extends TableRowType = TableRowType>(
   const { accessor, footer } = column;
 
   const footerAccessor = isStringType(footer) ? footer : footer?.accessor;
-  const colAccessor = isStringType(accessor) ? accessor : undefined;
+  const colAccessor = isStringType(accessor) ? accessor : accessor?.[0];
 
   return footerAccessor || colAccessor;
 };

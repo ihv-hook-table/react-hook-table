@@ -1,8 +1,13 @@
 import { ReactNode } from 'react';
-import clsx from 'clsx';
 import { ColumnProps, TableRowType } from '../../types';
 import { Value } from '../Value/Value';
-import { deepGet, isArrayType, isFunction, isStringType } from '../../utils';
+import {
+  clsx,
+  deepGet,
+  isArrayType,
+  isFunction,
+  isStringType,
+} from '../../utils';
 
 import classes from './Body.module.css';
 
@@ -46,14 +51,10 @@ export const Body = <T extends TableRowType = TableRowType>({
                   value = <Value value={deepGet(rowData, accessor)} />;
                 }
 
-                // This might not be needed anymore
-                if (isArrayType(accessor) && accessor.length === 1) {
-                  value = <Value value={deepGet(rowData, accessor[0])} />;
-                }
-
                 if (isArrayType(accessor)) {
                   value = accessor.map((acc, valueIndex) => {
                     const isSecondaryValue = valueIndex !== 0;
+
                     return (
                       <Value
                         value={deepGet(rowData, acc)}
