@@ -1,8 +1,6 @@
 import { ColumnProps, TableRowType } from '../../../types';
 import { isStringType, clsx } from '../../../utils';
 
-import classes from './Cell.module.css';
-
 type HeaderCellProps<T extends TableRowType = TableRowType> = {
   column: ColumnProps<T>;
 };
@@ -24,10 +22,7 @@ const CellValue = <T extends TableRowType = TableRowType>(
     const isSecondaryLabel = idx !== 0;
 
     return (
-      <div
-        key={idx}
-        className={clsx(isSecondaryLabel && classes.secondaryLabel)}
-      >
+      <div key={idx} className={clsx(isSecondaryLabel && 'secondary-value')}>
         {label}
       </div>
     );
@@ -41,13 +36,7 @@ export const Cell = <T extends TableRowType = TableRowType>({
   const { alignment = 'left' } = column || {};
 
   return (
-    <th
-      className={clsx(
-        classes.root,
-        classes[`align-${alignment}`],
-        isMulti && classes.multiLine,
-      )}
-    >
+    <th className={clsx(`align-${alignment}`, isMulti && 'multi-line')}>
       <CellValue {...column} />
     </th>
   );

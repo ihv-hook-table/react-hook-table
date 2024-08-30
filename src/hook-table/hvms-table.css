@@ -1,0 +1,63 @@
+/* Table has 4 selectors to target different parts of the table
+**
+** 1. .hvms-table
+** 2. .hvms-header
+** 3. .hvms-body
+** 4. .hvms-footer
+*/
+
+.hvms-table {
+  /* CSS variables */
+  --border-color: lightgray;
+  --secondary-color: lightgray;
+
+  /* General styles */
+  width: 100%;
+  border-collapse: collapse;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.hvms-table tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hvms-table th,
+.hvms-table td {
+  text-wrap: nowrap;
+  padding: 0.5rem 1rem;
+  height: 34px;
+}
+
+/* Secondary header & value */
+
+.hvms-table .secondary-value {
+  color: var(--secondary-color);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Alignment classes */
+
+.hvms-table .align-left {
+  text-align: left;
+}
+
+.hvms-table .align-center {
+  text-align: center;
+}
+
+.hvms-table .align-right {
+  text-align: right;
+}
+
+.hvms-table .top {
+  vertical-align: text-top;
+}
+
+.hvms-table .multi-line {
+  vertical-align: text-top;
+}

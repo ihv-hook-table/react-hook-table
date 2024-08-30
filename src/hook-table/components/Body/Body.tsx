@@ -9,7 +9,7 @@ import {
   isStringType,
 } from '../../utils';
 
-import classes from './Body.module.css';
+import { NoResults } from '../NoResults/NoResults';
 
 type Props<T extends TableRowType = TableRowType> = {
   columns: ColumnProps<T>[];
@@ -33,30 +33,37 @@ export const Body = <T extends TableRowType = TableRowType>({
   );
 
   return (
-    <tbody>
+    <tbody className="hvms-body">
       {data.map((rowData, dataIndex) => (
-        <tr key={dataIndex} className={clsx(classes.row)}>
+        <tr key={dataIndex}>
           {columns.map(
-            ({ accessor, alignment = 'left', children }, colIndex) => {
+            ({ accessor, alignment = 'left', children, format }, colIndex) => {
               let value: ReactNode;
 
+              // If children prop is a function, custom Cell component is used
               const childElements = isFunction(children) && children(rowData);
 
               if (childElements) {
                 value = childElements;
               }
 
+              // Column accessor is used to get the value from the data
               if (!children && !!accessor) {
+                // Accessor is string
                 if (isStringType(accessor)) {
-                  value = <Value value={deepGet(rowData, accessor)} />;
+                  value = (
+                    <Value value={deepGet(rowData, accessor)} format={format} />
+                  );
                 }
 
+                // Accessor is array of strings
                 if (isArrayType(accessor)) {
                   value = accessor.map((acc, valueIndex) => {
                     const isSecondaryValue = valueIndex !== 0;
 
                     return (
                       <Value
+                        format={format}
                         value={deepGet(rowData, acc)}
                         isSecondaryValue={isSecondaryValue}
                         key={valueIndex}
@@ -66,12 +73,13 @@ export const Body = <T extends TableRowType = TableRowType>({
                 }
               }
 
+              // Render the cell
               return (
                 <td
                   key={colIndex}
                   className={clsx(
-                    alignment && classes[`align-${alignment}`],
-                    hasMultipleValues && classes.top,
+                    alignment && `align-${alignment}`,
+                    hasMultipleValues && 'multi-line',
                   )}
                 >
                   {value}
@@ -84,19 +92,3 @@ export const Body = <T extends TableRowType = TableRowType>({
     </tbody>
   );
 };
-
-const NoResults = ({
-  isLoading,
-  columnCount,
-}: {
-  isLoading: boolean;
-  columnCount: number;
-}) => (
-  <tbody>
-    <tr className={classes.row}>
-      <td className={classes['align-center']} colSpan={columnCount}>
-        {isLoading ? 'Loading' : 'No results'}
-      </td>
-    </tr>
-  </tbody>
-);

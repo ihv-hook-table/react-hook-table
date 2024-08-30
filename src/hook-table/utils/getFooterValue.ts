@@ -23,7 +23,7 @@ export const getFooterValue = <T extends TableRowType = TableRowType>({
       case 'average':
         return getAverage(data, accessor);
       case 'sumMoney':
-        // TODO: Add better currency support
+        // TODO: Add better typesafe currency support
         return formatMoney({
           amount: getSum(data, accessor),
           currency: footer?.sumCurrency || 'EUR',

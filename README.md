@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# Hook Table for React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The project was initiated with the goal of developing a straightforward and easy-to-use table component. Although there are more feature-rich alternatives available, the emphasis here is on simplicity for projects where complex data tables are unnecessary.
 
-Currently, two official plugins are available:
+## How to use
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To use the table component in your project, follow these steps:
 
-## Expanding the ESLint configuration
+1. Install the package using your preferred package manager. For example, with npm:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```shell
+npm install @hvms/hook-table-react
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Import the hook:
 
 ```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+import { useTable } from '@hvms/hook-table-react';
+```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+3. Example data:
+
+```js
+const data = [
+  { name: 'John Doe', age: 25, city: 'New York' },
+  { name: 'Jane Smith', age: 30, city: 'San Francisco' },
+];
+```
+
+4. Render the table component with the data:
+
+```jsx
+type DataType = {
+  name: string;
+  age: number;
+  city: string;
+};
+
+const { Table, Column } = useTable<DataType>();
+
+<Table data={data}>
+  <Column accessor="name" label="Name" />
+  <Column accessor="age" label="Age" />
+  <Column accessor="city" label="City" />
+</Table>;
 ```

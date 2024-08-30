@@ -2,8 +2,6 @@ import { ColumnProps, TableRowType } from '../../types';
 import { isArrayType } from '../../utils';
 import { Cell } from './Cell/Cell';
 
-import classes from './Header.module.css';
-
 type Props<T extends TableRowType = TableRowType> = {
   columns: ColumnProps<T>[];
 };
@@ -16,8 +14,8 @@ export const Header = <T extends TableRowType = TableRowType>({
   );
 
   return (
-    <thead>
-      <tr className={classes.header}>
+    <thead className="hvms-header">
+      <tr>
         {columns?.map((col, idx) => {
           if (!!col.accessor && !!col.id) {
             throw new Error(

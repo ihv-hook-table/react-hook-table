@@ -18,7 +18,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Build types */
+    "typeRoots": ["node_modules/@types", "src/component/index.d.ts"]
   },
   "include": ["src"]
 }

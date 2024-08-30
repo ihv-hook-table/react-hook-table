@@ -1,23 +1,16 @@
-import { ReactNode } from 'react';
-import { isBooleanType, isObjectType, clsx } from '../../utils';
-
-import classes from './Value.module.css';
+import { clsx } from '../../utils';
+import { getCellValue } from '../../utils/getCellValue';
 
 export type ValueProps = {
   isSecondaryValue?: boolean;
   value: unknown;
+  format?: 'money' | 'date';
 };
 
-export const Value = ({ isSecondaryValue, value }: ValueProps) => {
-  if (isObjectType(value)) {
-    throw new Error('The value cannot be an object');
-  }
-
+export const Value = ({ format, isSecondaryValue, value }: ValueProps) => {
   return (
-    <div className={clsx(isSecondaryValue && classes.secondaryValue)}>
-      {!!value || value === 0 || isBooleanType(value)
-        ? (value as ReactNode)
-        : '-'}
+    <div className={clsx(isSecondaryValue && 'secondary-value')}>
+      {getCellValue(value, format)}
     </div>
   );
 };

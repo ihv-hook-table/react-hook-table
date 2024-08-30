@@ -20,12 +20,12 @@ export type TableRowType = Record<PropertyKey, unknown>;
  * Table component prop types
  */
 type FooterProps<T extends TableRowType = TableRowType> = {
+  accessor?: NestedKeyOf<T>;
   alignment?: AlignmentType;
   colSpan?: number;
+  fn?: 'average' | 'sum' | 'sumMoney';
   sumCurrency?: string;
   value?: unknown;
-  fn?: 'average' | 'sum' | 'sumMoney';
-  accessor?: NestedKeyOf<T>;
 };
 
 type AccessorPropsWithoutId<T extends TableRowType = TableRowType> = {
@@ -43,6 +43,7 @@ type AccessorPropsWithId<T extends TableRowType = TableRowType> = {
 export type ColumnProps<T extends TableRowType = TableRowType> = {
   alignment?: AlignmentType;
   footer?: string | FooterProps<T>;
+  format?: 'money' | 'date';
   label: string | string[];
   toolbar?: boolean;
 } & (AccessorPropsWithoutId<T> | AccessorPropsWithId<T>);

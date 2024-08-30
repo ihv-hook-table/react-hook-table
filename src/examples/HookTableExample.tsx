@@ -1,14 +1,22 @@
-import { formatMoney } from '../utils';
-import { useTable } from '../useTable';
-import { Value } from '../components/Value/Value';
+import { useTable } from '../hook-table';
+
+// Cstom helper type to override props
+// type OverrideProps<T, TOverridden> = Omit<T, keyof TOverridden> & TOverridden;
+// usage
+// type InputProps = OverrideProps<
+//   ComponentProps<'input'>,
+//   { onChange: (value: string) => string }
+// >;
+
+// type test = [Expect<Equal<typeof data, TableData[] | undefined>>];
 
 type TableData = {
   id: string;
   date?: string;
   item: string;
   price: {
-    amount: number;
-    currency: string;
+    amount?: number;
+    currency?: string;
   };
   qty: number;
 };
@@ -102,24 +110,18 @@ export const HookTableExample = () => {
       />
       <Column accessor="date" label="Date" />
       <Column accessor="item" label="Item" />
+      <Column accessor="qty" label="Qty" footer={{ fn: 'sum' }} />
       <Column
-        accessor="qty"
-        label="Quantity"
-        alignment="center"
-        footer={{ fn: 'sum' }}
-      />
-      <Column
-        id="price"
-        label="Long price label"
+        accessor="price"
+        label="Price"
         alignment="right"
+        format="money"
         footer={{
           fn: 'sumMoney',
-          sumCurrency: 'EUR',
           accessor: 'price.amount',
+          sumCurrency: 'EUR',
         }}
-      >
-        {({ price }) => <Value value={formatMoney(price)} />}
-      </Column>
+      />
     </Table>
   );
 };

@@ -1,5 +1,5 @@
-import "./App.css";
-import { HookTableExample } from "./hook-table/examples/HookTableExample";
+import './App.css';
+import { HookTableExample } from './examples/HookTableExample';
 
 function App() {
   return <HookTableExample />;

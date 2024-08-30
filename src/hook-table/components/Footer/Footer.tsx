@@ -1,7 +1,5 @@
 import { ColumnProps, TableRowType } from '../../types';
-import { getFooterValue, isStringType, clsx } from '../../utils';
-
-import classes from './Footer.module.css';
+import { getFooterValue, isStringType } from '../../utils';
 
 type Props<T extends TableRowType = TableRowType> = {
   columns: ColumnProps<T>[];
@@ -19,8 +17,8 @@ export const Footer = <T extends TableRowType = TableRowType>({
   }
 
   return (
-    <tfoot>
-      <tr className={classes.root}>
+    <tfoot className="hvms-footer">
+      <tr>
         {columns.map((col, idx) => (
           <Cell column={col} key={idx} data={data} />
         ))}
@@ -50,7 +48,7 @@ const Cell = <T extends TableRowType = TableRowType>({
   const colSpan = !isStringType(footer) && footer?.colSpan ? footer.colSpan : 1;
 
   return (
-    <th className={clsx(classes[`align-${footerAlignment}`])} colSpan={colSpan}>
+    <th className={`align-${footerAlignment}`} colSpan={colSpan}>
       {String(getFooterValue({ column, data }))}
     </th>
   );
