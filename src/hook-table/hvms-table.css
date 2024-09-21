@@ -1,11 +1,3 @@
-/* Table has 4 selectors to target different parts of the table
-**
-** 1. .hvms-table
-** 2. .hvms-header
-** 3. .hvms-body
-** 4. .hvms-footer
-*/
-
 .hvms-table {
   /* CSS variables */
   --border-color: lightgray;

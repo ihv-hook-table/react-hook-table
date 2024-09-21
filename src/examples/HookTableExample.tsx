@@ -1,15 +1,5 @@
 import { useTable } from '../hook-table';
 
-// Cstom helper type to override props
-// type OverrideProps<T, TOverridden> = Omit<T, keyof TOverridden> & TOverridden;
-// usage
-// type InputProps = OverrideProps<
-//   ComponentProps<'input'>,
-//   { onChange: (value: string) => string }
-// >;
-
-// type test = [Expect<Equal<typeof data, TableData[] | undefined>>];
-
 type TableData = {
   id: string;
   date?: string;
@@ -57,41 +47,6 @@ const data: TableData[] = [
     qty: 5,
     price: { amount: getRandomPrice(), currency: 'EUR' },
   },
-  {
-    id: 'Row 6',
-    date: '01.01.2024',
-    item: 'Cucumber',
-    qty: 6,
-    price: { amount: getRandomPrice(), currency: 'EUR' },
-  },
-  {
-    id: 'Row 7',
-    date: '01.01.2024',
-    item: 'Carrot',
-    qty: 7,
-    price: { amount: getRandomPrice(), currency: 'EUR' },
-  },
-  {
-    id: 'Row 8',
-    date: '01.01.2024',
-    item: 'Broccoli',
-    qty: 8,
-    price: { amount: getRandomPrice(), currency: 'EUR' },
-  },
-  {
-    id: 'Row 9',
-    date: '01.01.2024',
-    item: 'Lettuce',
-    qty: 9,
-    price: { amount: getRandomPrice(), currency: 'EUR' },
-  },
-  {
-    id: 'Row 10',
-    date: '01.01.2024',
-    item: 'Cabbage',
-    qty: 10,
-    price: { amount: getRandomPrice(), currency: 'EUR' },
-  },
 ];
 
 function getRandomPrice() {
@@ -111,17 +66,7 @@ export const HookTableExample = () => {
       <Column accessor="date" label="Date" />
       <Column accessor="item" label="Item" />
       <Column accessor="qty" label="Qty" footer={{ fn: 'sum' }} />
-      <Column
-        accessor="price"
-        label="Price"
-        alignment="right"
-        format="money"
-        footer={{
-          fn: 'sumMoney',
-          accessor: 'price.amount',
-          sumCurrency: 'EUR',
-        }}
-      />
+      <Column accessor="price" label="Price" alignment="right" format="money" />
     </Table>
   );
 };
