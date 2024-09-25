@@ -4,6 +4,7 @@ import { isStringType } from './isStringType';
 import { getSum } from './getSum';
 import { getAverage } from './getAverage';
 import { formatMoney } from './formatMoney';
+import { isObject } from './isObject';
 
 type GetFooterValueProps<T extends TableRowType = TableRowType> = {
   column: ColumnProps<T>;
@@ -23,9 +24,8 @@ export const getFooterValue = <T extends TableRowType = TableRowType>({
       case 'average':
         return getAverage(data, accessor);
       case 'sumMoney':
-        // TODO: Add better typesafe currency support
         return formatMoney({
-          amount: getSum(data, accessor),
+          amount: getSum(data, `${accessor}.amount`),
           currency: footer?.sumCurrency || 'EUR',
         });
       case 'sum':
@@ -35,5 +35,5 @@ export const getFooterValue = <T extends TableRowType = TableRowType>({
     }
   }
 
-  return isStringType(footer) ? footer : footer?.value;
+  return !isObject(footer) ? footer : footer?.value;
 };

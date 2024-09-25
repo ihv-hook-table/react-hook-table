@@ -6,19 +6,19 @@ type HeaderCellProps<T extends TableRowType = TableRowType> = {
 };
 
 const getLabel = <T extends TableRowType = TableRowType>({
-  label,
+  header,
 }: ColumnProps<T>) => {
-  if (isStringType(label)) return [label];
+  if (isStringType(header)) return [header];
 
-  return label;
+  return header;
 };
 
 const CellValue = <T extends TableRowType = TableRowType>(
   column: ColumnProps<T>,
 ) => {
-  const adjustedLabel = getLabel(column) || '';
+  const normalizedLabels = getLabel(column) || '';
 
-  return adjustedLabel.map((label, idx) => {
+  return normalizedLabels.map((label, idx) => {
     const isSecondaryLabel = idx !== 0;
 
     return (

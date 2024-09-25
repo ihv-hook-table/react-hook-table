@@ -4,6 +4,7 @@
   --secondary-color: lightgray;
 
   /* General styles */
+
   width: 100%;
   border-collapse: collapse;
   font-weight: 500;
@@ -44,10 +45,6 @@
 
 .hvms-table .align-right {
   text-align: right;
-}
-
-.hvms-table .top {
-  vertical-align: text-top;
 }
 
 .hvms-table .multi-line {

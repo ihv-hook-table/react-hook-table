@@ -28,7 +28,7 @@ export const Body = <T extends TableRowType = TableRowType>({
     return <NoResults isLoading={isLoading} columnCount={columns.length} />;
   }
 
-  const hasMultipleValues = columns.some(
+  const isMulti = columns.some(
     ({ accessor }) => isArrayType(accessor) && accessor.length > 1,
   );
 
@@ -40,7 +40,7 @@ export const Body = <T extends TableRowType = TableRowType>({
             ({ accessor, alignment = 'left', children, format }, colIndex) => {
               let value: ReactNode;
 
-              // If children prop is a function, custom Cell component is used
+              // If children prop is a function, render custom cell
               const childElements = isFunction(children) && children(rowData);
 
               if (childElements) {
@@ -79,7 +79,7 @@ export const Body = <T extends TableRowType = TableRowType>({
                   key={colIndex}
                   className={clsx(
                     alignment && `align-${alignment}`,
-                    hasMultipleValues && 'multi-line',
+                    isMulti && 'multi-line',
                   )}
                 >
                   {value}

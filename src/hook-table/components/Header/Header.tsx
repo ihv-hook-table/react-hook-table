@@ -10,7 +10,7 @@ export const Header = <T extends TableRowType = TableRowType>({
   columns,
 }: Props<T>) => {
   const hasMultiLabels = columns.some(
-    ({ label }) => isArrayType(label) && label.length > 1,
+    ({ header }) => isArrayType(header) && header.length > 1,
   );
 
   return (

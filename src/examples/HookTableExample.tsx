@@ -58,15 +58,17 @@ export const HookTableExample = () => {
 
   return (
     <Table data={data} isLoading={false}>
+      <Column accessor={['id', 'date']} header="#" footer="Total" />
+      <Column accessor="date" header="Date" />
+      <Column accessor="item" header="Item" />
+      <Column accessor="qty" header="Qty" alignment="center" />
       <Column
-        accessor={['id', 'date']}
-        label={['ID', 'Date']}
-        footer={{ value: 'Total', colSpan: 3 }}
+        accessor="price"
+        header="Price"
+        alignment="right"
+        format="money"
+        footer={{ fn: 'sumMoney', colSpan: 4 }}
       />
-      <Column accessor="date" label="Date" />
-      <Column accessor="item" label="Item" />
-      <Column accessor="qty" label="Qty" footer={{ fn: 'sum' }} />
-      <Column accessor="price" label="Price" alignment="right" format="money" />
     </Table>
   );
 };

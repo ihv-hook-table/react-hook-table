@@ -44,7 +44,7 @@ export type ColumnProps<T extends TableRowType = TableRowType> = {
   alignment?: AlignmentType;
   footer?: string | FooterProps<T>;
   format?: 'money' | 'date';
-  label: string | string[];
+  header: string | string[];
   toolbar?: boolean;
 } & (AccessorPropsWithoutId<T> | AccessorPropsWithId<T>);
 
