@@ -40,6 +40,8 @@ export const Body = <T extends TableRowType = TableRowType>({
             ({ accessor, alignment = 'left', children, format }, colIndex) => {
               let value: ReactNode;
 
+              console.log(dataIndex, colIndex);
+
               // If children prop is a function, render custom cell
               const childElements = isFunction(children) && children(rowData);
 

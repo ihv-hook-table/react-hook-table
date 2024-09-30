@@ -54,3 +54,11 @@ export type TableProps<T extends TableRowType = TableRowType> = {
   isLoading?: boolean;
   hideHeader?: boolean;
 };
+
+/**
+ * Table context types
+ */
+
+export type TableContextType = {
+  moneyFormat?: (data: unknown) => string | undefined;
+};
