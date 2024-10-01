@@ -10,16 +10,25 @@ import {
 } from '../../utils';
 
 import { NoResults } from '../NoResults/NoResults';
+import { getCellValue } from '../../utils/getCellValue';
 
-type Props<T extends TableRowType = TableRowType> = {
-  columns: ColumnProps<T>[];
+type Props<
+  T extends TableRowType = TableRowType,
+  F extends TableRowType = TableRowType,
+> = {
+  columns: ColumnProps<T, F>[];
   data?: T[];
+  formatProps?: F;
   isLoading?: boolean;
 };
 
-export const Body = <T extends TableRowType = TableRowType>({
+export const Body = <
+  T extends TableRowType = TableRowType,
+  F extends TableRowType = TableRowType,
+>({
   columns,
   data,
+  formatProps,
   isLoading = false,
 }: Props<T>) => {
   const isNoResults = !data || !data.length || !columns || isLoading;
@@ -31,6 +40,8 @@ export const Body = <T extends TableRowType = TableRowType>({
   const isMulti = columns.some(
     ({ accessor }) => isArrayType(accessor) && accessor.length > 1,
   );
+
+  // TODO: simplify this
 
   return (
     <tbody className="hvms-body">
@@ -51,9 +62,14 @@ export const Body = <T extends TableRowType = TableRowType>({
               if (!children && !!accessor) {
                 // Accessor is string
                 if (isStringType(accessor)) {
-                  value = (
-                    <Value value={deepGet(rowData, accessor)} format={format} />
+                  const cellValue = deepGet(rowData, accessor);
+                  const actualValue = getCellValue<F>(
+                    cellValue,
+                    format,
+                    formatProps as F | undefined,
                   );
+
+                  value = <Value value={actualValue} />;
                 }
 
                 // Accessor is array of strings
@@ -61,10 +77,16 @@ export const Body = <T extends TableRowType = TableRowType>({
                   value = accessor.map((acc, valueIndex) => {
                     const isSecondaryValue = valueIndex !== 0;
 
+                    const cellValue = deepGet(rowData, acc);
+                    const actualValue = getCellValue<F>(
+                      cellValue,
+                      format,
+                      formatProps as F | undefined,
+                    );
+
                     return (
                       <Value
-                        format={format}
-                        value={deepGet(rowData, acc)}
+                        value={actualValue}
                         isSecondaryValue={isSecondaryValue}
                         key={valueIndex}
                       />

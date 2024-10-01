@@ -37,13 +37,15 @@ type AccessorPropsWithoutId<T extends TableRowType = TableRowType> = {
 type AccessorPropsWithId<T extends TableRowType = TableRowType> = {
   accessor?: never;
   children: (rowData: T) => ReactNode;
-  id: string;
 };
 
-export type ColumnProps<T extends TableRowType = TableRowType> = {
+export type ColumnProps<
+  T extends TableRowType = TableRowType,
+  F extends TableRowType = TableRowType,
+> = {
   alignment?: AlignmentType;
   footer?: string | FooterProps<T>;
-  format?: 'money' | 'date';
+  format?: keyof F;
   header: string | string[];
   toolbar?: boolean;
 } & (AccessorPropsWithoutId<T> | AccessorPropsWithId<T>);
@@ -53,12 +55,4 @@ export type TableProps<T extends TableRowType = TableRowType> = {
   data?: T[];
   isLoading?: boolean;
   hideHeader?: boolean;
-};
-
-/**
- * Table context types
- */
-
-export type TableContextType = {
-  moneyFormat?: (data: unknown) => string | undefined;
 };

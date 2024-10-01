@@ -1,34 +1,36 @@
 import { ReactNode } from 'react';
-// import { formatMoney } from './formatMoney';
 import { isBooleanType } from './isBooleanType';
 import { isObject } from './isObject';
-import { TableContextType } from '../types';
+import { TableRowType } from '../types';
+import { isFunction } from './isFunction';
 
-export const getCellValue = (
+export const getCellValue = <F extends TableRowType = TableRowType>(
   value: unknown,
-  format?: 'money' | 'date',
-  ctx?: TableContextType,
+  format?: keyof F,
+  ctx?: F,
 ) => {
-  if (format !== 'money' && isObject(value)) {
+  if (!format && isObject(value)) {
     throw new Error(
-      '[getCellValue]: object value is only supported with format prop set to "money"',
+      '[getCellValue]: object value is only supported with custom format functions',
     );
   }
 
-  if (format === 'money' && !isObject(value)) {
-    throw new Error(
-      "[getCellValue]: money format can't be used with non-object value  - expected value is {currency: string, amount: number}",
-    );
-  }
-
-  if (format === 'money' && isObject(value)) {
-    if (!ctx?.moneyFormat) {
+  if (format) {
+    if (!ctx?.[format]) {
       throw new Error(
-        '[getCellValue]: money format is not configured - please provide moneyFormat function in TableContext',
+        `[getCellValue]: format "${String(format)}" is not defined in formatProps`,
       );
     }
 
-    return ctx?.moneyFormat(value);
+    const formatFunction = ctx?.[format];
+
+    if (!isFunction(formatFunction)) {
+      throw new Error(
+        `[getCellValue]: format "${String(format)}" must be a function`,
+      );
+    }
+
+    return formatFunction(value);
   }
 
   return !!value || value === 0 || isBooleanType(value)
