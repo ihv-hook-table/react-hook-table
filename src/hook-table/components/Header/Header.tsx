@@ -16,15 +16,9 @@ export const Header = <T extends TableRowType = TableRowType>({
   return (
     <thead className="hvms-header">
       <tr>
-        {columns?.map((col, idx) => {
-          if (!!col.accessor && !!col.id) {
-            throw new Error(
-              'You can only use one of `accessor` or `id` in a column',
-            );
-          }
-
-          return <Cell key={idx} column={col} isMulti={hasMultiLabels} />;
-        })}
+        {columns?.map((col, idx) => (
+          <Cell key={idx} column={col} isMulti={hasMultiLabels} />
+        ))}
       </tr>
     </thead>
   );

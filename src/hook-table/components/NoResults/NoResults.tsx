@@ -7,7 +7,7 @@ export const NoResults = ({
 }) => (
   <tbody>
     <tr>
-      <td className={'align-center'} colSpan={columnCount}>
+      <td className="align-center" colSpan={columnCount}>
         {isLoading ? 'Loading' : 'No results'}
       </td>
     </tr>

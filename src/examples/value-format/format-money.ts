@@ -31,6 +31,8 @@ export const formatMoney = ({
   minimumFractionDigits = 2,
   language,
 }: FormatProps) => {
+  console.log('formatMoney');
+
   const value = amount
     ? new Intl.NumberFormat(language || navigator.language, {
         style: 'currency',

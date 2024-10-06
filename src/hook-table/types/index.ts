@@ -3,6 +3,8 @@ import { ReactNode } from 'react';
 /**
  * Utility types
  */
+export type TableRowType = Record<PropertyKey, unknown>;
+export type FormatFunctionProperty = Record<string, unknown>;
 
 export type AlignmentType = 'left' | 'center' | 'right';
 
@@ -14,7 +16,9 @@ export type NestedKeyOf<T, K = keyof T> = K extends keyof T & (string | number)
   ? `${K}` | (T[K] extends object ? `${K}.${NestedKeyOf<T[K]>}` : never)
   : never;
 
-export type TableRowType = Record<PropertyKey, unknown>;
+export type ValueFormatType<
+  F extends FormatFunctionProperty = FormatFunctionProperty,
+> = keyof F | (keyof F | undefined)[] | undefined;
 
 /**
  * Table component prop types
@@ -45,7 +49,7 @@ export type ColumnProps<
 > = {
   alignment?: AlignmentType;
   footer?: string | FooterProps<T>;
-  format?: keyof F;
+  format?: ValueFormatType<F>;
   header: string | string[];
   toolbar?: boolean;
 } & (AccessorPropsWithoutId<T> | AccessorPropsWithId<T>);

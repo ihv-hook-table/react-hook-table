@@ -10,7 +10,7 @@ export const useCreateTable = <
   T extends TableRowType = TableRowType,
   F extends TableRowType = TableRowType,
 >(
-  formatProps?: F,
+  formatFunctions?: F,
 ) => {
   const HookTable = useMemo(
     () =>
@@ -24,13 +24,13 @@ export const useCreateTable = <
               columns={columns}
               data={data}
               isLoading={isLoading}
-              formatProps={formatProps}
+              formatFunctions={formatFunctions}
             />
             <Footer columns={columns} data={data} isLoading={isLoading} />
           </Table>
         );
       },
-    [formatProps],
+    [formatFunctions],
   );
 
   return { Table: HookTable };

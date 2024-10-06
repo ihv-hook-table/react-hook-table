@@ -6,28 +6,17 @@ import { isFunction } from './isFunction';
 
 export const getCellValue = <F extends TableRowType = TableRowType>(
   value: unknown,
-  format?: keyof F,
-  ctx?: F,
+  formatFunction?: F[keyof F],
 ) => {
-  if (!format && isObject(value)) {
+  if (!formatFunction && isObject(value)) {
     throw new Error(
       '[getCellValue]: object value is only supported with custom format functions',
     );
   }
 
-  if (format) {
-    if (!ctx?.[format]) {
-      throw new Error(
-        `[getCellValue]: format "${String(format)}" is not defined in formatProps`,
-      );
-    }
-
-    const formatFunction = ctx?.[format];
-
+  if (formatFunction) {
     if (!isFunction(formatFunction)) {
-      throw new Error(
-        `[getCellValue]: format "${String(format)}" must be a function`,
-      );
+      throw new Error(`[getCellValue]: format function must be a function`);
     }
 
     return formatFunction(value);
