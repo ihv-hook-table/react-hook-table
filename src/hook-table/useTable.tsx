@@ -1,4 +1,4 @@
-import { TableRecord } from './types';
+import { FormatOptions, TableRecord } from './types';
 import { useCreateColumn, useCreateTable } from './components';
 import { TableFormatContextType } from './context/context';
 
@@ -6,7 +6,7 @@ import './hvms-table.css';
 
 export const useTable = <
   T extends TableRecord = TableRecord,
-  F extends TableRecord = TableRecord,
+  F extends FormatOptions = FormatOptions,
 >(
   formatProps?: TableFormatContextType<F>,
 ) => {
