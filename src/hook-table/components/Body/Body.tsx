@@ -1,22 +1,20 @@
-import { ColumnProps, TableRowType } from '../../types';
+import { ColumnProps, FormatOptions, TableRecord } from '../../types';
 import { clsx, isArrayType } from '../../utils';
 import { NoResults } from '../NoResults/NoResults';
-import { ColData } from './ColData';
+import { ColumnData } from './ColumnData';
 
 type Props<
-  T extends TableRowType = TableRowType,
-  F extends TableRowType = TableRowType,
+  T extends TableRecord = TableRecord,
+  F extends FormatOptions = FormatOptions,
 > = {
   columns: ColumnProps<T, F>[];
   data?: T[];
-  formatFunctions?: F;
   isLoading?: boolean;
 };
 
-export const Body = <T extends TableRowType = TableRowType>({
+export const Body = <T extends TableRecord = TableRecord>({
   columns,
   data,
-  formatFunctions,
   isLoading = false,
 }: Props<T>) => {
   const isNoResults = !data || !data.length || !columns || isLoading;
@@ -44,11 +42,7 @@ export const Body = <T extends TableRowType = TableRowType>({
                   isMulti && 'multi-line',
                 )}
               >
-                <ColData
-                  {...columnProps}
-                  formatFunctions={formatFunctions}
-                  rowData={rowData}
-                />
+                <ColumnData {...columnProps} rowData={rowData} />
               </td>
             );
           })}

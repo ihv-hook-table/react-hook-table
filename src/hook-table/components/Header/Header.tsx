@@ -1,12 +1,12 @@
-import { ColumnProps, TableRowType } from '../../types';
+import { ColumnProps, TableRecord } from '../../types';
 import { isArrayType } from '../../utils';
 import { Cell } from './Cell/Cell';
 
-type Props<T extends TableRowType = TableRowType> = {
+type Props<T extends TableRecord = TableRecord> = {
   columns: ColumnProps<T>[];
 };
 
-export const Header = <T extends TableRowType = TableRowType>({
+export const Header = <T extends TableRecord = TableRecord>({
   columns,
 }: Props<T>) => {
   const hasMultiLabels = columns.some(

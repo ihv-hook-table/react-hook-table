@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { ColumnProps, TableRowType } from '../../types';
+import { ColumnProps, FormatOptions, TableRecord } from '../../types';
 
-export const Column = <T extends TableRowType = TableRowType>(
-  _props: ColumnProps<T>,
+export const Column = <
+  T extends TableRecord = TableRecord,
+  F extends FormatOptions = FormatOptions,
+>(
+  _props: ColumnProps<T, F>,
 ): JSX.Element => {
   return <></>;
 };

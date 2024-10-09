@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
-import { ColumnProps, TableRowType } from '../types';
+import { ColumnProps, FormatOptions, TableRecord } from '../types';
 import { Column } from './Column/Column';
 
 export const useCreateColumn = <
-  T extends TableRowType = TableRowType,
-  F extends TableRowType = TableRowType,
+  T extends TableRecord = TableRecord,
+  F extends FormatOptions = FormatOptions,
 >() => {
   const HookColumn = useMemo(
     () => (props: ColumnProps<T, F>) => <Column {...props} />,

@@ -1,11 +1,11 @@
-import { ColumnProps, TableRowType } from '../../../types';
+import { ColumnProps, TableRecord } from '../../../types';
 import { clsx, toArray } from '../../../utils';
 
-type HeaderCellProps<T extends TableRowType = TableRowType> = {
+type HeaderCellProps<T extends TableRecord = TableRecord> = {
   column: ColumnProps<T>;
 };
 
-export const Cell = <T extends TableRowType = TableRowType>({
+export const Cell = <T extends TableRecord = TableRecord>({
   column,
   isMulti,
 }: HeaderCellProps<T> & { isMulti: boolean }) => {
@@ -18,7 +18,7 @@ export const Cell = <T extends TableRowType = TableRowType>({
   );
 };
 
-const CellValue = <T extends TableRowType = TableRowType>({
+const CellValue = <T extends TableRecord = TableRecord>({
   header,
 }: ColumnProps<T>) => {
   const normalizedLabels = toArray(header) || '';

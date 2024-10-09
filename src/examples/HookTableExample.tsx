@@ -1,15 +1,15 @@
 import { useTable } from '../hook-table';
 import { mockData, MoneyType, TableData } from './mock-data';
-
-import '../hook-table/hvms-table.css';
 import { formatMoney } from './value-format/format-money';
 import {
   formatDateFromISOString,
   formatDateTimeFromISOString,
 } from './value-format/format-date';
 
+import '../hook-table/hvms-table.css';
+
 type FormatProps = {
-  money: (money: MoneyType) => string | undefined;
+  money: (money: MoneyType) => string;
   date: (date: string) => string;
   dateTime: (dateTime: string) => string;
 };
@@ -21,12 +21,16 @@ export const HookTableExample = () => {
     dateTime: formatDateTimeFromISOString,
   });
 
+  // TODO: display header without header prop (use translated accessor) - not sure if this is a good idea
+  // TODO: multiple footer rows
+
   return (
     <Table data={mockData} isLoading={false}>
       <Column
         accessor={['id', 'date']}
         header="#"
-        format={[undefined, 'dateTime']}
+        format={[undefined, 'date']}
+        footer={{ value: 'Total', colSpan: 4 }}
       />
       <Column accessor="date" header="Date" format="dateTime" />
       <Column accessor="item" header="Item" />
@@ -36,6 +40,7 @@ export const HookTableExample = () => {
         header="Price"
         alignment="right"
         format="money"
+        footer="123.20 €"
       />
     </Table>
   );

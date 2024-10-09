@@ -1,10 +1,10 @@
-import { TableRowType } from '../types';
+import { TableRecord } from '../types';
 import { addNumbers } from './addNumbers';
 import { deepGet } from './deepGet';
 import { isNumberType } from './isNumberType';
 import { isObjectType } from './isObjectType';
 
-export const getSum = <T extends TableRowType = TableRowType>(
+export const getSum = <T extends TableRecord = TableRecord>(
   data: T[],
   accessor: string,
 ) => {

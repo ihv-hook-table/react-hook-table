@@ -1,7 +1,7 @@
-import { ColumnProps, TableRowType } from '../types';
+import { ColumnProps, TableRecord } from '../types';
 import { isStringType } from './isStringType';
 
-export const getFooterAccessor = <T extends TableRowType = TableRowType>(
+export const getFooterAccessor = <T extends TableRecord = TableRecord>(
   column: ColumnProps<T>,
 ) => {
   const { accessor, footer } = column;

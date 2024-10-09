@@ -1,25 +1,25 @@
 import { ReactNode } from 'react';
 import { isBooleanType } from './isBooleanType';
 import { isObject } from './isObject';
-import { TableRowType } from '../types';
+import { TableRecord } from '../types';
 import { isFunction } from './isFunction';
 
-export const getCellValue = <F extends TableRowType = TableRowType>(
+export const getCellValue = <F extends TableRecord = TableRecord>(
   value: unknown,
-  formatFunction?: F[keyof F],
+  FormatOptions?: F[keyof F],
 ) => {
-  if (!formatFunction && isObject(value)) {
+  if (!FormatOptions && isObject(value)) {
     throw new Error(
       '[getCellValue]: object value is only supported with custom format functions',
     );
   }
 
-  if (formatFunction) {
-    if (!isFunction(formatFunction)) {
+  if (FormatOptions) {
+    if (!isFunction(FormatOptions)) {
       throw new Error(`[getCellValue]: format function must be a function`);
     }
 
-    return formatFunction(value);
+    return FormatOptions(value);
   }
 
   return !!value || value === 0 || isBooleanType(value)

@@ -1,15 +1,16 @@
-import { TableRowType } from './types';
+import { TableRecord } from './types';
 import { useCreateColumn, useCreateTable } from './components';
+import { TableFormatContextType } from './components/context/context';
 
 import './hvms-table.css';
 
 export const useTable = <
-  T extends TableRowType = TableRowType,
-  F extends TableRowType = TableRowType,
+  T extends TableRecord = TableRecord,
+  F extends TableRecord = TableRecord,
 >(
-  formatProps?: F,
+  formatProps?: TableFormatContextType<F>,
 ) => {
-  const { Table } = useCreateTable<T, F>(formatProps);
+  const { Table } = useCreateTable<T, TableFormatContextType<F>>(formatProps);
   const { Column } = useCreateColumn<T, F>();
 
   return {

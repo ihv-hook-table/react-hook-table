@@ -1,13 +1,13 @@
-import { ColumnProps, TableRowType } from '../../types';
+import { ColumnProps, TableRecord } from '../../types';
 import { getFooterValue, isStringType } from '../../utils';
 
-type Props<T extends TableRowType = TableRowType> = {
+type Props<T extends TableRecord = TableRecord> = {
   columns: ColumnProps<T>[];
   data?: T[];
   isLoading?: boolean;
 };
 
-export const Footer = <T extends TableRowType = TableRowType>({
+export const Footer = <T extends TableRecord = TableRecord>({
   columns,
   data,
   isLoading,
@@ -27,12 +27,12 @@ export const Footer = <T extends TableRowType = TableRowType>({
   );
 };
 
-type CellProps<T extends TableRowType = TableRowType> = {
+type CellProps<T extends TableRecord = TableRecord> = {
   column: ColumnProps<T>;
   data?: T[];
 };
 
-const Cell = <T extends TableRowType = TableRowType>({
+const Cell = <T extends TableRecord = TableRecord>({
   column,
   data,
 }: CellProps<T>) => {

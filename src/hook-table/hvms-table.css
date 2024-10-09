@@ -1,7 +1,8 @@
 .hvms-table {
   /* CSS variables */
-  --border-color: lightgray;
+  --border-color: hsl(240 5.9% 90% / 0.5);
   --secondary-color: lightgray;
+  --bg-hover-color: hsl(240 4.8% 95.9% / 0.5);
 
   /* General styles */
 
@@ -12,8 +13,13 @@
   line-height: 1rem;
 }
 
-.hvms-table tr {
+.hvms-header tr,
+.hvms-body tr {
   border-bottom: 1px solid var(--border-color);
+}
+
+.hvms-body tr:hover {
+  background-color: var(--bg-hover-color);
 }
 
 .hvms-table th,

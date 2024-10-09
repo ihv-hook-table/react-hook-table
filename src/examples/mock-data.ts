@@ -24,40 +24,24 @@ function getRandomPrice() {
   return parseFloat((Math.random() * (10 - 1) + 1).toFixed(2));
 }
 
-export const mockData: TableData[] = [
-  {
-    id: 'Row 1',
+function generateMockData(numRows: number): TableData[] {
+  const items = [
+    'Apple',
+    'Banana',
+    'Orange',
+    'Potato',
+    'Tomato',
+    'Grapes',
+    'Mango',
+  ];
+
+  return Array.from({ length: numRows }, (_, index) => ({
+    id: `Row ${index + 1}`,
     date: generateISODate(),
-    item: 'Apple',
-    qty: 1,
+    item: items[Math.floor(Math.random() * items.length)],
+    qty: Math.floor(Math.random() * 10) + 1,
     price: { amount: getRandomPrice(), currency: 'EUR' },
-  },
-  {
-    id: 'Row 2',
-    date: generateISODate(),
-    item: 'Banana',
-    qty: 2,
-    price: { amount: getRandomPrice(), currency: 'EUR' },
-  },
-  {
-    id: 'Row 3',
-    date: generateISODate(),
-    item: 'Orange',
-    qty: 3,
-    price: { amount: getRandomPrice(), currency: 'EUR' },
-  },
-  {
-    id: 'Row 4',
-    date: generateISODate(),
-    item: 'Potato',
-    qty: 4,
-    price: { amount: getRandomPrice(), currency: 'EUR' },
-  },
-  {
-    id: 'Row 5',
-    date: generateISODate(),
-    item: 'Tomato',
-    qty: 5,
-    price: { amount: getRandomPrice(), currency: 'EUR' },
-  },
-];
+  }));
+}
+
+export const mockData = generateMockData(10);

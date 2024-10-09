@@ -1,16 +1,16 @@
-import { ColumnProps, TableRowType } from '../types';
+import { ColumnProps, TableRecord } from '../types';
 import { getFooterAccessor } from './getFooterAccessor';
 import { isStringType } from './isStringType';
 import { getSum } from './getSum';
 import { getAverage } from './getAverage';
 import { isObject } from './isObject';
 
-type GetFooterValueProps<T extends TableRowType = TableRowType> = {
+type GetFooterValueProps<T extends TableRecord = TableRecord> = {
   column: ColumnProps<T>;
   data?: T[];
 };
 
-export const getFooterValue = <T extends TableRowType = TableRowType>({
+export const getFooterValue = <T extends TableRecord = TableRecord>({
   column,
   data,
 }: GetFooterValueProps<T>) => {

@@ -1,9 +1,9 @@
-import { TableRowType } from '../types';
+import { TableRecord } from '../types';
 import { deepGet } from './deepGet';
 import { isNumberType } from './isNumberType';
 import { isObjectType } from './isObjectType';
 
-export const getAverage = <T extends TableRowType = TableRowType>(
+export const getAverage = <T extends TableRecord = TableRecord>(
   data: T[],
   accessor: string,
 ) => {

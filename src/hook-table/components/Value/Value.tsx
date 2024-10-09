@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { clsx } from '../../utils';
 
-export type ValueProps = {
+type ValueProps = {
   isSecondaryValue?: boolean;
   value: ReactNode;
 };
