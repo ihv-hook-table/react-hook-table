@@ -5,7 +5,7 @@ import { Table } from './Table/Table';
 import { Header } from './Header/Header';
 import { Body } from './Body/Body';
 import { Footer } from './Footer/Footer';
-import { TableFormatContext } from './context/context';
+import { TableFormatContext } from '../context/context';
 
 type TableProps<T extends TableRecord = TableRecord> = {
   children: ReactNode;

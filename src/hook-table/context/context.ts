@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { FormatOptions } from '../../types';
+import { FormatOptions } from '../types';
 
 export type TableFormatContextType<F extends FormatOptions = FormatOptions> = {
   translate?: (key: string) => string;
