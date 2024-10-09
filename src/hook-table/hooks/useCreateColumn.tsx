@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ColumnProps, FormatOptions, TableRecord } from '../types';
-import { Column } from './Column/Column';
+import { Column } from '../components';
 
 export const useCreateColumn = <
   T extends TableRecord = TableRecord,

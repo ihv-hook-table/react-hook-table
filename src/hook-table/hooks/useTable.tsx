@@ -1,6 +1,7 @@
-import { FormatOptions, TableRecord } from './types';
-import { useCreateColumn, useCreateTable } from './components';
-import { TableFormatContextType } from './context/context';
+import { FormatOptions, TableRecord } from '../types';
+import { useCreateColumn } from './useCreateColumn';
+import { useCreateTable } from './useCreateTable';
+import { TableFormatContextType } from '../context/context';
 
 import './hvms-table.css';
 

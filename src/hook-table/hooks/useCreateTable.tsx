@@ -1,11 +1,8 @@
 import { ReactNode, useMemo } from 'react';
 import { FormatOptions, TableRecord } from '../types';
 import { getChildrenProps } from '../utils';
-import { Table } from './Table/Table';
-import { Header } from './Header/Header';
-import { Body } from './Body/Body';
-import { Footer } from './Footer/Footer';
 import { TableFormatContext } from '../context/context';
+import { Body, Footer, Header, Table } from '../components';
 
 type TableProps<T extends TableRecord = TableRecord> = {
   children: ReactNode;

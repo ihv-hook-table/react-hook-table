@@ -1,2 +1,2 @@
-export { useTable } from './useTable';
-export { Value } from './components/Value/Value';
+export { useTable } from './hooks/useTable';
+export { Value } from './components';
