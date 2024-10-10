@@ -23,6 +23,7 @@ export const HookTableExample = () => {
 
   // TODO: display header without header prop (use translated accessor) - not sure if this is a good idea
   // TODO: multiple footer rows
+  // TODO: footer functions fix - sum money doesn't work
 
   return (
     <Table data={mockData} isLoading={false}>
@@ -40,7 +41,7 @@ export const HookTableExample = () => {
         header="Price"
         alignment="right"
         format="money"
-        footer="123.20 €"
+        footer={{ fn: 'sumMoney', sumCurrency: 'USD' }}
       />
     </Table>
   );

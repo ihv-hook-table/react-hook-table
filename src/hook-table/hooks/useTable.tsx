@@ -3,8 +3,6 @@ import { useCreateColumn } from './useCreateColumn';
 import { useCreateTable } from './useCreateTable';
 import { TableFormatContextType } from '../context/context';
 
-import './hvms-table.css';
-
 export const useTable = <
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,

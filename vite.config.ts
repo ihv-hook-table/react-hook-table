@@ -24,5 +24,8 @@ export default defineConfig({
     },
     emptyOutDir: true,
   },
-  plugins: [react(), dts()],
+  plugins: [
+    react(),
+    dts({ tsconfigPath: './tsconfig.app.json', rollupTypes: true }),
+  ],
 });

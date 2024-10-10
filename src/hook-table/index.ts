@@ -1,2 +1,3 @@
-export { useTable } from './hooks/useTable';
+export { useTable } from './hooks';
 export { Value } from './components';
+import './hvms-table.css';

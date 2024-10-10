@@ -20,7 +20,7 @@ export const Footer = <T extends TableRecord = TableRecord>({
     <tfoot className="hvms-footer">
       <tr>
         {columns.map((col, idx) => (
-          <Cell column={col} key={idx} data={data} />
+          <Cell column={col} key={idx} />
         ))}
       </tr>
     </tfoot>
@@ -29,12 +29,10 @@ export const Footer = <T extends TableRecord = TableRecord>({
 
 type CellProps<T extends TableRecord = TableRecord> = {
   column: ColumnProps<T>;
-  data?: T[];
 };
 
 const Cell = <T extends TableRecord = TableRecord>({
   column,
-  data,
 }: CellProps<T>) => {
   const { alignment = 'left', footer } = column || {};
 
@@ -49,7 +47,7 @@ const Cell = <T extends TableRecord = TableRecord>({
 
   return (
     <th className={`align-${footerAlignment}`} colSpan={colSpan}>
-      {String(getFooterValue({ column, data }))}
+      {String(getFooterValue({ column }))}
     </th>
   );
 };
