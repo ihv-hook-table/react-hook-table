@@ -41,7 +41,6 @@ export const HookTableExample = () => {
         header="Price"
         alignment="right"
         format="money"
-        footer={{ fn: 'sumMoney', sumCurrency: 'USD' }}
       />
     </Table>
   );

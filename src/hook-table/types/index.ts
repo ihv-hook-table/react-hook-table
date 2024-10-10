@@ -52,7 +52,5 @@ type FooterProps<T extends TableRecord = TableRecord> = {
   accessor?: NestedKeyOf<T>;
   alignment?: ColumnAlignment;
   colSpan?: number;
-  fn?: 'average' | 'sum' | 'sumMoney';
-  sumCurrency?: string;
   value?: unknown;
 };
