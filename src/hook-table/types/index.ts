@@ -42,6 +42,7 @@ export type ColumnProps<
   F extends FormatOptions = FormatOptions,
 > = {
   alignment?: ColumnAlignment;
+  colWidth?: number;
   footer?: string | FooterProps<T>;
   format?: ValueFormatKey<F>;
   header: string | string[];

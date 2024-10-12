@@ -2,7 +2,7 @@ import { ReactNode, useMemo } from 'react';
 import { FormatOptions, TableRecord } from '../types';
 import { getChildrenProps } from '../utils';
 import { TableFormatContext } from '../context/context';
-import { Body, Footer, Header, Table } from '../components';
+import { Body, ColGroup, Footer, Header, Table } from '../components';
 
 type TableProps<T extends TableRecord = TableRecord> = {
   children: ReactNode;
@@ -25,6 +25,7 @@ export const useCreateTable = <
         return (
           <TableFormatContext.Provider value={FormatOptionss}>
             <Table {...rest}>
+              <ColGroup columns={columns} />
               <Header columns={columns} />
               <Body columns={columns} data={data} isLoading={isLoading} />
               <Footer columns={columns} data={data} isLoading={isLoading} />

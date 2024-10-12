@@ -23,17 +23,17 @@ export const HookTableExample = () => {
 
   // TODO: display header without header prop (use translated accessor) - not sure if this is a good idea
   // TODO: multiple footer rows
-  // TODO: footer functions fix - sum money doesn't work
 
   return (
     <Table data={mockData} isLoading={false}>
       <Column
         accessor={['id', 'date']}
+        colWidth={10}
         header="#"
         format={[undefined, 'date']}
         footer={{ value: 'Total', colSpan: 4 }}
       />
-      <Column accessor="date" header="Date" format="dateTime" />
+      <Column accessor="date" header="Date" format="dateTime" colWidth={20} />
       <Column accessor="item" header="Item" />
       <Column accessor="qty" header="Qty" alignment="center" />
       <Column
@@ -41,6 +41,7 @@ export const HookTableExample = () => {
         header="Price"
         alignment="right"
         format="money"
+        colWidth={10}
       />
     </Table>
   );
