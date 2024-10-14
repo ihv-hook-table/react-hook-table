@@ -15,7 +15,7 @@ export const useCreateTable = <
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,
 >(
-  FormatOptionss?: F,
+  formatOptions?: F,
 ) => {
   const HookTable = useMemo(
     () =>
@@ -23,7 +23,7 @@ export const useCreateTable = <
         const columns = getChildrenProps<T>(children);
 
         return (
-          <TableFormatContext.Provider value={FormatOptionss}>
+          <TableFormatContext.Provider value={formatOptions}>
             <Table {...rest}>
               <ColGroup columns={columns} />
               <Header columns={columns} />
@@ -33,7 +33,7 @@ export const useCreateTable = <
           </TableFormatContext.Provider>
         );
       },
-    [FormatOptionss],
+    [formatOptions],
   );
 
   return { Table: HookTable };

@@ -20,21 +20,25 @@ export type TableRecord = Record<PropertyKey, unknown>;
 
 export type ValueFormatKey<F extends FormatOptions = FormatOptions> =
   | keyof F
-  | (keyof F | undefined)[]
   | undefined;
 
 /**
  * Column props
  */
 
-type ColumnPropsWithAccessor<T extends TableRecord = TableRecord> = {
+type ColumnPropsWithAccessor<
+  T extends TableRecord = TableRecord,
+  F extends FormatOptions = FormatOptions,
+> = {
   accessor: NestedKeyOf<T> | NestedKeyOf<T>[];
   children?: never;
+  format?: ValueFormatKey<F> | ValueFormatKey<F>[];
 };
 
 type ColumnPropsWithChildren<T extends TableRecord = TableRecord> = {
   accessor?: never;
   children: ColumnChildren<T>;
+  format?: never;
 };
 
 export type ColumnProps<
@@ -44,10 +48,9 @@ export type ColumnProps<
   alignment?: ColumnAlignment;
   colWidth?: number;
   footer?: string | FooterProps<T>;
-  format?: ValueFormatKey<F>;
   header: string | string[];
-  toolbar?: boolean;
-} & (ColumnPropsWithAccessor<T> | ColumnPropsWithChildren<T>);
+  toolbar?: boolean; // TODO: implement
+} & (ColumnPropsWithAccessor<T, F> | ColumnPropsWithChildren<T>);
 
 type FooterProps<T extends TableRecord = TableRecord> = {
   accessor?: NestedKeyOf<T>;
