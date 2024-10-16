@@ -25,9 +25,9 @@ const CellValue = <T extends TableRecord = TableRecord>({
 }: ColumnProps<T>) => {
   const { translate } = useContext(TableFormatContext) || {};
 
-  const normalizedLabels = toArray(header) || '';
+  const labelsArray = toArray(header) || '';
 
-  return normalizedLabels.map((label, idx) => {
+  return labelsArray.map((label, idx) => {
     const isSecondaryLabel = idx !== 0;
 
     const value = isFunction(translate) ? translate(label) : label;

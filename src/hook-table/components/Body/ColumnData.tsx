@@ -34,8 +34,9 @@ export const ColumnData = <T extends TableRecord = TableRecord>({
 
     const formatFunction = getFormatOptions(index, format, formatOptions);
 
-    const cellValue = deepGet(rowData, acc);
-    const formattedValue = getCellValue(cellValue, formatFunction);
+    const value = deepGet(rowData, acc);
+
+    const formattedValue = getCellValue(value, formatFunction);
 
     return (
       <Value

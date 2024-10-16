@@ -6,20 +6,20 @@ import { isFunction } from './isFunction';
 
 export const getCellValue = <F extends TableRecord = TableRecord>(
   value: unknown,
-  FormatOptions?: F[keyof F],
+  formatFunction?: F[keyof F],
 ) => {
-  if (!FormatOptions && isObject(value)) {
+  if (!formatFunction && isObject(value)) {
     throw new Error(
       '[getCellValue]: object value is only supported with custom format functions',
     );
   }
 
-  if (FormatOptions) {
-    if (!isFunction(FormatOptions)) {
+  if (formatFunction) {
+    if (!isFunction(formatFunction)) {
       throw new Error(`[getCellValue]: format function must be a function`);
     }
 
-    return FormatOptions(value);
+    return formatFunction(value);
   }
 
   return !!value || value === 0 || isBooleanType(value)

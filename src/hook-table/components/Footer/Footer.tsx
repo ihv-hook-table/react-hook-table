@@ -34,7 +34,7 @@ type CellProps<T extends TableRecord = TableRecord> = {
 const Cell = <T extends TableRecord = TableRecord>({
   column,
 }: CellProps<T>) => {
-  const { alignment: colAlignment = 'left', footer } = column || {};
+  const { alignment: columnAlignment = 'left', footer } = column || {};
 
   if (!footer) {
     return null;
@@ -42,7 +42,7 @@ const Cell = <T extends TableRecord = TableRecord>({
 
   const { value, colSpan, footerAlignment } = getFooterProps({ column }) || {};
 
-  const alignment = footerAlignment ?? colAlignment;
+  const alignment = footerAlignment ?? columnAlignment;
 
   return (
     <th className={`align-${alignment}`} colSpan={colSpan}>
