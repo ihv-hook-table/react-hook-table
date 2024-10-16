@@ -1,5 +1,5 @@
 import { ColumnProps, TableRecord } from '../../types';
-import { getFooterValue, isStringType } from '../../utils';
+import { getFooterProps } from '../../utils';
 
 type Props<T extends TableRecord = TableRecord> = {
   columns: ColumnProps<T>[];
@@ -34,20 +34,19 @@ type CellProps<T extends TableRecord = TableRecord> = {
 const Cell = <T extends TableRecord = TableRecord>({
   column,
 }: CellProps<T>) => {
-  const { alignment = 'left', footer } = column || {};
+  const { alignment: colAlignment = 'left', footer } = column || {};
 
   if (!footer) {
     return null;
   }
 
-  const footerAlignment =
-    !isStringType(footer) && footer?.alignment ? footer.alignment : alignment;
+  const { value, colSpan, footerAlignment } = getFooterProps({ column }) || {};
 
-  const colSpan = !isStringType(footer) && footer?.colSpan ? footer.colSpan : 1;
+  const alignment = footerAlignment ?? colAlignment;
 
   return (
-    <th className={`align-${footerAlignment}`} colSpan={colSpan}>
-      {String(getFooterValue({ column }))}
+    <th className={`align-${alignment}`} colSpan={colSpan}>
+      {String(value)}
     </th>
   );
 };

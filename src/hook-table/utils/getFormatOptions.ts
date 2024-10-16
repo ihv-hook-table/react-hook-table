@@ -4,8 +4,8 @@ import { toArray } from './toArray';
 
 export function getFormatOptions<F extends FormatOptions = FormatOptions>(
   valueIndex: number,
-  format?: ValueFormatKey<F>,
-  FormatOptionss?: F,
+  format?: ValueFormatKey<F> | ValueFormatKey<F>[],
+  formatOptions?: F,
 ) {
   const keys = toArray(format);
 
@@ -13,7 +13,7 @@ export function getFormatOptions<F extends FormatOptions = FormatOptions>(
     format !== undefined && isArrayType(keys) ? keys[valueIndex] : undefined;
 
   const missingFomatFunction =
-    !!functionKey && (!FormatOptionss || !FormatOptionss[functionKey]);
+    !!functionKey && (!formatOptions || !formatOptions[functionKey]);
 
   if (missingFomatFunction) {
     throw new Error(
@@ -21,7 +21,5 @@ export function getFormatOptions<F extends FormatOptions = FormatOptions>(
     );
   }
 
-  return functionKey && FormatOptionss
-    ? FormatOptionss[functionKey]
-    : undefined;
+  return functionKey && formatOptions ? formatOptions[functionKey] : undefined;
 }

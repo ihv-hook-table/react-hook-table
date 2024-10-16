@@ -3,7 +3,7 @@ export { compact } from './compact';
 export { deepGet } from './deepGet';
 export { getCellValue } from './getCellValue';
 export { getChildrenProps } from './getChildrenProps';
-export { getFooterValue } from './getFooterValue';
+export { getFooterProps } from './getFooterProps';
 export { getFormatOptions } from './getFormatOptions';
 export { isArrayType } from './isArrayType';
 export { isBooleanType } from './isBooleanType';

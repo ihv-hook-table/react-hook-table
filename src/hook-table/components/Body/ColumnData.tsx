@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ColumnProps, FormatOptions, TableRecord } from '../../types';
+import { ColumnProps, TableRecord } from '../../types';
 import {
   deepGet,
   getCellValue,
@@ -14,10 +14,7 @@ type Props<T extends TableRecord = TableRecord> = ColumnProps<T> & {
   rowData: T;
 };
 
-export const ColumnData = <
-  T extends TableRecord = TableRecord,
-  F extends FormatOptions = FormatOptions,
->({
+export const ColumnData = <T extends TableRecord = TableRecord>({
   accessor,
   children,
   format,
@@ -35,14 +32,10 @@ export const ColumnData = <
   return accessors.map((acc, index) => {
     const isSecondaryValue = index !== 0;
 
-    const FormatOptions = getFormatOptions<F>(
-      index,
-      format,
-      formatOptions as F,
-    );
+    const formatFunction = getFormatOptions(index, format, formatOptions);
 
     const cellValue = deepGet(rowData, acc);
-    const formattedValue = getCellValue<F>(cellValue, FormatOptions);
+    const formattedValue = getCellValue(cellValue, formatFunction);
 
     return (
       <Value
