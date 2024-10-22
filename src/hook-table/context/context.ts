@@ -2,7 +2,12 @@ import { createContext } from 'react';
 import { FormatOptions } from '../types';
 
 export type TableFormatContextType<F extends FormatOptions = FormatOptions> = {
-  translate?: (key: string) => string;
+  /**
+   *
+   * @param translate - The translation function translate header labels.
+   * @returns
+   */
+  translate?: (key: string) => string | undefined;
 } & F;
 
 const createTableContext = <F extends FormatOptions = FormatOptions>() =>

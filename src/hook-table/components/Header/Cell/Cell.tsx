@@ -21,16 +21,18 @@ export const Cell = <T extends TableRecord = TableRecord>({
 };
 
 const CellValue = <T extends TableRecord = TableRecord>({
+  accessor,
   header,
 }: ColumnProps<T>) => {
   const { translate } = useContext(TableFormatContext) || {};
+  const headerLabel = header ?? accessor;
 
-  const labelsArray = toArray(header) || '';
+  const labelsArray = toArray(headerLabel) || '';
 
   return labelsArray.map((label, idx) => {
     const isSecondaryLabel = idx !== 0;
 
-    const value = isFunction(translate) ? translate(label) : label;
+    const value = isFunction(translate) && label ? translate(label) : label;
 
     return (
       <div key={idx} className={clsx(isSecondaryLabel && 'secondary-value')}>

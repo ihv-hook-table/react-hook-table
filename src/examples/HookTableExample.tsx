@@ -6,7 +6,8 @@ import {
   formatDateTimeFromISOString,
 } from './value-format/format-date';
 
-import '../hook-table/hvms-table.css';
+// import '../hook-table/hvms-table.css';
+import { translate } from './value-format/translate';
 
 // Wrapper hook to provide format functions
 
@@ -16,12 +17,12 @@ type FormatProps = {
   dateTime: (dateTime: string) => string;
 };
 
-const useTableWrapper = <T extends TableRecord>() => {
+const useTableWrapper = <T extends TableRecord = TableRecord>() => {
   const tableComponents = useTable<T, FormatProps>({
     money: formatMoney,
     date: formatDateFromISOString,
     dateTime: formatDateTimeFromISOString,
-    translate: key => key,
+    translate: translate,
   });
 
   return tableComponents;
@@ -29,33 +30,25 @@ const useTableWrapper = <T extends TableRecord>() => {
 
 // Example component
 
+// TODO: implement expandable rows
+// TODO: loading skeletons
+// TODO: implement data cell wrapping - default is nowrap. Keep headers nowrap.
+// TODO: implement sorting
+// TODO: implement toolbar column
+// TODO: implement caption - low priority
+// TODO: implement row headers - low priority
+// TODO: multiple footer rows - low priority
+
 export const HookTableExample = () => {
   const { Column, Table } = useTableWrapper<TableData>();
 
-  // TODO: implement expandable rows
-  // TODO: implement data cell wrapping - default is nowrap
-  // TODO: implement toolbar column
-  // TODO: display header without header prop (use translated accessor) - medium priority
-  // TODO: multiple footer rows - low priority
-
   return (
     <Table data={mockData} isLoading={false}>
-      <Column
-        accessor={['id', 'date']}
-        colWidth={10}
-        header="#"
-        format={[undefined, 'date']}
-      />
-      <Column accessor="date" header="Date" format="dateTime" colWidth={10} />
-      <Column accessor="item" header="Item" />
-      <Column accessor="qty" header="Qty" alignment="center" colWidth={5} />
-      <Column
-        accessor="price"
-        header="Price"
-        alignment="right"
-        format="money"
-        colWidth={10}
-      />
+      <Column accessor="id" />
+      <Column accessor="date" format="dateTime" />
+      <Column accessor="item" />
+      <Column accessor="qty" alignment="center" />
+      <Column accessor="price" format="money" alignment="right" />
       <Column header="Row total" alignment="right" colWidth={10}>
         {({ qty, price }) =>
           formatMoney({

@@ -19,14 +19,20 @@ export const useCreateTable = <
 ) => {
   const HookTable = useMemo(
     () =>
-      ({ children, data, isLoading, ...rest }: TableProps<T>) => {
+      ({
+        children,
+        data,
+        hideHeader = false,
+        isLoading,
+        ...rest
+      }: TableProps<T>) => {
         const columns = getChildrenProps<T>(children);
 
         return (
           <TableFormatContext.Provider value={formatOptions}>
             <Table {...rest}>
               <ColGroup columns={columns} />
-              <Header columns={columns} />
+              {!hideHeader && <Header columns={columns} />}
               <Body columns={columns} data={data} isLoading={isLoading} />
               <Footer columns={columns} data={data} isLoading={isLoading} />
             </Table>

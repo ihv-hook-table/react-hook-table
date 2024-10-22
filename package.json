@@ -16,9 +16,6 @@
     "README.md"
   ],
   "exports": {
-    ".": {
-      "import": "./dist/index.es.js"
-    },
     "./dist/style.css": "./dist/style.css"
   },
   "module": "./dist/index.es.js",
@@ -28,6 +25,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.9",
     "@eslint/js": "^9.8.0",
     "@types/node": "^22.7.4",
     "@types/react": "^18.3.3",

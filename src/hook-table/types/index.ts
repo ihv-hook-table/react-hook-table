@@ -59,7 +59,7 @@ export type ColumnProps<
    */
   alignment?: ColumnAlignment;
   /**
-   * @param {number} colWidth - The width of the column.
+   * @param {number} colWidth - The width of the column in percentage. If not provided, width will be auto.
    */
   colWidth?: number;
   /**
@@ -69,7 +69,7 @@ export type ColumnProps<
   /**
    * @param {string | string[]} header - The header label(s) of the column. If an array is provided, the header will have multiple labels. First is primary, the rest are secondary.
    */
-  header: string | string[];
+  header?: string | string[];
   /**
    * @param {boolean} toolbar - Whether the column is a toolbar column. Not implemented yet
    */
@@ -81,4 +81,16 @@ type FooterProps<T extends TableRecord = TableRecord> = {
   alignment?: ColumnAlignment;
   colSpan?: number;
   value?: unknown;
+};
+
+/**
+ * Expandable row props
+ */
+
+export type ExpandableRowProps<T extends TableRecord = TableRecord> = {
+  children: ReactNode | ((rowData: T) => ReactNode);
+  /**
+   * @param {boolean} isExpanded - Whether the row is expanded by default.
+   */
+  isExpanded?: boolean;
 };

@@ -23,8 +23,11 @@ export default defineConfig({
     },
     emptyOutDir: true,
   },
+  esbuild: {
+    legalComments: 'none',
+  },
   plugins: [
     react(),
-    dts({ tsconfigPath: './tsconfig.app.json', rollupTypes: true }),
+    dts({ tsconfigPath: './tsconfig.json', rollupTypes: true }),
   ],
 });

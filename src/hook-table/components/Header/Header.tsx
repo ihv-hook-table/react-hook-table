@@ -9,9 +9,10 @@ type Props<T extends TableRecord = TableRecord> = {
 export const Header = <T extends TableRecord = TableRecord>({
   columns,
 }: Props<T>) => {
-  const hasMultiLabels = columns.some(
-    ({ header }) => isArrayType(header) && header.length > 1,
-  );
+  const hasMultiLabels = columns.some(({ header, accessor }) => {
+    const labels = header ?? accessor;
+    return isArrayType(labels) && labels.length > 1;
+  });
 
   return (
     <thead className="hvms-header">
