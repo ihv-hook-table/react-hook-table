@@ -9,7 +9,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "knip": "knip"
+    "knip": "knip",
+    "release": "yarn build && changeset publish"
   },
   "description": "Experimental hook table for React",
   "files": [
