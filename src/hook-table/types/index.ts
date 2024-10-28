@@ -74,6 +74,14 @@ export type ColumnProps<
    * @param {boolean} toolbar - Whether the column is a toolbar column. Not implemented yet
    */
   toolbar?: boolean;
+  /**
+   * @param {boolean} expandable - Whether the column is expandable. Not implemented yet
+   */
+  expandable?: boolean;
+  /**
+   * @param {boolean} defaultExpanded - Whether the column is default expanded. Not implemented yet
+   */
+  defaultExpanded?: boolean;
 } & (ColumnPropsWithAccessor<T, F> | ColumnPropsWithChildren<T>);
 
 type FooterProps<T extends TableRecord = TableRecord> = {
@@ -81,16 +89,4 @@ type FooterProps<T extends TableRecord = TableRecord> = {
   alignment?: ColumnAlignment;
   colSpan?: number;
   value?: unknown;
-};
-
-/**
- * Expandable row props
- */
-
-export type ExpandableRowProps<T extends TableRecord = TableRecord> = {
-  children: ReactNode | ((rowData: T) => ReactNode);
-  /**
-   * @param {boolean} isExpanded - Whether the row is expanded by default.
-   */
-  isExpanded?: boolean;
 };

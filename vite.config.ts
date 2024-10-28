@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/hook-table/index.ts'),
-      name: 'hook-table-react',
+      name: '@iff/react-hook-table',
       formats: ['es'],
       fileName: format => `index.${format}.js`,
     },

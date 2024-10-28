@@ -2,6 +2,7 @@ import { isValidElement, ReactNode } from 'react';
 import { isArrayType } from './isArrayType';
 import { isObject } from './isObject';
 import { ColumnProps, TableRecord } from '../types';
+import { toArray } from './toArray';
 
 export const getChildrenProps = <T extends TableRecord = TableRecord>(
   columns: ReactNode,
@@ -16,14 +17,8 @@ export const getChildrenProps = <T extends TableRecord = TableRecord>(
       })
       .filter(Boolean) as ColumnProps<T>[];
 
-  // If multiple columns are passed as children
-  if (isArrayType<ReactNode>(columns)) {
-    return mappedValues(columns);
-  }
-
-  //If a single column is passed as children
-  if (isObject(columns)) {
-    return mappedValues([columns]);
+  if (isArrayType<ReactNode>(columns) || isObject(columns)) {
+    return mappedValues(toArray(columns));
   }
 
   return [];

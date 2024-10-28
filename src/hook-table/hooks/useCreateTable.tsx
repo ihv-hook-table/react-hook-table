@@ -1,6 +1,6 @@
 import { ReactNode, useMemo } from 'react';
 import { FormatOptions, TableRecord } from '../types';
-import { getChildrenProps } from '../utils';
+import { getChildrenProps, log } from '../utils';
 import { TableFormatContext } from '../context/context';
 import { Body, ColGroup, Footer, Header, Table } from '../components';
 
@@ -26,7 +26,16 @@ export const useCreateTable = <
         isLoading,
         ...rest
       }: TableProps<T>) => {
-        const columns = getChildrenProps<T>(children);
+        const columns = getChildrenProps<T>(children) || {};
+        // const columns = getOrderedColumns(childrenProps);
+
+        if (!columns || columns.length === 0) {
+          return null;
+        }
+
+        if (import.meta.env.DEV) {
+          log('useCreateTable - columns', columns);
+        }
 
         return (
           <TableFormatContext.Provider value={formatOptions}>

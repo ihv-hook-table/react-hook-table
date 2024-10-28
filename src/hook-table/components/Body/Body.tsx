@@ -1,7 +1,7 @@
 import { ColumnProps, FormatOptions, TableRecord } from '../../types';
-import { clsx, isArrayType } from '../../utils';
+import { log } from '../../utils';
 import { NoResults } from '../NoResults/NoResults';
-import { ColumnData } from './ColumnData';
+import { TableRow } from '../TableRow/TableRow';
 
 type Props<
   T extends TableRecord = TableRecord,
@@ -23,30 +23,14 @@ export const Body = <T extends TableRecord = TableRecord>({
     return <NoResults isLoading={isLoading} columnCount={columns.length} />;
   }
 
-  const isMulti = columns.some(
-    ({ accessor }) => isArrayType(accessor) && accessor.length > 1,
-  );
+  if (import.meta.env.DEV) {
+    log('Body - data', data);
+  }
 
   return (
     <tbody className="hvms-body">
       {data.map((rowData, dataIndex) => (
-        <tr key={dataIndex}>
-          {columns.map((columnProps, colIndex) => {
-            const { alignment = 'left' } = columnProps;
-
-            return (
-              <td
-                key={colIndex}
-                className={clsx(
-                  alignment && `align-${alignment}`,
-                  isMulti && 'multi-line',
-                )}
-              >
-                <ColumnData {...columnProps} rowData={rowData} />
-              </td>
-            );
-          })}
-        </tr>
+        <TableRow key={dataIndex} columns={columns} rowData={rowData} />
       ))}
     </tbody>
   );
