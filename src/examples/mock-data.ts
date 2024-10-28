@@ -50,7 +50,7 @@ function generateMockData(numRows: number): TableData[] {
   return Array.from({ length: numRows }, (_, index) => ({
     id: `Row ${index + 1}`,
     date: generateISODate(),
-    item: items[Math.floor(Math.random() * items.length)],
+    item: items[Math.floor(Math.random() * items.length)] || 'Unknown Item',
     qty: Math.floor(Math.random() * 10) + 1,
     price: { amount: getRandomPrice(), currency: 'EUR' },
     additionalData: {
