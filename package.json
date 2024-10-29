@@ -1,13 +1,10 @@
 {
-  "name": "@iff/react-hook-table",
+  "name": "@ihv/react-hook-table",
+  "author": "Ivo Etti",
   "private": false,
   "version": "0.2.1",
   "license": "MIT",
   "type": "module",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -16,7 +13,7 @@
     "knip": "knip",
     "release": "yarn build && changeset publish"
   },
-  "description": "Experimental hook table for React",
+  "description": "Lightweight hook table for React",
   "files": [
     "dist",
     "README.md"
