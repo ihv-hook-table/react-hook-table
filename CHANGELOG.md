@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.2.2
+
+### Patch Changes
+
+- cfdab14: Update readme with updated imports
+
 ## 0.2.1
 
 ### Patch Changes
