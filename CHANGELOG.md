@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.2.3
+
+### Patch Changes
+
+- 14b8074: changeset access policy fix
+
 ## 0.2.2
 
 ### Patch Changes
