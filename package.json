@@ -1,7 +1,6 @@
 {
   "name": "@ihv/react-hook-table",
   "author": "Ivo Etti",
-  "private": false,
   "version": "0.2.1",
   "license": "MIT",
   "type": "module",
