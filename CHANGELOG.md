@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.2.4
+
+### Patch Changes
+
+- 928617e: fix typings
+
 ## 0.2.3
 
 ### Patch Changes
