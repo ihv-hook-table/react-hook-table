@@ -9,13 +9,13 @@ To use the table component in your project, follow these steps:
 1. Install the package using your preferred package manager. For example, with npm:
 
 ```shell
-npm install @hvms/hook-table-react
+npm install @ihv/react-hook-table
 ```
 
 2. Import the hook:
 
 ```js
-import { useTable } from '@hvms/hook-table-react';
+import { useTable } from '@ihv/react-hook-table';
 ```
 
 3. Example data:
