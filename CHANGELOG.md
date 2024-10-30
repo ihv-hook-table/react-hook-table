@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.2.5
+
+### Patch Changes
+
+- 5c6436b: fix declarations finally
+
 ## 0.2.4
 
 ### Patch Changes
