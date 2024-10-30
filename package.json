@@ -17,15 +17,6 @@
     "dist",
     "README.md"
   ],
-  "exports": {
-    "./dist/style.css": "./dist/style.css",
-    ".": {
-      "import": {
-        "default": "./dist/index.es.js",
-        "types": "./dist/index.d.ts"
-      }
-    }
-  },
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "peerDependencies": {

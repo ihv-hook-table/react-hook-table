@@ -1,4 +1,4 @@
-import { TableRecord, useTable as useHookTable } from '../hook-table';
+import { useTable as useHookTable } from '../hook-table';
 import { AdditionalData, mockData, MoneyType, TableData } from './mock-data';
 import { formatMoney } from './value-format/format-money';
 import {
@@ -9,6 +9,7 @@ import {
 // import '../hook-table/hvms-table.css';
 import { translate } from './value-format/translate';
 import { formatBoolean } from './value-format/boolean';
+import { TableRecord } from '../hook-table/types';
 
 // Wrapper hook to provide format functions
 
