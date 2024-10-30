@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.2.6
+
+### Patch Changes
+
+- c1e76bc: Update readme
+
 ## 0.2.5
 
 ### Patch Changes
