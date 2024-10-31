@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.2.8
+
+### Patch Changes
+
+- 19a73ab: more documentation updates
+
 ## 0.2.7
 
 ### Patch Changes
