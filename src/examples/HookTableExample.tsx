@@ -50,25 +50,11 @@ const Subtable = ({ data }: SubTableProps) => {
   );
 };
 
-// const UpdatingColumn = () => {
-//   const [seconds, setSeconds] = useState(0);
-//   useEffect(() => {
-//     const intervalId = setInterval(() => {
-//       setSeconds(seconds + 1);
-//     }, 1000);
-
-//     return () => clearInterval(intervalId);
-//   }, [seconds]);
-
-//   return <div>{seconds}</div>;
-// };
-
 // Example component
 
 // TODO: loading skeletons
 // TODO: implement data cell wrapping - default is nowrap. Keep headers nowrap.
 // TODO: implement sorting
-// TODO: implement toolbar column
 // TODO: implement caption - low priority
 // TODO: implement row headers - low priority
 // TODO: multiple footer rows - low priority
@@ -94,9 +80,6 @@ export const HookTableExample = () => {
           })
         }
       </Column>
-      {/* <Column colWidth={5} alignment="right">
-        <UpdatingColumn />
-      </Column> */}
     </Table>
   );
 };
