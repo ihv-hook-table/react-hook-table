@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.2.10
+
+### Patch Changes
+
+- 56b6103: npm provenance info
+
 ## 0.2.9
 
 ### Patch Changes
