@@ -1,6 +1,6 @@
 {
   "name": "@ihv/react-hook-table",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Lightweight hook table for React",
   "author": "Ivo Etti",
   "license": "MIT",
