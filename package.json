@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/ihv-hook-table/react-hook-table"
   },
+  "publishConfig": {
+    "provenance": true
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
