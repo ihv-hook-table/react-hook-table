@@ -5,8 +5,8 @@ type Props = {
 
 export const Expander = ({ isOpen, setIsOpen }: Props) => {
   return (
-    <button onClick={() => setIsOpen(!isOpen)}>
-      {isOpen ? 'Hide' : 'Show'}
+    <button className="expander" onClick={() => setIsOpen(!isOpen)}>
+      {isOpen ? '-' : '+'}
     </button>
   );
 };

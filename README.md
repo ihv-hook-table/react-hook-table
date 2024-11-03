@@ -4,7 +4,7 @@ The project was initiated with the goal of developing a straightforward and easy
 
 The project is still under development, but most of the basic functionality should remain unchanged.
 
-**[Codesandbox demo](https://codesandbox.io/p/sandbox/react-hook-table-nsvy5y)**
+**[CodeSandbox demo](https://codesandbox.io/p/sandbox/react-hook-table-nsvy5y)**
 
 ## How to use
 

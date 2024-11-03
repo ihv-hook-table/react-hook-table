@@ -15,7 +15,7 @@ export const Header = <T extends TableRecord = TableRecord>({
   });
 
   return (
-    <thead className="hvms-header">
+    <thead className="ihv-header">
       <tr>
         {columns?.map((col, idx) => (
           <Cell key={idx} column={col} isMulti={hasMultiLabels} />

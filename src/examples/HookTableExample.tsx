@@ -6,7 +6,7 @@ import {
   formatDateTimeFromISOString,
 } from './value-format/format-date';
 
-// import '../hook-table/hvms-table.css';
+// import '../hook-table/ihv-table.css';
 import { translate } from './value-format/translate';
 import { formatBoolean } from './value-format/boolean';
 import { TableRecord } from '../hook-table/types';
@@ -67,7 +67,7 @@ export const HookTableExample = () => {
       <Column expandable>
         {({ additionalData }) => <Subtable data={additionalData} />}
       </Column>
-      <Column accessor={['id', 'date']} />
+      <Column accessor="id" />
       <Column accessor="date" format="dateTime" />
       <Column accessor="item" />
       <Column accessor="qty" alignment="center" />

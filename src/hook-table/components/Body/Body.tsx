@@ -28,7 +28,7 @@ export const Body = <T extends TableRecord = TableRecord>({
   }
 
   return (
-    <tbody className="hvms-body">
+    <tbody className="ihv-body">
       {data.map((rowData, dataIndex) => (
         <TableRow key={dataIndex} columns={columns} rowData={rowData} />
       ))}

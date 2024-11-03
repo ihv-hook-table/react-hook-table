@@ -1,4 +1,4 @@
-.hvms-table {
+.ihv-table {
   /* CSS variables */
   --border-color: hsl(240 5.9% 90% / 0.5);
   --secondary-color: lightgray;
@@ -13,37 +13,37 @@
   line-height: 1rem;
 }
 
-.hvms-header tr,
-.hvms-body tr {
+.ihv-header tr,
+.ihv-body tr {
   border-bottom: 1px solid var(--border-color);
 }
 
-.hvms-body tr:hover {
+.ihv-body tr:hover {
   background-color: var(--bg-hover-color);
 }
 
-.hvms-body tr.expanded {
+.ihv-body tr.expanded {
   background-color: var(--bg-hover-color);
 }
 
-.hvms-table th,
-.hvms-table td {
+.ihv-table th,
+.ihv-table td {
   text-wrap: nowrap;
   padding: 0.5rem 1rem;
-  height: 34px;
+  /* height: 34px; */
 }
 
-.hvms-body .expandable {
+.ihv-body .expandable {
   background-color: var(--bg-hover-color);
 }
 
-.hvms-body .expandable tr:last-child {
+.ihv-body .expandable tr:last-child {
   border-bottom: none;
 }
 
 /* Secondary header & value */
 
-.hvms-table .secondary-value {
+.ihv-table .secondary-value {
   color: var(--secondary-color);
   font-size: 0.875rem;
   font-weight: 400;
@@ -53,18 +53,22 @@
 
 /* Alignment classes */
 
-.hvms-table .align-left {
+.ihv-table .align-left {
   text-align: left;
 }
 
-.hvms-table .align-center {
+.ihv-table .align-center {
   text-align: center;
 }
 
-.hvms-table .align-right {
+.ihv-table .align-right {
   text-align: right;
 }
 
-.hvms-table .multi-line {
+.ihv-table .multi-line {
   vertical-align: text-top;
+}
+
+.ihv-body .expander {
+  cursor: pointer;
 }

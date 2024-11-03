@@ -5,6 +5,6 @@ type Props = ComponentProps<'table'>;
 
 export const Table = forwardRef(
   ({ className, ...rest }: Props, ref: Ref<HTMLTableElement>) => (
-    <table {...rest} ref={ref} className={clsx('hvms-table', className)} />
+    <table {...rest} ref={ref} className={clsx('ihv-table', className)} />
   ),
 );

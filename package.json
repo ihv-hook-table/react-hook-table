@@ -13,6 +13,12 @@
     "release": "yarn build && changeset publish"
   },
   "description": "Lightweight hook table for React",
+  "keywords": [
+    "react",
+    "hook",
+    "table",
+    "typescript"
+  ],
   "files": [
     "dist",
     "README.md"

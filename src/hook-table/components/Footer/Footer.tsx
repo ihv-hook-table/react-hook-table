@@ -17,7 +17,7 @@ export const Footer = <T extends TableRecord = TableRecord>({
   }
 
   return (
-    <tfoot className="hvms-footer">
+    <tfoot className="ihv-footer">
       <tr>
         {columns.map((col, idx) => (
           <Cell column={col} key={idx} />
