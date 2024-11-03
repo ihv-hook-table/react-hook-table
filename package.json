@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ihv-hook-table/react-hook-table"
+    "url": "https://github.com/ihv-hook-table/react-hook-table.git"
   },
   "publishConfig": {
     "provenance": true
