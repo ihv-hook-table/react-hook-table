@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.2.9
+
+### Patch Changes
+
+- dd8b031: add link to repository + internal adjustments
+
 ## 0.2.8
 
 ### Patch Changes
