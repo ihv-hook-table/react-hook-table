@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.2.11
+
+### Patch Changes
+
+- 1d9a757: provenance attempt 2
+
 ## 0.2.10
 
 ### Patch Changes
