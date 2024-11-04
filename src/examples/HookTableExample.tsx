@@ -1,4 +1,8 @@
-import { useTable as useHookTable } from '../hook-table';
+import {
+  useTable as useHookTable,
+  ExpanderProps,
+  TableRecord,
+} from '../hook-table';
 import { AdditionalData, mockData, MoneyType, TableData } from './mock-data';
 import { formatMoney } from './value-format/format-money';
 import {
@@ -9,7 +13,6 @@ import {
 // import '../hook-table/ihv-table.css';
 import { translate } from './value-format/translate';
 import { formatBoolean } from './value-format/boolean';
-import { TableRecord } from '../hook-table/types';
 
 // Wrapper hook to provide format functions
 
@@ -24,6 +27,12 @@ type SubTableProps = {
   data: AdditionalData;
 };
 
+const Expander = ({ isOpen, setIsOpen }: ExpanderProps) => (
+  <button className="expander" onClick={() => setIsOpen(!isOpen)}>
+    {isOpen ? 'Hide' : 'Show'}
+  </button>
+);
+
 const useTable = <T extends TableRecord = TableRecord>() => {
   const tableComponents = useHookTable<T, FormatProps>({
     money: formatMoney,
@@ -31,6 +40,9 @@ const useTable = <T extends TableRecord = TableRecord>() => {
     dateTime: formatDateTimeFromISOString,
     boolean: formatBoolean,
     translate,
+    components: {
+      Expander,
+    },
   });
 
   return tableComponents;
@@ -64,7 +76,10 @@ export const HookTableExample = () => {
 
   return (
     <Table data={mockData} isLoading={false}>
-      <Column expandable>
+      <Column
+        expandable
+        defaultExpanded={({ id }) => ['Row 2', 'Row 4'].includes(id)}
+      >
         {({ additionalData }) => <Subtable data={additionalData} />}
       </Column>
       <Column accessor="id" />
