@@ -81,7 +81,7 @@ export type ColumnProps<
   /**
    * @param {boolean} defaultExpanded - Whether the column is default expanded. Not implemented yet
    */
-  defaultExpanded?: boolean;
+  defaultExpanded?: boolean | ((rowData: T) => boolean);
 } & (ColumnPropsWithAccessor<T, F> | ColumnPropsWithChildren<T>);
 
 type FooterProps<T extends TableRecord = TableRecord> = {
@@ -89,4 +89,9 @@ type FooterProps<T extends TableRecord = TableRecord> = {
   alignment?: ColumnAlignment;
   colSpan?: number;
   value?: unknown;
+};
+
+export type ExpanderProps = {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 };
