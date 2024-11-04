@@ -1,5 +1,12 @@
 # @iff/react-hook-table
 
+## 0.2.12
+
+### Patch Changes
+
+- 3e54756: add external expander component support
+- 51b7dae: css update + minor cleanup
+
 ## 0.2.11
 
 ### Patch Changes
