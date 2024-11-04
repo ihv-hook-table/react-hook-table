@@ -1,5 +1,4 @@
 import { ColumnProps, FormatOptions, TableRecord } from '../../types';
-import { log } from '../../utils';
 import { NoResults } from '../NoResults/NoResults';
 import { TableRow } from '../TableRow/TableRow';
 
@@ -23,12 +22,8 @@ export const Body = <T extends TableRecord = TableRecord>({
     return <NoResults isLoading={isLoading} columnCount={columns.length} />;
   }
 
-  if (import.meta.env.DEV) {
-    log('Body - data', data);
-  }
-
   return (
-    <tbody className="ihv-body">
+    <tbody>
       {data.map((rowData, dataIndex) => (
         <TableRow key={dataIndex} columns={columns} rowData={rowData} />
       ))}

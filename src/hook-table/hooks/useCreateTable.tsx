@@ -27,7 +27,6 @@ export const useCreateTable = <
         ...rest
       }: TableProps<T>) => {
         const columns = getChildrenProps<T>(children) || {};
-        // const columns = getOrderedColumns(childrenProps);
 
         if (!columns || columns.length === 0) {
           return null;
