@@ -7,7 +7,7 @@ import {
   isFunction,
   toArray,
 } from '../../utils';
-import { Value } from '../Value/Value';
+import { Value } from '../default-components';
 import { TableFormatContext } from '../../context/context';
 
 type Props<T extends TableRecord = TableRecord> = ColumnProps<T> & {

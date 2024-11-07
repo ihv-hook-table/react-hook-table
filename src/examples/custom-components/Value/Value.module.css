@@ -1,0 +1,7 @@
+.root.secondaryValue {
+  color: var(--secondary-color);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 0.875rem;
+  margin-top: 0.25rem;
+}

@@ -1,6 +1,7 @@
 import { ColumnProps, FormatOptions, TableRecord } from '../../types';
+import { TableBody } from '../default-components';
 import { NoResults } from '../NoResults/NoResults';
-import { TableRow } from '../TableRow/TableRow';
+import { BodyRow } from '../BodyRow/BodyRow';
 
 type Props<
   T extends TableRecord = TableRecord,
@@ -23,10 +24,10 @@ export const Body = <T extends TableRecord = TableRecord>({
   }
 
   return (
-    <tbody>
+    <TableBody>
       {data.map((rowData, dataIndex) => (
-        <TableRow key={dataIndex} columns={columns} rowData={rowData} />
+        <BodyRow key={dataIndex} columns={columns} rowData={rowData} />
       ))}
-    </tbody>
+    </TableBody>
   );
 };

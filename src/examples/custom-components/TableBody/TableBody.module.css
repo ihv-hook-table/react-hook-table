@@ -1,0 +1,7 @@
+.root tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.root tr:hover {
+  background-color: var(--bg-hover-color);
+}

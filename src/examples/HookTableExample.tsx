@@ -1,51 +1,9 @@
-import {
-  useTable as useHookTable,
-  ExpanderProps,
-  TableRecord,
-} from '../hook-table';
-import { AdditionalData, mockData, MoneyType, TableData } from './mock-data';
+import { AdditionalData, mockData, TableData } from './mock-data';
+import { useTable } from './use-table';
 import { formatMoney } from './value-format/format-money';
-import {
-  formatDateFromISOString,
-  formatDateTimeFromISOString,
-} from './value-format/format-date';
-
-// import '../hook-table/ihv-table.css';
-import { translate } from './value-format/translate';
-import { formatBoolean } from './value-format/boolean';
-
-// Wrapper hook to provide format functions
-
-type FormatProps = {
-  money: (money: MoneyType) => string;
-  date: (date: string) => string;
-  dateTime: (dateTime: string) => string;
-  boolean: (value: boolean) => string;
-};
 
 type SubTableProps = {
   data: AdditionalData;
-};
-
-const Expander = ({ isOpen, setIsOpen }: ExpanderProps) => (
-  <button className="expander" onClick={() => setIsOpen(!isOpen)}>
-    {isOpen ? 'Hide' : 'Show'}
-  </button>
-);
-
-const useTable = <T extends TableRecord = TableRecord>() => {
-  const tableComponents = useHookTable<T, FormatProps>({
-    money: formatMoney,
-    date: formatDateFromISOString,
-    dateTime: formatDateTimeFromISOString,
-    boolean: formatBoolean,
-    translate,
-    components: {
-      Expander,
-    },
-  });
-
-  return tableComponents;
 };
 
 const Subtable = ({ data }: SubTableProps) => {
@@ -62,15 +20,6 @@ const Subtable = ({ data }: SubTableProps) => {
   );
 };
 
-// Example component
-
-// TODO: loading skeletons
-// TODO: implement data cell wrapping - default is nowrap. Keep headers nowrap.
-// TODO: implement sorting
-// TODO: implement caption - low priority
-// TODO: implement row headers - low priority
-// TODO: multiple footer rows - low priority
-
 export const HookTableExample = () => {
   const { Column, Table } = useTable<TableData>();
 
@@ -79,10 +28,11 @@ export const HookTableExample = () => {
       <Column
         expandable
         defaultExpanded={({ id }) => ['Row 2', 'Row 4'].includes(id)}
+        colWidth={5}
       >
         {({ additionalData }) => <Subtable data={additionalData} />}
       </Column>
-      <Column accessor="id" />
+      <Column accessor={['id', 'date']} />
       <Column accessor="date" format="dateTime" />
       <Column accessor="item" />
       <Column accessor="qty" alignment="center" />
