@@ -1,5 +1,6 @@
 import { ColumnProps, TableRecord } from '../../types';
 import { isArrayType } from '../../utils';
+import { TableHeader, TableRow } from '../default-components';
 import { Cell } from './Cell/Cell';
 
 type Props<T extends TableRecord = TableRecord> = {
@@ -15,12 +16,12 @@ export const Header = <T extends TableRecord = TableRecord>({
   });
 
   return (
-    <thead>
-      <tr>
+    <TableHeader>
+      <TableRow>
         {columns?.map((col, idx) => (
           <Cell key={idx} column={col} isMulti={hasMultiLabels} />
         ))}
-      </tr>
-    </thead>
+      </TableRow>
+    </TableHeader>
   );
 };

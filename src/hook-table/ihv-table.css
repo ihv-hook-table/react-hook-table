@@ -8,7 +8,7 @@
 
   width: 100%;
   border-collapse: collapse;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1rem;
   line-height: 1rem;
 }
@@ -33,12 +33,8 @@
   height: 34px;
 }
 
-.ihv-table tbody .expandable {
-  background-color: var(--bg-hover-color);
-}
-
 /* Remove border bottom from subtable */
-.ihv-table .expandable tbody tr:last-child {
+.ihv-table .expanded tbody tr:last-child {
   border-bottom: none;
 }
 

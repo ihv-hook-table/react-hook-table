@@ -1,15 +1,15 @@
-import { ReactNode, useMemo } from 'react';
+import { ComponentProps, useMemo } from 'react';
 import { FormatOptions, TableRecord } from '../types';
 import { getChildrenProps, log } from '../utils';
 import { TableFormatContext } from '../context/context';
-import { Body, ColGroup, Footer, Header, Table } from '../components';
+import { Body, ColGroup, Footer, Header } from '../components';
+import { Table } from '../components/default-components';
 
 type TableProps<T extends TableRecord = TableRecord> = {
-  children: ReactNode;
   data?: T[];
   isLoading?: boolean;
   hideHeader?: boolean;
-};
+} & ComponentProps<'table'>;
 
 export const useCreateTable = <
   T extends TableRecord = TableRecord,

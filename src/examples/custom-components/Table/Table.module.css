@@ -1,0 +1,13 @@
+.root {
+  /* CSS variables */
+  --border-color: hsl(240 5.9% 90% / 0.5);
+  --secondary-color: lightgray;
+  --bg-hover-color: hsl(240 4.8% 95.9% / 0.5);
+
+  /* general styles */
+  width: 100%;
+  border-collapse: collapse;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1rem;
+}

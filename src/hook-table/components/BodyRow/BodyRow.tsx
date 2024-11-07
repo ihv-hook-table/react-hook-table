@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { ColumnProps, FormatOptions, TableRecord } from '../../types';
-import { Expander } from '../Expander/Expander';
 import { ColumnData } from './ColumnData';
-import { clsx, isArrayType, isFunction } from '../../utils';
+import { isArrayType, isFunction } from '../../utils';
+import { TableData, TableRow, Expander } from '../default-components';
 
 type Props<
   T extends TableRecord = TableRecord,
@@ -12,7 +12,7 @@ type Props<
   rowData: T;
 };
 
-export const TableRow = <T extends TableRecord = TableRecord>({
+export const BodyRow = <T extends TableRecord = TableRecord>({
   columns,
   rowData,
 }: Props<T, FormatOptions>) => {
@@ -33,34 +33,31 @@ export const TableRow = <T extends TableRecord = TableRecord>({
 
   return (
     <>
-      <tr className={clsx(expanded && 'expanded')}>
+      <TableRow expanded={expanded}>
         {columns.map(({ expandable, ...columnRest }, colIndex) => {
           const { alignment = 'left' } = columnRest;
 
           return (
-            <td
+            <TableData
               key={colIndex}
-              className={clsx(
-                !expandable && alignment && `align-${alignment}`,
-                !expandable && isMulti && 'multi-line',
-              )}
+              alignment={alignment}
+              isMulti={isMulti}
+              expandable={expandable}
             >
               {expandable ? (
                 <Expander isOpen={expanded} setIsOpen={setExpanded} />
               ) : (
                 <ColumnData {...columnRest} rowData={rowData} />
               )}
-            </td>
+            </TableData>
           );
         })}
-      </tr>
+      </TableRow>
 
       {expanded && (
-        <tr>
-          <td colSpan={columns.length} className="expandable">
-            {expandableContent}
-          </td>
-        </tr>
+        <TableRow expanded={expanded}>
+          <TableData colSpan={columns.length}>{expandableContent}</TableData>
+        </TableRow>
       )}
     </>
   );

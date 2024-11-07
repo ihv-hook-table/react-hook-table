@@ -1,7 +1,9 @@
 import { useContext } from 'react';
 import { ColumnProps, TableRecord } from '../../../types';
-import { clsx, isFunction, toArray } from '../../../utils';
+import { isFunction, toArray } from '../../../utils';
 import { TableFormatContext } from '../../../context/context';
+import { TableHead } from '../../default-components';
+import { Value } from '../../default-components';
 
 type HeaderCellProps<T extends TableRecord = TableRecord> = {
   column: ColumnProps<T>;
@@ -14,9 +16,9 @@ export const Cell = <T extends TableRecord = TableRecord>({
   const { alignment = 'left' } = column || {};
 
   return (
-    <th className={clsx(`align-${alignment}`, isMulti && 'multi-line')}>
+    <TableHead alignment={alignment} isMulti={isMulti}>
       <CellValue {...column} />
-    </th>
+    </TableHead>
   );
 };
 
@@ -35,9 +37,7 @@ const CellValue = <T extends TableRecord = TableRecord>({
     const value = isFunction(translate) && label ? translate(label) : label;
 
     return (
-      <div key={idx} className={clsx(isSecondaryLabel && 'secondary-value')}>
-        {value}
-      </div>
+      <Value key={idx} isSecondaryValue={isSecondaryLabel} value={value} />
     );
   });
 };
