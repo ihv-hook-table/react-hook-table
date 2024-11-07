@@ -1,14 +1,14 @@
 import { useContext } from 'react';
-import { ColumnProps, TableRecord } from '../../types';
+import { ColumnProps, TableRecord } from '../../../types';
 import {
   deepGet,
   getCellValue,
   getFormatOptions,
   isFunction,
   toArray,
-} from '../../utils';
-import { Value } from '../default-components';
-import { TableFormatContext } from '../../context/context';
+} from '../../../utils';
+import { Value } from '../../default-components';
+import { TableFormatContext } from '../../../context/context';
 
 type Props<T extends TableRecord = TableRecord> = ColumnProps<T> & {
   rowData: T;

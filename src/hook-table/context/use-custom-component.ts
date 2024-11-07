@@ -8,8 +8,5 @@ export const useCustomComponent = <P = object>(
   componentName: TableFormatComponentKeys,
 ) => {
   const { components } = useContext(TableFormatContext) || {};
-
-  const component = components?.[componentName];
-
-  return component as ComponentType<P>;
+  return components?.[componentName] as ComponentType<P>;
 };
