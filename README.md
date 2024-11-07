@@ -5,4 +5,5 @@ The project was initiated with the goal of developing a straightforward and easy
 The project is still under development, but most of the basic functionality should remain unchanged.
 
 **[Documentation](https://github.com/ihv-hook-table/react-hook-table/wiki/Quickstart)**
+
 **[CodeSandbox demo](https://codesandbox.io/p/sandbox/react-hook-table-nsvy5y)**
