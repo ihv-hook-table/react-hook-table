@@ -1,4 +1,4 @@
-import { ColumnProps, TableRecord } from '../../types';
+import { ColumnProps, TableRecord } from '../../../types';
 
 type Props<T extends TableRecord = TableRecord> = {
   columns: ColumnProps<T>[];

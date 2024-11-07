@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { ColumnProps, FormatOptions, TableRecord } from '../../types';
+import { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 import { ColumnData } from './ColumnData';
-import { isArrayType, isFunction } from '../../utils';
-import { TableData, TableRow, Expander } from '../default-components';
+import { isArrayType, isFunction } from '../../../utils';
+import { TableData, TableRow, Expander } from '../../default-components';
 
 type Props<
   T extends TableRecord = TableRecord,

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { ColumnProps, FormatOptions, TableRecord } from '../../types';
+import { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 
 export const Column = <
   T extends TableRecord = TableRecord,

@@ -12,7 +12,6 @@ export { isFunction } from './isFunction';
 export { isNullOrUndefined } from './isNullOrUndefined';
 export { isObject } from './isObject';
 export { isObjectType } from './isObjectType';
-export { isStringType } from './isStringType';
 export { isUndefined } from './isUndefined';
 export { log } from './log';
 export { toArray } from './toArray';
