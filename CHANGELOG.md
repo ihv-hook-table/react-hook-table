@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.0
+
+### Minor Changes
+
+- 115ca83: FEATURE: Added support for custom components to enable more customization options
+
 ## 0.2.12
 
 ### Patch Changes
