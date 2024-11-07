@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/ihv-hook-table/react-hook-table.git"
   },
+  "homepage": "https://github.com/ihv-hook-table/react-hook-table/wiki",
   "publishConfig": {
     "provenance": true
   },
