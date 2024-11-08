@@ -2,10 +2,10 @@ import { FormatOptions, ValueFormatKey } from '../types';
 import { isArrayType } from './isArrayType';
 import { toArray } from './toArray';
 
-export function getFormatOptions<F extends FormatOptions = FormatOptions>(
+export function getFormatFunction<F extends FormatOptions = FormatOptions>(
   valueIndex: number,
   format?: ValueFormatKey<F> | ValueFormatKey<F>[],
-  formatOptions?: F,
+  formatFunctions?: F,
 ) {
   const keys = toArray(format);
 
@@ -13,7 +13,7 @@ export function getFormatOptions<F extends FormatOptions = FormatOptions>(
     format !== undefined && isArrayType(keys) ? keys[valueIndex] : undefined;
 
   const missingFomatFunction =
-    !!functionKey && (!formatOptions || !formatOptions[functionKey]);
+    !!functionKey && (!formatFunctions || !formatFunctions[functionKey]);
 
   if (missingFomatFunction) {
     throw new Error(
@@ -21,5 +21,7 @@ export function getFormatOptions<F extends FormatOptions = FormatOptions>(
     );
   }
 
-  return functionKey && formatOptions ? formatOptions[functionKey] : undefined;
+  return functionKey && formatFunctions
+    ? formatFunctions[functionKey]
+    : undefined;
 }

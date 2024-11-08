@@ -4,7 +4,7 @@ export { deepGet } from './deepGet';
 export { getCellValue } from './getCellValue';
 export { getChildrenProps } from './getChildrenProps';
 export { getFooterProps } from './getFooterProps';
-export { getFormatOptions } from './getFormatOptions';
+export { getFormatFunction } from './getFormatFunction';
 export { isArrayType } from './isArrayType';
 export { isBooleanType } from './isBooleanType';
 export { isDateObject } from './isDateObject';

@@ -1,7 +1,10 @@
 import { ComponentProps, useMemo } from 'react';
 import { FormatOptions, TableRecord } from '../types';
 import { getChildrenProps, log } from '../utils';
-import { TableFormatContext } from '../context/context';
+import {
+  TableFormatContext,
+  TableOptionsContextType,
+} from '../context/context';
 import { Body, ColGroup, Footer, Header } from '../components';
 import { Table } from '../components/default-components';
 
@@ -15,7 +18,7 @@ export const useCreateTable = <
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,
 >(
-  formatOptions?: F,
+  formatOptions?: TableOptionsContextType<F>,
 ) => {
   const HookTable = useMemo(
     () =>
