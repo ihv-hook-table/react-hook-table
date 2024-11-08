@@ -3,7 +3,7 @@ import { ColumnProps, TableRecord } from '../../../types';
 import {
   deepGet,
   getCellValue,
-  getFormatOptions,
+  getFormatFunction,
   isFunction,
   toArray,
 } from '../../../utils';
@@ -21,7 +21,7 @@ export const ColumnData = <T extends TableRecord = TableRecord>({
   rowData,
 }: Props<T>) => {
   const childElements = isFunction(children) ? children(rowData) : children;
-  const formatOptions = useContext(TableFormatContext);
+  const { formatFunctions } = useContext(TableFormatContext) || {};
 
   if (childElements) {
     return childElements;
@@ -32,7 +32,7 @@ export const ColumnData = <T extends TableRecord = TableRecord>({
   return accessors.map((acc, index) => {
     const isSecondaryValue = index !== 0;
 
-    const formatFunction = getFormatOptions(index, format, formatOptions);
+    const formatFunction = getFormatFunction(index, format, formatFunctions);
 
     const value = deepGet(rowData, acc);
 
