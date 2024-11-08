@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.1
+
+### Patch Changes
+
+- 765a74f: Breaking change: moved format options under separate key formatFunctions, to have better control over typings
+
 ## 0.3.0
 
 ### Minor Changes
