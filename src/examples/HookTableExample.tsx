@@ -29,6 +29,7 @@ export const HookTableExample = () => {
         expandable
         defaultExpanded={({ id }) => ['Row 2', 'Row 4'].includes(id)}
         colWidth={5}
+        footer={{ value: 'Total', colSpan: 6 }}
       >
         {({ additionalData }) => <Subtable data={additionalData} />}
       </Column>
@@ -37,7 +38,12 @@ export const HookTableExample = () => {
       <Column accessor="item" />
       <Column accessor="qty" alignment="center" />
       <Column accessor="price" format="money" alignment="right" />
-      <Column header="Row total" alignment="right" colWidth={10}>
+      <Column
+        header="Row total"
+        alignment="right"
+        colWidth={10}
+        footer="123 456,56 €"
+      >
         {({ qty, price }) =>
           formatMoney({
             amount: qty * price.amount,

@@ -8,10 +8,10 @@ type ValueProps = {
 };
 
 export const Value = ({ isSecondaryValue, value }: ValueProps) => {
-  const Value = useCustomComponent<ValueProps>('Value');
+  const CustomValue = useCustomComponent<ValueProps>('Value');
 
-  if (Value) {
-    return <Value isSecondaryValue={isSecondaryValue} value={value} />;
+  if (CustomValue) {
+    return <CustomValue isSecondaryValue={isSecondaryValue} value={value} />;
   }
 
   return (

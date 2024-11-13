@@ -5,10 +5,10 @@ import { clsx } from '../../utils';
 type Props = ComponentProps<'tr'> & { expanded?: boolean };
 
 export const TableRow = (props: Props) => {
-  const TableRow = useCustomComponent<Props>('TableRow');
+  const CustomTableRow = useCustomComponent<Props>('TableRow');
 
-  if (TableRow) {
-    return <TableRow {...props} />;
+  if (CustomTableRow) {
+    return <CustomTableRow {...props} />;
   }
 
   const { className, expanded, ...rest } = props;

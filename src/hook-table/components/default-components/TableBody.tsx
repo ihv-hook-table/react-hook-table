@@ -4,10 +4,10 @@ import { useCustomComponent } from '../../context/use-custom-component';
 type Props = ComponentProps<'tbody'>;
 
 export const TableBody = (props: Props) => {
-  const TableBody = useCustomComponent<Props>('TableBody');
+  const CustomTableBody = useCustomComponent<Props>('TableBody');
 
-  if (TableBody) {
-    return <TableBody {...props} />;
+  if (CustomTableBody) {
+    return <CustomTableBody {...props} />;
   }
 
   return <tbody {...props} />;

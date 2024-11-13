@@ -10,10 +10,10 @@ type Props = ComponentProps<'td'> & {
 };
 
 export const TableData = (props: Props) => {
-  const TableData = useCustomComponent<Props>('TableData');
+  const CustomTableData = useCustomComponent<Props>('TableData');
 
-  if (TableData) {
-    return <TableData {...props} />;
+  if (CustomTableData) {
+    return <CustomTableData {...props} />;
   }
 
   const { alignment = 'left', isMulti, expandable, ...rest } = props;

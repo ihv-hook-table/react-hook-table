@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { ColumnProps, TableRecord } from '../../../../types';
 import { isFunction, toArray } from '../../../../utils';
-import { TableFormatContext } from '../../../../context/context';
+import { TableFormatContext } from '../../../../context/table-options-context';
 import { Value, TableHead } from '../../../default-components';
 
 type HeaderCellProps<T extends TableRecord = TableRecord> = {

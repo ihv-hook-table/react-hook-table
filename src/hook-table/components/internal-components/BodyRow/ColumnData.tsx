@@ -8,7 +8,7 @@ import {
   toArray,
 } from '../../../utils';
 import { Value } from '../../default-components';
-import { TableFormatContext } from '../../../context/context';
+import { TableFormatContext } from '../../../context/table-options-context';
 
 type Props<T extends TableRecord = TableRecord> = ColumnProps<T> & {
   rowData: T;

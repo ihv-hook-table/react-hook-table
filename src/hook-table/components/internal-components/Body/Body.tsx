@@ -1,6 +1,5 @@
 import { ColumnProps, FormatOptions, TableRecord } from '../../../types';
-import { TableBody } from '../../default-components';
-import { NoResults } from '../../NoResults/NoResults';
+import { TableBody, NoResults } from '../../default-components';
 import { BodyRow } from '../BodyRow/BodyRow';
 
 type Props<
