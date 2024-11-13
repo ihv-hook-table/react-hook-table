@@ -1,5 +1,12 @@
 # @iff/react-hook-table
 
+## 0.3.2
+
+### Patch Changes
+
+- 96955e9: internal adjustments
+- 96955e9: support for more custom components
+
 ## 0.3.1
 
 ### Patch Changes
