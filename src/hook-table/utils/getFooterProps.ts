@@ -17,6 +17,6 @@ export const getFooterProps = <T extends TableRecord = TableRecord>({
   return {
     footerAlignment,
     colSpan,
-    value,
+    value: value ?? '-',
   };
 };

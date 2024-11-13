@@ -1,5 +1,8 @@
 import { ComponentType, useContext } from 'react';
-import { TableFormatContext, TableOptionsContextType } from './context';
+import {
+  TableFormatContext,
+  TableOptionsContextType,
+} from './table-options-context';
 
 type TableFormatComponentKeys = keyof NonNullable<
   TableOptionsContextType['components']

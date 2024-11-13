@@ -5,18 +5,16 @@ import { ReactNode } from 'react';
  */
 
 export type ColumnAlignment = 'left' | 'center' | 'right';
+export type TableRecord = Record<PropertyKey, unknown>;
+export type FormatOptions = Record<string, (value: never) => ReactNode>;
 
 type ColumnChildren<T extends TableRecord = TableRecord> =
   | ReactNode
   | ((rowData: T) => ReactNode);
 
-export type FormatOptions = Record<string, (value: never) => ReactNode>;
-
 type NestedKeyOf<T, K = keyof T> = K extends keyof T & (string | number)
   ? `${K}` | (T[K] extends object ? `${K}.${NestedKeyOf<T[K]>}` : never)
   : never;
-
-export type TableRecord = Record<PropertyKey, unknown>;
 
 export type ValueFormatKey<F extends FormatOptions = FormatOptions> =
   | keyof F
@@ -65,7 +63,7 @@ export type ColumnProps<
   /**
    * @param {ReactNode | FooterProps<T>} footer - The column footer value or props.
    */
-  footer?: string | number | FooterProps<T>;
+  footer?: string | number | FooterProps;
   /**
    * @param {string | string[]} header - The header label(s) of the column. If an array is provided, the header will have multiple labels. First is primary, the rest are secondary.
    */
@@ -84,8 +82,7 @@ export type ColumnProps<
   defaultExpanded?: boolean | ((rowData: T) => boolean);
 } & (ColumnPropsWithAccessor<T, F> | ColumnPropsWithChildren<T>);
 
-type FooterProps<T extends TableRecord = TableRecord> = {
-  accessor?: NestedKeyOf<T>;
+type FooterProps = {
   alignment?: ColumnAlignment;
   colSpan?: number;
   value?: unknown;
@@ -94,4 +91,9 @@ type FooterProps<T extends TableRecord = TableRecord> = {
 export type ExpanderProps = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+};
+
+export type NoResultsProps = {
+  isLoading: boolean;
+  columnCount: number;
 };

@@ -9,10 +9,10 @@ type Props = ComponentProps<'th'> & {
 };
 
 export const TableHead = (props: Props) => {
-  const TableHead = useCustomComponent<Props>('TableHead');
+  const CustomTableHead = useCustomComponent<Props>('TableHead');
 
-  if (TableHead) {
-    return <TableHead {...props} />;
+  if (CustomTableHead) {
+    return <CustomTableHead {...props} />;
   }
 
   const { alignment = 'left', isMulti, ...rest } = props;

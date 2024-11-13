@@ -6,10 +6,10 @@ type Props = ComponentProps<'table'>;
 
 export const Table = forwardRef(
   ({ className, ...rest }: Props, ref: Ref<HTMLTableElement>) => {
-    const Table = useCustomComponent<Props>('Table');
+    const CustomTable = useCustomComponent<Props>('Table');
 
-    if (Table) {
-      return <Table {...rest} className={className} ref={ref} />;
+    if (CustomTable) {
+      return <CustomTable {...rest} className={className} ref={ref} />;
     }
 
     return (

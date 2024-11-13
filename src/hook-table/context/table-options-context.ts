@@ -1,5 +1,10 @@
 import { ComponentProps, ComponentType, createContext, ReactNode } from 'react';
-import { ColumnAlignment, ExpanderProps, FormatOptions } from '../types';
+import {
+  ColumnAlignment,
+  ExpanderProps,
+  FormatOptions,
+  NoResultsProps,
+} from '../types';
 
 export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
   /**
@@ -54,6 +59,11 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      */
     TableData?: ComponentType<ComponentProps<'td'>>;
     /**
+     * @param TableFooter - Html tfoot element.
+     * @returns
+     */
+    TableFooter?: ComponentType<ComponentProps<'tfoot'>>;
+    /**
      * @param Value - Component that renders the cell value.
      * @returns
      */
@@ -61,6 +71,16 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
       isSecondaryValue?: boolean;
       value: ReactNode;
     }>;
+    /**
+     * @param TableCaption - Html caption element.
+     * @returns
+     */
+    TableCaption?: ComponentType<ComponentProps<'caption'>>;
+    /**
+     * @param NoResults - Component that renders the no results message.
+     * @returns
+     */
+    NoResults?: ComponentType<NoResultsProps>;
   };
 };
 

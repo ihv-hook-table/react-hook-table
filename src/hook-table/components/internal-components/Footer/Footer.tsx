@@ -1,5 +1,6 @@
 import { ColumnProps, TableRecord } from '../../../types';
 import { getFooterProps } from '../../../utils';
+import { TableFooter, TableHead, TableRow } from '../../default-components';
 
 type Props<T extends TableRecord = TableRecord> = {
   columns: ColumnProps<T>[];
@@ -17,13 +18,13 @@ export const Footer = <T extends TableRecord = TableRecord>({
   }
 
   return (
-    <tfoot>
-      <tr>
+    <TableFooter>
+      <TableRow>
         {columns.map((col, idx) => (
           <Cell column={col} key={idx} />
         ))}
-      </tr>
-    </tfoot>
+      </TableRow>
+    </TableFooter>
   );
 };
 
@@ -45,8 +46,8 @@ const Cell = <T extends TableRecord = TableRecord>({
   const alignment = footerAlignment ?? columnAlignment;
 
   return (
-    <th className={`align-${alignment}`} colSpan={colSpan}>
+    <TableHead alignment={alignment} colSpan={colSpan}>
       {String(value)}
-    </th>
+    </TableHead>
   );
 };

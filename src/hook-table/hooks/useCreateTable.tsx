@@ -4,7 +4,7 @@ import { getChildrenProps, log } from '../utils';
 import {
   TableFormatContext,
   TableOptionsContextType,
-} from '../context/context';
+} from '../context/table-options-context';
 import { Body, ColGroup, Footer, Header } from '../components';
 import { Table } from '../components/default-components';
 

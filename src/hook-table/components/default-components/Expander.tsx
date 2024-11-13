@@ -1,18 +1,18 @@
-import { useContext } from 'react';
-import { TableFormatContext } from '../../context/context';
+import { useCustomComponent } from '../../context/use-custom-component';
 
 type Props = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 };
 
-export const Expander = ({ isOpen, setIsOpen }: Props) => {
-  const { components } = useContext(TableFormatContext) || {};
-  const { Expander: ExternalExpander } = components || {};
+export const Expander = (props: Props) => {
+  const CustomExpander = useCustomComponent('Expander');
 
-  if (ExternalExpander) {
-    return <ExternalExpander isOpen={isOpen} setIsOpen={setIsOpen} />;
+  if (CustomExpander) {
+    return <CustomExpander {...props} />;
   }
+
+  const { isOpen, setIsOpen } = props;
 
   return (
     <button className="expander" onClick={() => setIsOpen(!isOpen)}>
