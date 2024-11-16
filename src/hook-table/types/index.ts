@@ -20,9 +20,19 @@ export type ValueFormatKey<F extends FormatOptions = FormatOptions> =
   | keyof F
   | undefined;
 
+export type CaptionProps = {
+  value?: ReactNode;
+};
+
 /**
  * Column props
  */
+
+type FooterProps = {
+  alignment?: ColumnAlignment;
+  colSpan?: number;
+  value?: unknown;
+};
 
 type ColumnPropsWithAccessor<
   T extends TableRecord = TableRecord,
@@ -81,12 +91,6 @@ export type ColumnProps<
    */
   defaultExpanded?: boolean | ((rowData: T) => boolean);
 } & (ColumnPropsWithAccessor<T, F> | ColumnPropsWithChildren<T>);
-
-type FooterProps = {
-  alignment?: ColumnAlignment;
-  colSpan?: number;
-  value?: unknown;
-};
 
 export type ExpanderProps = {
   isOpen: boolean;
