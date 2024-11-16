@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.3
+
+### Patch Changes
+
+- 4377aaf: [chore] update dependencies
+
 ## 0.3.2
 
 ### Patch Changes
