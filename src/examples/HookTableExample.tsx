@@ -24,12 +24,15 @@ export const HookTableExample = () => {
   const { Column, Table } = useTable<TableData>();
 
   return (
-    <Table data={mockData} isLoading={false}>
+    <Table
+      data={mockData}
+      isLoading={false}
+      caption={{ value: 'Example table with default components' }}
+    >
       <Column
         expandable
         defaultExpanded={({ id }) => ['Row 2', 'Row 4'].includes(id)}
         colWidth={5}
-        footer={{ value: 'Total', colSpan: 6 }}
       >
         {({ additionalData }) => <Subtable data={additionalData} />}
       </Column>
@@ -37,7 +40,12 @@ export const HookTableExample = () => {
       <Column accessor="date" format="dateTime" />
       <Column accessor="item" />
       <Column accessor="qty" alignment="center" />
-      <Column accessor="price" format="money" alignment="right" />
+      <Column
+        accessor="price"
+        format="money"
+        alignment="right"
+        footer={{ value: 'Total:', colSpan: 6, alignment: 'right' }}
+      />
       <Column
         header="Row total"
         alignment="right"
