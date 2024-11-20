@@ -1,8 +1,8 @@
 import { ComponentProps, useMemo } from 'react';
-import { CaptionProps, FormatOptions, TableRecord } from '../types';
+import { TableCaptionProps, FormatOptions, TableRecord } from '../types';
 import { getChildrenProps, log } from '../utils';
 import {
-  TableFormatContext,
+  TableOptionsContext,
   TableOptionsContextType,
 } from '../context/table-options-context';
 import { Body, ColGroup, Footer, Header } from '../components';
@@ -12,7 +12,7 @@ type TableProps<T extends TableRecord = TableRecord> = {
   data?: T[];
   isLoading?: boolean;
   hideHeader?: boolean;
-  caption?: CaptionProps;
+  caption?: TableCaptionProps;
 } & ComponentProps<'table'>;
 
 export const useCreateTable = <
@@ -42,7 +42,7 @@ export const useCreateTable = <
         }
 
         return (
-          <TableFormatContext.Provider value={formatOptions}>
+          <TableOptionsContext.Provider value={formatOptions}>
             <Table {...rest}>
               <TableCaption {...caption} />
               <ColGroup columns={columns} />
@@ -50,7 +50,7 @@ export const useCreateTable = <
               <Body columns={columns} data={data} isLoading={isLoading} />
               <Footer columns={columns} data={data} isLoading={isLoading} />
             </Table>
-          </TableFormatContext.Provider>
+          </TableOptionsContext.Provider>
         );
       },
     [formatOptions],

@@ -84,7 +84,7 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
   };
 };
 
-const createTableContext = <F extends FormatOptions = FormatOptions>() =>
+const createTableOptionsContext = <F extends FormatOptions = FormatOptions>() =>
   createContext<TableOptionsContextType<F> | undefined>(undefined);
 
-export const TableFormatContext = createTableContext();
+export const TableOptionsContext = createTableOptionsContext();

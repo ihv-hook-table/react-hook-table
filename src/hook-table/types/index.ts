@@ -20,7 +20,7 @@ export type ValueFormatKey<F extends FormatOptions = FormatOptions> =
   | keyof F
   | undefined;
 
-export type CaptionProps = {
+export type TableCaptionProps = {
   value?: ReactNode;
 };
 
