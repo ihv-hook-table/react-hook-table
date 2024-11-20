@@ -1,5 +1,12 @@
 # @iff/react-hook-table
 
+## 0.3.4
+
+### Patch Changes
+
+- bef204a: update changeset/cli to fix (ReDoS) in cross-spawn dependabot alert
+- bff136d: fix table caption
+
 ## 0.3.3
 
 ### Patch Changes
