@@ -8,7 +8,7 @@ import {
   toArray,
 } from '../../../utils';
 import { Value } from '../../default-components';
-import { TableFormatContext } from '../../../context/table-options-context';
+import { TableOptionsContext } from '../../../context/table-options-context';
 
 type Props<T extends TableRecord = TableRecord> = ColumnProps<T> & {
   rowData: T;
@@ -21,7 +21,7 @@ export const ColumnData = <T extends TableRecord = TableRecord>({
   rowData,
 }: Props<T>) => {
   const childElements = isFunction(children) ? children(rowData) : children;
-  const { formatFunctions } = useContext(TableFormatContext) || {};
+  const { formatFunctions } = useContext(TableOptionsContext) || {};
 
   if (childElements) {
     return childElements;
