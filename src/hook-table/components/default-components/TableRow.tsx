@@ -2,7 +2,7 @@ import { ComponentProps } from 'react';
 import { useCustomComponent } from '../../context/use-custom-component';
 import { clsx } from '../../utils';
 
-type Props = ComponentProps<'tr'> & { expanded?: boolean };
+type Props = ComponentProps<'tr'> & { subrow?: boolean };
 
 export const TableRow = (props: Props) => {
   const CustomTableRow = useCustomComponent<Props>('TableRow');
@@ -11,7 +11,7 @@ export const TableRow = (props: Props) => {
     return <CustomTableRow {...props} />;
   }
 
-  const { className, expanded, ...rest } = props;
+  const { className, subrow, ...rest } = props;
 
-  return <tr {...rest} className={clsx(className, expanded && 'expanded')} />;
+  return <tr {...rest} className={clsx(className, subrow && 'expanded')} />;
 };

@@ -15,7 +15,7 @@ export const TableCaption = forwardRef<
   }
 
   if (CustomTableCaption) {
-    return <CustomTableCaption {...props} />;
+    return <CustomTableCaption {...rest}>{value}</CustomTableCaption>;
   }
 
   return (

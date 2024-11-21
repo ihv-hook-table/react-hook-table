@@ -33,7 +33,7 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
 
   return (
     <>
-      <TableRow expanded={expanded}>
+      <TableRow>
         {columns.map(({ expandable, ...columnRest }, colIndex) => {
           const { alignment = 'left' } = columnRest;
 
@@ -55,7 +55,7 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
       </TableRow>
 
       {expanded && (
-        <TableRow expanded={expanded}>
+        <TableRow subrow>
           <TableData colSpan={columns.length}>{expandableContent}</TableData>
         </TableRow>
       )}

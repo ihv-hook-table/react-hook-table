@@ -1,8 +1,8 @@
-.root.expanded {
+.root.subrow {
   background-color: var(--bg-hover-color);
 }
 
 /* Remove last border from child table */
-.root.expanded tbody tr:last-child {
+.root.subrow tbody tr:last-child {
   border-bottom: none;
 }
