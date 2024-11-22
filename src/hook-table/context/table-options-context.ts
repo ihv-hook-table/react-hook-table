@@ -1,9 +1,10 @@
 import {
-  ComponentProps,
   ComponentType,
   createContext,
   HTMLAttributes,
   ReactNode,
+  TdHTMLAttributes,
+  ThHTMLAttributes,
 } from 'react';
 import {
   ColumnAlignment,
@@ -37,14 +38,14 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param Table - Html table element.
      * @returns
      */
-    Table?: ComponentType<ComponentProps<'table'>>;
+    Table?: ComponentType<HTMLAttributes<HTMLTableElement>>;
     /**
      * @param TableHeader - Html thead element.
      * @returns
      */
-    TableHeader?: ComponentType<ComponentProps<'thead'>>;
+    TableHeader?: ComponentType<HTMLAttributes<HTMLTableSectionElement>>;
     TableHead?: ComponentType<
-      ComponentProps<'th'> & {
+      ThHTMLAttributes<HTMLTableCellElement> & {
         alignment?: ColumnAlignment;
         isMulti?: boolean;
       }
@@ -53,22 +54,22 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param TableRow - Html tr element.
      * @returns
      */
-    TableRow?: ComponentType<ComponentProps<'tr'>>;
+    TableRow?: ComponentType<HTMLAttributes<HTMLTableRowElement>>;
     /**
      * @param TableBody - Html tbody element.
      * @returns
      */
-    TableBody?: ComponentType<ComponentProps<'tbody'>>;
+    TableBody?: ComponentType<HTMLAttributes<HTMLTableSectionElement>>;
     /**
      * @param TableData - Html td element.
      * @returns
      */
-    TableData?: ComponentType<ComponentProps<'td'>>;
+    TableData?: ComponentType<TdHTMLAttributes<HTMLTableCellElement>>;
     /**
      * @param TableFooter - Html tfoot element.
      * @returns
      */
-    TableFooter?: ComponentType<ComponentProps<'tfoot'>>;
+    TableFooter?: ComponentType<HTMLAttributes<HTMLTableSectionElement>>;
     /**
      * @param Value - Component that renders the cell value.
      * @returns
