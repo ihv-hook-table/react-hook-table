@@ -33,7 +33,7 @@
   background-color: var(--bg-hover-color);
 }
 
-.ihv-table tbody tr.expanded {
+.ihv-table tbody tr.subrow {
   background-color: var(--bg-hover-color);
 }
 
@@ -45,7 +45,7 @@
 }
 
 /* Remove border bottom from subtable */
-.ihv-table .expanded tbody tr:last-child {
+.ihv-table .subrow tbody tr:last-child {
   border-bottom: none;
 }
 

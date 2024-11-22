@@ -7,8 +7,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Value,
 } from './custom-components';
-import { Value } from './custom-components/Value/Value';
 import { MoneyType } from './mock-data';
 import { formatBoolean } from './value-format/boolean';
 import {
