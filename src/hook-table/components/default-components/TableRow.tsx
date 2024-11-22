@@ -13,5 +13,5 @@ export const TableRow = (props: Props) => {
 
   const { className, subrow, ...rest } = props;
 
-  return <tr {...rest} className={clsx(className, subrow && 'expanded')} />;
+  return <tr {...rest} className={clsx(subrow && 'subrow', className)} />;
 };

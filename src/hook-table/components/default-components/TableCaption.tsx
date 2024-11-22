@@ -1,12 +1,13 @@
-import { forwardRef, HTMLAttributes } from 'react';
+import { ComponentPropsWithRef, forwardRef } from 'react';
 import { useCustomComponent } from '../../context/use-custom-component';
 import { TableCaptionProps } from '../../types';
 
 export const TableCaption = forwardRef<
   HTMLTableCaptionElement,
-  HTMLAttributes<HTMLTableCaptionElement> & TableCaptionProps
+  ComponentPropsWithRef<'caption'> & TableCaptionProps
 >((props, ref) => {
-  const CustomTableCaption = useCustomComponent('TableCaption');
+  const CustomTableCaption =
+    useCustomComponent<ComponentPropsWithRef<'caption'>>('TableCaption');
 
   const { value, ...rest } = props;
 
@@ -15,7 +16,11 @@ export const TableCaption = forwardRef<
   }
 
   if (CustomTableCaption) {
-    return <CustomTableCaption {...rest}>{value}</CustomTableCaption>;
+    return (
+      <CustomTableCaption {...rest} ref={ref}>
+        {value}
+      </CustomTableCaption>
+    );
   }
 
   return (

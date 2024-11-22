@@ -1,4 +1,10 @@
-import { ComponentProps, ComponentType, createContext, ReactNode } from 'react';
+import {
+  ComponentProps,
+  ComponentPropsWithRef,
+  ComponentType,
+  createContext,
+  ReactNode,
+} from 'react';
 import {
   ColumnAlignment,
   ExpanderProps,
@@ -75,7 +81,7 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param TableCaption - Html caption element.
      * @returns
      */
-    TableCaption?: ComponentType<ComponentProps<'caption'>>;
+    TableCaption?: ComponentType<ComponentPropsWithRef<'caption'>>;
     /**
      * @param NoResults - Component that renders the no results message.
      * @returns
