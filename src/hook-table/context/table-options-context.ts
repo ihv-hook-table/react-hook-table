@@ -1,8 +1,8 @@
 import {
   ComponentProps,
-  ComponentPropsWithRef,
   ComponentType,
   createContext,
+  HTMLAttributes,
   ReactNode,
 } from 'react';
 import {
@@ -81,7 +81,7 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param TableCaption - Html caption element.
      * @returns
      */
-    TableCaption?: ComponentType<ComponentPropsWithRef<'caption'>>;
+    TableCaption?: ComponentType<HTMLAttributes<HTMLTableCaptionElement>>;
     /**
      * @param NoResults - Component that renders the no results message.
      * @returns
