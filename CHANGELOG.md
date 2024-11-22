@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.5
+
+### Patch Changes
+
+- 6d24576: Internal adjustments for better shadcn/ui table support
+
 ## 0.3.4
 
 ### Patch Changes
