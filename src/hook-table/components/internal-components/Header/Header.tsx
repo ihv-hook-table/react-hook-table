@@ -19,7 +19,7 @@ export const Header = <T extends TableRecord = TableRecord>({
     <TableHeader>
       <TableRow>
         {columns?.map((col, idx) => (
-          <Cell key={idx} column={col} isMulti={hasMultiLabels} />
+          <Cell key={idx} column={col} isMultiValue={hasMultiLabels} />
         ))}
       </TableRow>
     </TableHeader>

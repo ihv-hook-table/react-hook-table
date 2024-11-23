@@ -5,4 +5,5 @@ export * from './TableHead/TableHead';
 export * from './TableRow/TableRow';
 export * from './TableBody/TableBody';
 export * from './TableData/TableData';
+export * from './TableCaption/TableCaption';
 export * from './Value/Value';

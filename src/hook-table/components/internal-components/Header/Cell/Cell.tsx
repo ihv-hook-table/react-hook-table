@@ -10,12 +10,12 @@ type HeaderCellProps<T extends TableRecord = TableRecord> = {
 
 export const Cell = <T extends TableRecord = TableRecord>({
   column,
-  isMulti,
-}: HeaderCellProps<T> & { isMulti: boolean }) => {
+  isMultiValue,
+}: HeaderCellProps<T> & { isMultiValue: boolean }) => {
   const { alignment = 'left' } = column || {};
 
   return (
-    <TableHead alignment={alignment} isMulti={isMulti}>
+    <TableHead alignment={alignment} isMultiValue={isMultiValue}>
       <CellValue {...column} />
     </TableHead>
   );

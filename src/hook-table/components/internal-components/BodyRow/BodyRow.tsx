@@ -25,7 +25,7 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
 
   const [expanded, setExpanded] = useState(isDefaultExpanded || false);
 
-  const isMulti = columns.some(
+  const isMultiValue = columns.some(
     ({ accessor }) => isArrayType(accessor) && accessor.length > 1,
   );
 
@@ -41,7 +41,7 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
             <TableData
               key={colIndex}
               alignment={alignment}
-              isMulti={isMulti}
+              isMultiValue={isMultiValue}
               expandable={expandable}
             >
               {expandable ? (
@@ -56,7 +56,9 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
 
       {expanded && (
         <TableRow subrow>
-          <TableData colSpan={columns.length}>{expandableContent}</TableData>
+          <TableData isMultiValue={false} colSpan={columns.length}>
+            {expandableContent}
+          </TableData>
         </TableRow>
       )}
     </>

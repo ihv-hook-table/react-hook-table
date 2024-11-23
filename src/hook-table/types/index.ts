@@ -4,7 +4,16 @@ import { ReactNode } from 'react';
  * Utility types
  */
 
-export type ColumnAlignment = 'left' | 'center' | 'right';
+type ColumnAlignment = 'left' | 'center' | 'right';
+
+export type CaptionAlignment =
+  | 'top-left'
+  | 'top-center'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right';
+
 export type TableRecord = Record<PropertyKey, unknown>;
 export type FormatOptions = Record<string, (value: never) => ReactNode>;
 
@@ -20,8 +29,9 @@ export type ValueFormatKey<F extends FormatOptions = FormatOptions> =
   | keyof F
   | undefined;
 
-export type TableCaptionProps = {
+export type CaptionProps = {
   value?: ReactNode;
+  alignment?: CaptionAlignment;
 };
 
 /**
@@ -32,6 +42,11 @@ type FooterProps = {
   alignment?: ColumnAlignment;
   colSpan?: number;
   value?: unknown;
+};
+
+export type ColumnAlignmentProps = {
+  alignment?: ColumnAlignment;
+  isMultiValue: boolean;
 };
 
 type ColumnPropsWithAccessor<

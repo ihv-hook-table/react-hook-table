@@ -1,5 +1,5 @@
 import { ComponentProps, useMemo } from 'react';
-import { TableCaptionProps, FormatOptions, TableRecord } from '../types';
+import { CaptionProps, FormatOptions, TableRecord } from '../types';
 import { getChildrenProps, log } from '../utils';
 import {
   TableOptionsContext,
@@ -12,7 +12,7 @@ type TableProps<T extends TableRecord = TableRecord> = {
   data?: T[];
   isLoading?: boolean;
   hideHeader?: boolean;
-  caption?: TableCaptionProps;
+  caption?: CaptionProps;
 } & ComponentProps<'table'>;
 
 export const useCreateTable = <

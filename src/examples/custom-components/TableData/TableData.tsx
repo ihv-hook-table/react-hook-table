@@ -2,19 +2,18 @@ import { ComponentProps } from 'react';
 
 import classes from './TableData.module.css';
 import { clsx } from '../../../hook-table/utils';
-import { ColumnAlignment } from '../../../hook-table/types';
+import { ColumnAlignmentProps } from '../../../hook-table/types';
 
-type Props = ComponentProps<'td'> & {
-  alignment?: ColumnAlignment;
-  isMulti?: boolean;
-  expandable?: boolean;
-};
+type Props = ComponentProps<'td'> &
+  ColumnAlignmentProps & {
+    expandable?: boolean;
+  };
 
 export const TableData = ({
   className,
   alignment = 'left',
   expandable,
-  isMulti,
+  isMultiValue,
   ...rest
 }: Props) => (
   <td
@@ -22,7 +21,7 @@ export const TableData = ({
     className={clsx(
       classes.root,
       !expandable && classes[alignment],
-      !expandable && isMulti && classes.multiLine,
+      !expandable && isMultiValue && classes.multiLine,
       className,
     )}
   />
