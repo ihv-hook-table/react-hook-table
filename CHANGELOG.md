@@ -1,5 +1,14 @@
 # @iff/react-hook-table
 
+## 0.3.6
+
+### Patch Changes
+
+- f36e9c9: export ColimnAlignmentProps
+- f36e9c9: added alignment option to Table caption prop & export CaptionAlignment type
+- 3ce0620: cross-spawn vulnerability fix
+- f36e9c9: rename isMulti prop to isMultiValue
+
 ## 0.3.5
 
 ### Patch Changes
