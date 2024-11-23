@@ -27,7 +27,10 @@ export const HookTableExample = () => {
     <Table
       data={mockData}
       isLoading={false}
-      caption={{ value: 'Example table with default components' }}
+      caption={{
+        value: 'Example table with default components',
+        alignment: 'bottom-center',
+      }}
     >
       <Column
         expandable

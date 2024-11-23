@@ -1,13 +1,12 @@
 import { ComponentProps } from 'react';
 import { useCustomComponent } from '../../context/use-custom-component';
 import { clsx } from '../../utils';
-import { ColumnAlignment } from '../../types';
+import { ColumnAlignmentProps } from '../../types';
 
-type Props = ComponentProps<'td'> & {
-  alignment?: ColumnAlignment;
-  isMulti?: boolean;
-  expandable?: boolean;
-};
+type Props = ComponentProps<'td'> &
+  ColumnAlignmentProps & {
+    expandable?: boolean;
+  };
 
 export const TableData = (props: Props) => {
   const CustomTableData = useCustomComponent<Props>('TableData');
@@ -16,14 +15,14 @@ export const TableData = (props: Props) => {
     return <CustomTableData {...props} />;
   }
 
-  const { alignment = 'left', isMulti, expandable, ...rest } = props;
+  const { alignment = 'left', isMultiValue, expandable, ...rest } = props;
 
   return (
     <td
       {...rest}
       className={clsx(
         !expandable && `align-${alignment}`,
-        !expandable && isMulti && 'multi-line',
+        !expandable && isMultiValue && 'multi-line',
         expandable && 'expandable',
       )}
     />

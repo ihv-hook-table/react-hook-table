@@ -1,12 +1,9 @@
 import { ComponentProps } from 'react';
 import { useCustomComponent } from '../../context/use-custom-component';
 import { clsx } from '../../utils';
-import { ColumnAlignment } from '../../types';
+import { ColumnAlignmentProps } from '../../types';
 
-type Props = ComponentProps<'th'> & {
-  alignment?: ColumnAlignment;
-  isMulti?: boolean;
-};
+type Props = ComponentProps<'th'> & ColumnAlignmentProps;
 
 export const TableHead = (props: Props) => {
   const CustomTableHead = useCustomComponent<Props>('TableHead');
@@ -15,12 +12,12 @@ export const TableHead = (props: Props) => {
     return <CustomTableHead {...props} />;
   }
 
-  const { alignment = 'left', isMulti, ...rest } = props;
+  const { alignment = 'left', isMultiValue, ...rest } = props;
 
   return (
     <th
       {...rest}
-      className={clsx(`align-${alignment}`, isMulti && 'multi-line')}
+      className={clsx(`align-${alignment}`, isMultiValue && 'multi-line')}
     />
   );
 };

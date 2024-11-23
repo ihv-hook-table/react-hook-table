@@ -7,7 +7,7 @@ import {
   ThHTMLAttributes,
 } from 'react';
 import {
-  ColumnAlignment,
+  ColumnAlignmentProps,
   ExpanderProps,
   FormatOptions,
   NoResultsProps,
@@ -45,10 +45,7 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      */
     TableHeader?: ComponentType<HTMLAttributes<HTMLTableSectionElement>>;
     TableHead?: ComponentType<
-      ThHTMLAttributes<HTMLTableCellElement> & {
-        alignment?: ColumnAlignment;
-        isMulti?: boolean;
-      }
+      ThHTMLAttributes<HTMLTableCellElement> & ColumnAlignmentProps
     >;
     /**
      * @param TableRow - Html tr element.
@@ -64,7 +61,9 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param TableData - Html td element.
      * @returns
      */
-    TableData?: ComponentType<TdHTMLAttributes<HTMLTableCellElement>>;
+    TableData?: ComponentType<
+      TdHTMLAttributes<HTMLTableCellElement> & ColumnAlignmentProps
+    >;
     /**
      * @param TableFooter - Html tfoot element.
      * @returns

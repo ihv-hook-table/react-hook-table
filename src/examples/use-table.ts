@@ -3,6 +3,7 @@ import {
   Expander,
   Table,
   TableBody,
+  TableCaption,
   TableData,
   TableHead,
   TableHeader,
@@ -44,6 +45,7 @@ export const useTable = <T extends TableRecord = TableRecord>() => {
       TableRow,
       TableBody,
       TableData,
+      TableCaption,
       Value,
     },
   });
