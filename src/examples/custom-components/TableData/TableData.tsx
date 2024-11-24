@@ -7,6 +7,7 @@ import { ColumnAlignmentProps } from '../../../hook-table/types';
 type Props = ComponentProps<'td'> &
   ColumnAlignmentProps & {
     expandable?: boolean;
+    isSubRow?: boolean;
   };
 
 export const TableData = ({
@@ -14,6 +15,7 @@ export const TableData = ({
   alignment = 'left',
   expandable,
   isMultiValue,
+  isSubRow,
   ...rest
 }: Props) => (
   <td
@@ -22,6 +24,7 @@ export const TableData = ({
       classes.root,
       !expandable && classes[alignment],
       !expandable && isMultiValue && classes.multiLine,
+      isSubRow && classes.subrow,
       className,
     )}
   />

@@ -29,21 +29,19 @@ export const ColumnData = <T extends TableRecord = TableRecord>({
 
   const accessors = toArray(accessor);
 
-  return accessors.map((acc, index) => {
+  return accessors.map((currentAccessor, index) => {
     const isSecondaryValue = index !== 0;
 
     const formatFunction = getFormatFunction(index, format, formatFunctions);
 
-    const value = deepGet(rowData, acc);
+    const value = deepGet(rowData, currentAccessor);
 
     const formattedValue = getCellValue(value, formatFunction);
 
     return (
-      <Value
-        value={formattedValue}
-        isSecondaryValue={isSecondaryValue}
-        key={index}
-      />
+      <Value isSecondaryValue={isSecondaryValue} key={index}>
+        {formattedValue}
+      </Value>
     );
   });
 };
