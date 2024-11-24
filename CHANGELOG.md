@@ -1,5 +1,13 @@
 # @iff/react-hook-table
 
+## 0.3.7
+
+### Patch Changes
+
+- cc40faa: Add caption alignemnt classes to default css for internal components
+- d1b6954: Expose more props for value component
+- d1b6954: Add better css styling for default subrow components
+
 ## 0.3.6
 
 ### Patch Changes
