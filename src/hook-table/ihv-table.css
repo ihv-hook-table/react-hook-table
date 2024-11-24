@@ -80,3 +80,35 @@
 .ihv-table tbody .expander {
   cursor: pointer;
 }
+
+/* Caption alignment */
+
+.top-left {
+  caption-side: top;
+  text-align: left;
+}
+
+.top-right {
+  caption-side: top;
+  text-align: right;
+}
+
+.top-center {
+  caption-side: top;
+  text-align: center;
+}
+
+.bottom-left {
+  caption-side: bottom;
+  text-align: left;
+}
+
+.bottom-right {
+  caption-side: bottom;
+  text-align: right;
+}
+
+.bottom-center {
+  caption-side: bottom;
+  text-align: center;
+}
