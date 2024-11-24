@@ -1,4 +1,13 @@
-.root.subrow {
+.root.subrow,
+.root.expanded {
+  background-color: var(--bg-expanded-color);
+}
+
+.root.subrow:hover {
+  background-color: var(--bg-expanded-color);
+}
+
+.root:not(.subrow):hover {
   background-color: var(--bg-hover-color);
 }
 

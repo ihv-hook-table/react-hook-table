@@ -3,6 +3,7 @@
   --border-color: hsl(240 5.9% 90% / 0.5);
   --secondary-color: lightgray;
   --bg-hover-color: hsl(240 4.8% 95.9% / 0.5);
+  --bg-expanded-color: hsl(240 4.8% 95.9%);
 
   /* General styles */
   font-family:
@@ -29,12 +30,18 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.ihv-table tbody tr:hover {
+/* .ihv-table tbody tr:not(.subrow):hover {
   background-color: var(--bg-hover-color);
+} */
+
+.ihv-table tbody tr.subrow,
+.ihv-table tbody tr.expanded {
+  background-color: var(--bg-expanded-color);
 }
 
-.ihv-table tbody tr.subrow {
-  background-color: var(--bg-hover-color);
+/* Remove border bottom from subtable */
+.ihv-table .subrow tbody tr:last-child {
+  border-bottom: none;
 }
 
 .ihv-table th,
@@ -44,9 +51,9 @@
   height: 34px;
 }
 
-/* Remove border bottom from subtable */
-.ihv-table .subrow tbody tr:last-child {
-  border-bottom: none;
+.ihv-table tbody tr.subrow td.subrow > * {
+  background-color: white;
+  border-radius: 0.5rem;
 }
 
 /* Secondary header & value */

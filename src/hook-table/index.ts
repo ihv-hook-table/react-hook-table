@@ -2,10 +2,11 @@ export { useTable } from './hooks';
 export { Value } from './components';
 
 export type {
-  ExpanderProps,
+  TableExpanderProps,
   TableRecord,
   ColumnAlignmentProps,
-  CaptionAlignment,
+  TableCaptionProps,
+  TableRowProps,
 } from './types';
 
 import './ihv-table.css';

@@ -3,6 +3,7 @@
   --border-color: hsl(240 5.9% 90% / 0.5);
   --secondary-color: lightgray;
   --bg-hover-color: hsl(240 4.8% 95.9% / 0.5);
+  --bg-expanded-color: hsl(240 4.8% 95.9%);
 
   /* general styles */
   width: 100%;

@@ -6,6 +6,7 @@ import { ColumnAlignmentProps } from '../../types';
 type Props = ComponentProps<'td'> &
   ColumnAlignmentProps & {
     expandable?: boolean;
+    isSubRow?: boolean;
   };
 
 export const TableData = (props: Props) => {
@@ -15,7 +16,13 @@ export const TableData = (props: Props) => {
     return <CustomTableData {...props} />;
   }
 
-  const { alignment = 'left', isMultiValue, expandable, ...rest } = props;
+  const {
+    alignment = 'left',
+    isMultiValue,
+    expandable,
+    isSubRow,
+    ...rest
+  } = props;
 
   return (
     <td
@@ -24,6 +31,7 @@ export const TableData = (props: Props) => {
         !expandable && `align-${alignment}`,
         !expandable && isMultiValue && 'multi-line',
         expandable && 'expandable',
+        isSubRow && 'subrow',
       )}
     />
   );

@@ -36,7 +36,9 @@ const CellValue = <T extends TableRecord = TableRecord>({
     const value = isFunction(translate) && label ? translate(label) : label;
 
     return (
-      <Value key={idx} isSecondaryValue={isSecondaryLabel} value={value} />
+      <Value key={idx} isSecondaryValue={isSecondaryLabel}>
+        {value}
+      </Value>
     );
   });
 };

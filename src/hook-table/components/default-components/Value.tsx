@@ -1,20 +1,19 @@
-import { ReactNode } from 'react';
+import { ComponentProps } from 'react';
 import { clsx } from '../../utils';
 import { useCustomComponent } from '../../context/use-custom-component';
 
-type ValueProps = {
+type Props = ComponentProps<'div'> & {
   isSecondaryValue?: boolean;
-  value: ReactNode;
 };
 
-export const Value = ({ isSecondaryValue, value }: ValueProps) => {
-  const CustomValue = useCustomComponent<ValueProps>('Value');
+export const Value = ({ isSecondaryValue, ...rest }: Props) => {
+  const CustomValue = useCustomComponent<Props>('Value');
 
   if (CustomValue) {
-    return <CustomValue isSecondaryValue={isSecondaryValue} value={value} />;
+    return <CustomValue isSecondaryValue={isSecondaryValue} {...rest} />;
   }
 
   return (
-    <div className={clsx(isSecondaryValue && 'secondary-value')}>{value}</div>
+    <div className={clsx(isSecondaryValue && 'secondary-value')} {...rest} />
   );
 };

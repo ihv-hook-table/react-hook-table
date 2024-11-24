@@ -1,17 +1,15 @@
-import { ReactNode } from 'react';
+import { ComponentProps } from 'react';
 import { clsx } from '../../../hook-table/utils';
 
 import classes from './Value.module.css';
 
-type ValueProps = {
+type Props = ComponentProps<'div'> & {
   isSecondaryValue?: boolean;
-  value: ReactNode;
 };
 
-export const Value = ({ isSecondaryValue, value }: ValueProps) => (
+export const Value = ({ isSecondaryValue, ...rest }: Props) => (
   <div
     className={clsx(classes.root, isSecondaryValue && classes.secondaryValue)}
-  >
-    {value}
-  </div>
+    {...rest}
+  />
 );

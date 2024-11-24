@@ -2,15 +2,15 @@ import {
   ComponentType,
   createContext,
   HTMLAttributes,
-  ReactNode,
   TdHTMLAttributes,
   ThHTMLAttributes,
 } from 'react';
 import {
   ColumnAlignmentProps,
-  ExpanderProps,
+  TableExpanderProps,
   FormatOptions,
   NoResultsProps,
+  TableRowProps,
 } from '../types';
 
 export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
@@ -33,7 +33,7 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param Expandable - Component that toggles the visibility of the expandable content.
      * @returns
      */
-    Expander?: ComponentType<ExpanderProps>;
+    Expander?: ComponentType<TableExpanderProps>;
     /**
      * @param Table - Html table element.
      * @returns
@@ -51,7 +51,8 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param TableRow - Html tr element.
      * @returns
      */
-    TableRow?: ComponentType<HTMLAttributes<HTMLTableRowElement>>;
+    TableRow?: ComponentType<HTMLAttributes<HTMLTableRowElement>> &
+      TableRowProps;
     /**
      * @param TableBody - Html tbody element.
      * @returns
@@ -62,7 +63,8 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @returns
      */
     TableData?: ComponentType<
-      TdHTMLAttributes<HTMLTableCellElement> & ColumnAlignmentProps
+      TdHTMLAttributes<HTMLTableCellElement> &
+        ColumnAlignmentProps & { isSubRow?: boolean }
     >;
     /**
      * @param TableFooter - Html tfoot element.
@@ -70,13 +72,12 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      */
     TableFooter?: ComponentType<HTMLAttributes<HTMLTableSectionElement>>;
     /**
-     * @param Value - Component that renders the cell value.
+     * @param Value - Component that renders the cell value. It can be used to format the cell value. Accepts the isSecondaryValue prop, that turns true when the cell has more than one value.
      * @returns
      */
-    Value?: ComponentType<{
-      isSecondaryValue?: boolean;
-      value: ReactNode;
-    }>;
+    Value?: ComponentType<
+      HTMLAttributes<HTMLDivElement> & { isSecondaryValue?: boolean }
+    >;
     /**
      * @param TableCaption - Html caption element.
      * @returns

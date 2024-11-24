@@ -5,8 +5,7 @@ import { ReactNode } from 'react';
  */
 
 type ColumnAlignment = 'left' | 'center' | 'right';
-
-export type CaptionAlignment =
+type CaptionAlignment =
   | 'top-left'
   | 'top-center'
   | 'top-right'
@@ -29,25 +28,9 @@ export type ValueFormatKey<F extends FormatOptions = FormatOptions> =
   | keyof F
   | undefined;
 
-export type CaptionProps = {
-  value?: ReactNode;
-  alignment?: CaptionAlignment;
-};
-
 /**
  * Column props
  */
-
-type FooterProps = {
-  alignment?: ColumnAlignment;
-  colSpan?: number;
-  value?: unknown;
-};
-
-export type ColumnAlignmentProps = {
-  alignment?: ColumnAlignment;
-  isMultiValue: boolean;
-};
 
 type ColumnPropsWithAccessor<
   T extends TableRecord = TableRecord,
@@ -107,7 +90,18 @@ export type ColumnProps<
   defaultExpanded?: boolean | ((rowData: T) => boolean);
 } & (ColumnPropsWithAccessor<T, F> | ColumnPropsWithChildren<T>);
 
-export type ExpanderProps = {
+type FooterProps = {
+  alignment?: ColumnAlignment;
+  colSpan?: number;
+  value?: unknown;
+};
+
+export type ColumnAlignmentProps = {
+  alignment?: ColumnAlignment;
+  isMultiValue: boolean;
+};
+
+export type TableExpanderProps = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 };
@@ -115,4 +109,14 @@ export type ExpanderProps = {
 export type NoResultsProps = {
   isLoading: boolean;
   columnCount: number;
+};
+
+export type TableRowProps = {
+  subrow?: boolean;
+  expanded?: boolean;
+};
+
+export type TableCaptionProps = {
+  value?: ReactNode;
+  alignment?: CaptionAlignment;
 };
