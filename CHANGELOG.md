@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.8
+
+### Patch Changes
+
+- 1e52fae: add shadcn/ui demo link to readme
+
 ## 0.3.7
 
 ### Patch Changes
