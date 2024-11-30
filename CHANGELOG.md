@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.9
+
+### Patch Changes
+
+- 536fb3f: update vite and knip dependencies
+
 ## 0.3.8
 
 ### Patch Changes
