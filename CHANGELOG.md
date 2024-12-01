@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.10
+
+### Patch Changes
+
+- 4b0dbf3: Remove footer from dom if footer is not used. Caused problems if footer tag had border-top
+
 ## 0.3.9
 
 ### Patch Changes
