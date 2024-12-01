@@ -13,7 +13,9 @@ export const Footer = <T extends TableRecord = TableRecord>({
   data,
   isLoading,
 }: Props<T>) => {
-  if (!data || !columns || isLoading) {
+  const hasFooter = columns.some(col => col.footer);
+
+  if (!data || !columns || !hasFooter || isLoading) {
     return null;
   }
 
