@@ -81,11 +81,15 @@ export type ColumnProps<
    */
   toolbar?: boolean;
   /**
-   * @param {boolean} expandable - Whether the column is expandable. Not implemented yet
+   * @param {boolean} wrap - Whether the column should wrap text.
+   */
+  wrap?: boolean;
+  /**
+   * @param {boolean} expandable - Whether the column is expandable.
    */
   expandable?: boolean;
   /**
-   * @param {boolean} defaultExpanded - Whether the column is default expanded. Not implemented yet
+   * @param {boolean} defaultExpanded - Whether the column is default expanded.
    */
   defaultExpanded?: boolean | ((rowData: T) => boolean);
 } & (ColumnPropsWithAccessor<T, F> | ColumnPropsWithChildren<T>);

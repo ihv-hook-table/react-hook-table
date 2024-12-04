@@ -4,6 +4,10 @@
   height: 34px;
 }
 
+.wrap {
+  text-wrap: wrap;
+}
+
 /* Secondary header & value */
 
 .ihv-table .secondary-value {
