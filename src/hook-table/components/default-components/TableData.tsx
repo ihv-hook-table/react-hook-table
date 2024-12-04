@@ -7,7 +7,7 @@ type Props = ComponentProps<'td'> &
   ColumnAlignmentProps & {
     expandable?: boolean;
     isSubRow?: boolean;
-    wrap: boolean;
+    wrap?: boolean;
   };
 
 export const TableData = (props: Props) => {
@@ -19,10 +19,10 @@ export const TableData = (props: Props) => {
 
   const {
     alignment = 'left',
-    isMultiValue,
+    isMultiValue = false,
     expandable,
-    isSubRow,
-    wrap,
+    isSubRow = false,
+    wrap = false,
     ...rest
   } = props;
 

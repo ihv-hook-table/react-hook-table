@@ -102,7 +102,7 @@ type FooterProps = {
 
 export type ColumnAlignmentProps = {
   alignment?: ColumnAlignment;
-  isMultiValue: boolean;
+  isMultiValue?: boolean;
 };
 
 export type TableExpanderProps = {
