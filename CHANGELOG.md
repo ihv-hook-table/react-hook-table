@@ -1,5 +1,12 @@
 # @iff/react-hook-table
 
+## 0.3.11
+
+### Patch Changes
+
+- ee7ba00: add new column prop wrap - to support column text wrapping
+- 1eed8c3: Update NoResults component to be wrapped with external table elements if provided
+
 ## 0.3.10
 
 ### Patch Changes
