@@ -64,7 +64,11 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      */
     TableData?: ComponentType<
       TdHTMLAttributes<HTMLTableCellElement> &
-        ColumnAlignmentProps & { isSubRow?: boolean }
+        ColumnAlignmentProps & {
+          expandable?: boolean;
+          isSubRow?: boolean;
+          wrap: boolean;
+        }
     >;
     /**
      * @param TableFooter - Html tfoot element.

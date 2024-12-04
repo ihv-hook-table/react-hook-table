@@ -30,9 +30,9 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-/* .ihv-table tbody tr:not(.subrow):hover {
+.ihv-table tbody tr:not(.subrow):hover {
   background-color: var(--bg-hover-color);
-} */
+}
 
 .ihv-table tbody tr.subrow,
 .ihv-table tbody tr.expanded {
