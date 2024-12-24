@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { JSX } from 'react';
 import { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 
 export const Column = <
