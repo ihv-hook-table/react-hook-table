@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.12
+
+### Patch Changes
+
+- 6ce19b9: switch to pnpm and update dependencies
+
 ## 0.3.11
 
 ### Patch Changes
