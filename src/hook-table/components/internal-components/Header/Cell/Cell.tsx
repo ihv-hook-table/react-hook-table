@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { use } from 'react';
 import { ColumnProps, TableRecord } from '../../../../types';
 import { isFunction, toArray } from '../../../../utils';
 import { TableOptionsContext } from '../../../../context/table-options-context';
@@ -25,7 +25,7 @@ const CellValue = <T extends TableRecord = TableRecord>({
   accessor,
   header,
 }: ColumnProps<T>) => {
-  const { translate } = useContext(TableOptionsContext) || {};
+  const { translate } = use(TableOptionsContext) || {};
   const headerLabel = header ?? accessor;
 
   const labelsArray = toArray(headerLabel) || '';

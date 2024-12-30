@@ -16,8 +16,8 @@ export const TableHead = (props: Props) => {
 
   return (
     <th
-      {...rest}
       className={clsx(`align-${alignment}`, isMultiValue && 'multi-line')}
+      {...rest}
     />
   );
 };

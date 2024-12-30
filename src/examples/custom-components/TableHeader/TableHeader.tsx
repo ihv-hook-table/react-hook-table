@@ -1,6 +1,7 @@
 import { ComponentProps } from 'react';
-import classes from './TableHeader.module.css';
 import { clsx } from '../../../hook-table/utils';
+
+import classes from './TableHeader.module.css';
 
 type Props = ComponentProps<'thead'>;
 

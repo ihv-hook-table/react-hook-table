@@ -30,13 +30,6 @@ type FormatProps = {
 
 export const useTable = <T extends TableRecord = TableRecord>() => {
   const tableComponents = useHookTable<T, FormatProps>({
-    formatFunctions: {
-      money: formatMoney,
-      date: formatDateFromISOString,
-      dateTime: formatDateTimeFromISOString,
-      boolean: formatBoolean,
-    },
-    translate,
     components: {
       Expander,
       Table,
@@ -48,6 +41,13 @@ export const useTable = <T extends TableRecord = TableRecord>() => {
       TableCaption,
       Value,
     },
+    formatFunctions: {
+      money: formatMoney,
+      date: formatDateFromISOString,
+      dateTime: formatDateTimeFromISOString,
+      boolean: formatBoolean,
+    },
+    translate,
   });
 
   return tableComponents;

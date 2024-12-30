@@ -1,8 +1,8 @@
 import { ComponentProps } from 'react';
 import { clsx } from '../../../hook-table/utils';
+import { TableRowProps } from '../../../hook-table';
 
 import classes from './TableRow.module.css';
-import { TableRowProps } from '../../../hook-table';
 
 type Props = ComponentProps<'tr'> & TableRowProps;
 

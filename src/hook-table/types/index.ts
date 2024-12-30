@@ -77,19 +77,15 @@ export type ColumnProps<
    */
   header?: string | string[];
   /**
-   * @param {boolean} toolbar - Whether the column is a toolbar column. Not implemented yet
-   */
-  toolbar?: boolean;
-  /**
    * @param {boolean} wrap - Whether the column should wrap text.
    */
   wrap?: boolean;
   /**
-   * @param {boolean} expandable - Whether the column is expandable.
+   * @param {boolean | string} expandable - Whether the column is expandable. Boolean can be used if row has single expander. Unique string identifier can be used if row has multiple expanders.
    */
-  expandable?: boolean;
+  expandable?: boolean | string;
   /**
-   * @param {boolean} defaultExpanded - Whether the column is default expanded.
+   * @param {boolean} defaultExpanded - Whether the column is default expanded. Works only if expandable is defined.
    */
   defaultExpanded?: boolean | ((rowData: T) => boolean);
 } & (ColumnPropsWithAccessor<T, F> | ColumnPropsWithChildren<T>);
@@ -107,7 +103,8 @@ export type ColumnAlignmentProps = {
 
 export type TableExpanderProps = {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  toggle: () => void;
+  identifier?: string;
 };
 
 export type NoResultsProps = {
@@ -121,6 +118,6 @@ export type TableRowProps = {
 };
 
 export type TableCaptionProps = {
-  value?: ReactNode;
   alignment?: CaptionAlignment;
+  value?: ReactNode;
 };

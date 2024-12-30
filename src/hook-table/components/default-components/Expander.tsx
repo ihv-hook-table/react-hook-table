@@ -2,7 +2,8 @@ import { useCustomComponent } from '../../context/use-custom-component';
 
 type Props = {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  toggle: () => void;
+  identifier?: string;
 };
 
 export const Expander = (props: Props) => {
@@ -12,10 +13,10 @@ export const Expander = (props: Props) => {
     return <CustomExpander {...props} />;
   }
 
-  const { isOpen, setIsOpen } = props;
+  const { isOpen, toggle } = props;
 
   return (
-    <button className="expander" onClick={() => setIsOpen(!isOpen)}>
+    <button className="expander" onClick={toggle}>
       {isOpen ? '-' : '+'}
     </button>
   );

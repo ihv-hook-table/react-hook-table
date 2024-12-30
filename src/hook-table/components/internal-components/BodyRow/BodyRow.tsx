@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 import { ColumnData } from './ColumnData';
 import { isArrayType, isFunction } from '../../../utils';
@@ -12,18 +12,40 @@ type Props<
   rowData: T;
 };
 
+const getExpandableIdentifier = (expandable?: boolean | string) => {
+  if (typeof expandable === 'string') {
+    return expandable;
+  }
+
+  return expandable ? 'default' : undefined;
+};
+
 export const BodyRow = <T extends TableRecord = TableRecord>({
   columns,
   rowData,
 }: Props<T, FormatOptions>) => {
-  const { children, defaultExpanded } =
-    columns.find(({ expandable }) => expandable) || {};
+  const defaultExpanded = useMemo(() => {
+    const values = columns.filter(({ expandable }) => !!expandable);
 
-  const isDefaultExpanded = isFunction(defaultExpanded)
-    ? defaultExpanded(rowData)
-    : defaultExpanded;
+    const expandedRow = values.filter(({ defaultExpanded }) =>
+      isFunction(defaultExpanded) ? defaultExpanded(rowData) : defaultExpanded,
+    );
 
-  const [expanded, setExpanded] = useState(isDefaultExpanded || false);
+    if (expandedRow.length > 1) {
+      console.warn(
+        'Multiple defaultExpanded rows detected. Only the first match will be expanded.',
+      );
+    }
+
+    return getExpandableIdentifier(expandedRow[0]?.expandable);
+  }, [columns, rowData]);
+
+  const [expanded, setExpanded] = useState(defaultExpanded);
+
+  const { children } =
+    columns.find(
+      ({ expandable }) => expanded === getExpandableIdentifier(expandable),
+    ) || {};
 
   const isMultiValue = columns.some(
     ({ accessor }) => isArrayType(accessor) && accessor.length > 1,
@@ -33,20 +55,30 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
 
   return (
     <>
-      <TableRow expanded={expanded}>
+      <TableRow expanded={!!expanded}>
         {columns.map(({ expandable, ...columnRest }, colIndex) => {
           const { alignment = 'left', wrap = false } = columnRest;
+          const currentIdentifier = getExpandableIdentifier(expandable);
+          const isExpanded = expanded === currentIdentifier;
 
           return (
             <TableData
               key={colIndex}
               alignment={alignment}
               isMultiValue={isMultiValue}
-              expandable={expandable}
+              expandable={!!expandable}
               wrap={wrap}
             >
               {expandable ? (
-                <Expander isOpen={expanded} setIsOpen={setExpanded} />
+                <Expander
+                  isOpen={isExpanded}
+                  toggle={() =>
+                    setExpanded(
+                      expanded && isExpanded ? undefined : currentIdentifier,
+                    )
+                  }
+                  identifier={currentIdentifier}
+                />
               ) : (
                 <ColumnData {...columnRest} rowData={rowData} />
               )}

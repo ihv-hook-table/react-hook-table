@@ -28,7 +28,6 @@ export const TableData = (props: Props) => {
 
   return (
     <td
-      {...rest}
       className={clsx(
         !expandable && `align-${alignment}`,
         !expandable && isMultiValue && 'multi-line',
@@ -36,6 +35,7 @@ export const TableData = (props: Props) => {
         isSubRow && 'subrow',
         wrap && 'wrap',
       )}
+      {...rest}
     />
   );
 };

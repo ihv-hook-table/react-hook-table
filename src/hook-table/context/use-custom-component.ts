@@ -1,4 +1,4 @@
-import { ComponentType, useContext } from 'react';
+import { ComponentType, use } from 'react';
 import {
   TableOptionsContext,
   TableOptionsContextType,
@@ -10,6 +10,6 @@ type TableFormatComponentKeys = keyof NonNullable<
 export const useCustomComponent = <P = object>(
   componentName: TableFormatComponentKeys,
 ) => {
-  const { components } = useContext(TableOptionsContext) || {};
+  const { components } = use(TableOptionsContext) || {};
   return components?.[componentName] as ComponentType<P>;
 };
