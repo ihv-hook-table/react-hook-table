@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.14
+
+### Patch Changes
+
+- deb74d1: Pass close subrow function to column children to allow closing the subrow inside the subrow
+
 ## 0.3.13
 
 ### Patch Changes
