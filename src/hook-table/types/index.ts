@@ -16,9 +16,13 @@ type CaptionAlignment =
 export type TableRecord = Record<PropertyKey, unknown>;
 export type FormatOptions = Record<string, (value: never) => ReactNode>;
 
+type SubrowActions = {
+  closeSubrow: () => void;
+};
+
 type ColumnChildren<T extends TableRecord = TableRecord> =
   | ReactNode
-  | ((rowData: T) => ReactNode);
+  | ((rowData: T, subrowActions: SubrowActions) => ReactNode);
 
 type NestedKeyOf<T, K = keyof T> = K extends keyof T & (string | number)
   ? `${K}` | (T[K] extends object ? `${K}.${NestedKeyOf<T[K]>}` : never)

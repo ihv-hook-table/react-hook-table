@@ -67,7 +67,12 @@ export const HookTableExample = () => {
         colWidth={5}
         defaultExpanded={({ id }) => id === 'Row 10'}
       >
-        Hello
+        {(_, { closeSubrow }) => (
+          <div>
+            <p>Custom expandable content</p>
+            <button onClick={closeSubrow}>Close</button>
+          </div>
+        )}
       </Column>
     </Table>
   );
