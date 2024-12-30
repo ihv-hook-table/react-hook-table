@@ -17,7 +17,7 @@ export type TableRecord = Record<PropertyKey, unknown>;
 export type FormatOptions = Record<string, (value: never) => ReactNode>;
 
 type SubrowActions = {
-  closeSubrow: () => void;
+  closeSubrow?: () => void;
 };
 
 type ColumnChildren<T extends TableRecord = TableRecord> =
