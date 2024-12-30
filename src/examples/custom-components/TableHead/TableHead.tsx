@@ -1,8 +1,8 @@
 import { ComponentProps } from 'react';
-
-import classes from './TableHead.module.css';
 import { clsx } from '../../../hook-table/utils';
 import { ColumnAlignmentProps } from '../../../hook-table';
+
+import classes from './TableHead.module.css';
 
 type Props = ComponentProps<'th'> & ColumnAlignmentProps;
 

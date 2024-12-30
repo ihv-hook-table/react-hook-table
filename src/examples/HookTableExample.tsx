@@ -62,6 +62,13 @@ export const HookTableExample = () => {
           })
         }
       </Column>
+      <Column
+        expandable="test"
+        colWidth={5}
+        defaultExpanded={({ id }) => id === 'Row 10'}
+      >
+        Hello
+      </Column>
     </Table>
   );
 };

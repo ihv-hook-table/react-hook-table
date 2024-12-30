@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { use } from 'react';
 import { ColumnProps, TableRecord } from '../../../types';
 import {
   deepGet,
@@ -21,7 +21,7 @@ export const ColumnData = <T extends TableRecord = TableRecord>({
   rowData,
 }: Props<T>) => {
   const childElements = isFunction(children) ? children(rowData) : children;
-  const { formatFunctions } = useContext(TableOptionsContext) || {};
+  const { formatFunctions } = use(TableOptionsContext) || {};
 
   if (childElements) {
     return childElements;
