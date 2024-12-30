@@ -1,5 +1,12 @@
 # @iff/react-hook-table
 
+## 0.3.13
+
+### Patch Changes
+
+- d1c339c: Add support for multiple row expanders
+- d1c339c: rename expanded prop setIsOpen to toggle
+
 ## 0.3.12
 
 ### Patch Changes
