@@ -20,7 +20,9 @@ export const ColumnData = <T extends TableRecord = TableRecord>({
   format,
   rowData,
 }: Props<T>) => {
-  const childElements = isFunction(children) ? children(rowData) : children;
+  const childElements = isFunction(children)
+    ? children(rowData, { closeSubrow: undefined })
+    : children;
   const { formatFunctions } = use(TableOptionsContext) || {};
 
   if (childElements) {

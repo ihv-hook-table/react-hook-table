@@ -51,7 +51,9 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
     ({ accessor }) => isArrayType(accessor) && accessor.length > 1,
   );
 
-  const expandableContent = isFunction(children) ? children(rowData) : children;
+  const expandableContent = isFunction(children)
+    ? children(rowData, { closeSubrow: () => setExpanded(undefined) })
+    : children;
 
   return (
     <>
@@ -60,6 +62,9 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
           const { alignment = 'left', wrap = false } = columnRest;
           const currentIdentifier = getExpandableIdentifier(expandable);
           const isExpanded = expanded === currentIdentifier;
+
+          const toggle = () =>
+            setExpanded(expanded && isExpanded ? undefined : currentIdentifier);
 
           return (
             <TableData
@@ -72,11 +77,7 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
               {expandable ? (
                 <Expander
                   isOpen={isExpanded}
-                  toggle={() =>
-                    setExpanded(
-                      expanded && isExpanded ? undefined : currentIdentifier,
-                    )
-                  }
+                  toggle={toggle}
                   identifier={currentIdentifier}
                 />
               ) : (
