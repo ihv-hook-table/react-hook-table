@@ -53,7 +53,7 @@ export const HookTableExample = () => {
         header="Row total"
         alignment="right"
         colWidth={10}
-        footer="123 456,56 €"
+        footer={formatMoney({ amount: 123456.56, currency: 'EUR' })}
       >
         {({ qty, price }) =>
           formatMoney({
@@ -66,6 +66,7 @@ export const HookTableExample = () => {
         expandable="test"
         colWidth={5}
         defaultExpanded={({ id }) => id === 'Row 10'}
+        footer
       >
         {(_, { closeSubrow }) => (
           <div>
