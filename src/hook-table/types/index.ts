@@ -75,7 +75,7 @@ export type ColumnProps<
   /**
    * @param {ReactNode | FooterProps<T>} footer - The column footer value or props.
    */
-  footer?: string | number | FooterProps;
+  footer?: string | number | boolean | FooterProps;
   /**
    * @param {string | string[]} header - The header label(s) of the column. If an array is provided, the header will have multiple labels. First is primary, the rest are secondary.
    */
