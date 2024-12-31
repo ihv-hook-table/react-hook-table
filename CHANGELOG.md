@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.15
+
+### Patch Changes
+
+- 4380ced: Allow boolean as column footer value to render empty footer cell
+
 ## 0.3.14
 
 ### Patch Changes
