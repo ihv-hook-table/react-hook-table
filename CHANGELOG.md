@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.17
+
+### Patch Changes
+
+- 68451d2: remove font from build
+
 ## 0.3.16
 
 ### Patch Changes
