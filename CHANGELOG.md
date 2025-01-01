@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.3.16
+
+### Patch Changes
+
+- 03c54a5: update internal example to use shadcn and remove local css
+
 ## 0.3.15
 
 ### Patch Changes
