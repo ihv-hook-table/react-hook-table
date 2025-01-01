@@ -1,3 +1,4 @@
+import { Confirm } from '@/components/ui/confirm';
 import { AdditionalData, mockData, TableData } from './mock-data';
 import { useTable } from './use-table';
 import { formatMoney } from './value-format/format-money';
@@ -24,57 +25,54 @@ export const HookTableExample = () => {
   const { Column, Table } = useTable<TableData>();
 
   return (
-    <Table
-      data={mockData}
-      isLoading={false}
-      caption={{
-        value: 'Example table with default components',
-        alignment: 'bottom-center',
-      }}
-    >
-      <Column
-        expandable
-        defaultExpanded={({ id }) => ['Row 2', 'Row 4'].includes(id)}
-        colWidth={5}
+    <div className="rounded-md border">
+      <Table
+        data={mockData}
+        isLoading={false}
+        caption={{
+          value: 'Example table rendering with chadcn/ui table elements',
+          alignment: 'top-left',
+        }}
       >
-        {({ additionalData }) => <Subtable data={additionalData} />}
-      </Column>
-      <Column accessor={['id', 'date']} />
-      <Column accessor="date" format="dateTime" />
-      <Column accessor="item" />
-      <Column accessor="qty" alignment="center" />
-      <Column
-        accessor="price"
-        format="money"
-        alignment="right"
-        footer={{ value: 'Total:', colSpan: 6, alignment: 'right' }}
-      />
-      <Column
-        header="Row total"
-        alignment="right"
-        colWidth={10}
-        footer={formatMoney({ amount: 123456.56, currency: 'EUR' })}
-      >
-        {({ qty, price }) =>
-          formatMoney({
-            amount: qty * price.amount,
-            currency: price.currency,
-          })
-        }
-      </Column>
-      <Column
-        expandable="test"
-        colWidth={5}
-        defaultExpanded={({ id }) => id === 'Row 10'}
-        footer
-      >
-        {(_, { closeSubrow }) => (
-          <div>
-            <p>Custom expandable content</p>
-            <button onClick={closeSubrow}>Close</button>
-          </div>
-        )}
-      </Column>
-    </Table>
+        <Column
+          expandable
+          defaultExpanded={({ id }) => ['Row 2', 'Row 4'].includes(id)}
+          colWidth={1}
+        >
+          {({ additionalData }) => <Subtable data={additionalData} />}
+        </Column>
+        <Column accessor="id" />
+        <Column accessor="date" format="dateTime" />
+        <Column accessor="item" />
+        <Column accessor="qty" alignment="center" />
+        <Column
+          accessor="price"
+          format="money"
+          alignment="right"
+          footer={{ value: 'Total:', colSpan: 6 }}
+          colWidth={10}
+        />
+        <Column
+          header="Row total"
+          alignment="right"
+          colWidth={10}
+          footer={{
+            value: formatMoney({ amount: 123456.56, currency: 'EUR' }),
+          }}
+        >
+          {({ qty, price }) =>
+            formatMoney({
+              amount: qty * price.amount,
+              currency: price.currency,
+            })
+          }
+        </Column>
+        <Column expandable="delete" colWidth={1} footer="&nbsp;">
+          {({ id }, { closeSubrow }) => (
+            <Confirm id={id} onClose={closeSubrow} />
+          )}
+        </Column>
+      </Table>
+    </div>
   );
 };

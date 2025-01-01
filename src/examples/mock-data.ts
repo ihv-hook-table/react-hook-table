@@ -54,7 +54,9 @@ function generateMockData(numRows: number): TableData[] {
     qty: Math.floor(Math.random() * 10) + 1,
     price: { amount: getRandomPrice(), currency: 'EUR' },
     additionalData: {
-      description: `Description for ${items[Math.floor(Math.random() * items.length)]}`,
+      description: `Description for ${
+        items[Math.floor(Math.random() * items.length)]
+      }`,
       category: categories[Math.floor(Math.random() * categories.length)],
       supplier: suppliers[Math.floor(Math.random() * suppliers.length)],
       inStock: Math.random() > 0.5 ? true : false,

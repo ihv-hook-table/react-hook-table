@@ -2,34 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color: #213547;
-  background-color: #ffffff;
-
-  padding: 2rem;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  margin: 0;
-  width: 100%;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/Geist.var.woff2') format('woff2');
 }
 
 @layer base {
   :root {
+    font-family: 'Geist', sans-serif;
+    font-family: 'Geist';
+    font-feature-settings:
+      'cv11' on,
+      'cv01' on,
+      'ss01' on,
+      'rlig' 1,
+      'calt' 1;
+    font-variation-settings: normal;
+    -webkit-font-smoothing: antialiased;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+
+    padding: 2rem;
+
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -90,5 +87,9 @@ h1 {
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  .secondary-value {
+    @apply bg-secondary text-secondary-foreground;
   }
 }
