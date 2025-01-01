@@ -1,15 +1,16 @@
-import { useTable as useHookTable, TableRecord } from '../hook-table';
 import {
   Expander,
   Table,
   TableBody,
   TableCaption,
-  TableData,
+  TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
   Value,
-} from './custom-components';
+} from '@/components/ui/table';
+import { useTable as useHookTable, TableRecord } from '../hook-table';
 import { MoneyType } from './mock-data';
 import { formatBoolean } from './value-format/boolean';
 import {
@@ -26,8 +27,6 @@ type FormatProps = {
   boolean: (value: boolean) => string;
 };
 
-// Reusable wrapper hook to provide format functions and custom components
-
 export const useTable = <T extends TableRecord = TableRecord>() => {
   const tableComponents = useHookTable<T, FormatProps>({
     components: {
@@ -37,8 +36,9 @@ export const useTable = <T extends TableRecord = TableRecord>() => {
       TableHead,
       TableRow,
       TableBody,
-      TableData,
+      TableData: TableCell,
       TableCaption,
+      TableFooter,
       Value,
     },
     formatFunctions: {

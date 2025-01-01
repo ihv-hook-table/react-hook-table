@@ -1,5 +1,4 @@
 export { useTable } from './hooks';
-export { Value } from './components';
 
 export type {
   TableExpanderProps,
@@ -8,5 +7,3 @@ export type {
   TableCaptionProps,
   TableRowProps,
 } from './types';
-
-import './ihv-table.css';
