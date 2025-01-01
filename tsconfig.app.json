@@ -22,7 +22,13 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Build types */
-    "typeRoots": ["node_modules/@types", "src/component/index.d.ts"]
+    "typeRoots": ["node_modules/@types", "src/component/index.d.ts"],
+
+    /* shadcn/ui */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src"]
 }
