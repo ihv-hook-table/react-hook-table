@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.4.0
+
+### Minor Changes
+
+- 63f94e0: add offline pagination support - manual pagination will follow with next patch release
+
 ## 0.3.17
 
 ### Patch Changes
