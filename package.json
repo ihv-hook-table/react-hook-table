@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ihv-hook-table/react-hook-table.git"
+    "url": "git+https://github.com/ihv-hook-table/react-hook-table.git"
   },
   "homepage": "https://github.com/ihv-hook-table/react-hook-table/wiki",
   "publishConfig": {
@@ -39,7 +39,11 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.11",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "@eslint/js": "^9.17.0",
+    "@radix-ui/react-select": "^2.1.4",
+    "@radix-ui/react-slot": "^1.1.1",
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
@@ -52,23 +56,17 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "knip": "^5.41.1",
+    "lucide-react": "^0.469.0",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^3.4.17",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.5",
     "vite-plugin-dts": "^4.4.0"
-  },
-  "dependencies": {
-    "@radix-ui/react-select": "^2.1.4",
-    "@radix-ui/react-slot": "^1.1.1",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.469.0",
-    "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
   }
 }

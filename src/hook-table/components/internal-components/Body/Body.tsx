@@ -1,21 +1,22 @@
 import { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 import { TableBody, NoResults } from '../../default-components';
 import { BodyRow } from '../BodyRow/BodyRow';
+import { useTableData } from '../../../context/table-data-context';
 
 type Props<
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,
 > = {
   columns: ColumnProps<T, F>[];
-  data?: T[];
   isLoading?: boolean;
 };
 
 export const Body = <T extends TableRecord = TableRecord>({
   columns,
-  data,
   isLoading = false,
 }: Props<T>) => {
+  const data = useTableData<T>();
+
   const isNoResults = !data || !data.length || !columns || isLoading;
 
   if (isNoResults) {
@@ -25,7 +26,11 @@ export const Body = <T extends TableRecord = TableRecord>({
   return (
     <TableBody>
       {data.map((rowData, dataIndex) => (
-        <BodyRow key={dataIndex} columns={columns} rowData={rowData} />
+        <BodyRow
+          key={`${dataIndex}-${new Date().getTime()}`}
+          columns={columns}
+          rowData={rowData}
+        />
       ))}
     </TableBody>
   );

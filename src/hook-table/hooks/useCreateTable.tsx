@@ -1,18 +1,24 @@
 import { ComponentProps, useMemo } from 'react';
-import { TableCaptionProps, FormatOptions, TableRecord } from '../types';
-import { getChildrenProps, log } from '../utils';
+import { CaptionProps, FormatOptions, TableRecord } from '../types';
+import { getChildrenProps } from '../utils';
 import {
   TableOptionsContext,
   TableOptionsContextType,
 } from '../context/table-options-context';
 import { Body, ColGroup, Footer, Header } from '../components';
 import { Table, TableCaption } from '../components/default-components';
+import { TableDataContext } from '../context/table-data-context';
+import { PaginationContextProvider } from '../context/pagination-context/pagination-provider';
+import { Pagination } from '../components/default-components/Pagination';
 
 type TableProps<T extends TableRecord = TableRecord> = {
   data?: T[];
   isLoading?: boolean;
   hideHeader?: boolean;
-  caption?: TableCaptionProps;
+  caption?: CaptionProps;
+  paginate?: boolean;
+  pageSize?: number;
+  pageNumber?: number;
 } & ComponentProps<'table'>;
 
 export const useCreateTable = <
@@ -28,6 +34,9 @@ export const useCreateTable = <
         data,
         caption,
         hideHeader = false,
+        paginate = false,
+        pageSize,
+        pageNumber,
         isLoading,
         ...rest
       }: TableProps<T>) => {
@@ -37,19 +46,27 @@ export const useCreateTable = <
           return null;
         }
 
-        if (import.meta.env.DEV) {
-          log('useCreateTable - columns', columns);
-        }
-
         return (
           <TableOptionsContext value={tableOptions}>
-            <Table {...rest}>
-              <TableCaption {...caption} />
-              <ColGroup columns={columns} />
-              {!hideHeader && <Header columns={columns} />}
-              <Body columns={columns} data={data} isLoading={isLoading} />
-              <Footer columns={columns} data={data} isLoading={isLoading} />
-            </Table>
+            <PaginationContextProvider
+              initialState={{
+                pageNumber,
+                pageSize,
+                paginate,
+                numberOfRecords: data?.length,
+              }}
+            >
+              <TableDataContext value={{ data }}>
+                <Table {...rest}>
+                  <TableCaption {...caption} />
+                  <ColGroup columns={columns} />
+                  {!hideHeader && <Header columns={columns} />}
+                  <Body columns={columns} isLoading={isLoading} />
+                  <Footer columns={columns} isLoading={isLoading} />
+                </Table>
+                <Pagination />
+              </TableDataContext>
+            </PaginationContextProvider>
           </TableOptionsContext>
         );
       },

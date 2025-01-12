@@ -13,5 +13,4 @@ export { isNullOrUndefined } from './isNullOrUndefined';
 export { isObject } from './isObject';
 export { isObjectType } from './isObjectType';
 export { isUndefined } from './isUndefined';
-export { log } from './log';
 export { toArray } from './toArray';
