@@ -11,6 +11,7 @@ import {
   FormatOptions,
   NoResultsProps,
   TableRowProps,
+  PaginationProps,
 } from '../types';
 
 export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
@@ -34,6 +35,11 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @returns
      */
     Expander?: ComponentType<TableExpanderProps>;
+    /**
+     * @param Pagination - Component that renders the pagination section.
+     * @returns
+     */
+    Pagination?: ComponentType<PaginationProps>;
     /**
      * @param Table - Html table element.
      * @returns
@@ -92,6 +98,16 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @returns
      */
     NoResults?: ComponentType<NoResultsProps>;
+  };
+  pagination?: {
+    /**
+     * @param defaultPageSize - The default page size to paginate the table.
+     */
+    defaultPageSize?: number;
+    /**
+     * @param pageSizeOptions - The page size options to paginate the table.
+     */
+    pageSizeOptions?: number[];
   };
 };
 

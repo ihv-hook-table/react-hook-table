@@ -1,9 +1,11 @@
 export { useTable } from './hooks';
 
 export type {
+  ColumnAlignmentProps,
+  PaginationProps,
+  TableCaptionProps,
+  TableDataProps,
   TableExpanderProps,
   TableRecord,
-  ColumnAlignmentProps,
-  TableCaptionProps,
   TableRowProps,
 } from './types';

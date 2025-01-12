@@ -1,19 +1,19 @@
+import { useTableData } from '../../../context/table-data-context';
 import { ColumnProps, TableRecord } from '../../../types';
 import { getFooterProps } from '../../../utils';
 import { TableFooter, TableHead, TableRow } from '../../default-components';
 
 type Props<T extends TableRecord = TableRecord> = {
   columns: ColumnProps<T>[];
-  data?: T[];
   isLoading?: boolean;
 };
 
 export const Footer = <T extends TableRecord = TableRecord>({
   columns,
-  data,
   isLoading,
 }: Props<T>) => {
   const hasFooter = columns.some(col => col.footer);
+  const data = useTableData<T>();
 
   if (!data || !columns || !hasFooter || isLoading) {
     return null;

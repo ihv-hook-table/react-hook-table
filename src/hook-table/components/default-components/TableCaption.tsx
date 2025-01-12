@@ -1,12 +1,12 @@
 import { ComponentProps } from 'react';
 import { useCustomComponent } from '../../context/use-custom-component';
-import { TableCaptionProps } from '../../types';
+import { CaptionProps } from '../../types';
 
-type Props = ComponentProps<'caption'> & TableCaptionProps;
+type Props = ComponentProps<'caption'> & CaptionProps;
 
 export const TableCaption = ({ value, ...rest }: Props) => {
   const CustomTableCaption = useCustomComponent<
-    ComponentProps<'caption'> & Pick<TableCaptionProps, 'alignment'>
+    ComponentProps<'caption'> & Pick<CaptionProps, 'alignment'>
   >('TableCaption');
 
   if (!value) {

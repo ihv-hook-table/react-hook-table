@@ -121,7 +121,26 @@ export type TableRowProps = {
   expanded?: boolean;
 };
 
-export type TableCaptionProps = {
+export type CaptionProps = {
   alignment?: CaptionAlignment;
   value?: ReactNode;
+};
+
+export type TableCaptionProps = Pick<CaptionProps, 'alignment'>;
+
+export type TableDataProps = ColumnAlignmentProps & {
+  expandable?: boolean;
+  isSubRow?: boolean;
+  wrap?: boolean;
+};
+
+export type PaginationProps = {
+  pageNumber: number;
+  pageSize: number;
+  pageCount?: number;
+  nextPage: () => void;
+  previousPage: () => void;
+  setPageSize: (pageSize: number) => void;
+  goToPage: (pageNumber: number) => void;
+  pageSizeOptions?: number[];
 };
