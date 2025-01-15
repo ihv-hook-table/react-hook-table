@@ -25,6 +25,8 @@ export const Pagination = () => {
       pageSizeOptions={pagination?.pageSizeOptions}
       pageCount={state.pageCount}
       goToPage={goToPage}
+      isLastPage={state.isLastPage}
+      isManualPagination={state.isManualPagination}
     />
   );
 };

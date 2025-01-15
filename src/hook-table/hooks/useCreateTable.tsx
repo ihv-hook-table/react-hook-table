@@ -1,5 +1,10 @@
 import { ComponentProps, useMemo } from 'react';
-import { CaptionProps, FormatOptions, TableRecord } from '../types';
+import {
+  CaptionProps,
+  FormatOptions,
+  PaginationState,
+  TableRecord,
+} from '../types';
 import { getChildrenProps } from '../utils';
 import {
   TableOptionsContext,
@@ -12,13 +17,16 @@ import { PaginationContextProvider } from '../context/pagination-context/paginat
 import { Pagination } from '../components/default-components/Pagination';
 
 type TableProps<T extends TableRecord = TableRecord> = {
-  data?: T[];
-  isLoading?: boolean;
-  hideHeader?: boolean;
   caption?: CaptionProps;
-  paginate?: boolean;
-  pageSize?: number;
+  data?: T[];
+  hideHeader?: boolean;
+  isLastPage?: boolean;
+  isLoading?: boolean;
+  onPaginate?: (pageNumber: number, pageSize: number) => void;
   pageNumber?: number;
+  pageSize?: number;
+  paginate?: boolean;
+  paginationState?: PaginationState;
 } & ComponentProps<'table'>;
 
 export const useCreateTable = <
@@ -34,10 +42,12 @@ export const useCreateTable = <
         data,
         caption,
         hideHeader = false,
+        isLastPage,
+        isLoading,
         paginate = false,
         pageSize,
         pageNumber,
-        isLoading,
+        onPaginate,
         ...rest
       }: TableProps<T>) => {
         const columns = getChildrenProps<T>(children) || {};
@@ -50,10 +60,12 @@ export const useCreateTable = <
           <TableOptionsContext value={tableOptions}>
             <PaginationContextProvider
               initialState={{
+                isLastPage,
+                numberOfRecords: data?.length,
+                onPaginate,
                 pageNumber,
                 pageSize,
                 paginate,
-                numberOfRecords: data?.length,
               }}
             >
               <TableDataContext value={{ data }}>

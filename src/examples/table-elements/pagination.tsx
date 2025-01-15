@@ -24,6 +24,8 @@ export function Pagination({
   setPageSize,
   pageSize,
   pageSizeOptions,
+  isLastPage,
+  isManualPagination,
 }: PaginationProps) {
   return (
     <div className="flex items-center justify-between mt-4">
@@ -54,7 +56,9 @@ export function Pagination({
           </div>
         )}
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {pageNumber} of {pageCount}
+          {isManualPagination
+            ? `Page ${pageNumber}`
+            : `Page ${pageNumber} of ${pageCount}`}
         </div>
         <div className="flex items-center space-x-2">
           <Button
@@ -79,7 +83,10 @@ export function Pagination({
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() => nextPage()}
-            disabled={pageNumber === pageCount}
+            disabled={
+              (isManualPagination && isLastPage) ||
+              (!isManualPagination && pageNumber === pageCount)
+            }
           >
             <span className="sr-only">Go to next page</span>
             <ChevronRight />
@@ -89,7 +96,10 @@ export function Pagination({
               variant="outline"
               className="hidden h-8 w-8 p-0 lg:flex"
               onClick={() => goToPage(pageCount || 1)}
-              disabled={pageNumber === pageCount}
+              disabled={
+                (isManualPagination && isLastPage) ||
+                (!isManualPagination && pageNumber === pageCount)
+              }
             >
               <span className="sr-only">Go to last page</span>
               <ChevronsRight />

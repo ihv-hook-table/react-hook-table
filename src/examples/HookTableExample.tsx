@@ -1,7 +1,8 @@
 import { Confirm } from '@/examples/table-elements/confirm';
-import { AdditionalData, mockData, TableData } from './mock-data';
+import { AdditionalData, TableData } from './mock-data';
 import { useTable } from './use-table';
 import { formatMoney } from './value-format/format-money';
+import { useMockData } from './use-mock-data';
 
 type SubTableProps = {
   data: AdditionalData;
@@ -23,16 +24,22 @@ const Subtable = ({ data }: SubTableProps) => {
 
 export const HookTableExample = () => {
   const { Column, Table } = useTable<TableData>();
+  const { search, data } = useMockData();
+
+  const { values, ...paginationParams } = data || {};
 
   return (
     <Table
-      data={mockData}
+      data={values}
       isLoading={false}
       caption={{
         value: 'Example table rendering with chadcn/ui table elements',
         alignment: 'top-left',
       }}
-      paginate
+      pageSize={data?.pageSize}
+      pageNumber={data?.pageNumber}
+      isLastPage={data?.isLastPage}
+      onPaginate={(pageNumber, pageSize) => search(pageNumber, pageSize)}
     >
       <Column
         expandable

@@ -134,7 +134,22 @@ export type TableDataProps = ColumnAlignmentProps & {
   wrap?: boolean;
 };
 
+/**
+ * Pagination types
+ */
+
+export type Pagination = {
+  pageIndex: number;
+  pageSize: number;
+};
+
+export type PaginationState = {
+  isLastPage?: boolean;
+} & Pagination;
+
 export type PaginationProps = {
+  isLastPage?: boolean;
+  isManualPagination?: boolean;
   pageNumber: number;
   pageSize: number;
   pageCount?: number;
