@@ -59,7 +59,9 @@ export const PaginationContextProvider = ({
   const nextPage = () => {
     dispatch({ type: ActionTypes.NEXT });
     if (isManualPagination) {
-      search(state.pageNumber + 1, state.pageSize);
+      setTimeout(() => {
+        search(state.pageNumber + 1, state.pageSize);
+      });
     }
   };
 

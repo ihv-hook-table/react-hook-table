@@ -91,7 +91,7 @@ export function Pagination({
             <span className="sr-only">Go to next page</span>
             <ChevronRight />
           </Button>
-          {pageCount && (
+          {!!pageCount && !isManualPagination && (
             <Button
               variant="outline"
               className="hidden h-8 w-8 p-0 lg:flex"

@@ -24,14 +24,12 @@ const Subtable = ({ data }: SubTableProps) => {
 
 export const HookTableExample = () => {
   const { Column, Table } = useTable<TableData>();
-  const { search, data } = useMockData();
-
-  const { values, ...paginationParams } = data || {};
+  const { search, data, isLoading } = useMockData(5);
 
   return (
     <Table
-      data={values}
-      isLoading={false}
+      data={data?.values}
+      isLoading={isLoading}
       caption={{
         value: 'Example table rendering with chadcn/ui table elements',
         alignment: 'top-left',

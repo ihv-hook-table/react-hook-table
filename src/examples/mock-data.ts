@@ -65,4 +65,4 @@ function generateMockData(numRows: number): TableData[] {
   }));
 }
 
-export const mockData = generateMockData(10);
+export const mockData = generateMockData(11);

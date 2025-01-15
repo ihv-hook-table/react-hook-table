@@ -8,42 +8,71 @@ type DataResponse<T> = {
   pageSize?: number;
 };
 
-const getData = (pageNumber: number, pageSize: number) =>
-  [...mockData].slice((pageNumber - 1) * pageSize, pageNumber * pageSize + 1);
+// mimic an API call - get 1 more than the pageSize, so we can determine if we are on the last page
+const getData = (
+  pageNumber: number,
+  pageSize: number,
+): DataResponse<TableData> => {
+  const result = [...mockData].slice(
+    (pageNumber - 1) * pageSize,
+    pageNumber * pageSize + 1,
+  );
 
-export const useMockData = () => {
+  return {
+    values: result.length > pageSize ? [...result]?.slice(0, pageSize) : result,
+    pageNumber,
+    isLastPage: result.length <= pageSize,
+    pageSize,
+  };
+};
+
+// mocal API call
+const getMockData = async (
+  pageNumber: number,
+  pageSize: number,
+): Promise<DataResponse<TableData>> => {
+  const data = getData(pageNumber, pageSize);
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (data) {
+        resolve(data);
+      } else {
+        reject({
+          type: 'Error ❌',
+          message: 'Failed to fetch data',
+        });
+      }
+    }, 1000);
+  });
+};
+
+export const useMockData = (pageSize: number) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<DataResponse<TableData> | undefined>(
     undefined,
   );
 
   useEffect(() => {
-    const result = getData(1, 5);
-    console.log('EFFECT', result);
+    setIsLoading(true);
+    const fetchData = async () => {
+      const result = await getMockData(1, pageSize);
+      setData(result);
+      setIsLoading(false);
+    };
 
-    setData({
-      values: result.length > 5 ? [...result]?.slice(0, 5) : result,
-      pageNumber: 1,
-      isLastPage: result.length <= 5,
-    });
-  }, []);
+    fetchData();
+  }, [pageSize]);
 
-  const search = (pageNumber: number, pageSize: number) => {
-    const result = getData(pageNumber, pageSize);
-
-    console.log('Hello', result);
+  const search = async (pageNumber: number, pageSize: number) => {
+    setIsLoading(true);
+    const result = await getMockData(pageNumber, pageSize);
 
     if (result) {
-      setData({
-        values:
-          result.length > pageSize
-            ? [...result]?.slice(pageNumber - 1, pageSize)
-            : result,
-        pageNumber,
-        pageSize,
-        isLastPage: result.length <= pageSize,
-      });
+      setData(result);
+      setIsLoading(false);
     }
   };
 
-  return { data, search };
+  return { data, search, isLoading };
 };
