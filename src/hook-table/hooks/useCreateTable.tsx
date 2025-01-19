@@ -1,10 +1,5 @@
 import { ComponentProps, useMemo } from 'react';
-import {
-  CaptionProps,
-  FormatOptions,
-  PaginationState,
-  TableRecord,
-} from '../types';
+import { CaptionProps, FormatOptions, TableRecord } from '../types';
 import { getChildrenProps } from '../utils';
 import {
   TableOptionsContext,
@@ -26,14 +21,13 @@ type TableProps<T extends TableRecord = TableRecord> = {
   pageNumber?: number;
   pageSize?: number;
   paginate?: boolean;
-  paginationState?: PaginationState;
 } & ComponentProps<'table'>;
 
 export const useCreateTable = <
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,
 >(
-  tableOptions?: TableOptionsContextType<F>,
+  globalOptions?: TableOptionsContextType<F>,
 ) => {
   const HookTable = useMemo(
     () =>
@@ -57,7 +51,7 @@ export const useCreateTable = <
         }
 
         return (
-          <TableOptionsContext value={tableOptions}>
+          <TableOptionsContext value={globalOptions}>
             <PaginationContextProvider
               initialState={{
                 isLastPage,
@@ -69,6 +63,7 @@ export const useCreateTable = <
               }}
             >
               <TableDataContext value={{ data }}>
+                {/* Custom top element with pagination options and functions */}
                 <Table {...rest}>
                   <TableCaption {...caption} />
                   <ColGroup columns={columns} />
@@ -76,13 +71,14 @@ export const useCreateTable = <
                   <Body columns={columns} isLoading={isLoading} />
                   <Footer columns={columns} isLoading={isLoading} />
                 </Table>
+                {/* Replace Pagination with Custom bottom element with pagination options and functions */}
                 <Pagination />
               </TableDataContext>
             </PaginationContextProvider>
           </TableOptionsContext>
         );
       },
-    [tableOptions],
+    [globalOptions],
   );
 
   return { Table: HookTable };

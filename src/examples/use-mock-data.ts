@@ -39,40 +39,34 @@ const getMockData = async (
         resolve(data);
       } else {
         reject({
-          type: 'Error ❌',
           message: 'Failed to fetch data',
         });
       }
-    }, 1000);
+    }, 500);
   });
 };
 
 export const useMockData = (pageSize: number) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<DataResponse<TableData> | undefined>(
     undefined,
   );
 
   useEffect(() => {
-    setIsLoading(true);
     const fetchData = async () => {
       const result = await getMockData(1, pageSize);
       setData(result);
-      setIsLoading(false);
     };
 
     fetchData();
   }, [pageSize]);
 
   const search = async (pageNumber: number, pageSize: number) => {
-    setIsLoading(true);
     const result = await getMockData(pageNumber, pageSize);
 
     if (result) {
       setData(result);
-      setIsLoading(false);
     }
   };
 
-  return { data, search, isLoading };
+  return { data, search };
 };
