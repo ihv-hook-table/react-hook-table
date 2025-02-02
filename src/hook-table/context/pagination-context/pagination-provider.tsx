@@ -10,10 +10,11 @@ type Props = {
   initialState?: {
     isLastPage?: boolean;
     numberOfRecords?: number;
-    onPaginate?: (pageNumber: number, pageSize: number) => void;
+    onPaginate?: (pageNumber: number, pageSize: number) => Promise<void>;
     paginate?: boolean;
     pageNumber?: number;
     pageSize?: number;
+    isLoading?: boolean;
   };
 };
 
@@ -41,32 +42,50 @@ export const PaginationContextProvider = ({
     pageCount: getPageCount(initialState?.numberOfRecords, currentPageSize),
     isLastPage: initialState?.isLastPage,
     isManualPagination,
+    isLoading: !!initialState?.isLoading,
   });
 
-  const search = (pageNumber: number, pageSize: number) => {
+  const search = async (pageNumber: number, pageSize: number) => {
     if (initialState?.onPaginate && isFunction(initialState.onPaginate)) {
-      return initialState?.onPaginate(pageNumber, pageSize);
+      return await initialState?.onPaginate(pageNumber, pageSize);
     }
   };
 
+  const setLoadingFalse = () =>
+    dispatch({ type: ActionTypes.LOADING, isLoading: false });
+
   const goToPage = (pageNumber: number) => {
-    dispatch({ type: ActionTypes.PAGE_NUMBER, pageNumber });
+    dispatch({
+      type: ActionTypes.PAGE_NUMBER,
+      pageNumber,
+      isLoading: state.isManualPagination ? true : false,
+    });
     if (isManualPagination) {
-      search(pageNumber, state.pageSize);
+      return search(pageNumber, state.pageSize)?.finally(setLoadingFalse);
     }
   };
 
   const nextPage = () => {
-    dispatch({ type: ActionTypes.NEXT });
+    dispatch({
+      type: ActionTypes.NEXT,
+      isLoading: state.isManualPagination ? true : false,
+    });
     if (isManualPagination) {
-      search(state.pageNumber + 1, state.pageSize);
+      return search(state.pageNumber + 1, state.pageSize)?.finally(
+        setLoadingFalse,
+      );
     }
   };
 
   const previousPage = () => {
-    dispatch({ type: ActionTypes.PREVIOUS });
+    dispatch({
+      type: ActionTypes.PREVIOUS,
+      isLoading: state.isManualPagination ? true : false,
+    });
     if (isManualPagination) {
-      search(state.pageNumber - 1, state.pageSize);
+      return search(state.pageNumber - 1, state.pageSize)?.finally(
+        setLoadingFalse,
+      );
     }
   };
 
@@ -75,9 +94,10 @@ export const PaginationContextProvider = ({
       type: ActionTypes.PAGE_SIZE,
       pageSize,
       pageCount: getPageCount(initialState?.numberOfRecords, pageSize),
+      isLoading: state.isManualPagination ? true : false,
     });
     if (isManualPagination) {
-      search(1, pageSize);
+      return search(1, pageSize)?.finally(setLoadingFalse);
     }
   };
 
@@ -89,6 +109,9 @@ export const PaginationContextProvider = ({
         previousPage,
         goToPage,
         setPageSize,
+        search,
+        setLoading: (isLoading: boolean) =>
+          dispatch({ type: ActionTypes.LOADING, isLoading }),
       }}
     >
       {children}

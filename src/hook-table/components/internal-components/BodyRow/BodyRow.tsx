@@ -24,7 +24,6 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
   columns,
   rowData,
 }: Props<T, FormatOptions>) => {
-  // TODO: should reset when paginate - not working at the moment
   const isDefaultExpanded = useMemo(() => {
     const values = columns.filter(({ expandable }) => !!expandable);
 

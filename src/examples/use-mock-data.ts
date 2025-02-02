@@ -51,14 +51,7 @@ export const useMockData = (pageSize: number) => {
     undefined,
   );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await getMockData(1, pageSize);
-      setData(result);
-    };
-
-    fetchData();
-  }, [pageSize]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const search = async (pageNumber: number, pageSize: number) => {
     const result = await getMockData(pageNumber, pageSize);
@@ -68,5 +61,10 @@ export const useMockData = (pageSize: number) => {
     }
   };
 
-  return { data, search };
+  useEffect(() => {
+    setIsLoading(true);
+    search(1, pageSize).then(() => setIsLoading(false));
+  }, [pageSize]);
+
+  return { data, search, isLoading };
 };

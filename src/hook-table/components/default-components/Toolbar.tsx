@@ -2,21 +2,25 @@ import { use } from 'react';
 import { PaginationContext } from '../../context/pagination-context/pagination-context';
 import { useCustomComponent } from '../../context/use-custom-component';
 import { PaginationProps } from '../../types';
-import { TableOptionsContext } from '@/hook-table/context/table-options-context';
+import { TableOptionsContext } from '../../context/table-options-context';
 
-export const Pagination = () => {
+type Props = {
+  element: 'TopToolbar' | 'BottomToolbar';
+};
+
+export const Toolbar = ({ element }: Props) => {
   const paginationCtx = use(PaginationContext);
   const { pagination } = use(TableOptionsContext) || {};
-  const CustomPagination = useCustomComponent<PaginationProps>('Pagination');
+  const CustomToolbar = useCustomComponent<PaginationProps>(element);
 
-  if (!paginationCtx || !paginationCtx?.state?.paginate || !CustomPagination)
+  if (!paginationCtx || !paginationCtx?.state?.paginate || !CustomToolbar)
     return null;
 
   const { nextPage, previousPage, setPageSize, state, goToPage } =
     paginationCtx;
 
   return (
-    <CustomPagination
+    <CustomToolbar
       nextPage={nextPage}
       previousPage={previousPage}
       setPageSize={setPageSize}
@@ -27,6 +31,7 @@ export const Pagination = () => {
       goToPage={goToPage}
       isLastPage={state.isLastPage}
       isManualPagination={state.isManualPagination}
+      isLoading={state.isLoading}
     />
   );
 };

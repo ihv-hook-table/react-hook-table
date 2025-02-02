@@ -1,6 +1,7 @@
 export { Confirm } from './confirm';
 export { Expander } from './expander';
 export { Pagination } from './pagination';
+export { PageSize } from './pagination';
 export { Table } from './table';
 export { TableBody } from './table-body';
 export { TableCaption } from './table-caption';

@@ -2,32 +2,34 @@ import { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 import { TableBody, NoResults } from '../../default-components';
 import { BodyRow } from '../BodyRow/BodyRow';
 import { useTableData } from '../../../context/table-data-context';
+import { use, useId } from 'react';
+import { PaginationContext } from '@/hook-table/context/pagination-context/pagination-context';
 
 type Props<
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,
 > = {
   columns: ColumnProps<T, F>[];
-  isLoading?: boolean;
 };
 
 export const Body = <T extends TableRecord = TableRecord>({
   columns,
-  isLoading = false,
 }: Props<T>) => {
+  const id = useId();
   const data = useTableData<T>();
+  const { state } = use(PaginationContext) || {};
 
-  const isNoResults = !data || !data.length || !columns || isLoading;
+  const isNoResults = !data || !data.length || !columns;
 
-  if (isNoResults) {
-    return <NoResults isLoading={isLoading} columnCount={columns.length} />;
+  if (!state?.isLoading && isNoResults) {
+    return <NoResults columnCount={columns.length} />;
   }
 
   return (
     <TableBody>
-      {data.map((rowData, dataIndex) => (
+      {data?.map((rowData, dataIndex) => (
         <BodyRow
-          key={`${dataIndex}-${new Date().getTime()}`}
+          key={`${dataIndex}-${id}`}
           columns={columns}
           rowData={rowData}
         />

@@ -9,15 +9,18 @@ import { Body, ColGroup, Footer, Header } from '../components';
 import { Table, TableCaption } from '../components/default-components';
 import { TableDataContext } from '../context/table-data-context';
 import { PaginationContextProvider } from '../context/pagination-context/pagination-provider';
-import { Pagination } from '../components/default-components/Pagination';
+import { Toolbar } from '../components/default-components/Toolbar';
 
 type TableProps<T extends TableRecord = TableRecord> = {
   caption?: CaptionProps;
   data?: T[];
   hideHeader?: boolean;
   isLastPage?: boolean;
+  /**
+   * @param isLoading - Handle initial loading state of the table. If manual pagination is enabled, futher loading state is handled internally.
+   */
   isLoading?: boolean;
-  onPaginate?: (pageNumber: number, pageSize: number) => void;
+  onPaginate?: (pageNumber: number, pageSize: number) => Promise<void>;
   pageNumber?: number;
   pageSize?: number;
   paginate?: boolean;
@@ -37,7 +40,7 @@ export const useCreateTable = <
         caption,
         hideHeader = false,
         isLastPage,
-        isLoading,
+        isLoading = false,
         paginate = false,
         pageSize,
         pageNumber,
@@ -60,19 +63,19 @@ export const useCreateTable = <
                 pageNumber,
                 pageSize,
                 paginate,
+                isLoading,
               }}
             >
               <TableDataContext value={{ data }}>
-                {/* Custom top element with pagination options and functions */}
+                <Toolbar element="TopToolbar" />
                 <Table {...rest}>
                   <TableCaption {...caption} />
                   <ColGroup columns={columns} />
                   {!hideHeader && <Header columns={columns} />}
-                  <Body columns={columns} isLoading={isLoading} />
-                  <Footer columns={columns} isLoading={isLoading} />
+                  <Body columns={columns} />
+                  <Footer columns={columns} isLoading={false} />
                 </Table>
-                {/* Replace Pagination with Custom bottom element with pagination options and functions */}
-                <Pagination />
+                <Toolbar element="BottomToolbar" />
               </TableDataContext>
             </PaginationContextProvider>
           </TableOptionsContext>

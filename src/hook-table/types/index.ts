@@ -112,13 +112,14 @@ export type TableExpanderProps = {
 };
 
 export type NoResultsProps = {
-  isLoading: boolean;
+  isLoading?: boolean;
   columnCount: number;
 };
 
 export type TableRowProps = {
   subrow?: boolean;
   expanded?: boolean;
+  isLoading?: boolean;
 };
 
 export type CaptionProps = {
@@ -138,17 +139,9 @@ export type TableDataProps = ColumnAlignmentProps & {
  * Pagination types
  */
 
-export type Pagination = {
-  pageIndex: number;
-  pageSize: number;
-};
-
-export type PaginationState = {
-  isLastPage?: boolean;
-} & Pagination;
-
 export type PaginationProps = {
   isLastPage?: boolean;
+  isLoading: boolean;
   isManualPagination?: boolean;
   pageNumber: number;
   pageSize: number;

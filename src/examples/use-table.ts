@@ -7,7 +7,6 @@ import {
 } from './value-format/format-date';
 import { formatMoney } from './value-format/format-money';
 import { translate } from './value-format/translate';
-import { Pagination } from '@/examples/table-elements/pagination';
 import {
   Expander,
   TableCaption,
@@ -19,6 +18,8 @@ import {
   TableRow,
   TableHead,
   Value,
+  PageSize,
+  Pagination,
 } from './table-elements';
 
 type FormatProps = {
@@ -31,8 +32,9 @@ type FormatProps = {
 export const useTable = <T extends TableRecord = TableRecord>() => {
   const tableComponents = useHookTable<T, FormatProps>({
     components: {
+      BottomToolbar: Pagination,
       Expander,
-      Pagination,
+      TopToolbar: PageSize,
       Table,
       TableHeader,
       TableHead,
