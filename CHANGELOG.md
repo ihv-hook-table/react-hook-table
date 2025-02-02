@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.5.0
+
+### Minor Changes
+
+- 7d66019: add experimental manual pagination
+
 ## 0.4.0
 
 ### Minor Changes
