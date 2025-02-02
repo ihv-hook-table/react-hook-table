@@ -6,12 +6,10 @@ type Props<T extends TableRecord = TableRecord> = {
 
 export const ColGroup = <T extends TableRecord = TableRecord>({
   columns,
-}: Props<T>) => {
-  return (
-    <colgroup>
-      {columns.map(({ colWidth }, idx) => (
-        <col key={idx} {...(colWidth && { width: `${colWidth}%` })} />
-      ))}
-    </colgroup>
-  );
-};
+}: Props<T>) => (
+  <colgroup>
+    {columns.map(({ colWidth }, idx) => (
+      <col key={idx} {...(colWidth && { width: `${colWidth}%` })} />
+    ))}
+  </colgroup>
+);

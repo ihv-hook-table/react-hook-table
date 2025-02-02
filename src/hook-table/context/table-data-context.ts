@@ -18,7 +18,7 @@ export const useTableData = <T extends TableRecord = TableRecord>() => {
   const { data } =
     use(TableDataContext as Context<TableDataContextType<T>>) || {};
 
-  if (state?.paginate && state.pageSize) {
+  if (state?.paginate && state.pageSize && !state.isManualPagination) {
     const start = (state.pageNumber - 1) * state.pageSize;
     return data?.slice(start, start + state.pageSize);
   }

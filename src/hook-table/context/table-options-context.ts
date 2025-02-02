@@ -39,11 +39,6 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param Pagination - Component that renders the pagination section.
      * @returns
      */
-    Pagination?: ComponentType<PaginationProps>;
-    /**
-     * @param Table - Html table element.
-     * @returns
-     */
     Table?: ComponentType<HTMLAttributes<HTMLTableElement>>;
     /**
      * @param TableHeader - Html thead element.
@@ -98,6 +93,16 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @returns
      */
     NoResults?: ComponentType<NoResultsProps>;
+    /**
+     * @param TopToolbar - Component for the top toolbar. Receives the pagination props.
+     * @returns
+     */
+    TopToolbar?: ComponentType<PaginationProps>;
+    /**
+     * @param BottomToolbar - Component for the top toolbar. Receives the pagination props.
+     * @returns
+     */
+    BottomToolbar?: ComponentType<PaginationProps>;
   };
   pagination?: {
     /**

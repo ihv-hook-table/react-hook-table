@@ -17,12 +17,19 @@ const rowClasses = cva('', {
   },
 });
 
-export const TableRow = ({ className, expanded, subrow, ...props }: Props) => {
+export const TableRow = ({
+  className,
+  expanded,
+  subrow,
+  isLoading,
+  ...props
+}: Props) => {
   return (
     <CnTableRow
       // Customize the row style when it is expanded.
       // Customize the row style when it is a subrow.
       className={cn(rowClasses({ expanded, subrow }), className)}
+      data-loading={isLoading}
       {...props}
     />
   );

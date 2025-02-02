@@ -9,23 +9,28 @@ import { Body, ColGroup, Footer, Header } from '../components';
 import { Table, TableCaption } from '../components/default-components';
 import { TableDataContext } from '../context/table-data-context';
 import { PaginationContextProvider } from '../context/pagination-context/pagination-provider';
-import { Pagination } from '../components/default-components/Pagination';
+import { Toolbar } from '../components/default-components/Toolbar';
 
 type TableProps<T extends TableRecord = TableRecord> = {
-  data?: T[];
-  isLoading?: boolean;
-  hideHeader?: boolean;
   caption?: CaptionProps;
-  paginate?: boolean;
-  pageSize?: number;
+  data?: T[];
+  hideHeader?: boolean;
+  isLastPage?: boolean;
+  /**
+   * @param isLoading - Handle initial loading state of the table. If manual pagination is enabled, futher loading state is handled internally.
+   */
+  isLoading?: boolean;
+  onPaginate?: (pageNumber: number, pageSize: number) => Promise<void>;
   pageNumber?: number;
+  pageSize?: number;
+  paginate?: boolean;
 } & ComponentProps<'table'>;
 
 export const useCreateTable = <
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,
 >(
-  tableOptions?: TableOptionsContextType<F>,
+  globalOptions?: TableOptionsContextType<F>,
 ) => {
   const HookTable = useMemo(
     () =>
@@ -34,10 +39,12 @@ export const useCreateTable = <
         data,
         caption,
         hideHeader = false,
+        isLastPage,
+        isLoading = false,
         paginate = false,
         pageSize,
         pageNumber,
-        isLoading,
+        onPaginate,
         ...rest
       }: TableProps<T>) => {
         const columns = getChildrenProps<T>(children) || {};
@@ -47,30 +54,34 @@ export const useCreateTable = <
         }
 
         return (
-          <TableOptionsContext value={tableOptions}>
+          <TableOptionsContext value={globalOptions}>
             <PaginationContextProvider
               initialState={{
+                isLastPage,
+                numberOfRecords: data?.length,
+                onPaginate,
                 pageNumber,
                 pageSize,
                 paginate,
-                numberOfRecords: data?.length,
+                isLoading,
               }}
             >
               <TableDataContext value={{ data }}>
+                <Toolbar element="TopToolbar" />
                 <Table {...rest}>
                   <TableCaption {...caption} />
                   <ColGroup columns={columns} />
                   {!hideHeader && <Header columns={columns} />}
-                  <Body columns={columns} isLoading={isLoading} />
-                  <Footer columns={columns} isLoading={isLoading} />
+                  <Body columns={columns} />
+                  <Footer columns={columns} isLoading={false} />
                 </Table>
-                <Pagination />
+                <Toolbar element="BottomToolbar" />
               </TableDataContext>
             </PaginationContextProvider>
           </TableOptionsContext>
         );
       },
-    [tableOptions],
+    [globalOptions],
   );
 
   return { Table: HookTable };
