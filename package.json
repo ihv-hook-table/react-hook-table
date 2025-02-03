@@ -19,7 +19,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "knip": "knip",
-    "release": "yarn build && changeset publish"
+    "release": "pnpm build && changeset publish"
   },
   "keywords": [
     "react",
