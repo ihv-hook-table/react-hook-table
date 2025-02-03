@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.5.1
+
+### Patch Changes
+
+- df5abb9: update release script
+
 ## 0.5.0
 
 ### Minor Changes
