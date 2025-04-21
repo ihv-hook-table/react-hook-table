@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.5.2
+
+### Patch Changes
+
+- f055b01: Update vite & react dependencies
+
 ## 0.5.1
 
 ### Patch Changes
