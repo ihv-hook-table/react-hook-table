@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.5.3
+
+### Patch Changes
+
+- daa5a69: update deps & export type
+
 ## 0.5.2
 
 ### Patch Changes
