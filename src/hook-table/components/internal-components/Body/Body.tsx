@@ -1,9 +1,9 @@
-import { ColumnProps, FormatOptions, TableRecord } from '../../../types';
+import { use, useId } from 'react';
 import { TableBody, NoResults } from '../../default-components';
 import { BodyRow } from '../BodyRow/BodyRow';
 import { useTableData } from '../../../context/table-data-context';
-import { use, useId } from 'react';
-import { PaginationContext } from '@/hook-table/context/pagination-context/pagination-context';
+import { PaginationContext } from '../../../context/pagination-context/pagination-context';
+import type { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 
 type Props<
   T extends TableRecord = TableRecord,

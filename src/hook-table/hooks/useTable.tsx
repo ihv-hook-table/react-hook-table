@@ -1,7 +1,7 @@
-import { FormatOptions, TableRecord } from '../types';
 import { useCreateColumn } from './useCreateColumn';
 import { useCreateTable } from './useCreateTable';
-import { TableOptionsContextType } from '../context/table-options-context';
+import type { TableOptionsContextType } from '../context/table-options-context';
+import type { FormatOptions, TableRecord } from '../types';
 
 export const useTable = <
   T extends TableRecord = TableRecord,

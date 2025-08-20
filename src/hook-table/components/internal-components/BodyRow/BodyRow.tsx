@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ColumnProps, FormatOptions, TableRecord } from '../../../types';
+import type { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 import { ColumnData } from './ColumnData';
 import { isArrayType, isFunction } from '../../../utils';
 import { TableData, TableRow, Expander } from '../../default-components';

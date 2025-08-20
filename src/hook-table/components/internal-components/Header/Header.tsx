@@ -1,4 +1,4 @@
-import { ColumnProps, TableRecord } from '../../../types';
+import type { ColumnProps, TableRecord } from '../../../types';
 import { isArrayType } from '../../../utils';
 import { TableHeader, TableRow } from '../../default-components';
 import { Cell } from './Cell/Cell';

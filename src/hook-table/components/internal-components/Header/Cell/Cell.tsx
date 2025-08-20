@@ -1,5 +1,5 @@
 import { use } from 'react';
-import { ColumnProps, TableRecord } from '../../../../types';
+import type { ColumnProps, TableRecord } from '../../../../types';
 import { isFunction, toArray } from '../../../../utils';
 import { TableOptionsContext } from '../../../../context/table-options-context';
 import { Value, TableHead } from '../../../default-components';

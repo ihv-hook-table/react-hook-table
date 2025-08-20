@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ColumnProps, FormatOptions, TableRecord } from '../types';
+import type { ColumnProps, FormatOptions, TableRecord } from '../types';
 import { Column } from '../components';
 
 export const useCreateColumn = <

@@ -1,5 +1,5 @@
 import { useTableData } from '../../../context/table-data-context';
-import { ColumnProps, TableRecord } from '../../../types';
+import type { ColumnProps, TableRecord } from '../../../types';
 import { getFooterProps } from '../../../utils';
 import { TableFooter, TableHead, TableRow } from '../../default-components';
 

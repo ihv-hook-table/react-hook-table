@@ -1,6 +1,6 @@
-import { FormatOptions, ValueFormatKey } from '../types';
 import { isArrayType } from './isArrayType';
 import { toArray } from './toArray';
+import type { FormatOptions, ValueFormatKey } from '../types';
 
 export function getFormatFunction<F extends FormatOptions = FormatOptions>(
   valueIndex: number,

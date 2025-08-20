@@ -9,3 +9,4 @@ export { TableHead } from './TableHead';
 export { TableHeader } from './TableHeader';
 export { TableRow } from './TableRow';
 export { Value } from './Value';
+export { Toolbar } from './Toolbar';
