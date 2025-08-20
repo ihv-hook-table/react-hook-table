@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.5.4
+
+### Patch Changes
+
+- 1b54ae4: Replace vite-plugin-dts with unplugin-dts-bundle-generator - to fix issue with type declarations
+
 ## 0.5.3
 
 ### Patch Changes
