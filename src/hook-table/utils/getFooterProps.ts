@@ -1,6 +1,6 @@
-import { ColumnProps, TableRecord } from '../types';
 import { isBooleanType } from './isBooleanType';
 import { isObject } from './isObject';
+import type { ColumnProps, TableRecord } from '../types';
 
 type GetFooterValueProps<T extends TableRecord = TableRecord> = {
   column: ColumnProps<T>;

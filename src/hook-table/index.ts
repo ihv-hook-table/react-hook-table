@@ -1,7 +1,6 @@
-export { useTable } from './hooks';
+export { useTable } from './hooks/useTable';
 
 export type {
-  ColumnProps,
   ColumnAlignmentProps,
   PaginationProps,
   TableCaptionProps,

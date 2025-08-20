@@ -1,15 +1,21 @@
 import { ComponentProps, useMemo } from 'react';
-import { CaptionProps, FormatOptions, TableRecord } from '../types';
 import { getChildrenProps } from '../utils';
 import {
-  TableOptionsContext,
-  TableOptionsContextType,
-} from '../context/table-options-context';
-import { Body, ColGroup, Footer, Header } from '../components';
-import { Table, TableCaption } from '../components/default-components';
+  Body,
+  ColGroup,
+  Footer,
+  Header,
+  Toolbar,
+  Table,
+  TableCaption,
+} from '../components';
 import { TableDataContext } from '../context/table-data-context';
 import { PaginationContextProvider } from '../context/pagination-context/pagination-provider';
-import { Toolbar } from '../components/default-components/Toolbar';
+import {
+  TableOptionsContext,
+  type TableOptionsContextType,
+} from '../context/table-options-context';
+import { CaptionProps, FormatOptions, TableRecord } from '../types';
 
 type TableProps<T extends TableRecord = TableRecord> = {
   caption?: CaptionProps;

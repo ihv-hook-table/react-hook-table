@@ -1,8 +1,8 @@
 import { isValidElement, ReactNode } from 'react';
 import { isArrayType } from './isArrayType';
 import { isObject } from './isObject';
-import { ColumnProps, TableRecord } from '../types';
 import { toArray } from './toArray';
+import type { ColumnProps, TableRecord } from '../types';
 
 export const getChildrenProps = <T extends TableRecord = TableRecord>(
   columns: ReactNode,

@@ -1,4 +1,4 @@
-import { useTable as useHookTable, TableRecord } from '../hook-table';
+import { useTable as useHookTable, TableRecord } from '@/hook-table';
 import { MoneyType } from './mock-data';
 import { formatBoolean } from './value-format/boolean';
 import {

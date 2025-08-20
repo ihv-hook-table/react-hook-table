@@ -1,5 +1,5 @@
 import { use } from 'react';
-import { ColumnProps, TableRecord } from '../../../types';
+import type { ColumnProps, TableRecord } from '../../../types';
 import {
   deepGet,
   getCellValue,
@@ -35,9 +35,7 @@ export const ColumnData = <T extends TableRecord = TableRecord>({
     const isSecondaryValue = index !== 0;
 
     const formatFunction = getFormatFunction(index, format, formatFunctions);
-
     const value = deepGet(rowData, currentAccessor);
-
     const formattedValue = getCellValue(value, formatFunction);
 
     return (

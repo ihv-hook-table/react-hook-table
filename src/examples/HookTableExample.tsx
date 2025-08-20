@@ -1,4 +1,4 @@
-import { Confirm } from '@/examples/table-elements/confirm';
+import { Confirm } from '@/examples/table-elements';
 import { AdditionalData, TableData } from './mock-data';
 import { useTable } from './use-table';
 import { formatMoney } from './value-format/format-money';
