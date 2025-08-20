@@ -1,12 +1,13 @@
-import { defineConfig } from 'vite';
+import { defineConfig, normalizePath } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
-import dts from 'vite-plugin-dts';
+// import dts from 'vite-plugin-dts';
+import dtsBundleGenerator from 'unplugin-dts-bundle-generator/vite';
 
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/hook-table/index.ts'),
+      entry: normalizePath('src/hook-table/index.ts'),
       name: '@iff/react-hook-table',
       formats: ['es'],
       fileName: format => `index.${format}.js`,
@@ -18,6 +19,7 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'react/jsx-runtime',
         },
       },
     },
@@ -28,9 +30,11 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    dts({
-      rollupTypes: true,
-      tsconfigPath: './tsconfig.app.json',
+    dtsBundleGenerator({
+      fileName: 'index.d.ts',
+      compilation: {
+        preferredConfigPath: './tsconfig.app.json',
+      },
     }),
   ],
   resolve: {

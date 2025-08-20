@@ -1,4 +1,4 @@
-export { useTable } from './hooks';
+export { useTable } from './hooks/useTable';
 
 export type {
   ColumnAlignmentProps,
