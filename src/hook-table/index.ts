@@ -1,4 +1,5 @@
 export { useTable } from './hooks/useTable';
+export { useSortingContext } from './context/sort-context/sort-context';
 
 export type {
   ColumnAlignmentProps,

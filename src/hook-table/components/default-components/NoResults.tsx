@@ -1,10 +1,10 @@
 import { use } from 'react';
-import { useCustomComponent } from '../../context/use-custom-component';
 import { NoResultsProps } from '../../types';
 import { TableBody } from './TableBody';
 import { TableData } from './TableData';
 import { TableRow } from './TableRow';
 import { PaginationContext } from '../../context/pagination-context/pagination-context';
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
 
 export const NoResults = ({ columnCount }: NoResultsProps) => {
   const CustomNoResults = useCustomComponent<NoResultsProps>('NoResults');

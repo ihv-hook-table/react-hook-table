@@ -1,8 +1,8 @@
 import { use } from 'react';
 import { PaginationContext } from '../../context/pagination-context/pagination-context';
-import { useCustomComponent } from '../../context/use-custom-component';
 import { PaginationProps } from '../../types';
-import { TableOptionsContext } from '../../context/table-options-context';
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
+import { TableOptionsContext } from '@/hook-table/context/options-context/options-context';
 
 type Props = {
   element: 'TopToolbar' | 'BottomToolbar';

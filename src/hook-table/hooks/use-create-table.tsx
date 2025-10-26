@@ -9,14 +9,12 @@ import {
   Table,
   TableCaption,
 } from '../components';
-import { TableDataContext } from '../context/table-data-context';
+import { TableDataContext } from '../context/data-context/data-context';
 import { PaginationContextProvider } from '../context/pagination-context/pagination-provider';
-import {
-  TableOptionsContext,
-  type TableOptionsContextType,
-} from '../context/table-options-context';
+import { type TableOptionsContextType } from '../context/options-context/options-context';
 import { CaptionProps, FormatOptions, TableRecord } from '../types';
 import { SortingContextProvider } from '../context/sort-context/sort-provider';
+import { TableContextProvider } from '../context/table-context-provider';
 
 type TableProps<T extends TableRecord = TableRecord> = {
   caption?: CaptionProps;
@@ -31,6 +29,7 @@ type TableProps<T extends TableRecord = TableRecord> = {
   pageNumber?: number;
   pageSize?: number;
   paginate?: boolean;
+  sortingEnabled?: boolean;
 } & ComponentProps<'table'>;
 
 export const useCreateTable = <
@@ -51,6 +50,7 @@ export const useCreateTable = <
         paginate = false,
         pageSize,
         pageNumber,
+        sortingEnabled = false,
         onPaginate,
         ...rest
       }: TableProps<T>) => {
@@ -61,7 +61,7 @@ export const useCreateTable = <
         }
 
         return (
-          <TableOptionsContext value={globalOptions}>
+          <TableContextProvider globalOptions={globalOptions}>
             <PaginationContextProvider
               initialState={{
                 isLastPage,
@@ -73,7 +73,7 @@ export const useCreateTable = <
                 isLoading,
               }}
             >
-              <SortingContextProvider>
+              <SortingContextProvider initialState={{ sortingEnabled }}>
                 <TableDataContext value={{ data }}>
                   <Toolbar element="TopToolbar" />
                   <Table {...rest}>
@@ -87,7 +87,7 @@ export const useCreateTable = <
                 </TableDataContext>
               </SortingContextProvider>
             </PaginationContextProvider>
-          </TableOptionsContext>
+          </TableContextProvider>
         );
       },
     [globalOptions],

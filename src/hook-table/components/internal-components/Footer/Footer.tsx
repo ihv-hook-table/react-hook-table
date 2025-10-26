@@ -1,4 +1,4 @@
-import { useTableData } from '../../../context/table-data-context';
+import { useTableData } from '@/hook-table/context/data-context/data-context';
 import type { ColumnProps, TableRecord } from '../../../types';
 import { getFooterProps } from '../../../utils';
 import { TableFooter, TableHead, TableRow } from '../../default-components';

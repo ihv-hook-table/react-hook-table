@@ -1,9 +1,9 @@
 import { use, useId } from 'react';
 import { TableBody, NoResults } from '../../default-components';
 import { BodyRow } from '../BodyRow/BodyRow';
-import { useTableData } from '../../../context/table-data-context';
 import { PaginationContext } from '../../../context/pagination-context/pagination-context';
 import type { ColumnProps, FormatOptions, TableRecord } from '../../../types';
+import { useTableData } from '@/hook-table/context/data-context/data-context';
 
 type Props<
   T extends TableRecord = TableRecord,

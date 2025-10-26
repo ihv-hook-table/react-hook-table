@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
-import { useCustomComponent } from '../../context/use-custom-component';
 import { clsx } from '../../utils';
 import { ColumnAlignmentProps } from '../../types';
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
 
 type Props = ComponentProps<'td'> &
   ColumnAlignmentProps & {

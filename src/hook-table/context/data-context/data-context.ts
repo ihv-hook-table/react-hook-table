@@ -1,8 +1,8 @@
 import { Context, createContext, use, useMemo } from 'react';
-import { TableRecord } from '../types';
-import { PaginationContext } from './pagination-context/pagination-context';
-import { useSortingContext } from './sort-context/sort-context';
-import { getSortedData } from '../utils';
+import { TableRecord } from '../../types';
+import { PaginationContext } from '../pagination-context/pagination-context';
+import { useSortingContext } from '../sort-context/sort-context';
+import { getSortedData } from '../../utils';
 
 type TableDataContextType<T extends TableRecord = TableRecord> = {
   data?: T[];
@@ -22,10 +22,11 @@ export const useTableData = <T extends TableRecord = TableRecord>() => {
 
   const { sortDirection, sortAccessor } = useSortingContext();
 
-  console.log(sortDirection, sortAccessor);
-
   const sorted = useMemo(
-    () => getSortedData(sortDirection, sortAccessor, [...(data || [])]),
+    () =>
+      sortDirection === 'none'
+        ? [...(data || [])]
+        : getSortedData(sortDirection, sortAccessor, [...(data || [])]),
     [data, sortAccessor, sortDirection],
   );
 

@@ -1,5 +1,5 @@
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
 import { ComponentProps } from 'react';
-import { useCustomComponent } from '../../context/use-custom-component';
 
 type Props = ComponentProps<'tbody'>;
 

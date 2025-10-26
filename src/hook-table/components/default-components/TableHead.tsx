@@ -1,9 +1,10 @@
 import { ComponentProps } from 'react';
-import { useCustomComponent } from '../../context/use-custom-component';
 import { clsx } from '../../utils';
 import { ColumnAlignmentProps } from '../../types';
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
 
-type Props = ComponentProps<'th'> & ColumnAlignmentProps;
+type Props = ComponentProps<'th'> &
+  ColumnAlignmentProps & { accessor?: string };
 
 export const TableHead = (props: Props) => {
   const CustomTableHead = useCustomComponent<Props>('TableHead');

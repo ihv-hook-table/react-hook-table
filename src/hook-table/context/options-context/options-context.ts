@@ -12,7 +12,7 @@ import {
   NoResultsProps,
   TableRowProps,
   PaginationProps,
-} from '../types';
+} from '../../types';
 
 export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
   /**

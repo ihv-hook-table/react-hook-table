@@ -41,6 +41,7 @@ export const HookTableExample = () => {
       pageNumber={data?.pageNumber}
       isLastPage={data?.isLastPage}
       onPaginate={(pageNumber, pageSize) => search(pageNumber, pageSize)}
+      sortingEnabled
     >
       <Column
         expandable

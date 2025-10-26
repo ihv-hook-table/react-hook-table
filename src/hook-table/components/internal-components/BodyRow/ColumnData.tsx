@@ -8,7 +8,7 @@ import {
   toArray,
 } from '../../../utils';
 import { Value } from '../../default-components';
-import { TableOptionsContext } from '../../../context/table-options-context';
+import { TableOptionsContext } from '@/hook-table/context/options-context/options-context';
 
 type Props<T extends TableRecord = TableRecord> = ColumnProps<T> & {
   rowData: T;

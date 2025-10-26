@@ -1,4 +1,4 @@
-import { useCustomComponent } from '../../context/use-custom-component';
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
 
 type Props = {
   isOpen: boolean;

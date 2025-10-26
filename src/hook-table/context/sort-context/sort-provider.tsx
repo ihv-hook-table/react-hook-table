@@ -7,7 +7,7 @@ import { ActionTypes } from './sort-actions';
 
 type Props<T extends TableRecord = TableRecord> = {
   children: ReactNode;
-  initialState?: ISortContextProvider<T>;
+  initialState?: Partial<ISortContextProvider<T>>;
 };
 
 export const SortingContextProvider = <T extends TableRecord = TableRecord>({
@@ -48,6 +48,10 @@ export const SortingContextProvider = <T extends TableRecord = TableRecord>({
   };
 
   return (
-    <SortingContext value={{ ...state, onSort }}>{children}</SortingContext>
+    <SortingContext
+      value={{ ...state, onSort, sortingEnabled: initialState?.sortingEnabled }}
+    >
+      {children}
+    </SortingContext>
   );
 };

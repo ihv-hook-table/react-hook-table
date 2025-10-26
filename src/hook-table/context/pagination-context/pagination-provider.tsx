@@ -2,8 +2,8 @@ import { ReactNode, use, useReducer } from 'react';
 import { reducer } from './pagination-reducer';
 import { PaginationContext } from './pagination-context';
 import { ActionTypes } from './pagination-actions';
-import { TableOptionsContext } from '../table-options-context';
 import { isFunction } from '@/hook-table/utils';
+import { TableOptionsContext } from '../options-context/options-context';
 
 type Props = {
   children: ReactNode;
@@ -101,6 +101,9 @@ export const PaginationContextProvider = ({
     }
   };
 
+  const setLoading = (isLoading: boolean) =>
+    dispatch({ type: ActionTypes.LOADING, isLoading });
+
   return (
     <PaginationContext
       value={{
@@ -110,8 +113,7 @@ export const PaginationContextProvider = ({
         goToPage,
         setPageSize,
         search,
-        setLoading: (isLoading: boolean) =>
-          dispatch({ type: ActionTypes.LOADING, isLoading }),
+        setLoading,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react';
 import { clsx } from '../../utils';
-import { useCustomComponent } from '../../context/use-custom-component';
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
 
 type Props = ComponentProps<'div'> & {
   isSecondaryValue?: boolean;
