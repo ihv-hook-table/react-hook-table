@@ -16,6 +16,7 @@ import {
   type TableOptionsContextType,
 } from '../context/table-options-context';
 import { CaptionProps, FormatOptions, TableRecord } from '../types';
+import { SortingContextProvider } from '../context/sort-context/sort-provider';
 
 type TableProps<T extends TableRecord = TableRecord> = {
   caption?: CaptionProps;
@@ -72,17 +73,19 @@ export const useCreateTable = <
                 isLoading,
               }}
             >
-              <TableDataContext value={{ data }}>
-                <Toolbar element="TopToolbar" />
-                <Table {...rest}>
-                  <TableCaption {...caption} />
-                  <ColGroup columns={columns} />
-                  {!hideHeader && <Header columns={columns} />}
-                  <Body columns={columns} />
-                  <Footer columns={columns} isLoading={false} />
-                </Table>
-                <Toolbar element="BottomToolbar" />
-              </TableDataContext>
+              <SortingContextProvider>
+                <TableDataContext value={{ data }}>
+                  <Toolbar element="TopToolbar" />
+                  <Table {...rest}>
+                    <TableCaption {...caption} />
+                    <ColGroup columns={columns} />
+                    {!hideHeader && <Header columns={columns} />}
+                    <Body columns={columns} />
+                    <Footer columns={columns} isLoading={false} />
+                  </Table>
+                  <Toolbar element="BottomToolbar" />
+                </TableDataContext>
+              </SortingContextProvider>
             </PaginationContextProvider>
           </TableOptionsContext>
         );

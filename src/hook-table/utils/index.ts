@@ -7,3 +7,4 @@ export { getFormatFunction } from './getFormatFunction';
 export { isArrayType } from './isArrayType';
 export { isFunction } from './isFunction';
 export { toArray } from './toArray';
+export { getSortedData } from './sort';
