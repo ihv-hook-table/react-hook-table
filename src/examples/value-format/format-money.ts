@@ -1,4 +1,4 @@
-type FormatProps = {
+type MoneyFormatProps = {
   currency?: string;
   amount?: number;
   language?: string;
@@ -10,7 +10,7 @@ export const formatMoney = ({
   currency = 'EUR',
   minimumFractionDigits = 2,
   language,
-}: FormatProps) => {
+}: MoneyFormatProps) => {
   const value = amount
     ? new Intl.NumberFormat(language || navigator.language, {
         style: 'currency',

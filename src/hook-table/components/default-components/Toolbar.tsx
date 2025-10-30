@@ -2,7 +2,8 @@ import { use } from 'react';
 import { PaginationContext } from '../../context/pagination-context/pagination-context';
 import { PaginationProps } from '../../types';
 import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
-import { TableOptionsContext } from '@/hook-table/context/options-context/options-context';
+import { useTableOptionsContext } from '@/hook-table/context/options-context/options-context';
+import { useLoadingContext } from '@/hook-table/context/loading-context/loading-context';
 
 type Props = {
   element: 'TopToolbar' | 'BottomToolbar';
@@ -10,8 +11,9 @@ type Props = {
 
 export const Toolbar = ({ element }: Props) => {
   const paginationCtx = use(PaginationContext);
-  const { pagination } = use(TableOptionsContext) || {};
+  const { pagination } = useTableOptionsContext() || {};
   const CustomToolbar = useCustomComponent<PaginationProps>(element);
+  const { isLoading } = useLoadingContext();
 
   if (!paginationCtx || !paginationCtx?.state?.paginate || !CustomToolbar)
     return null;
@@ -31,7 +33,7 @@ export const Toolbar = ({ element }: Props) => {
       goToPage={goToPage}
       isLastPage={state.isLastPage}
       isManualPagination={state.isManualPagination}
-      isLoading={state.isLoading}
+      isLoading={isLoading}
     />
   );
 };

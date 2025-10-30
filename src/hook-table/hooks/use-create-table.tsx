@@ -75,7 +75,6 @@ export const useCreateTable = <
                 pageNumber,
                 pageSize,
                 paginate,
-                isLoading,
               }}
             >
               <SortingContextProvider initialState={{ sortingEnabled }}>
