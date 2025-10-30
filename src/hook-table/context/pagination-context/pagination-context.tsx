@@ -7,7 +7,6 @@ type PaginationState = {
   pageCount?: number;
   isLastPage?: boolean;
   isManualPagination?: boolean;
-  isLoading: boolean;
 };
 
 type PaginationContextType = {
@@ -17,7 +16,6 @@ type PaginationContextType = {
   previousPage: () => void;
   goToPage: (pageNumber: number) => void;
   search?: (pageNumber: number, pageSize: number) => Promise<void>;
-  setLoading: (isLoading: boolean) => void;
 };
 
 export const PaginationContext = createContext<PaginationContextType | null>(

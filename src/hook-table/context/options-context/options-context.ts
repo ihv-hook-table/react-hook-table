@@ -4,6 +4,7 @@ import {
   HTMLAttributes,
   TdHTMLAttributes,
   ThHTMLAttributes,
+  use,
 } from 'react';
 import {
   ColumnAlignmentProps,
@@ -120,3 +121,5 @@ const createTableOptionsContext = <F extends FormatOptions = FormatOptions>() =>
   createContext<TableOptionsContextType<F> | undefined>(undefined);
 
 export const TableOptionsContext = createTableOptionsContext();
+
+export const useTableOptionsContext = () => use(TableOptionsContext);

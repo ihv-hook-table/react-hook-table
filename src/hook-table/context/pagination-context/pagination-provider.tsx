@@ -1,9 +1,10 @@
-import { ReactNode, use, useReducer } from 'react';
+import { ReactNode, useReducer } from 'react';
 import { reducer } from './pagination-reducer';
 import { PaginationContext } from './pagination-context';
 import { ActionTypes } from './pagination-actions';
 import { isFunction } from '@/hook-table/utils';
-import { TableOptionsContext } from '../options-context/options-context';
+import { useTableOptionsContext } from '../options-context/options-context';
+import { useLoadingContext } from '../loading-context/loading-context';
 
 type Props = {
   children: ReactNode;
@@ -14,7 +15,6 @@ type Props = {
     paginate?: boolean;
     pageNumber?: number;
     pageSize?: number;
-    isLoading?: boolean;
   };
 };
 
@@ -27,7 +27,8 @@ export const PaginationContextProvider = ({
   children,
   initialState,
 }: Props) => {
-  const { pagination } = use(TableOptionsContext) || {};
+  const { pagination } = useTableOptionsContext() || {};
+  const { setLoading } = useLoadingContext();
 
   const currentPageSize =
     initialState?.pageSize || pagination?.defaultPageSize || 10;
@@ -42,7 +43,6 @@ export const PaginationContextProvider = ({
     pageCount: getPageCount(initialState?.numberOfRecords, currentPageSize),
     isLastPage: initialState?.isLastPage,
     isManualPagination,
-    isLoading: !!initialState?.isLoading,
   });
 
   const search = async (pageNumber: number, pageSize: number) => {
@@ -51,28 +51,28 @@ export const PaginationContextProvider = ({
     }
   };
 
-  const setLoadingFalse = () =>
-    dispatch({ type: ActionTypes.LOADING, isLoading: false });
-
   const goToPage = (pageNumber: number) => {
     dispatch({
       type: ActionTypes.PAGE_NUMBER,
       pageNumber,
-      isLoading: state.isManualPagination ? true : false,
     });
+
     if (isManualPagination) {
-      return search(pageNumber, state.pageSize)?.finally(setLoadingFalse);
+      setLoading?.(true);
+      return search(pageNumber, state.pageSize).finally(() =>
+        setLoading?.(false),
+      );
     }
   };
 
   const nextPage = () => {
     dispatch({
       type: ActionTypes.NEXT,
-      isLoading: state.isManualPagination ? true : false,
     });
     if (isManualPagination) {
-      return search(state.pageNumber + 1, state.pageSize)?.finally(
-        setLoadingFalse,
+      setLoading?.(true);
+      return search(state.pageNumber + 1, state.pageSize).finally(() =>
+        setLoading?.(false),
       );
     }
   };
@@ -80,11 +80,11 @@ export const PaginationContextProvider = ({
   const previousPage = () => {
     dispatch({
       type: ActionTypes.PREVIOUS,
-      isLoading: state.isManualPagination ? true : false,
     });
     if (isManualPagination) {
-      return search(state.pageNumber - 1, state.pageSize)?.finally(
-        setLoadingFalse,
+      setLoading?.(true);
+      return search(state.pageNumber - 1, state.pageSize).finally(() =>
+        setLoading?.(false),
       );
     }
   };
@@ -94,15 +94,12 @@ export const PaginationContextProvider = ({
       type: ActionTypes.PAGE_SIZE,
       pageSize,
       pageCount: getPageCount(initialState?.numberOfRecords, pageSize),
-      isLoading: state.isManualPagination ? true : false,
     });
     if (isManualPagination) {
-      return search(1, pageSize)?.finally(setLoadingFalse);
+      setLoading?.(true);
+      return search(1, pageSize).finally(() => setLoading?.(false));
     }
   };
-
-  const setLoading = (isLoading: boolean) =>
-    dispatch({ type: ActionTypes.LOADING, isLoading });
 
   return (
     <PaginationContext
@@ -113,7 +110,6 @@ export const PaginationContextProvider = ({
         goToPage,
         setPageSize,
         search,
-        setLoading,
       }}
     >
       {children}

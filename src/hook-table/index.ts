@@ -1,5 +1,6 @@
-export { useTable } from './hooks/useTable';
+export { useTable } from './hooks/use-table';
 export { useSortingContext } from './context/sort-context/sort-context';
+export { useLoadingContext } from './context/loading-context/loading-context';
 
 export type {
   ColumnAlignmentProps,

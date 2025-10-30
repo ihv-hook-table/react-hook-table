@@ -1,16 +1,12 @@
-import type { ColumnProps, TableRecord } from '../../../types';
+import { useColumnContext } from '@/hook-table/context/column-context/column-context';
 import { isArrayType } from '../../../utils';
 import { TableHeader, TableRow } from '../../default-components';
 import { Cell } from './Cell/Cell';
 
-type Props<T extends TableRecord = TableRecord> = {
-  columns: ColumnProps<T>[];
-};
+export const Header = () => {
+  const columns = useColumnContext() || [];
 
-export const Header = <T extends TableRecord = TableRecord>({
-  columns,
-}: Props<T>) => {
-  const hasMultiLabels = columns.some(({ header, accessor }) => {
+  const hasMultiLabels = columns?.some(({ header, accessor }) => {
     const labels = header ?? accessor;
     return isArrayType(labels) && labels.length > 1;
   });

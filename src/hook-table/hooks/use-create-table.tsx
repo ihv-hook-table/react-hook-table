@@ -57,11 +57,16 @@ export const useCreateTable = <
         const columns = getChildrenProps<T>(children) || {};
 
         if (!columns || columns.length === 0) {
+          console.warn('Please add at least one column to Table');
           return null;
         }
 
         return (
-          <TableContextProvider globalOptions={globalOptions}>
+          <TableContextProvider
+            globalOptions={globalOptions}
+            columns={children}
+            isLoading={isLoading}
+          >
             <PaginationContextProvider
               initialState={{
                 isLastPage,
@@ -78,10 +83,10 @@ export const useCreateTable = <
                   <Toolbar element="TopToolbar" />
                   <Table {...rest}>
                     <TableCaption {...caption} />
-                    <ColGroup columns={columns} />
-                    {!hideHeader && <Header columns={columns} />}
-                    <Body columns={columns} />
-                    <Footer columns={columns} isLoading={false} />
+                    <ColGroup />
+                    {!hideHeader && <Header />}
+                    <Body />
+                    <Footer isLoading={false} />
                   </Table>
                   <Toolbar element="BottomToolbar" />
                 </TableDataContext>

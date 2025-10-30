@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { PaginationProps } from '@/hook-table';
+import { PaginationProps, useLoadingContext } from '@/hook-table';
 
 export const PageSize = ({
   setPageSize,
@@ -48,9 +48,10 @@ export function Pagination({
   pageNumber,
   pageCount,
   isLastPage,
-  isLoading,
   isManualPagination,
 }: PaginationProps) {
+  const { isLoading } = useLoadingContext();
+
   return (
     <div className="flex items-center justify-end py-4">
       <div className="flex w-[100px] items-center justify-center text-sm font-medium">

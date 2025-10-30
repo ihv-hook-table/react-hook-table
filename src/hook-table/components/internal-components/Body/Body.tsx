@@ -1,27 +1,19 @@
-import { use, useId } from 'react';
+import { useId } from 'react';
 import { TableBody, NoResults } from '../../default-components';
 import { BodyRow } from '../BodyRow/BodyRow';
-import { PaginationContext } from '../../../context/pagination-context/pagination-context';
-import type { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 import { useTableData } from '@/hook-table/context/data-context/data-context';
+import { useColumnContext } from '@/hook-table/context/column-context/column-context';
+import { useLoadingContext } from '@/hook-table/context/loading-context/loading-context';
 
-type Props<
-  T extends TableRecord = TableRecord,
-  F extends FormatOptions = FormatOptions,
-> = {
-  columns: ColumnProps<T, F>[];
-};
-
-export const Body = <T extends TableRecord = TableRecord>({
-  columns,
-}: Props<T>) => {
+export const Body = () => {
   const id = useId();
-  const data = useTableData<T>();
-  const { state } = use(PaginationContext) || {};
+  const data = useTableData();
+  const columns = useColumnContext() || [];
+  const { isLoading } = useLoadingContext();
 
   const isNoResults = !data || !data.length || !columns;
 
-  if (!state?.isLoading && isNoResults) {
+  if (!isLoading && isNoResults) {
     return <NoResults columnCount={columns.length} />;
   }
 
