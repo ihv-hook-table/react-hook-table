@@ -9,10 +9,8 @@ import {
   Table,
   TableCaption,
 } from '../components';
-import { TableDataContext } from '../context/data-context/data-context';
 import { type TableOptionsContextType } from '../context/options-context/options-context';
 import { CaptionProps, FormatOptions, TableRecord } from '../types';
-import { SortingContextProvider } from '../context/sort-context/sort-provider';
 import { TableContextProvider } from '../context/table-context-provider';
 
 type TableProps<T extends TableRecord = TableRecord> = {
@@ -45,9 +43,9 @@ export const useCreateTable = <
         data,
         caption,
         hideHeader = false,
-        isLoading = false,
+        isLoading,
         paginate,
-        sortingEnabled = false,
+        sortingEnabled,
         ...htmlProps
       }: TableProps<T>) => {
         const columns = getChildrenProps<T>(children) || {};
@@ -64,20 +62,17 @@ export const useCreateTable = <
             isLoading={isLoading}
             data={data}
             paginate={paginate}
+            sortingEnabled={sortingEnabled}
           >
-            <SortingContextProvider initialState={{ sortingEnabled }}>
-              <TableDataContext value={{ data }}>
-                <Toolbar element="TopToolbar" />
-                <Table {...htmlProps}>
-                  <TableCaption {...caption} />
-                  <ColGroup />
-                  {!hideHeader && <Header />}
-                  <Body />
-                  <Footer />
-                </Table>
-                <Toolbar element="BottomToolbar" />
-              </TableDataContext>
-            </SortingContextProvider>
+            <Toolbar element="TopToolbar" />
+            <Table {...htmlProps}>
+              <TableCaption {...caption} />
+              <ColGroup />
+              {!hideHeader && <Header />}
+              <Body />
+              <Footer />
+            </Table>
+            <Toolbar element="BottomToolbar" />
           </TableContextProvider>
         );
       },

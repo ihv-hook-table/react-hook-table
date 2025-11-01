@@ -11,6 +11,8 @@ import {
   PaginationContextProvider,
   PaginationState,
 } from './pagination-context/pagination-provider';
+import { SortingContextProvider } from './sort-context/sort-provider';
+import { TableDataContext } from './data-context/data-context';
 
 type Props<
   T extends TableRecord = TableRecord,
@@ -22,6 +24,7 @@ type Props<
   isLoading?: boolean;
   paginate?: PaginationState;
   data?: T[];
+  sortingEnabled?: boolean;
 };
 
 export const TableContextProvider = <
@@ -34,6 +37,7 @@ export const TableContextProvider = <
   data,
   paginate,
   isLoading = false,
+  sortingEnabled = false,
 }: Props<T, F>) => {
   const columnsProps = useMemo(
     () => getChildrenProps(columns) || [],
@@ -55,7 +59,9 @@ export const TableContextProvider = <
               ...paginate,
             }}
           >
-            {children}
+            <SortingContextProvider initialState={{ sortingEnabled }}>
+              <TableDataContext value={{ data }}>{children}</TableDataContext>
+            </SortingContextProvider>
           </PaginationContextProvider>
         </LoadingContextProvider>
       </ColumnContext>
