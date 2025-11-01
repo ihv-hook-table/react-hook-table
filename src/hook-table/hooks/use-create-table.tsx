@@ -10,7 +10,6 @@ import {
   TableCaption,
 } from '../components';
 import { TableDataContext } from '../context/data-context/data-context';
-import { PaginationContextProvider } from '../context/pagination-context/pagination-provider';
 import { type TableOptionsContextType } from '../context/options-context/options-context';
 import { CaptionProps, FormatOptions, TableRecord } from '../types';
 import { SortingContextProvider } from '../context/sort-context/sort-provider';
@@ -63,27 +62,22 @@ export const useCreateTable = <
             globalOptions={globalOptions}
             columns={children}
             isLoading={isLoading}
+            data={data}
+            paginate={paginate}
           >
-            <PaginationContextProvider
-              initialState={{
-                numberOfRecords: data?.length,
-                ...paginate,
-              }}
-            >
-              <SortingContextProvider initialState={{ sortingEnabled }}>
-                <TableDataContext value={{ data }}>
-                  <Toolbar element="TopToolbar" />
-                  <Table {...htmlProps}>
-                    <TableCaption {...caption} />
-                    <ColGroup />
-                    {!hideHeader && <Header />}
-                    <Body />
-                    <Footer />
-                  </Table>
-                  <Toolbar element="BottomToolbar" />
-                </TableDataContext>
-              </SortingContextProvider>
-            </PaginationContextProvider>
+            <SortingContextProvider initialState={{ sortingEnabled }}>
+              <TableDataContext value={{ data }}>
+                <Toolbar element="TopToolbar" />
+                <Table {...htmlProps}>
+                  <TableCaption {...caption} />
+                  <ColGroup />
+                  {!hideHeader && <Header />}
+                  <Body />
+                  <Footer />
+                </Table>
+                <Toolbar element="BottomToolbar" />
+              </TableDataContext>
+            </SortingContextProvider>
           </TableContextProvider>
         );
       },

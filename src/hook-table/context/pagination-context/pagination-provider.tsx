@@ -6,16 +6,17 @@ import { isFunction } from '@/hook-table/utils';
 import { useTableOptionsContext } from '../options-context/options-context';
 import { useLoadingContext } from '../loading-context/loading-context';
 
+export type PaginationState = {
+  isLastPage?: boolean;
+  pageNumber?: number;
+  pageSize?: number;
+  onPaginate?: (pageNumber: number, pageSize: number) => Promise<void>;
+  numberOfRecords?: number;
+};
+
 type Props = {
   children: ReactNode;
-  initialState?: {
-    isLastPage?: boolean;
-    numberOfRecords?: number;
-    onPaginate?: (pageNumber: number, pageSize: number) => Promise<void>;
-    paginate?: boolean;
-    pageNumber?: number;
-    pageSize?: number;
-  };
+  initialState?: PaginationState;
 };
 
 const getPageCount = (numberOfRecords?: number, pageSize?: number) => {
@@ -39,7 +40,7 @@ export const PaginationContextProvider = ({
   const [state, dispatch] = useReducer(reducer, {
     pageNumber: initialState?.pageNumber || 1,
     pageSize: currentPageSize,
-    paginate: !!initialState?.paginate || isManualPagination,
+    paginate: !!initialState?.onPaginate || isManualPagination,
     pageCount: getPageCount(initialState?.numberOfRecords, currentPageSize),
     isLastPage: initialState?.isLastPage,
     isManualPagination,

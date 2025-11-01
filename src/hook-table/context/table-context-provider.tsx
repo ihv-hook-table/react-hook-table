@@ -1,5 +1,5 @@
 import { ReactNode, useMemo } from 'react';
-import { FormatOptions } from '../types';
+import { FormatOptions, TableRecord } from '../types';
 import {
   TableOptionsContext,
   TableOptionsContextType,
@@ -7,20 +7,34 @@ import {
 import { getChildrenProps } from '../utils';
 import { ColumnContext } from './column-context/column-context';
 import { LoadingContextProvider } from './loading-context/loading-provider';
+import {
+  PaginationContextProvider,
+  PaginationState,
+} from './pagination-context/pagination-provider';
 
-type Props<F extends FormatOptions = FormatOptions> = {
+type Props<
+  T extends TableRecord = TableRecord,
+  F extends FormatOptions = FormatOptions,
+> = {
   children: ReactNode;
   columns?: ReactNode;
   globalOptions?: TableOptionsContextType<F>;
   isLoading?: boolean;
+  paginate?: PaginationState;
+  data?: T[];
 };
 
-export const TableContextProvider = <F extends FormatOptions = FormatOptions>({
+export const TableContextProvider = <
+  T extends TableRecord = TableRecord,
+  F extends FormatOptions = FormatOptions,
+>({
   children,
   globalOptions,
   columns,
+  data,
+  paginate,
   isLoading = false,
-}: Props<F>) => {
+}: Props<T, F>) => {
   const columnsProps = useMemo(
     () => getChildrenProps(columns) || [],
     [columns],
@@ -35,7 +49,14 @@ export const TableContextProvider = <F extends FormatOptions = FormatOptions>({
     <TableOptionsContext value={globalOptions}>
       <ColumnContext value={columnsProps}>
         <LoadingContextProvider value={isLoading}>
-          {children}
+          <PaginationContextProvider
+            initialState={{
+              numberOfRecords: data?.length,
+              ...paginate,
+            }}
+          >
+            {children}
+          </PaginationContextProvider>
         </LoadingContextProvider>
       </ColumnContext>
     </TableOptionsContext>
