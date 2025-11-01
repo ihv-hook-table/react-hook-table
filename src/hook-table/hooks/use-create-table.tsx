@@ -20,15 +20,16 @@ type TableProps<T extends TableRecord = TableRecord> = {
   caption?: CaptionProps;
   data?: T[];
   hideHeader?: boolean;
-  isLastPage?: boolean;
   /**
    * @param isLoading - Handle initial loading state of the table. If manual pagination is enabled, futher loading state is handled internally.
    */
   isLoading?: boolean;
-  onPaginate?: (pageNumber: number, pageSize: number) => Promise<void>;
-  pageNumber?: number;
-  pageSize?: number;
-  paginate?: boolean;
+  paginate?: {
+    isLastPage?: boolean;
+    onPaginate?: (pageNumber: number, pageSize: number) => Promise<void>;
+    pageNumber?: number;
+    pageSize?: number;
+  };
   sortingEnabled?: boolean;
 } & ComponentProps<'table'>;
 
@@ -45,14 +46,10 @@ export const useCreateTable = <
         data,
         caption,
         hideHeader = false,
-        isLastPage,
         isLoading = false,
-        paginate = false,
-        pageSize,
-        pageNumber,
+        paginate,
         sortingEnabled = false,
-        onPaginate,
-        ...rest
+        ...htmlProps
       }: TableProps<T>) => {
         const columns = getChildrenProps<T>(children) || {};
 
@@ -69,23 +66,19 @@ export const useCreateTable = <
           >
             <PaginationContextProvider
               initialState={{
-                isLastPage,
                 numberOfRecords: data?.length,
-                onPaginate,
-                pageNumber,
-                pageSize,
-                paginate,
+                ...paginate,
               }}
             >
               <SortingContextProvider initialState={{ sortingEnabled }}>
                 <TableDataContext value={{ data }}>
                   <Toolbar element="TopToolbar" />
-                  <Table {...rest}>
+                  <Table {...htmlProps}>
                     <TableCaption {...caption} />
                     <ColGroup />
                     {!hideHeader && <Header />}
                     <Body />
-                    <Footer isLoading={false} />
+                    <Footer />
                   </Table>
                   <Toolbar element="BottomToolbar" />
                 </TableDataContext>

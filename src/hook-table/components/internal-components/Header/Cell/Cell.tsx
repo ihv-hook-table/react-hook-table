@@ -28,6 +28,7 @@ export const Cell = <T extends TableRecord = TableRecord>({
 const CellValue = <T extends TableRecord = TableRecord>({
   accessor,
   header,
+  expandable,
 }: ColumnProps<T>) => {
   const { translate } = use(TableOptionsContext) || {};
   const headerLabel = header ?? accessor;
@@ -40,7 +41,7 @@ const CellValue = <T extends TableRecord = TableRecord>({
     const value = isFunction(translate) && label ? translate(label) : label;
 
     return (
-      <Value key={idx} isSecondaryValue={isSecondaryLabel}>
+      <Value key={idx} isSecondaryValue={isSecondaryLabel && !expandable}>
         {value}
       </Value>
     );

@@ -11,7 +11,9 @@ export const Value = ({
   isSecondaryValue?: boolean;
 }) => (
   <div
-    className={cn(isSecondaryValue && 'text-muted-foreground text-xs')}
+    className={cn(
+      isSecondaryValue && 'text-muted-foreground text-xs font-normal',
+    )}
     {...rest}
   />
 );

@@ -1,4 +1,3 @@
-import { use } from 'react';
 import type { ColumnProps, TableRecord } from '../../../types';
 import {
   deepGet,
@@ -8,7 +7,7 @@ import {
   toArray,
 } from '../../../utils';
 import { Value } from '../../default-components';
-import { TableOptionsContext } from '@/hook-table/context/options-context/options-context';
+import { useTableOptionsContext } from '@/hook-table/context/options-context/options-context';
 
 type Props<T extends TableRecord = TableRecord> = ColumnProps<T> & {
   rowData: T;
@@ -20,10 +19,11 @@ export const ColumnData = <T extends TableRecord = TableRecord>({
   format,
   rowData,
 }: Props<T>) => {
+  const { formatFunctions } = useTableOptionsContext() || {};
+
   const childElements = isFunction(children)
     ? children(rowData, { closeSubrow: undefined })
     : children;
-  const { formatFunctions } = use(TableOptionsContext) || {};
 
   if (childElements) {
     return childElements;

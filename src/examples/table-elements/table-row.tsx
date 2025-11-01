@@ -1,4 +1,4 @@
-import { TableRowProps } from '@/hook-table';
+import { TableRowProps, useLoadingContext } from '@/hook-table';
 import { ComponentPropsWithoutRef } from 'react';
 import { TableRow as CnTableRow } from '@/components/ui/table';
 import { cva } from 'class-variance-authority';
@@ -17,13 +17,9 @@ const rowClasses = cva('', {
   },
 });
 
-export const TableRow = ({
-  className,
-  expanded,
-  subrow,
-  isLoading,
-  ...props
-}: Props) => {
+export const TableRow = ({ className, expanded, subrow, ...props }: Props) => {
+  const { isLoading } = useLoadingContext();
+
   return (
     <CnTableRow
       // Customize the row style when it is expanded.

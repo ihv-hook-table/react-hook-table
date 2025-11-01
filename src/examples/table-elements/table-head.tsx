@@ -30,14 +30,29 @@ const getIcon = (direction: 'asc' | 'desc' | 'none', isSorting?: boolean) => {
 
 const TableHeadWrapper = ({
   children,
+  alignment,
+  isMultiValue,
   isSorting,
   ...rest
-}: ComponentProps<'button'> & { isSorting: boolean }) => {
+}: ComponentProps<'button'> &
+  ColumnAlignmentProps & { isSorting: boolean }) => {
   const { sortDirection } = useSortingContext();
   return (
     <button {...rest}>
-      <div className="flex gap-1 items-center">
-        {children}
+      <div
+        className={cn(
+          'flex gap-3 items-center',
+          alignment === 'right' && 'flex-row-reverse',
+        )}
+      >
+        <div
+          className={cn(
+            'text-nowrap',
+            cellAlignment({ alignment, isMultiValue }),
+          )}
+        >
+          {children}
+        </div>
         {getIcon(sortDirection, isSorting)}
       </div>
     </button>
@@ -60,8 +75,8 @@ export const TableHead = ({
       // Disable wrapping text in table head cells.
       // Add alignment props received from ihv/react-hook-table.
       className={cn(
-        'text-nowrap',
-        cellAlignment({ alignment, isMultiValue }),
+        'text-nowrap h-min p-2',
+        cellAlignment({ alignment, isMultiValue: false }),
         className,
       )}
     >
@@ -69,6 +84,8 @@ export const TableHead = ({
         <TableHeadWrapper
           onClick={() => onSort(accessor)}
           isSorting={sortAccessor === accessor}
+          alignment={alignment}
+          isMultiValue={isMultiValue}
         >
           {children}
         </TableHeadWrapper>

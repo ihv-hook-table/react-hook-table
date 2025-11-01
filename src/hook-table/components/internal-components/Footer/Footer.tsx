@@ -4,17 +4,13 @@ import { getFooterProps } from '../../../utils';
 import { TableFooter, TableHead, TableRow } from '../../default-components';
 import { useColumnContext } from '@/hook-table/context/column-context/column-context';
 
-type Props = {
-  isLoading?: boolean;
-};
-
-export const Footer = ({ isLoading }: Props) => {
+export const Footer = () => {
   const data = useTableData();
   const columns = useColumnContext() || [];
 
   const hasFooter = columns.some(col => col.footer);
 
-  if (!data || !columns.length || !hasFooter || isLoading) {
+  if (!data || !columns.length || !hasFooter) {
     return null;
   }
 

@@ -14,19 +14,21 @@ export const Expander = ({
 }: TableExpanderProps) => {
   if (identifier === 'delete') {
     return (
-      <button type="button" onClick={toggle} className="p-2">
+      <button type="button" onClick={toggle} className="p-3">
         <LucideCircleX size={14} className="text-muted-foreground" />
       </button>
     );
   }
 
   return (
-    <button type="button" onClick={toggle} className="p-2">
-      {isOpen ? (
-        <LucideChevronDown size={14} className="text-muted-foreground" />
-      ) : (
-        <LucideChevronRight size={14} className="text-muted-foreground" />
-      )}
-    </button>
+    <div className="h-full flex items-center">
+      <button type="button" onClick={toggle} className="p-3">
+        {isOpen ? (
+          <LucideChevronDown size={14} className="text-muted-foreground" />
+        ) : (
+          <LucideChevronRight size={14} className="text-muted-foreground" />
+        )}
+      </button>
+    </div>
   );
 };

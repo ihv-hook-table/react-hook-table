@@ -3,27 +3,22 @@ import { NoResultsProps } from '../../types';
 import { TableBody } from './TableBody';
 import { TableData } from './TableData';
 import { TableRow } from './TableRow';
-import { PaginationContext } from '../../context/pagination-context/pagination-context';
 import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
+import { LoadingContext } from '@/hook-table/context/loading-context/loading-context';
 
 export const NoResults = ({ columnCount }: NoResultsProps) => {
   const CustomNoResults = useCustomComponent<NoResultsProps>('NoResults');
-  const { state } = use(PaginationContext) || {};
+  const { isLoading } = use(LoadingContext);
 
   if (CustomNoResults) {
-    return (
-      <CustomNoResults
-        isLoading={!!state?.isLoading}
-        columnCount={columnCount}
-      />
-    );
+    return <CustomNoResults isLoading={isLoading} columnCount={columnCount} />;
   }
 
   return (
     <TableBody>
       <TableRow>
         <TableData colSpan={columnCount} isMultiValue={false}>
-          {state?.isLoading ? 'Loading' : 'No results'}
+          {isLoading ? 'Loading' : 'No results'}
         </TableData>
       </TableRow>
     </TableBody>

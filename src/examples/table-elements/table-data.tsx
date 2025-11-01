@@ -41,7 +41,10 @@ export const TableData = ({
     // Assign alignment classes based on props received from ihv/react-hook-table.
     // expandable - adjust styles when column is expandable.
     className={cn(
-      cellAlignment({ alignment, isMultiValue }),
+      cellAlignment({
+        alignment,
+        isMultiValue: !expandable && isMultiValue,
+      }),
       cellClasses({ expandable, isSubRow, wrap }),
       className,
     )}

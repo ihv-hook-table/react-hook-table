@@ -31,16 +31,17 @@ export const HookTableExample = () => {
     <Table
       data={data?.values}
       // data={mockData}
-      // paginate
       isLoading={isLoading}
       caption={{
         value: 'Example table rendering with chadcn/ui table elements',
         alignment: 'top-left',
       }}
-      pageSize={data?.pageSize}
-      pageNumber={data?.pageNumber}
-      isLastPage={data?.isLastPage}
-      onPaginate={(pageNumber, pageSize) => search(pageNumber, pageSize)}
+      paginate={{
+        pageSize: data?.pageSize,
+        pageNumber: data?.pageNumber,
+        isLastPage: data?.isLastPage,
+        onPaginate: (pageNumber, pageSize) => search(pageNumber, pageSize),
+      }}
       sortingEnabled
     >
       <Column
@@ -50,8 +51,8 @@ export const HookTableExample = () => {
       >
         {({ additionalData }) => <Subtable data={additionalData} />}
       </Column>
-      <Column accessor="id" colWidth={10} />
-      <Column accessor="date" format="dateTime" colWidth={10} />
+      <Column accessor={['id', 'item']} colWidth={10} />
+      <Column accessor="date" format="date" colWidth={10} />
       <Column accessor="item" />
       <Column accessor="qty" alignment="center" colWidth={10} />
       <Column

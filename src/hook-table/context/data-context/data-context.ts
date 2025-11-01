@@ -1,4 +1,4 @@
-import { Context, createContext, use, useMemo } from 'react';
+import { createContext, use, useMemo } from 'react';
 import { TableRecord } from '../../types';
 import { PaginationContext } from '../pagination-context/pagination-context';
 import { useSortingContext } from '../sort-context/sort-context';
@@ -15,10 +15,9 @@ const createTableDataContext = <T extends TableRecord = TableRecord>() =>
 
 export const TableDataContext = createTableDataContext();
 
-export const useTableData = <T extends TableRecord = TableRecord>() => {
+export const useTableData = () => {
   const { state } = use(PaginationContext) || {};
-  const { data } =
-    use(TableDataContext as Context<TableDataContextType<T>>) || {};
+  const { data } = use(TableDataContext) || {};
 
   const { sortDirection, sortAccessor } = useSortingContext();
 

@@ -4,7 +4,7 @@ import { ColumnAlignmentProps } from '../../types';
 import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
 
 type Props = ComponentProps<'th'> &
-  ColumnAlignmentProps & { accessor?: string };
+  ColumnAlignmentProps & { accessor?: string }; // TODO: Needs to be NestedKeyOf type
 
 export const TableHead = (props: Props) => {
   const CustomTableHead = useCustomComponent<Props>('TableHead');
