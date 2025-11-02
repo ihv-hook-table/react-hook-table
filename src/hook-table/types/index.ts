@@ -14,7 +14,7 @@ type CaptionAlignment =
   | 'bottom-right';
 
 export type TableRecord = Record<PropertyKey, unknown>;
-export type FormatOptions = Record<string, (value: never) => ReactNode>;
+export type FormatOptions = Record<string, (value: unknown) => string>;
 
 type SubrowActions = {
   closeSubrow?: () => void;

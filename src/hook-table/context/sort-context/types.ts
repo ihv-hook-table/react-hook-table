@@ -1,9 +1,9 @@
-import { TableRecord } from '@/hook-table/types';
+import { ColumnsAccessor, TableRecord } from '@/hook-table/types';
 
 export type SortDirection = 'asc' | 'desc' | 'none';
 
 export type SortState<T extends TableRecord = TableRecord> = {
-  sortAccessor?: keyof T;
+  sortAccessor?: ColumnsAccessor<T> | ColumnsAccessor<T>[];
   sortDirection: SortDirection;
 };
 
