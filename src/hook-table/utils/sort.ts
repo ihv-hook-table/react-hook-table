@@ -22,7 +22,7 @@ export const getSortedData = <
     ...options,
   });
 
-  const copy = data.slice();
+  const copy = [...data];
 
   copy.sort((a, b) => {
     const aValue =
