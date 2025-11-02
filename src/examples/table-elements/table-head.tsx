@@ -13,19 +13,32 @@ type Props = ComponentPropsWithRef<'th'> &
   ColumnAlignmentProps & { accessor?: string; isSorting?: boolean };
 
 const getIcon = (direction: 'asc' | 'desc' | 'none', isSorting?: boolean) => {
-  if (isSorting) {
-    switch (direction) {
-      case 'asc':
-        return <LucideArrowDownWideNarrow size={14} />;
-      case 'desc':
-        return <LucideArrowUpNarrowWide size={14} />;
-      case 'none':
-      default:
-        return <ArrowUpDown size={14} />;
-    }
+  switch (direction) {
+    case 'asc':
+      return (
+        <LucideArrowDownWideNarrow
+          size={14}
+          className={cn(!isSorting && 'opacity-0 peer-hover:opacity-100')}
+        />
+      );
+    case 'desc':
+      return (
+        <LucideArrowUpNarrowWide
+          size={14}
+          className={cn(!isSorting && 'opacity-0 peer-hover:opacity-100')}
+        />
+      );
+    case 'none':
+    default:
+      return (
+        <ArrowUpDown
+          size={14}
+          className={cn('opacity-0 peer-hover:opacity-100')}
+        />
+      );
   }
 
-  return <ArrowUpDown size={14} />;
+  // return <ArrowUpDown size={14} className="opacity-0 peer-hover:opacity-100" />;
 };
 
 const TableHeadWrapper = ({
@@ -47,7 +60,7 @@ const TableHeadWrapper = ({
       >
         <div
           className={cn(
-            'text-nowrap',
+            'text-nowrap peer',
             cellAlignment({ alignment, isMultiValue }),
           )}
         >

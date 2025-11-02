@@ -25,7 +25,7 @@ export const PageSize = () => {
 
   const { pageSize } = state;
 
-  if (!pagination?.pageSizeOptions) {
+  if (!state?.paginate) {
     return null;
   }
 
@@ -57,6 +57,10 @@ export function Pagination() {
     usePaginationContext() || {};
 
   const { pageNumber, pageCount, isLastPage, isManualPagination } = state;
+
+  if (!state?.paginate) {
+    return null;
+  }
 
   return (
     <div className="flex items-center justify-end py-4">
