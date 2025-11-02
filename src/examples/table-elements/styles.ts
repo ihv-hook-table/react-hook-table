@@ -8,7 +8,8 @@ export const cellAlignment = cva('', {
       right: 'text-right',
     },
     isMultiValue: {
-      true: 'align-top',
+      // true: 'align-top',
+      true: 'align-middle',
       false: 'align-middle',
     },
   },

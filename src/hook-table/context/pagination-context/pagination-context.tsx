@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, use } from 'react';
 
 type PaginationState = {
   pageNumber: number;
@@ -18,6 +18,12 @@ type PaginationContextType = {
   search?: (pageNumber: number, pageSize: number) => Promise<void>;
 };
 
-export const PaginationContext = createContext<PaginationContextType | null>(
-  null,
-);
+export const PaginationContext = createContext<PaginationContextType>({
+  state: {} as PaginationState,
+  setPageSize: () => {},
+  nextPage: () => {},
+  previousPage: () => {},
+  goToPage: () => {},
+});
+
+export const usePaginationContext = () => use(PaginationContext) || {};

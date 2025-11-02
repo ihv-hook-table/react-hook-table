@@ -13,14 +13,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { PaginationProps, useLoadingContext } from '@/hook-table';
+import {
+  useLoadingContext,
+  usePaginationContext,
+  useTableOptionsContext,
+} from '@/hook-table';
 
-export const PageSize = ({
-  setPageSize,
-  pageSize,
-  pageSizeOptions,
-}: PaginationProps) =>
-  pageSizeOptions && (
+export const PageSize = () => {
+  const { state, setPageSize } = usePaginationContext();
+  const { pagination } = useTableOptionsContext();
+
+  const { pageSize } = state;
+
+  if (!pagination?.pageSizeOptions) {
+    return null;
+  }
+
+  return (
     <div className="flex items-center space-x-2 pb-4">
       <p className="text-sm font-medium">Rows per page</p>
       <Select
@@ -31,7 +40,7 @@ export const PageSize = ({
           <SelectValue placeholder={5} />
         </SelectTrigger>
         <SelectContent side="top">
-          {pageSizeOptions?.map(value => (
+          {pagination?.pageSizeOptions?.map(value => (
             <SelectItem key={value} value={`${value}`}>
               {value}
             </SelectItem>
@@ -40,17 +49,14 @@ export const PageSize = ({
       </Select>
     </div>
   );
+};
 
-export function Pagination({
-  nextPage,
-  previousPage,
-  goToPage,
-  pageNumber,
-  pageCount,
-  isLastPage,
-  isManualPagination,
-}: PaginationProps) {
+export function Pagination() {
   const { isLoading } = useLoadingContext();
+  const { state, goToPage, nextPage, previousPage } =
+    usePaginationContext() || {};
+
+  const { pageNumber, pageCount, isLastPage, isManualPagination } = state;
 
   return (
     <div className="flex items-center justify-end py-4">

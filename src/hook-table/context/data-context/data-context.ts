@@ -13,11 +13,11 @@ const createTableDataContext = <T extends TableRecord = TableRecord>() =>
     data: [],
   });
 
-export const TableDataContext = createTableDataContext();
+export const DataContext = createTableDataContext();
 
 export const useTableData = () => {
   const { state } = use(PaginationContext) || {};
-  const { data } = use(TableDataContext) || {};
+  const { data } = use(DataContext) || {};
 
   const { sortDirection, sortAccessor } = useSortingContext();
 

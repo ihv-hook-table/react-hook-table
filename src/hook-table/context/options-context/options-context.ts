@@ -2,6 +2,7 @@ import {
   ComponentType,
   createContext,
   HTMLAttributes,
+  HtmlHTMLAttributes,
   TdHTMLAttributes,
   ThHTMLAttributes,
   use,
@@ -12,7 +13,6 @@ import {
   FormatOptions,
   NoResultsProps,
   TableRowProps,
-  PaginationProps,
 } from '../../types';
 
 export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
@@ -95,15 +95,15 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      */
     NoResults?: ComponentType<NoResultsProps>;
     /**
-     * @param TopToolbar - Component for the top toolbar. Receives the pagination props.
+     * @param TopToolbar - Component for the top toolbar. Can access table context.
      * @returns
      */
-    TopToolbar?: ComponentType<PaginationProps>;
+    TopToolbar?: ComponentType<HtmlHTMLAttributes<HTMLDivElement>>;
     /**
-     * @param BottomToolbar - Component for the top toolbar. Receives the pagination props.
+     * @param BottomToolbar - Component for the bottom toolbar. Can access table context.
      * @returns
      */
-    BottomToolbar?: ComponentType<PaginationProps>;
+    BottomToolbar?: ComponentType<HtmlHTMLAttributes<HTMLDivElement>>;
   };
   pagination?: {
     /**
@@ -122,4 +122,4 @@ const createTableOptionsContext = <F extends FormatOptions = FormatOptions>() =>
 
 export const TableOptionsContext = createTableOptionsContext();
 
-export const useTableOptionsContext = () => use(TableOptionsContext);
+export const useTableOptionsContext = () => use(TableOptionsContext) || {};

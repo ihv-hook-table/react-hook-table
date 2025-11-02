@@ -36,6 +36,9 @@ export type ValueFormatKey<F extends FormatOptions = FormatOptions> =
  * Column props
  */
 
+export type ColumnsAccessor<T extends TableRecord = TableRecord> =
+  NestedKeyOf<T>;
+
 type ColumnPropsWithAccessor<
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,
@@ -43,7 +46,7 @@ type ColumnPropsWithAccessor<
   /**
    * @param {NestedKeyOf<T> | NestedKeyOf<T>[]} accessor - key path to the value in the data.
    */
-  accessor: NestedKeyOf<T> | NestedKeyOf<T>[];
+  accessor: ColumnsAccessor<T> | ColumnsAccessor<T>[];
   children?: never;
   /**
    * @param {ValueFormatKey<F> | ValueFormatKey<F>[]} format - The optional format function to apply to the value. If multiple array accessors are provided, the format should be ana array of format function keys.
@@ -141,7 +144,6 @@ export type TableDataProps = ColumnAlignmentProps & {
 
 export type PaginationProps = {
   isLastPage?: boolean;
-  isLoading: boolean;
   isManualPagination?: boolean;
   pageNumber: number;
   pageSize: number;

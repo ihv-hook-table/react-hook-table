@@ -1,39 +1,14 @@
-import { use } from 'react';
-import { PaginationContext } from '../../context/pagination-context/pagination-context';
-import { PaginationProps } from '../../types';
 import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
-import { useTableOptionsContext } from '@/hook-table/context/options-context/options-context';
-import { useLoadingContext } from '@/hook-table/context/loading-context/loading-context';
+import { CustomRenderer } from './custom-renderer';
 
 type Props = {
   element: 'TopToolbar' | 'BottomToolbar';
 };
 
 export const Toolbar = ({ element }: Props) => {
-  const paginationCtx = use(PaginationContext);
-  const { pagination } = useTableOptionsContext() || {};
-  const CustomToolbar = useCustomComponent<PaginationProps>(element);
-  const { isLoading } = useLoadingContext();
+  const CustomToolbar = useCustomComponent(element);
 
-  if (!paginationCtx || !paginationCtx?.state?.paginate || !CustomToolbar)
-    return null;
+  if (!CustomToolbar) return null;
 
-  const { nextPage, previousPage, setPageSize, state, goToPage } =
-    paginationCtx;
-
-  return (
-    <CustomToolbar
-      nextPage={nextPage}
-      previousPage={previousPage}
-      setPageSize={setPageSize}
-      pageNumber={state.pageNumber}
-      pageSize={state.pageSize}
-      pageSizeOptions={pagination?.pageSizeOptions}
-      pageCount={state.pageCount}
-      goToPage={goToPage}
-      isLastPage={state.isLastPage}
-      isManualPagination={state.isManualPagination}
-      isLoading={isLoading}
-    />
-  );
+  return <CustomRenderer Component={CustomToolbar} props={{}} />;
 };
