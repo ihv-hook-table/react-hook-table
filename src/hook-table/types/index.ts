@@ -14,6 +14,7 @@ type CaptionAlignment =
   | 'bottom-right';
 
 export type TableRecord = Record<PropertyKey, unknown>;
+
 export type FormatOptions = Record<string, (value: unknown) => string>;
 
 type SubrowActions = {
@@ -67,6 +68,7 @@ export type ColumnProps<
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,
 > = {
+  sortAccessor?: ColumnsAccessor<T>;
   /**
    * @param {ColumnAlignment} alignment - The horizontal alignment of the column.
    */

@@ -10,5 +10,5 @@ export type SortState<T extends TableRecord = TableRecord> = {
 export interface ISortContextProvider<T extends TableRecord = TableRecord>
   extends SortState<T> {
   sortingEnabled?: boolean;
-  onSort: (sortAccessor: keyof T) => void;
+  onSort: (sortAccessor: ColumnsAccessor<T> | ColumnsAccessor<T>[]) => void;
 }

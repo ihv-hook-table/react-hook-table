@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { SortDirection } from '../context/sort-context/types';
 import { ColumnsAccessor, TableRecord } from '../types';
 
@@ -8,7 +9,7 @@ export const getSortedData = <
   direction: SortDirection,
   key?: K,
   data?: T[],
-  columnFormat?: (value: T[K]) => string,
+  columnFormat?: (value: T[K]) => ReactNode,
   locales?: Intl.LocalesArgument,
   options?: Intl.CollatorOptions,
 ) => {

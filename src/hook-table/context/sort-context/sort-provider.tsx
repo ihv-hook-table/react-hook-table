@@ -2,12 +2,21 @@ import { ReactNode, useReducer } from 'react';
 import { SortingContext } from './sort-context';
 import { ISortContextProvider } from './types';
 import { reducer } from './sort-reducer';
-import { TableRecord } from '@/hook-table/types';
+import { ColumnsAccessor, TableRecord } from '@/hook-table/types';
 import { ActionTypes } from './sort-actions';
 
 type Props<T extends TableRecord = TableRecord> = {
   children: ReactNode;
   initialState?: Partial<ISortContextProvider<T>>;
+};
+
+const getFirstKey = <T extends TableRecord = TableRecord>(
+  keys: ColumnsAccessor<T> | ColumnsAccessor<T>[],
+): ColumnsAccessor<T> | undefined => {
+  if (Array.isArray(keys)) {
+    return keys[0];
+  }
+  return keys;
 };
 
 export const SortingContextProvider = <T extends TableRecord = TableRecord>({
@@ -19,15 +28,22 @@ export const SortingContextProvider = <T extends TableRecord = TableRecord>({
     sortDirection: initialState?.sortDirection ?? 'none',
   });
 
-  const onSort = (sortAccessor: keyof T) => {
+  const onSort = (sortAccessor: string | string[]) => {
+    const firstKey = getFirstKey(sortAccessor);
+
+    // Guard clause for undefined firstKey
+    if (!firstKey) return;
+
+    // If no sortAccessor is set, set it to the first key and sort ascending (default initial sort direction)
     if (!state?.sortAccessor) {
       dispatch({
         type: ActionTypes.SET_SORT_ACCESSOR,
-        sortAccessor,
+        sortAccessor: firstKey,
       });
     }
 
-    if (state.sortAccessor === sortAccessor) {
+    // If the same sortAccessor is clicked, toggle the sort direction
+    if (state.sortAccessor === firstKey) {
       const newDirection =
         state.sortDirection === 'asc'
           ? 'desc'
@@ -40,9 +56,10 @@ export const SortingContextProvider = <T extends TableRecord = TableRecord>({
         sortDirection: newDirection,
       });
     } else {
+      // If sortAccessor is set and a different one is clicked, set it to the new key and sort using current direction
       dispatch({
         type: ActionTypes.SET_SORT_ACCESSOR,
-        sortAccessor,
+        sortAccessor: firstKey,
       });
     }
   };

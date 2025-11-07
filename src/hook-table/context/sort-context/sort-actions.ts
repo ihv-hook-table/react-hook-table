@@ -1,4 +1,4 @@
-import { TableRecord } from '@/hook-table/types';
+import { ColumnsAccessor, TableRecord } from '@/hook-table/types';
 import { SortDirection } from './types';
 
 export enum ActionTypes {
@@ -8,7 +8,7 @@ export enum ActionTypes {
 
 type SetSortAccessor<T extends TableRecord = TableRecord> = {
   type: ActionTypes.SET_SORT_ACCESSOR;
-  sortAccessor: keyof T;
+  sortAccessor: ColumnsAccessor<T>;
   sortDirection?: SortDirection;
 };
 
