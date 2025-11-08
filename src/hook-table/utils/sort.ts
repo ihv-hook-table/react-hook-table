@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import { SortDirection } from '../context/sort-context/types';
-import { ColumnsAccessor, TableRecord } from '../types';
+import { ColumnsAccessor, SortDirection, TableRecord } from '../types';
 
 export const getSortedData = <
   T extends TableRecord = TableRecord,

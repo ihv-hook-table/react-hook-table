@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 /**
  * Utility types
  */
-
+export type SortDirection = 'asc' | 'desc' | 'none';
 type ColumnAlignment = 'left' | 'center' | 'right';
 type CaptionAlignment =
   | 'top-left'
@@ -13,9 +13,22 @@ type CaptionAlignment =
   | 'bottom-center'
   | 'bottom-right';
 
-export type TableRecord = Record<PropertyKey, unknown>;
+export type TableRecord = Record<string | number, unknown>;
 
-export type FormatOptions = Record<string, (value: unknown) => string>;
+type FormatRecord = {
+  [K in string]: (value: unknown) => string;
+};
+
+export type InferFormatValue<T> = T extends (value: infer V) => string
+  ? V
+  : never;
+
+export type FormatOptions<
+  F extends FormatRecord = FormatRecord,
+  K extends keyof F = keyof F,
+> = {
+  [P in K]: InferFormatValue<F[P]>;
+};
 
 type SubrowActions = {
   closeSubrow?: () => void;
@@ -29,9 +42,10 @@ type NestedKeyOf<T, K = keyof T> = K extends keyof T & (string | number)
   ? `${K}` | (T[K] extends object ? `${K}.${NestedKeyOf<T[K]>}` : never)
   : never;
 
-export type ValueFormatKey<F extends FormatOptions = FormatOptions> =
-  | keyof F
-  | undefined;
+export type ValueFormatKey<
+  F extends FormatOptions = FormatOptions,
+  K extends keyof F = keyof F,
+> = K | undefined;
 
 /**
  * Column props

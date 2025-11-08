@@ -20,10 +20,13 @@ const getExpandableIdentifier = (expandable?: boolean | string) => {
   return expandable ? 'default' : undefined;
 };
 
-export const BodyRow = <T extends TableRecord = TableRecord>({
+export const BodyRow = <
+  T extends TableRecord = TableRecord,
+  F extends FormatOptions = FormatOptions,
+>({
   columns,
   rowData,
-}: Props<T, FormatOptions>) => {
+}: Props<T, F>) => {
   const isDefaultExpanded = useMemo(() => {
     const values = columns.filter(({ expandable }) => !!expandable);
 

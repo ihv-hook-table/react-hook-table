@@ -1,5 +1,8 @@
-import { ColumnsAccessor, TableRecord } from '@/hook-table/types';
-import { SortDirection } from './types';
+import {
+  ColumnsAccessor,
+  SortDirection,
+  TableRecord,
+} from '@/hook-table/types';
 
 export enum ActionTypes {
   SET_SORT_ACCESSOR = 'SET_SORT_ACCESSOR',
