@@ -19,9 +19,7 @@ type FormatRecord = {
   [K in string]: (value: unknown) => string;
 };
 
-export type InferFormatValue<T> = T extends (value: infer V) => string
-  ? V
-  : never;
+type InferFormatValue<T> = T extends (value: infer V) => string ? V : never;
 
 export type FormatOptions<
   F extends FormatRecord = FormatRecord,

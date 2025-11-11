@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import { ColumnsAccessor, SortDirection, TableRecord } from '../types';
 
 export const getSortedData = <
@@ -8,7 +7,6 @@ export const getSortedData = <
   direction: SortDirection,
   key?: K,
   data?: T[],
-  columnFormat?: (value: T[K]) => ReactNode,
   locales?: Intl.LocalesArgument,
   options?: Intl.CollatorOptions,
 ) => {
@@ -25,10 +23,8 @@ export const getSortedData = <
   const copy = [...data];
 
   copy.sort((a, b) => {
-    const aValue =
-      typeof columnFormat === 'function' ? columnFormat(a[key]) : a[key];
-    const bValue =
-      typeof columnFormat === 'function' ? columnFormat(b[key]) : b[key];
+    const aValue = a[key];
+    const bValue = b[key];
 
     const compare = collator.compare(String(aValue), String(bValue));
     return direction === 'desc' ? -compare : compare;

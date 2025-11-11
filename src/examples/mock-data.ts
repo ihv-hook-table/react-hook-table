@@ -30,7 +30,7 @@ function generateISODate() {
 }
 
 function getRandomPrice() {
-  return parseFloat((Math.random() * (10000 - 1) + 1).toFixed(2));
+  return parseFloat((Math.random() * (15000 - 1) + 1).toFixed(2));
 }
 
 function generateMockData(numRows: number): TableData[] {
