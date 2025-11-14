@@ -1,6 +1,6 @@
 import { use } from 'react';
 import type { ColumnProps, TableRecord } from '../../../../types';
-import { isFunction, toArray } from '../../../../utils';
+import { isFunction, toArray, getFirst } from '../../../../utils';
 import { TableOptionsContext } from '../../../../context/options-context/options-context';
 import { Value, TableHead } from '../../../default-components';
 
@@ -12,13 +12,16 @@ export const Cell = <T extends TableRecord = TableRecord>({
   column,
   isMultiValue,
 }: HeaderCellProps<T> & { isMultiValue: boolean }) => {
-  const { alignment = 'left', accessor } = column || {};
+  const { alignment = 'left', accessor, sortAccessor } = column || {};
+
+  // Determine sortAccessor key
+  const sortAccessorKey = sortAccessor ?? getFirst(accessor);
 
   return (
     <TableHead
       alignment={alignment}
       isMultiValue={isMultiValue}
-      accessor={accessor}
+      sortAccessor={sortAccessorKey}
     >
       <CellValue {...column} />
     </TableHead>

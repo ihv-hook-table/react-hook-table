@@ -1,8 +1,9 @@
-import { ColumnsAccessor, SortDirection, TableRecord } from '../types';
+import { ColumnAccessor, SortDirection, TableRecord } from '../types';
+import { deepGet } from './deepGet';
 
 export const getSortedData = <
   T extends TableRecord = TableRecord,
-  K extends ColumnsAccessor<T> = ColumnsAccessor<T>,
+  K extends ColumnAccessor<T> = ColumnAccessor<T>,
 >(
   direction: SortDirection,
   key?: K,
@@ -23,8 +24,8 @@ export const getSortedData = <
   const copy = [...data];
 
   copy.sort((a, b) => {
-    const aValue = a[key];
-    const bValue = b[key];
+    const aValue = deepGet(a, key);
+    const bValue = deepGet(b, key);
 
     const compare = collator.compare(String(aValue), String(bValue));
     return direction === 'desc' ? -compare : compare;

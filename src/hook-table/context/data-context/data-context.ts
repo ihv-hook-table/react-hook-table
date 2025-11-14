@@ -21,18 +21,12 @@ export const useTableData = () => {
 
   const { sortDirection, sortAccessor } = useSortingContext();
 
-  const normalizedSortAccessor = Array.isArray(sortAccessor)
-    ? sortAccessor[0]
-    : sortAccessor;
-
   const sorted = useMemo(
     () =>
       sortDirection === 'none'
         ? [...(data || [])]
-        : getSortedData(sortDirection, normalizedSortAccessor, [
-            ...(data || []),
-          ]),
-    [data, normalizedSortAccessor, sortDirection],
+        : getSortedData(sortDirection, sortAccessor, [...(data || [])]),
+    [data, sortAccessor, sortDirection],
   );
 
   if (state?.paginate && state.pageSize && !state.isManualPagination) {

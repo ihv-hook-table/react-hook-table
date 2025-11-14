@@ -1,16 +1,13 @@
 import { ComponentProps } from 'react';
 import { clsx } from '../../utils';
-import {
-  ColumnAlignmentProps,
-  ColumnsAccessor,
-  TableRecord,
-} from '../../types';
+import { ColumnAlignmentProps, ColumnAccessor, TableRecord } from '../../types';
 import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
 import { CustomRenderer } from './custom-renderer';
 
 type Props<T extends TableRecord = TableRecord> = ComponentProps<'th'> &
   ColumnAlignmentProps & {
-    accessor?: ColumnsAccessor<T> | ColumnsAccessor<T>[];
+    accessor?: ColumnAccessor<T> | ColumnAccessor<T>[];
+    sortAccessor?: ColumnAccessor<T>;
   };
 
 export const TableHead = <T extends TableRecord = TableRecord>(

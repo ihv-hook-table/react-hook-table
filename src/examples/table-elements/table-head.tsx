@@ -10,7 +10,10 @@ import {
 } from 'lucide-react';
 
 type Props = ComponentPropsWithRef<'th'> &
-  ColumnAlignmentProps & { accessor?: string; isSorting?: boolean };
+  ColumnAlignmentProps & {
+    isSorting?: boolean;
+    sortAccessor?: string;
+  };
 
 const getIcon = (direction: 'asc' | 'desc' | 'none', isSorting?: boolean) => {
   switch (direction) {
@@ -76,11 +79,16 @@ export const TableHead = ({
   children,
   className,
   alignment,
-  accessor,
+  sortAccessor,
   isMultiValue,
   ...props
 }: Props) => {
-  const { onSort, sortingEnabled, sortAccessor } = useSortingContext();
+  const {
+    onSort,
+    sortingEnabled,
+    sortAccessor: currentSortAccessor,
+  } = useSortingContext();
+  const isSorting = currentSortAccessor === sortAccessor;
 
   return (
     <CnTableHead
@@ -93,10 +101,10 @@ export const TableHead = ({
         className,
       )}
     >
-      {sortingEnabled && !!accessor ? (
+      {sortingEnabled && !!sortAccessor ? (
         <TableHeadWrapper
-          onClick={() => onSort(accessor)}
-          isSorting={sortAccessor === accessor}
+          onClick={() => onSort(sortAccessor)}
+          isSorting={isSorting}
           alignment={alignment}
           isMultiValue={isMultiValue}
         >

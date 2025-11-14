@@ -61,6 +61,7 @@ export const HookTableExample = () => {
         alignment="right"
         footer={{ value: 'Total:', colSpan: 6 }}
         colWidth={10}
+        sortAccessor="price.amount"
       />
       <Column
         header="Row total"
