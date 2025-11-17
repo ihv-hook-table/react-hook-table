@@ -78,12 +78,10 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      */
     TableFooter?: ComponentType<HTMLAttributes<HTMLTableSectionElement>>;
     /**
-     * @param Value - Component that renders the cell value. It can be used to format the cell value. Accepts the isSecondaryValue prop, that turns true when the cell has more than one value.
+     * @param Value - Component that renders the cell value. It can be used to format the cell value.
      * @returns
      */
-    Value?: ComponentType<
-      HTMLAttributes<HTMLDivElement> & { isSecondaryValue?: boolean }
-    >;
+    Value?: ComponentType<HTMLAttributes<HTMLDivElement>>;
     /**
      * @param TableCaption - Html caption element.
      * @returns

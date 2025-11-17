@@ -44,7 +44,7 @@ const CellValue = <T extends TableRecord = TableRecord>({
     const value = isFunction(translate) && label ? translate(label) : label;
 
     return (
-      <Value key={idx} isSecondaryValue={isSecondaryLabel && !expandable}>
+      <Value key={idx} data-secondary={isSecondaryLabel && !expandable}>
         {value}
       </Value>
     );

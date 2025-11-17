@@ -49,7 +49,7 @@ export const ColumnData = <
     const formattedValue = getCellValue(value, formatFunction);
 
     return (
-      <Value isSecondaryValue={isSecondaryValue} key={index}>
+      <Value data-secondary={isSecondaryValue} key={index}>
         {formattedValue}
       </Value>
     );
