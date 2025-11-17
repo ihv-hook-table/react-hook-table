@@ -5,7 +5,6 @@ import { CustomRenderer } from './custom-renderer';
 
 type Props = ComponentProps<'tr'> & {
   subrow?: boolean;
-  expanded?: boolean;
 };
 
 export const TableRow = (props: Props) => {
@@ -15,12 +14,7 @@ export const TableRow = (props: Props) => {
     return <CustomRenderer Component={CustomTableRow} props={props} />;
   }
 
-  const { className, subrow, expanded, ...rest } = props;
+  const { className, subrow, ...rest } = props;
 
-  return (
-    <tr
-      className={clsx(subrow && 'subrow', expanded && 'expanded', className)}
-      {...rest}
-    />
-  );
+  return <tr className={clsx(subrow && 'subrow', className)} {...rest} />;
 };

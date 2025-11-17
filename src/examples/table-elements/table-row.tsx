@@ -11,20 +11,23 @@ const rowClasses = cva('', {
     subrow: {
       true: 'bg-muted hover:bg-muted [&>td>*]:bg-white [&>td>*]:rounded-sm [&>td>*]:border',
     },
-    expanded: {
-      true: 'bg-muted border-b-0 hover:bg-muted',
-    },
   },
 });
 
-export const TableRow = ({ className, expanded, subrow, ...props }: Props) => {
+export const TableRow = ({ className, subrow, ...props }: Props) => {
   const { isLoading } = useLoadingContext();
 
   return (
     <CnTableRow
       // Customize the row style when it is expanded.
       // Customize the row style when it is a subrow.
-      className={cn(rowClasses({ expanded, subrow }), className)}
+      className={cn(
+        rowClasses({ subrow }),
+        'data-[expanded=true]:bg-muted',
+        'data-[expanded=true]:border-b-0',
+        'data-[expanded=true]:hover:bg-muted',
+        className,
+      )}
       data-loading={isLoading}
       {...props}
     />

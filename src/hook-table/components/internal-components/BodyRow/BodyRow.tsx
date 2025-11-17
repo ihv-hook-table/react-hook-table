@@ -64,7 +64,7 @@ export const BodyRow = <
 
   return (
     <>
-      <TableRow expanded={!!expanded}>
+      <TableRow data-expanded={!!expanded}>
         {columns.map(({ expandable, ...columnRest }, colIndex) => {
           const { alignment = 'left', wrap = false } = columnRest;
           const currentIdentifier = getExpandableIdentifier(expandable);

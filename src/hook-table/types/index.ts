@@ -105,7 +105,6 @@ export type NoResultsProps = {
 
 export type TableRowProps = {
   subrow?: boolean;
-  expanded?: boolean;
   isLoading?: boolean;
 };
 
