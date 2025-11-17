@@ -1,5 +1,4 @@
 import { ComponentProps, useMemo } from 'react';
-import { getChildrenProps } from '../utils';
 import {
   Body,
   ColGroup,
