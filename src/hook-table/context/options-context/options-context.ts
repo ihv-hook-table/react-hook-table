@@ -68,7 +68,6 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
       TdHTMLAttributes<HTMLTableCellElement> &
         ColumnAlignmentProps & {
           expandable?: boolean;
-          isSubRow?: boolean;
           wrap: boolean;
         }
     >;

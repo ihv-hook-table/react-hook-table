@@ -98,9 +98,9 @@ export const BodyRow = <
       {expanded && (
         <TableRow subrow>
           <TableData
+            data-subrow={true}
             isMultiValue={false}
             colSpan={columns.length}
-            isSubRow
             wrap={false}
           >
             {expandableContent}

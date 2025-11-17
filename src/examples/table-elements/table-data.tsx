@@ -12,9 +12,6 @@ const cellClasses = cva('', {
     expandable: {
       true: 'p-0',
     },
-    isSubRow: {
-      true: 'bg-white, border-bottom-0 pt-0',
-    },
     wrap: {
       true: 'text-wrap',
       false: 'text-nowrap',
@@ -32,7 +29,6 @@ export const TableData = ({
   className,
   expandable,
   isMultiValue,
-  isSubRow,
   wrap,
   ...props
 }: Props) => (
@@ -45,7 +41,8 @@ export const TableData = ({
         alignment,
         isMultiValue: !expandable && isMultiValue,
       }),
-      cellClasses({ expandable, isSubRow, wrap }),
+      cellClasses({ expandable, wrap }),
+      'data-[subrow=true]:pt-0',
       className,
     )}
   />

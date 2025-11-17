@@ -118,7 +118,6 @@ export type TableCaptionProps = Pick<CaptionProps, 'alignment'>;
 
 export type TableDataProps = ColumnAlignmentProps & {
   expandable?: boolean;
-  isSubRow?: boolean;
   wrap?: boolean;
 };
 
