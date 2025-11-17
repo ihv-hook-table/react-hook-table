@@ -5,8 +5,8 @@ import { cn } from '@/lib/utils';
 import { cellAlignment } from './styles';
 import {
   ArrowUpDown,
-  LucideArrowDownWideNarrow,
-  LucideArrowUpNarrowWide,
+  LucideArrowDownNarrowWide,
+  LucideArrowUpWideNarrow,
 } from 'lucide-react';
 
 type Props = ComponentPropsWithRef<'th'> &
@@ -19,29 +19,33 @@ const getIcon = (direction: 'asc' | 'desc' | 'none', isSorting?: boolean) => {
   switch (direction) {
     case 'asc':
       return (
-        <LucideArrowDownWideNarrow
-          size={14}
-          className={cn(!isSorting && 'opacity-0 peer-hover:opacity-100')}
+        <LucideArrowDownNarrowWide
+          size={16}
+          className={cn(
+            !isSorting && 'opacity-0 peer-hover:opacity-100 transition-opacity',
+          )}
         />
       );
     case 'desc':
       return (
-        <LucideArrowUpNarrowWide
-          size={14}
-          className={cn(!isSorting && 'opacity-0 peer-hover:opacity-100')}
+        <LucideArrowUpWideNarrow
+          size={16}
+          className={cn(
+            !isSorting && 'opacity-0 peer-hover:opacity-100 transition-opacity',
+          )}
         />
       );
     case 'none':
     default:
       return (
         <ArrowUpDown
-          size={14}
-          className={cn('opacity-0 peer-hover:opacity-100')}
+          size={16}
+          className={cn(
+            'opacity-0 peer-hover:opacity-100 transition-opacity translate-x-0',
+          )}
         />
       );
   }
-
-  // return <ArrowUpDown size={14} className="opacity-0 peer-hover:opacity-100" />;
 };
 
 const TableHeadWrapper = ({

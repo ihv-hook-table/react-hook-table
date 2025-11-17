@@ -48,13 +48,6 @@ export const useCreateTable = <
         sortingEnabled,
         ...htmlProps
       }: TableProps<T>) => {
-        const columns = getChildrenProps<T>(children) || {};
-
-        if (!columns || columns.length === 0) {
-          console.warn('Please add at least one column to Table');
-          return null;
-        }
-
         return (
           <TableContextProvider
             globalOptions={globalOptions}
