@@ -12,13 +12,6 @@ const cellClasses = cva('', {
     expandable: {
       true: 'p-0',
     },
-    wrap: {
-      true: 'text-wrap',
-      false: 'text-nowrap',
-    },
-  },
-  defaultVariants: {
-    wrap: false,
   },
 });
 
@@ -29,7 +22,6 @@ export const TableData = ({
   className,
   expandable,
   isMultiValue,
-  wrap,
   ...props
 }: Props) => (
   <CnTableCell
@@ -41,8 +33,10 @@ export const TableData = ({
         alignment,
         isMultiValue: !expandable && isMultiValue,
       }),
-      cellClasses({ expandable, wrap }),
+      cellClasses({ expandable }),
       'data-[subrow=true]:pt-0',
+      'data-[wrap=true]:text-wrap',
+      'data-[wrap=false]:text-nowrap',
       className,
     )}
   />

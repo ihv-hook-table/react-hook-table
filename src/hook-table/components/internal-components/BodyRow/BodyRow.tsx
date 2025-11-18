@@ -79,7 +79,7 @@ export const BodyRow = <
               alignment={alignment}
               isMultiValue={isMultiValue}
               expandable={!!expandable}
-              wrap={wrap}
+              data-wrap={wrap}
             >
               {expandable ? (
                 <Expander
@@ -101,7 +101,7 @@ export const BodyRow = <
             data-subrow={true}
             isMultiValue={false}
             colSpan={columns.length}
-            wrap={false}
+            data-wrap={false}
           >
             {expandableContent}
           </TableData>

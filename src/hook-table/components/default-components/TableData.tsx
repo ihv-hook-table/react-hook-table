@@ -7,7 +7,6 @@ import { CustomRenderer } from './custom-renderer';
 type Props = ComponentProps<'td'> &
   ColumnAlignmentProps & {
     expandable?: boolean;
-    wrap?: boolean;
   };
 
 export const TableData = (props: Props) => {
@@ -21,7 +20,6 @@ export const TableData = (props: Props) => {
     alignment = 'left',
     isMultiValue = false,
     expandable,
-    wrap = false,
     ...rest
   } = props;
 
@@ -31,7 +29,6 @@ export const TableData = (props: Props) => {
         !expandable && `align-${alignment}`,
         !expandable && isMultiValue && 'multi-line',
         expandable && 'expandable',
-        wrap && 'wrap',
       )}
       {...rest}
     />
