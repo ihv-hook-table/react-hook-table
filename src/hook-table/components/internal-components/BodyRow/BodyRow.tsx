@@ -96,7 +96,7 @@ export const BodyRow = <
       </TableRow>
 
       {expanded && (
-        <TableRow subrow>
+        <TableRow data-subrow={true}>
           <TableData
             data-subrow={true}
             isMultiValue={false}
