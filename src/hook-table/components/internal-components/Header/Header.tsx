@@ -1,5 +1,4 @@
 import { useColumnContext } from '@/hook-table/context/column-context/column-context';
-import { isArrayType } from '../../../utils';
 import { TableHeader, TableRow } from '../../default-components';
 import { Cell } from './Cell/Cell';
 
@@ -13,11 +12,6 @@ function getFirstKey(value?: string | string[]): string | undefined {
 export const Header = () => {
   const columns = useColumnContext() || [];
 
-  const hasMultiLabels = columns?.some(({ header, accessor }) => {
-    const labels = header ?? accessor;
-    return isArrayType(labels) && labels.length > 1;
-  });
-
   return (
     <TableHeader>
       <TableRow>
@@ -28,7 +22,6 @@ export const Header = () => {
               ...col,
               sortAccessor: col?.sortAccessor ?? getFirstKey(col.accessor),
             }}
-            isMultiValue={hasMultiLabels}
           />
         ))}
       </TableRow>

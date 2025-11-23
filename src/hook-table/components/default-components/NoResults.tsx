@@ -23,7 +23,7 @@ export const NoResults = ({ columnCount }: NoResultsProps) => {
   return (
     <TableBody>
       <TableRow>
-        <TableData colSpan={columnCount} isMultiValue={false}>
+        <TableData colSpan={columnCount}>
           {isLoading ? 'Loading' : 'No results'}
         </TableData>
       </TableRow>

@@ -19,12 +19,7 @@ export const TableHead = <T extends TableRecord = TableRecord>(
     return <CustomRenderer Component={CustomTableHead} props={props} />;
   }
 
-  const { alignment = 'left', isMultiValue, ...rest } = props;
+  const { alignment = 'left', ...rest } = props;
 
-  return (
-    <th
-      className={clsx(`align-${alignment}`, isMultiValue && 'multi-line')}
-      {...rest}
-    />
-  );
+  return <th className={clsx(`align-${alignment}`)} {...rest} />;
 };

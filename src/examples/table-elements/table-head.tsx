@@ -51,7 +51,6 @@ const getIcon = (direction: 'asc' | 'desc' | 'none', isSorting?: boolean) => {
 const TableHeadWrapper = ({
   children,
   alignment,
-  isMultiValue,
   isSorting,
   ...rest
 }: ComponentProps<'button'> &
@@ -65,12 +64,7 @@ const TableHeadWrapper = ({
           alignment === 'right' && 'flex-row-reverse',
         )}
       >
-        <div
-          className={cn(
-            'text-nowrap peer',
-            cellAlignment({ alignment, isMultiValue }),
-          )}
-        >
+        <div className={cn('text-nowrap peer', cellAlignment({ alignment }))}>
           {children}
         </div>
         {getIcon(sortDirection, isSorting)}
@@ -84,7 +78,6 @@ export const TableHead = ({
   className,
   alignment,
   sortAccessor,
-  isMultiValue,
   ...props
 }: Props) => {
   const {
@@ -101,7 +94,7 @@ export const TableHead = ({
       // Add alignment props received from ihv/react-hook-table.
       className={cn(
         'text-nowrap h-min p-2',
-        cellAlignment({ alignment, isMultiValue: false }),
+        cellAlignment({ alignment }),
         className,
       )}
     >
@@ -110,7 +103,6 @@ export const TableHead = ({
           onClick={() => onSort(sortAccessor)}
           isSorting={isSorting}
           alignment={alignment}
-          isMultiValue={isMultiValue}
         >
           {children}
         </TableHeadWrapper>

@@ -16,18 +16,12 @@ export const TableData = (props: Props) => {
     return <CustomRenderer Component={CustomTableData} props={props} />;
   }
 
-  const {
-    alignment = 'left',
-    isMultiValue = false,
-    expandable,
-    ...rest
-  } = props;
+  const { alignment = 'left', expandable, ...rest } = props;
 
   return (
     <td
       className={clsx(
         !expandable && `align-${alignment}`,
-        !expandable && isMultiValue && 'multi-line',
         expandable && 'expandable',
       )}
       {...rest}

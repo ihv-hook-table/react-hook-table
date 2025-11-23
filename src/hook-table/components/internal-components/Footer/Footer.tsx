@@ -43,7 +43,7 @@ const Cell = <T extends TableRecord = TableRecord>({
   const alignment = footerAlignment ?? columnAlignment;
 
   return (
-    <TableHead isMultiValue={false} alignment={alignment} colSpan={colSpan}>
+    <TableHead alignment={alignment} colSpan={colSpan}>
       {String(value)}
     </TableHead>
   );

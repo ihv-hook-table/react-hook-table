@@ -21,7 +21,6 @@ export const TableData = ({
   alignment,
   className,
   expandable,
-  isMultiValue,
   ...props
 }: Props) => (
   <CnTableCell
@@ -31,7 +30,6 @@ export const TableData = ({
     className={cn(
       cellAlignment({
         alignment,
-        isMultiValue: !expandable && isMultiValue,
       }),
       cellClasses({ expandable }),
       'data-[subrow=true]:pt-0',

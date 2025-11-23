@@ -10,19 +10,14 @@ type HeaderCellProps<T extends TableRecord = TableRecord> = {
 
 export const Cell = <T extends TableRecord = TableRecord>({
   column,
-  isMultiValue,
-}: HeaderCellProps<T> & { isMultiValue: boolean }) => {
+}: HeaderCellProps<T>) => {
   const { alignment = 'left', accessor, sortAccessor } = column || {};
 
   // Determine sortAccessor key
   const sortAccessorKey = sortAccessor ?? getFirst(accessor);
 
   return (
-    <TableHead
-      alignment={alignment}
-      isMultiValue={isMultiValue}
-      sortAccessor={sortAccessorKey}
-    >
+    <TableHead alignment={alignment} sortAccessor={sortAccessorKey}>
       <CellValue {...column} />
     </TableHead>
   );

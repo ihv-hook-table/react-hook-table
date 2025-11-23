@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 import { ColumnData } from './ColumnData';
-import { isArrayType, isFunction } from '../../../utils';
+import { isFunction } from '../../../utils';
 import { TableData, TableRow, Expander } from '../../default-components';
 
 type Props<
@@ -54,10 +54,6 @@ export const BodyRow = <
       ({ expandable }) => expanded === getExpandableIdentifier(expandable),
     ) || {};
 
-  const isMultiValue = columns.some(
-    ({ accessor }) => isArrayType(accessor) && accessor.length > 1,
-  );
-
   const expandableContent = isFunction(children)
     ? children(rowData, { closeSubrow: () => setExpanded(undefined) })
     : children;
@@ -77,7 +73,6 @@ export const BodyRow = <
             <TableData
               key={colIndex}
               alignment={alignment}
-              isMultiValue={isMultiValue}
               expandable={!!expandable}
               data-wrap={wrap}
             >
@@ -99,7 +94,6 @@ export const BodyRow = <
         <TableRow data-subrow={true}>
           <TableData
             data-subrow={true}
-            isMultiValue={false}
             colSpan={columns.length}
             data-wrap={false}
           >
