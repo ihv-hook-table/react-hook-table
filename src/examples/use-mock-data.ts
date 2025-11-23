@@ -47,14 +47,16 @@ const getMockData = async (
 };
 
 export const useMockData = (pageSize: number) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<DataResponse<TableData> | undefined>(
     undefined,
   );
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const search = async (pageNumber: number, pageSize: number) => {
+    setIsLoading(true);
     const result = await getMockData(pageNumber, pageSize);
+
+    setIsLoading(false);
 
     if (result) {
       setData(result);

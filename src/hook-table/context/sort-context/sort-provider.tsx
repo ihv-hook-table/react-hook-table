@@ -27,7 +27,7 @@ export const SortingContextProvider = <T extends TableRecord = TableRecord>({
     if (!state?.sortAccessor) {
       dispatch({
         type: ActionTypes.SET_SORT_ACCESSOR,
-        sortAccessor: sortAccessor,
+        sortAccessor,
       });
     }
 

@@ -6,7 +6,7 @@ import {
 } from './options-context/options-context';
 import { getChildrenProps } from '../utils';
 import { ColumnContext } from './column-context/column-context';
-import { LoadingContextProvider } from './loading-context/loading-provider';
+import { LoadingContext } from './loading-context/loading-context';
 import {
   PaginationContextProvider,
   PaginationState,
@@ -52,7 +52,7 @@ export const TableContextProvider = <
   return (
     <TableOptionsContext value={globalOptions}>
       <ColumnContext value={columnsProps}>
-        <LoadingContextProvider value={isLoading}>
+        <LoadingContext value={{ isLoading }}>
           <PaginationContextProvider
             initialState={{
               numberOfRecords: data?.length,
@@ -63,7 +63,7 @@ export const TableContextProvider = <
               <DataContext value={{ data }}>{children}</DataContext>
             </SortingContextProvider>
           </PaginationContextProvider>
-        </LoadingContextProvider>
+        </LoadingContext>
       </ColumnContext>
     </TableOptionsContext>
   );
