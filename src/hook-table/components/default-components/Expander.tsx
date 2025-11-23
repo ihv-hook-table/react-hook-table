@@ -16,9 +16,5 @@ export const Expander = (props: Props) => {
 
   const { isOpen, toggle } = props;
 
-  return (
-    <button className="expander" onClick={toggle}>
-      {isOpen ? '-' : '+'}
-    </button>
-  );
+  return <button onClick={toggle}>{isOpen ? '-' : '+'}</button>;
 };
