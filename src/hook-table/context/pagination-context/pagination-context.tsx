@@ -6,7 +6,7 @@ type PaginationState = {
   paginate?: boolean;
   pageCount?: number;
   isLastPage?: boolean;
-  isManualPagination?: boolean;
+  isServersidePagination?: boolean;
 };
 
 type PaginationContextType = {

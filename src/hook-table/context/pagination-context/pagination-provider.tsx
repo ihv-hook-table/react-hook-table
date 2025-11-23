@@ -4,7 +4,6 @@ import { PaginationContext } from './pagination-context';
 import { ActionTypes } from './pagination-actions';
 import { isFunction } from '@/hook-table/utils';
 import { useTableOptionsContext } from '../options-context/options-context';
-import { useLoadingContext } from '../loading-context/loading-context';
 
 export type PaginationState = {
   isLastPage?: boolean;
@@ -29,21 +28,20 @@ export const PaginationContextProvider = ({
   initialState,
 }: Props) => {
   const { pagination } = useTableOptionsContext() || {};
-  const { setLoading } = useLoadingContext();
 
   const currentPageSize =
     initialState?.pageSize || pagination?.defaultPageSize || 10;
 
-  const isManualPagination =
+  const isServersidePagination =
     initialState?.onPaginate && isFunction(initialState.onPaginate);
 
   const [state, dispatch] = useReducer(reducer, {
     pageNumber: initialState?.pageNumber || 1,
     pageSize: currentPageSize,
-    paginate: !!initialState?.onPaginate || isManualPagination,
+    paginate: !!initialState?.onPaginate || isServersidePagination,
     pageCount: getPageCount(initialState?.numberOfRecords, currentPageSize),
     isLastPage: initialState?.isLastPage,
-    isManualPagination,
+    isServersidePagination,
   });
 
   const search = async (pageNumber: number, pageSize: number) => {
@@ -53,53 +51,46 @@ export const PaginationContextProvider = ({
   };
 
   const goToPage = (pageNumber: number) => {
+    if (isServersidePagination) {
+      return search(pageNumber, state.pageSize);
+    }
+
     dispatch({
       type: ActionTypes.PAGE_NUMBER,
       pageNumber,
     });
-
-    if (isManualPagination) {
-      setLoading?.(true);
-      return search(pageNumber, state.pageSize).finally(() =>
-        setLoading?.(false),
-      );
-    }
   };
 
   const nextPage = () => {
+    if (isServersidePagination) {
+      return search(state.pageNumber + 1, state.pageSize);
+    }
+
     dispatch({
       type: ActionTypes.NEXT,
     });
-    if (isManualPagination) {
-      setLoading?.(true);
-      return search(state.pageNumber + 1, state.pageSize).finally(() =>
-        setLoading?.(false),
-      );
-    }
   };
 
   const previousPage = () => {
+    if (isServersidePagination) {
+      return search(state.pageNumber - 1, state.pageSize);
+    }
+
     dispatch({
       type: ActionTypes.PREVIOUS,
     });
-    if (isManualPagination) {
-      setLoading?.(true);
-      return search(state.pageNumber - 1, state.pageSize).finally(() =>
-        setLoading?.(false),
-      );
-    }
   };
 
   const setPageSize = (pageSize: number) => {
+    if (isServersidePagination) {
+      return search(1, pageSize);
+    }
+
     dispatch({
       type: ActionTypes.PAGE_SIZE,
       pageSize,
       pageCount: getPageCount(initialState?.numberOfRecords, pageSize),
     });
-    if (isManualPagination) {
-      setLoading?.(true);
-      return search(1, pageSize).finally(() => setLoading?.(false));
-    }
   };
 
   return (

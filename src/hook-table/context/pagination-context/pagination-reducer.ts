@@ -6,7 +6,7 @@ type State = {
   paginate?: boolean;
   pageCount?: number;
   isLastPage?: boolean;
-  isManualPagination?: boolean;
+  isServersidePagination?: boolean;
 };
 
 export const reducer = (state: State, actions: Actions) => {

@@ -123,7 +123,7 @@ export type TableDataProps = ColumnAlignmentProps & {
 
 export type PaginationProps = {
   isLastPage?: boolean;
-  isManualPagination?: boolean;
+  isServersidePagination?: boolean;
   pageNumber: number;
   pageSize: number;
   pageCount?: number;

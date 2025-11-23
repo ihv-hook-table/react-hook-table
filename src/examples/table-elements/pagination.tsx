@@ -56,7 +56,7 @@ export function Pagination() {
   const { state, goToPage, nextPage, previousPage } =
     usePaginationContext() || {};
 
-  const { pageNumber, pageCount, isLastPage, isManualPagination } = state;
+  const { pageNumber, pageCount, isLastPage, isServersidePagination } = state;
 
   if (!state?.paginate) {
     return null;
@@ -65,7 +65,7 @@ export function Pagination() {
   return (
     <div className="flex items-center justify-end py-4">
       <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-        {isManualPagination
+        {isServersidePagination
           ? `Page ${pageNumber}`
           : `Page ${pageNumber} of ${pageCount}`}
       </div>
@@ -74,7 +74,7 @@ export function Pagination() {
           variant="outline"
           className="hidden h-8 w-8 p-0 lg:flex"
           onClick={() => goToPage(1)}
-          disabled={pageNumber === 1 || (isManualPagination && isLoading)}
+          disabled={pageNumber === 1 || (isServersidePagination && isLoading)}
         >
           <span className="sr-only">Go to first page</span>
           <ChevronsLeft />
@@ -83,7 +83,7 @@ export function Pagination() {
           variant="outline"
           className="h-8 w-8 p-0"
           onClick={() => previousPage()}
-          disabled={pageNumber === 1 || (isManualPagination && isLoading)}
+          disabled={pageNumber === 1 || (isServersidePagination && isLoading)}
         >
           <span className="sr-only">Go to previous page</span>
           <ChevronLeft />
@@ -93,21 +93,21 @@ export function Pagination() {
           className="h-8 w-8 p-0"
           onClick={() => nextPage()}
           disabled={
-            (isManualPagination && (isLastPage || isLoading)) ||
-            (!isManualPagination && pageNumber === pageCount)
+            (isServersidePagination && (isLastPage || isLoading)) ||
+            (!isServersidePagination && pageNumber === pageCount)
           }
         >
           <span className="sr-only">Go to next page</span>
           <ChevronRight />
         </Button>
-        {!!pageCount && !isManualPagination && (
+        {!!pageCount && !isServersidePagination && (
           <Button
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => goToPage(pageCount || 1)}
             disabled={
-              (isManualPagination && (isLastPage || isLoading)) ||
-              (!isManualPagination && pageNumber === pageCount)
+              (isServersidePagination && (isLastPage || isLoading)) ||
+              (!isServersidePagination && pageNumber === pageCount)
             }
           >
             <span className="sr-only">Go to last page</span>

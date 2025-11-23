@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { mockData, TableData } from './mock-data';
 
 type DataResponse<T> = {
@@ -54,6 +54,7 @@ export const useMockData = (pageSize: number) => {
 
   const search = async (pageNumber: number, pageSize: number) => {
     setIsLoading(true);
+
     const result = await getMockData(pageNumber, pageSize);
 
     setIsLoading(false);
@@ -63,15 +64,13 @@ export const useMockData = (pageSize: number) => {
     }
   };
 
-  const initialSearch = useCallback(() => {
-    setIsLoading(true);
-    search(1, pageSize).then(() => setIsLoading(false));
-  }, [pageSize]);
-
   useEffect(() => {
-    // schedule initialSearch in a microtask so it doesn't call setState synchronously within the effect
-    void Promise.resolve().then(initialSearch);
-  }, [pageSize, initialSearch]);
+    async function initialSearch() {
+      await search(1, pageSize);
+    }
+
+    initialSearch();
+  }, [pageSize]);
 
   return { data, search, isLoading };
 };

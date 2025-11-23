@@ -29,7 +29,7 @@ export const useTableData = () => {
     [data, sortAccessor, sortDirection],
   );
 
-  if (state?.paginate && state.pageSize && !state.isManualPagination) {
+  if (state?.paginate && state.pageSize && !state.isServersidePagination) {
     const start = (state.pageNumber - 1) * state.pageSize;
     return sorted?.slice(start, start + state.pageSize);
   }
