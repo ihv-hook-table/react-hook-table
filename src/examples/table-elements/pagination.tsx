@@ -22,6 +22,7 @@ import {
 export const PageSize = () => {
   const { state, setPageSize } = usePaginationContext();
   const { pagination } = useTableOptionsContext();
+  const { isLoading } = useLoadingContext();
 
   const { pageSize } = state;
 
@@ -35,6 +36,7 @@ export const PageSize = () => {
       <Select
         value={String(pageSize)}
         onValueChange={value => setPageSize(Number(value))}
+        disabled={isLoading}
       >
         <SelectTrigger className="h-8 w-[70px]">
           <SelectValue placeholder={5} />
