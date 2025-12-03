@@ -4,7 +4,7 @@ import { CustomRenderer } from './custom-renderer';
 type Props = {
   isOpen: boolean;
   toggle: () => void;
-  identifier?: string;
+  action?: string;
 };
 
 export const Expander = (props: Props) => {

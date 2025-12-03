@@ -42,8 +42,13 @@ type NestedKeyOf<T, K = keyof T> = K extends keyof T & (string | number)
 
 export type ValueFormatKey<
   F extends FormatOptions = FormatOptions,
-  K extends keyof F = keyof F,
+  K = keyof F,
 > = K | undefined;
+
+export type PaginationValue = {
+  pageNumber: number;
+  pageSize: number;
+};
 
 /**
  * Column props
@@ -77,7 +82,7 @@ export type ColumnProps<
   footer?: string | number | boolean | FooterProps;
   header?: string | string[];
   wrap?: boolean;
-  expandable?: boolean | string;
+  action?: boolean | string;
   defaultExpanded?: boolean | ((rowData: T) => boolean);
 } & (ColumnPropsWithAccessor<T, F> | ColumnPropsWithChildren<T>);
 
@@ -94,7 +99,7 @@ export type ColumnAlignmentProps = {
 export type TableExpanderProps = {
   isOpen: boolean;
   toggle: () => void;
-  identifier?: string;
+  action?: string;
 };
 
 export type NoResultsProps = {

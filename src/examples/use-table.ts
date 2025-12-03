@@ -30,6 +30,14 @@ type FormatProps = {
 };
 
 export const useTable = <T extends TableRecord = TableRecord>() => {
+  const onPaginate = ({
+    pageNumber,
+    pageSize,
+  }: {
+    pageNumber: number;
+    pageSize: number;
+  }) => console.log(pageNumber, pageSize);
+
   const tableComponents = useHookTable<T, FormatProps>({
     components: {
       BottomToolbar: Pagination,
@@ -54,6 +62,7 @@ export const useTable = <T extends TableRecord = TableRecord>() => {
     pagination: {
       defaultPageSize: 5,
       pageSizeOptions: [5, 10, 20],
+      onPaginate,
     },
     translate,
   });

@@ -9,7 +9,12 @@ import {
   TableCaption,
 } from '../components';
 import { type TableOptionsContextType } from '../context/options-context/options-context';
-import { CaptionProps, FormatOptions, TableRecord } from '../types';
+import {
+  CaptionProps,
+  FormatOptions,
+  PaginationValue,
+  TableRecord,
+} from '../types';
 import { TableContextProvider } from '../context/table-context-provider';
 
 type TableProps<T extends TableRecord = TableRecord> = {
@@ -22,7 +27,7 @@ type TableProps<T extends TableRecord = TableRecord> = {
   isLoading?: boolean;
   paginate?: {
     isLastPage?: boolean;
-    onPaginate?: (pageNumber: number, pageSize: number) => Promise<void>;
+    onPaginate?: (value: PaginationValue) => Promise<void>;
     pageNumber?: number;
     pageSize?: number;
   };

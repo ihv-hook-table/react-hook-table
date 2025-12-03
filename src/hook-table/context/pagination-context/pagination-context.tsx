@@ -15,7 +15,7 @@ type PaginationContextType = {
   nextPage: () => void;
   previousPage: () => void;
   goToPage: (pageNumber: number) => void;
-  search?: (pageNumber: number, pageSize: number) => Promise<void>;
+  search?: (pageNumber: number, pageSize: number) => void;
 };
 
 export const PaginationContext = createContext<PaginationContextType>({

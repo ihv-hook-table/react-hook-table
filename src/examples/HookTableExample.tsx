@@ -40,14 +40,14 @@ export const HookTableExample = () => {
         pageSize: data?.pageSize,
         pageNumber: data?.pageNumber,
         isLastPage: data?.isLastPage,
-        onPaginate: (pageNumber, pageSize) => search(pageNumber, pageSize),
+        onPaginate: ({ pageNumber, pageSize }) => search(pageNumber, pageSize),
       }}
       sortingEnabled
     >
       <Column
-        expandable
+        action
         // defaultExpanded={({ id }) => ['Row 2', 'Row 8'].includes(id)}
-        colWidth={1}
+        colWidth={2.1}
       >
         {({ additionalData }) => <Subtable data={additionalData} />}
       </Column>
@@ -76,7 +76,7 @@ export const HookTableExample = () => {
           })
         }
       </Column>
-      <Column expandable="delete" colWidth={1} footer="&nbsp;">
+      <Column action="delete" colWidth={2.1} footer="&nbsp;">
         {({ id }, { closeSubrow }) => <Confirm id={id} onClose={closeSubrow} />}
       </Column>
     </Table>

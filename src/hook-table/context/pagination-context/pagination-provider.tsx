@@ -4,12 +4,13 @@ import { PaginationContext } from './pagination-context';
 import { ActionTypes } from './pagination-actions';
 import { isFunction } from '@/hook-table/utils';
 import { useTableOptionsContext } from '../options-context/options-context';
+import { PaginationValue } from '@/hook-table/types';
 
 export type PaginationState = {
   isLastPage?: boolean;
   pageNumber?: number;
   pageSize?: number;
-  onPaginate?: (pageNumber: number, pageSize: number) => Promise<void>;
+  onPaginate?: (value: PaginationValue) => Promise<void>;
   numberOfRecords?: number;
 };
 
@@ -44,9 +45,12 @@ export const PaginationContextProvider = ({
     isServersidePagination,
   });
 
-  const search = async (pageNumber: number, pageSize: number) => {
-    if (initialState?.onPaginate && isFunction(initialState.onPaginate)) {
-      return await initialState?.onPaginate(pageNumber, pageSize);
+  const search = (pageNumber: number, pageSize: number) => {
+    const paginationFunction =
+      initialState?.onPaginate || pagination?.onPaginate;
+
+    if (paginationFunction && isFunction(paginationFunction)) {
+      paginationFunction({ pageNumber, pageSize });
     }
   };
 

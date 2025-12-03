@@ -7,12 +7,8 @@ import {
 
 // Element that expands the row when clicked.
 // If multiple expanders are used, the identifier prop can be used to differentiate them.
-export const Expander = ({
-  isOpen,
-  toggle,
-  identifier,
-}: TableExpanderProps) => {
-  if (identifier === 'delete') {
+export const Expander = ({ isOpen, toggle, action }: TableExpanderProps) => {
+  if (action === 'delete') {
     return (
       <button type="button" onClick={toggle} className="p-3">
         <LucideCircleX size={14} className="text-muted-foreground" />

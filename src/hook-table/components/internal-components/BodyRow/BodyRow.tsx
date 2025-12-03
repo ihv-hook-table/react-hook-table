@@ -12,12 +12,12 @@ type Props<
   rowData: T;
 };
 
-const getExpandableIdentifier = (expandable?: boolean | string) => {
-  if (typeof expandable === 'string') {
-    return expandable;
+const getActionIdentifier = (action?: boolean | string) => {
+  if (typeof action === 'string') {
+    return action;
   }
 
-  return expandable ? 'default' : undefined;
+  return action ? 'default' : undefined;
 };
 
 export const BodyRow = <
@@ -28,7 +28,7 @@ export const BodyRow = <
   rowData,
 }: Props<T, F>) => {
   const isDefaultExpanded = useMemo(() => {
-    const values = columns.filter(({ expandable }) => !!expandable);
+    const values = columns.filter(({ action }) => !!action);
 
     const expandedRow = values.filter(({ defaultExpanded }) =>
       isFunction(defaultExpanded) ? defaultExpanded(rowData) : defaultExpanded,
@@ -41,7 +41,7 @@ export const BodyRow = <
     }
 
     return expandedRow?.length
-      ? getExpandableIdentifier(expandedRow[0]?.expandable)
+      ? getActionIdentifier(expandedRow[0]?.action)
       : undefined;
   }, [columns, rowData]);
 
@@ -50,9 +50,8 @@ export const BodyRow = <
   );
 
   const { children } =
-    columns.find(
-      ({ expandable }) => expanded === getExpandableIdentifier(expandable),
-    ) || {};
+    columns.find(({ action }) => expanded === getActionIdentifier(action)) ||
+    {};
 
   const expandableContent = isFunction(children)
     ? children(rowData, { closeSubrow: () => setExpanded(undefined) })
@@ -61,26 +60,25 @@ export const BodyRow = <
   return (
     <>
       <TableRow data-expanded={!!expanded}>
-        {columns.map(({ expandable, ...columnRest }, colIndex) => {
+        {columns.map(({ action, ...columnRest }, colIndex) => {
           const { alignment = 'left', wrap = false } = columnRest;
-          const currentIdentifier = getExpandableIdentifier(expandable);
-          const isExpanded = expanded === currentIdentifier;
+          const actionIdentifier = getActionIdentifier(action);
+          const isExpanded = expanded === actionIdentifier;
 
           const toggle = () =>
-            setExpanded(expanded && isExpanded ? undefined : currentIdentifier);
-
+            setExpanded(expanded && isExpanded ? undefined : actionIdentifier);
           return (
             <TableData
               key={colIndex}
               alignment={alignment}
-              expandable={!!expandable}
+              expandable={!!action}
               data-wrap={wrap}
             >
-              {expandable ? (
+              {action ? (
                 <Expander
                   isOpen={isExpanded}
                   toggle={toggle}
-                  identifier={currentIdentifier}
+                  action={actionIdentifier}
                 />
               ) : (
                 <ColumnData {...columnRest} rowData={rowData} />

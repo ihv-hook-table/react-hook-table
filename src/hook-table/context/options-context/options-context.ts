@@ -13,6 +13,7 @@ import {
   FormatOptions,
   NoResultsProps,
   TableRowProps,
+  PaginationValue,
 } from '../../types';
 
 export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
@@ -111,6 +112,10 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param pageSizeOptions - The page size options to paginate the table.
      */
     pageSizeOptions?: number[];
+    /**
+     * @param onPaginate - Callback function called when pagination occurs.
+     */
+    onPaginate?: (params: PaginationValue) => void;
   };
 };
 
