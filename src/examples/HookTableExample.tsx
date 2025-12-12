@@ -1,5 +1,5 @@
 import { Confirm } from '@/examples/table-elements';
-import { AdditionalData, TableData } from './mock-data';
+import { AdditionalData, mockData, TableData } from './mock-data';
 import { useTable } from './use-table';
 import { formatMoney } from './value-format/format-money';
 import { useMockData } from './use-mock-data';
@@ -37,10 +37,10 @@ export const HookTableExample = () => {
         alignment: 'top-left',
       }}
       paginate={{
-        pageSize: data?.pageSize,
-        pageNumber: data?.pageNumber,
-        isLastPage: data?.isLastPage,
         onPaginate: ({ pageNumber, pageSize }) => search(pageNumber, pageSize),
+        pageNumber: data?.pageNumber,
+        pageSize: data?.pageSize,
+        isLastPage: data?.isLastPage,
       }}
       sortingEnabled
     >

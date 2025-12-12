@@ -22,9 +22,23 @@ type Props<
   columns?: ReactNode;
   globalOptions?: TableOptionsContextType<F>;
   isLoading?: boolean;
-  paginate?: PaginationState;
+  paginate?: PaginationState | boolean;
   data?: T[];
   sortingEnabled?: boolean;
+};
+
+const getPaginationProps = (paginate?: PaginationState | boolean) => {
+  const isPaginationEnabled = paginate === true || typeof paginate === 'object';
+  const isServersidePagination =
+    typeof paginate === 'object' && !!paginate.onPaginate;
+
+  const paginationProps = typeof paginate === 'boolean' ? {} : paginate;
+
+  return {
+    isPaginationEnabled,
+    isServersidePagination,
+    ...paginationProps,
+  };
 };
 
 export const TableContextProvider = <
@@ -35,7 +49,7 @@ export const TableContextProvider = <
   globalOptions,
   columns,
   data,
-  paginate,
+  paginate = false,
   isLoading = false,
   sortingEnabled = false,
 }: Props<T, F>) => {
@@ -56,7 +70,7 @@ export const TableContextProvider = <
           <PaginationContextProvider
             initialState={{
               numberOfRecords: data?.length,
-              ...paginate,
+              ...getPaginationProps(paginate),
             }}
           >
             <SortingContextProvider initialState={{ sortingEnabled }}>

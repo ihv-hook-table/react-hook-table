@@ -16,7 +16,10 @@ export type PaginationState = {
 
 type Props = {
   children: ReactNode;
-  initialState?: PaginationState;
+  initialState?: PaginationState & {
+    isPaginationEnabled: boolean;
+    isServersidePagination: boolean;
+  };
 };
 
 const getPageCount = (numberOfRecords?: number, pageSize?: number) => {
@@ -30,16 +33,15 @@ export const PaginationContextProvider = ({
 }: Props) => {
   const { pagination } = useTableOptionsContext() || {};
 
+  const { isPaginationEnabled, isServersidePagination } = initialState || {};
+
   const currentPageSize =
     initialState?.pageSize || pagination?.defaultPageSize || 10;
-
-  const isServersidePagination =
-    initialState?.onPaginate && isFunction(initialState.onPaginate);
 
   const [state, dispatch] = useReducer(reducer, {
     pageNumber: initialState?.pageNumber || 1,
     pageSize: currentPageSize,
-    paginate: !!initialState?.onPaginate || isServersidePagination,
+    paginate: isPaginationEnabled,
     pageCount: getPageCount(initialState?.numberOfRecords, currentPageSize),
     isLastPage: initialState?.isLastPage,
     isServersidePagination,

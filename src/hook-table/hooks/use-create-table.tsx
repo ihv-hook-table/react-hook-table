@@ -25,12 +25,14 @@ type TableProps<T extends TableRecord = TableRecord> = {
    * @param isLoading - Handle initial loading state of the table. If manual pagination is enabled, futher loading state is handled internally.
    */
   isLoading?: boolean;
-  paginate?: {
-    isLastPage?: boolean;
-    onPaginate?: (value: PaginationValue) => Promise<void>;
-    pageNumber?: number;
-    pageSize?: number;
-  };
+  paginate?:
+    | {
+        isLastPage?: boolean;
+        onPaginate?: (value: PaginationValue) => Promise<void>;
+        pageNumber?: number;
+        pageSize?: number;
+      }
+    | boolean;
   sortingEnabled?: boolean;
 } & ComponentProps<'table'>;
 
