@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.6.0
+
+### Minor Changes
+
+- 08de178: Add essential sorting functionality
+
 ## 0.5.4
 
 ### Patch Changes
