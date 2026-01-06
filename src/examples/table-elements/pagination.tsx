@@ -60,6 +60,13 @@ export function Pagination() {
 
   const { pageNumber, pageCount, isLastPage, isServersidePagination } = state;
 
+  const isPreviousDisabled =
+    pageNumber === 1 || (isServersidePagination && isLoading);
+
+  const isNextDisabled =
+    (isServersidePagination && (isLastPage || isLoading)) ||
+    (!isServersidePagination && pageNumber === pageCount);
+
   if (!state?.paginate) {
     return null;
   }
@@ -76,7 +83,7 @@ export function Pagination() {
           variant="outline"
           className="hidden h-8 w-8 p-0 lg:flex"
           onClick={() => goToPage(1)}
-          disabled={pageNumber === 1 || (isServersidePagination && isLoading)}
+          disabled={isPreviousDisabled}
         >
           <span className="sr-only">Go to first page</span>
           <ChevronsLeft />
@@ -85,7 +92,7 @@ export function Pagination() {
           variant="outline"
           className="h-8 w-8 p-0"
           onClick={() => previousPage()}
-          disabled={pageNumber === 1 || (isServersidePagination && isLoading)}
+          disabled={isPreviousDisabled}
         >
           <span className="sr-only">Go to previous page</span>
           <ChevronLeft />
@@ -94,10 +101,7 @@ export function Pagination() {
           variant="outline"
           className="h-8 w-8 p-0"
           onClick={() => nextPage()}
-          disabled={
-            (isServersidePagination && (isLastPage || isLoading)) ||
-            (!isServersidePagination && pageNumber === pageCount)
-          }
+          disabled={isNextDisabled}
         >
           <span className="sr-only">Go to next page</span>
           <ChevronRight />
@@ -107,10 +111,7 @@ export function Pagination() {
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => goToPage(pageCount || 1)}
-            disabled={
-              (isServersidePagination && (isLastPage || isLoading)) ||
-              (!isServersidePagination && pageNumber === pageCount)
-            }
+            disabled={isNextDisabled}
           >
             <span className="sr-only">Go to last page</span>
             <ChevronsRight />

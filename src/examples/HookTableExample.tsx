@@ -1,5 +1,5 @@
 import { Confirm } from '@/examples/table-elements';
-import { AdditionalData, mockData, TableData } from './mock-data';
+import { AdditionalData, TableData } from './mock-data';
 import { useTable } from './use-table';
 import { formatMoney } from './value-format/format-money';
 import { useMockData } from './use-mock-data';
