@@ -47,23 +47,29 @@ const getMockData = async (
 };
 
 export const useMockData = (pageSize: number) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<DataResponse<TableData> | undefined>(
     undefined,
   );
 
-  const [isLoading, setIsLoading] = useState(false);
+  async function search(pageNumber: number, pageSize: number) {
+    setIsLoading(true);
 
-  const search = async (pageNumber: number, pageSize: number) => {
     const result = await getMockData(pageNumber, pageSize);
+
+    setIsLoading(false);
 
     if (result) {
       setData(result);
     }
-  };
+  }
 
   useEffect(() => {
-    setIsLoading(true);
-    search(1, pageSize).then(() => setIsLoading(false));
+    async function initialSearch() {
+      await search(1, pageSize);
+    }
+
+    initialSearch();
   }, [pageSize]);
 
   return { data, search, isLoading };

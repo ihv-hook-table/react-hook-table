@@ -1,19 +1,15 @@
 import { ComponentProps } from 'react';
-import { clsx } from '../../utils';
-import { useCustomComponent } from '../../context/use-custom-component';
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
+import { CustomRenderer } from './custom-renderer';
 
-type Props = ComponentProps<'div'> & {
-  isSecondaryValue?: boolean;
-};
+type Props = ComponentProps<'div'>;
 
-export const Value = ({ isSecondaryValue, ...rest }: Props) => {
+export const Value = (props: Props) => {
   const CustomValue = useCustomComponent<Props>('Value');
 
   if (CustomValue) {
-    return <CustomValue isSecondaryValue={isSecondaryValue} {...rest} />;
+    return <CustomRenderer Component={CustomValue} props={props} />;
   }
 
-  return (
-    <div className={clsx(isSecondaryValue && 'secondary-value')} {...rest} />
-  );
+  return <div {...props} />;
 };

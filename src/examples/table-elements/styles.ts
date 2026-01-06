@@ -7,13 +7,8 @@ export const cellAlignment = cva('', {
       center: 'text-center',
       right: 'text-right',
     },
-    isMultiValue: {
-      true: 'align-top',
-      false: 'align-middle',
-    },
   },
   defaultVariants: {
     alignment: 'left',
-    isMultiValue: false,
   },
 });

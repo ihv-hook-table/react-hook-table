@@ -29,7 +29,11 @@ export default defineConfig({
     legalComments: 'none',
   },
   plugins: [
-    react(),
+    react(/*{
+      babel: {
+        plugins: ['babel-plugin-react-compiler'],
+      },
+    }*/),
     dtsBundleGenerator({
       fileName: 'index.d.ts',
       compilation: {

@@ -1,21 +1,16 @@
-import { useTableData } from '../../../context/table-data-context';
+import { useTableData } from '@/hook-table/context/data-context/data-context';
 import type { ColumnProps, TableRecord } from '../../../types';
 import { getFooterProps } from '../../../utils';
 import { TableFooter, TableHead, TableRow } from '../../default-components';
+import { useColumnContext } from '@/hook-table/context/column-context/column-context';
 
-type Props<T extends TableRecord = TableRecord> = {
-  columns: ColumnProps<T>[];
-  isLoading?: boolean;
-};
+export const Footer = () => {
+  const data = useTableData();
+  const columns = useColumnContext() || [];
 
-export const Footer = <T extends TableRecord = TableRecord>({
-  columns,
-  isLoading,
-}: Props<T>) => {
   const hasFooter = columns.some(col => col.footer);
-  const data = useTableData<T>();
 
-  if (!data || !columns || !hasFooter || isLoading) {
+  if (!data || !columns.length || !hasFooter) {
     return null;
   }
 
@@ -48,7 +43,7 @@ const Cell = <T extends TableRecord = TableRecord>({
   const alignment = footerAlignment ?? columnAlignment;
 
   return (
-    <TableHead isMultiValue={false} alignment={alignment} colSpan={colSpan}>
+    <TableHead alignment={alignment} colSpan={colSpan}>
       {String(value)}
     </TableHead>
   );

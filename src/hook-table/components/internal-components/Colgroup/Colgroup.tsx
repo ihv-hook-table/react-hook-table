@@ -1,15 +1,13 @@
-import type { ColumnProps, TableRecord } from '../../../types';
+import { useColumnContext } from '@/hook-table/context/column-context/column-context';
 
-type Props<T extends TableRecord = TableRecord> = {
-  columns: ColumnProps<T>[];
+export const ColGroup = () => {
+  const columns = useColumnContext();
+
+  return (
+    <colgroup>
+      {columns?.map(({ colWidth }, idx) => (
+        <col key={idx} {...(colWidth && { width: `${colWidth}%` })} />
+      ))}
+    </colgroup>
+  );
 };
-
-export const ColGroup = <T extends TableRecord = TableRecord>({
-  columns,
-}: Props<T>) => (
-  <colgroup>
-    {columns.map(({ colWidth }, idx) => (
-      <col key={idx} {...(colWidth && { width: `${colWidth}%` })} />
-    ))}
-  </colgroup>
-);

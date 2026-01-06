@@ -3,15 +3,13 @@ import { cn } from '@/lib/utils';
 
 // Overrides the default value component inside the td element
 
-export const Value = ({
-  isSecondaryValue,
-  ...rest
-}: ComponentProps<'div'> & {
-  // If cell has more than one value, the secondary value can be styled differently if needed
-  isSecondaryValue?: boolean;
-}) => (
+export const Value = (props: ComponentProps<'div'>) => (
   <div
-    className={cn(isSecondaryValue && 'text-muted-foreground text-xs')}
-    {...rest}
+    className={cn(
+      'data-[secondary=true]:text-muted-foreground',
+      'data-[secondary=true]:text-xs',
+      'data-[secondary=true]:font-normal',
+    )}
+    {...props}
   />
 );

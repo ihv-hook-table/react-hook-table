@@ -1,15 +1,15 @@
 import { ComponentProps } from 'react';
-import { clsx } from '../../utils';
-import { useCustomComponent } from '../../context/use-custom-component';
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
+import { CustomRenderer } from './custom-renderer';
 
 type Props = ComponentProps<'table'>;
 
-export const Table = ({ className, ...rest }: Props) => {
+export const Table = (props: Props) => {
   const CustomTable = useCustomComponent<Props>('Table');
 
   if (CustomTable) {
-    return <CustomTable {...rest} className={className} />;
+    return <CustomRenderer Component={CustomTable} props={props} />;
   }
 
-  return <table {...rest} className={clsx('ihv-table', className)} />;
+  return <table {...props} />;
 };

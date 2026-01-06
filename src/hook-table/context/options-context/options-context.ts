@@ -2,8 +2,10 @@ import {
   ComponentType,
   createContext,
   HTMLAttributes,
+  HtmlHTMLAttributes,
   TdHTMLAttributes,
   ThHTMLAttributes,
+  use,
 } from 'react';
 import {
   ColumnAlignmentProps,
@@ -11,8 +13,8 @@ import {
   FormatOptions,
   NoResultsProps,
   TableRowProps,
-  PaginationProps,
-} from '../types';
+  PaginationValue,
+} from '../../types';
 
 export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
   /**
@@ -67,7 +69,6 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
       TdHTMLAttributes<HTMLTableCellElement> &
         ColumnAlignmentProps & {
           expandable?: boolean;
-          isSubRow?: boolean;
           wrap: boolean;
         }
     >;
@@ -77,12 +78,10 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      */
     TableFooter?: ComponentType<HTMLAttributes<HTMLTableSectionElement>>;
     /**
-     * @param Value - Component that renders the cell value. It can be used to format the cell value. Accepts the isSecondaryValue prop, that turns true when the cell has more than one value.
+     * @param Value - Component that renders the cell value. It can be used to format the cell value.
      * @returns
      */
-    Value?: ComponentType<
-      HTMLAttributes<HTMLDivElement> & { isSecondaryValue?: boolean }
-    >;
+    Value?: ComponentType<HTMLAttributes<HTMLDivElement>>;
     /**
      * @param TableCaption - Html caption element.
      * @returns
@@ -94,15 +93,15 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      */
     NoResults?: ComponentType<NoResultsProps>;
     /**
-     * @param TopToolbar - Component for the top toolbar. Receives the pagination props.
+     * @param TopToolbar - Component for the top toolbar. Can access table context.
      * @returns
      */
-    TopToolbar?: ComponentType<PaginationProps>;
+    TopToolbar?: ComponentType<HtmlHTMLAttributes<HTMLDivElement>>;
     /**
-     * @param BottomToolbar - Component for the top toolbar. Receives the pagination props.
+     * @param BottomToolbar - Component for the bottom toolbar. Can access table context.
      * @returns
      */
-    BottomToolbar?: ComponentType<PaginationProps>;
+    BottomToolbar?: ComponentType<HtmlHTMLAttributes<HTMLDivElement>>;
   };
   pagination?: {
     /**
@@ -113,6 +112,10 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param pageSizeOptions - The page size options to paginate the table.
      */
     pageSizeOptions?: number[];
+    /**
+     * @param onPaginate - Callback function called when pagination occurs.
+     */
+    onPaginate?: (params: PaginationValue) => void;
   };
 };
 
@@ -120,3 +123,5 @@ const createTableOptionsContext = <F extends FormatOptions = FormatOptions>() =>
   createContext<TableOptionsContextType<F> | undefined>(undefined);
 
 export const TableOptionsContext = createTableOptionsContext();
+
+export const useTableOptionsContext = () => use(TableOptionsContext) || {};

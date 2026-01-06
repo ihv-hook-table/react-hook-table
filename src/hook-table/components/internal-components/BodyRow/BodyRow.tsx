@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 import { ColumnData } from './ColumnData';
-import { isArrayType, isFunction } from '../../../utils';
+import { isFunction } from '../../../utils';
 import { TableData, TableRow, Expander } from '../../default-components';
 
 type Props<
@@ -12,20 +12,23 @@ type Props<
   rowData: T;
 };
 
-const getExpandableIdentifier = (expandable?: boolean | string) => {
-  if (typeof expandable === 'string') {
-    return expandable;
+const getActionIdentifier = (action?: boolean | string) => {
+  if (typeof action === 'string') {
+    return action;
   }
 
-  return expandable ? 'default' : undefined;
+  return action ? 'default' : undefined;
 };
 
-export const BodyRow = <T extends TableRecord = TableRecord>({
+export const BodyRow = <
+  T extends TableRecord = TableRecord,
+  F extends FormatOptions = FormatOptions,
+>({
   columns,
   rowData,
-}: Props<T, FormatOptions>) => {
+}: Props<T, F>) => {
   const isDefaultExpanded = useMemo(() => {
-    const values = columns.filter(({ expandable }) => !!expandable);
+    const values = columns.filter(({ action }) => !!action);
 
     const expandedRow = values.filter(({ defaultExpanded }) =>
       isFunction(defaultExpanded) ? defaultExpanded(rowData) : defaultExpanded,
@@ -38,7 +41,7 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
     }
 
     return expandedRow?.length
-      ? getExpandableIdentifier(expandedRow[0]?.expandable)
+      ? getActionIdentifier(expandedRow[0]?.action)
       : undefined;
   }, [columns, rowData]);
 
@@ -47,13 +50,8 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
   );
 
   const { children } =
-    columns.find(
-      ({ expandable }) => expanded === getExpandableIdentifier(expandable),
-    ) || {};
-
-  const isMultiValue = columns.some(
-    ({ accessor }) => isArrayType(accessor) && accessor.length > 1,
-  );
+    columns.find(({ action }) => expanded === getActionIdentifier(action)) ||
+    {};
 
   const expandableContent = isFunction(children)
     ? children(rowData, { closeSubrow: () => setExpanded(undefined) })
@@ -61,28 +59,26 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
 
   return (
     <>
-      <TableRow expanded={!!expanded}>
-        {columns.map(({ expandable, ...columnRest }, colIndex) => {
+      <TableRow data-expanded={!!expanded}>
+        {columns.map(({ action, ...columnRest }, colIndex) => {
           const { alignment = 'left', wrap = false } = columnRest;
-          const currentIdentifier = getExpandableIdentifier(expandable);
-          const isExpanded = expanded === currentIdentifier;
+          const actionIdentifier = getActionIdentifier(action);
+          const isExpanded = expanded === actionIdentifier;
 
           const toggle = () =>
-            setExpanded(expanded && isExpanded ? undefined : currentIdentifier);
-
+            setExpanded(expanded && isExpanded ? undefined : actionIdentifier);
           return (
             <TableData
               key={colIndex}
               alignment={alignment}
-              isMultiValue={isMultiValue}
-              expandable={!!expandable}
-              wrap={wrap}
+              expandable={!!action}
+              data-wrap={wrap}
             >
-              {expandable ? (
+              {action ? (
                 <Expander
                   isOpen={isExpanded}
                   toggle={toggle}
-                  identifier={currentIdentifier}
+                  action={actionIdentifier}
                 />
               ) : (
                 <ColumnData {...columnRest} rowData={rowData} />
@@ -93,12 +89,11 @@ export const BodyRow = <T extends TableRecord = TableRecord>({
       </TableRow>
 
       {expanded && (
-        <TableRow subrow>
+        <TableRow data-subrow={true}>
           <TableData
-            isMultiValue={false}
+            data-subrow={true}
             colSpan={columns.length}
-            isSubRow
-            wrap={false}
+            data-wrap={false}
           >
             {expandableContent}
           </TableData>

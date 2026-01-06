@@ -1,7 +1,7 @@
 import { use } from 'react';
 import type { ColumnProps, TableRecord } from '../../../../types';
-import { isFunction, toArray } from '../../../../utils';
-import { TableOptionsContext } from '../../../../context/table-options-context';
+import { isFunction, toArray, getFirst } from '../../../../utils';
+import { TableOptionsContext } from '../../../../context/options-context/options-context';
 import { Value, TableHead } from '../../../default-components';
 
 type HeaderCellProps<T extends TableRecord = TableRecord> = {
@@ -10,12 +10,14 @@ type HeaderCellProps<T extends TableRecord = TableRecord> = {
 
 export const Cell = <T extends TableRecord = TableRecord>({
   column,
-  isMultiValue,
-}: HeaderCellProps<T> & { isMultiValue: boolean }) => {
-  const { alignment = 'left' } = column || {};
+}: HeaderCellProps<T>) => {
+  const { alignment = 'left', accessor, sortAccessor } = column || {};
+
+  // Determine sortAccessor key
+  const sortAccessorKey = sortAccessor ?? getFirst(accessor);
 
   return (
-    <TableHead alignment={alignment} isMultiValue={isMultiValue}>
+    <TableHead alignment={alignment} sortAccessor={sortAccessorKey}>
       <CellValue {...column} />
     </TableHead>
   );
@@ -24,6 +26,7 @@ export const Cell = <T extends TableRecord = TableRecord>({
 const CellValue = <T extends TableRecord = TableRecord>({
   accessor,
   header,
+  action,
 }: ColumnProps<T>) => {
   const { translate } = use(TableOptionsContext) || {};
   const headerLabel = header ?? accessor;
@@ -36,7 +39,7 @@ const CellValue = <T extends TableRecord = TableRecord>({
     const value = isFunction(translate) && label ? translate(label) : label;
 
     return (
-      <Value key={idx} isSecondaryValue={isSecondaryLabel}>
+      <Value key={idx} data-secondary={isSecondaryLabel && !action}>
         {value}
       </Value>
     );

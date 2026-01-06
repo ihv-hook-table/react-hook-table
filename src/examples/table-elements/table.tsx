@@ -5,7 +5,7 @@ type Props = ComponentPropsWithRef<'table'>;
 
 export const Table = (props: Props) => {
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border bg-white">
       <CnTable {...props} />
     </div>
   );

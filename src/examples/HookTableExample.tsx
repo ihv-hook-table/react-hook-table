@@ -31,26 +31,28 @@ export const HookTableExample = () => {
     <Table
       data={data?.values}
       // data={mockData}
-      // paginate
       isLoading={isLoading}
       caption={{
         value: 'Example table rendering with chadcn/ui table elements',
         alignment: 'top-left',
       }}
-      pageSize={data?.pageSize}
-      pageNumber={data?.pageNumber}
-      isLastPage={data?.isLastPage}
-      onPaginate={(pageNumber, pageSize) => search(pageNumber, pageSize)}
+      paginate={{
+        onPaginate: ({ pageNumber, pageSize }) => search(pageNumber, pageSize),
+        pageNumber: data?.pageNumber,
+        pageSize: data?.pageSize,
+        isLastPage: data?.isLastPage,
+      }}
+      sortingEnabled
     >
       <Column
-        expandable
+        action
         // defaultExpanded={({ id }) => ['Row 2', 'Row 8'].includes(id)}
-        colWidth={1}
+        colWidth={2.1}
       >
         {({ additionalData }) => <Subtable data={additionalData} />}
       </Column>
-      <Column accessor="id" colWidth={10} />
-      <Column accessor="date" format="dateTime" colWidth={10} />
+      <Column accessor={['id', 'item']} colWidth={10} />
+      <Column accessor="date" format="date" colWidth={10} />
       <Column accessor="item" />
       <Column accessor="qty" alignment="center" colWidth={10} />
       <Column
@@ -59,6 +61,7 @@ export const HookTableExample = () => {
         alignment="right"
         footer={{ value: 'Total:', colSpan: 6 }}
         colWidth={10}
+        sortAccessor="price.amount"
       />
       <Column
         header="Row total"
@@ -73,7 +76,7 @@ export const HookTableExample = () => {
           })
         }
       </Column>
-      <Column expandable="delete" colWidth={1} footer="&nbsp;">
+      <Column action="delete" colWidth={2.1} footer="&nbsp;">
         {({ id }, { closeSubrow }) => <Confirm id={id} onClose={closeSubrow} />}
       </Column>
     </Table>

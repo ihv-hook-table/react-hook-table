@@ -1,28 +1,15 @@
-import { ComponentProps, use } from 'react';
-import { useCustomComponent } from '../../context/use-custom-component';
-import { clsx } from '../../utils';
-import { PaginationContext } from '@/hook-table/context/pagination-context/pagination-context';
+import { ComponentProps } from 'react';
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
+import { CustomRenderer } from './custom-renderer';
 
-type Props = ComponentProps<'tr'> & {
-  subrow?: boolean;
-  expanded?: boolean;
-  isLoading?: boolean;
-};
+type Props = ComponentProps<'tr'>;
 
 export const TableRow = (props: Props) => {
   const CustomTableRow = useCustomComponent<Props>('TableRow');
-  const { state } = use(PaginationContext) || {};
 
   if (CustomTableRow) {
-    return <CustomTableRow {...props} isLoading={state?.isLoading} />;
+    return <CustomRenderer Component={CustomTableRow} props={props} />;
   }
 
-  const { className, subrow, expanded, ...rest } = props;
-
-  return (
-    <tr
-      className={clsx(subrow && 'subrow', expanded && 'expanded', className)}
-      {...rest}
-    />
-  );
+  return <tr {...props} />;
 };

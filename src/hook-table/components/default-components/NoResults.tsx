@@ -1,20 +1,21 @@
 import { use } from 'react';
-import { useCustomComponent } from '../../context/use-custom-component';
 import { NoResultsProps } from '../../types';
 import { TableBody } from './TableBody';
 import { TableData } from './TableData';
 import { TableRow } from './TableRow';
-import { PaginationContext } from '../../context/pagination-context/pagination-context';
+import { useCustomComponent } from '@/hook-table/hooks/use-custom-component';
+import { LoadingContext } from '@/hook-table/context/loading-context/loading-context';
+import { CustomRenderer } from './custom-renderer';
 
 export const NoResults = ({ columnCount }: NoResultsProps) => {
   const CustomNoResults = useCustomComponent<NoResultsProps>('NoResults');
-  const { state } = use(PaginationContext) || {};
+  const { isLoading } = use(LoadingContext);
 
   if (CustomNoResults) {
     return (
-      <CustomNoResults
-        isLoading={!!state?.isLoading}
-        columnCount={columnCount}
+      <CustomRenderer
+        Component={CustomNoResults}
+        props={{ isLoading, columnCount }}
       />
     );
   }
@@ -22,8 +23,8 @@ export const NoResults = ({ columnCount }: NoResultsProps) => {
   return (
     <TableBody>
       <TableRow>
-        <TableData colSpan={columnCount} isMultiValue={false}>
-          {state?.isLoading ? 'Loading' : 'No results'}
+        <TableData colSpan={columnCount}>
+          {isLoading ? 'Loading' : 'No results'}
         </TableData>
       </TableRow>
     </TableBody>

@@ -2,7 +2,7 @@ import { ComponentType, use } from 'react';
 import {
   TableOptionsContext,
   TableOptionsContextType,
-} from './table-options-context';
+} from '../context/options-context/options-context';
 
 type TableFormatComponentKeys = keyof NonNullable<
   TableOptionsContextType['components']

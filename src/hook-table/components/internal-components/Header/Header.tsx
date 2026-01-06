@@ -1,25 +1,28 @@
-import type { ColumnProps, TableRecord } from '../../../types';
-import { isArrayType } from '../../../utils';
+import { useColumnContext } from '@/hook-table/context/column-context/column-context';
 import { TableHeader, TableRow } from '../../default-components';
 import { Cell } from './Cell/Cell';
 
-type Props<T extends TableRecord = TableRecord> = {
-  columns: ColumnProps<T>[];
-};
+function getFirstKey(value?: string | string[]): string | undefined {
+  if (Array.isArray(value)) {
+    return value.length > 0 ? value[0] : undefined;
+  }
+  return typeof value === 'string' ? value : undefined;
+}
 
-export const Header = <T extends TableRecord = TableRecord>({
-  columns,
-}: Props<T>) => {
-  const hasMultiLabels = columns.some(({ header, accessor }) => {
-    const labels = header ?? accessor;
-    return isArrayType(labels) && labels.length > 1;
-  });
+export const Header = () => {
+  const columns = useColumnContext() || [];
 
   return (
     <TableHeader>
       <TableRow>
         {columns?.map((col, idx) => (
-          <Cell key={idx} column={col} isMultiValue={hasMultiLabels} />
+          <Cell
+            key={idx}
+            column={{
+              ...col,
+              sortAccessor: col?.sortAccessor ?? getFirstKey(col.accessor),
+            }}
+          />
         ))}
       </TableRow>
     </TableHeader>

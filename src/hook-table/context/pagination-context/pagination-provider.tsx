@@ -1,20 +1,24 @@
-import { ReactNode, use, useReducer } from 'react';
+import { ReactNode, useReducer } from 'react';
 import { reducer } from './pagination-reducer';
 import { PaginationContext } from './pagination-context';
 import { ActionTypes } from './pagination-actions';
-import { TableOptionsContext } from '../table-options-context';
 import { isFunction } from '@/hook-table/utils';
+import { useTableOptionsContext } from '../options-context/options-context';
+import { PaginationValue } from '@/hook-table/types';
+
+export type PaginationState = {
+  isLastPage?: boolean;
+  pageNumber?: number;
+  pageSize?: number;
+  onPaginate?: (value: PaginationValue) => Promise<void>;
+  numberOfRecords?: number;
+};
 
 type Props = {
   children: ReactNode;
-  initialState?: {
-    isLastPage?: boolean;
-    numberOfRecords?: number;
-    onPaginate?: (pageNumber: number, pageSize: number) => Promise<void>;
-    paginate?: boolean;
-    pageNumber?: number;
-    pageSize?: number;
-    isLoading?: boolean;
+  initialState?: PaginationState & {
+    isPaginationEnabled: boolean;
+    isServersidePagination: boolean;
   };
 };
 
@@ -27,78 +31,72 @@ export const PaginationContextProvider = ({
   children,
   initialState,
 }: Props) => {
-  const { pagination } = use(TableOptionsContext) || {};
+  const { pagination } = useTableOptionsContext() || {};
+
+  const { isPaginationEnabled, isServersidePagination } = initialState || {};
 
   const currentPageSize =
     initialState?.pageSize || pagination?.defaultPageSize || 10;
 
-  const isManualPagination =
-    initialState?.onPaginate && isFunction(initialState.onPaginate);
-
   const [state, dispatch] = useReducer(reducer, {
     pageNumber: initialState?.pageNumber || 1,
     pageSize: currentPageSize,
-    paginate: !!initialState?.paginate || isManualPagination,
+    paginate: isPaginationEnabled,
     pageCount: getPageCount(initialState?.numberOfRecords, currentPageSize),
     isLastPage: initialState?.isLastPage,
-    isManualPagination,
-    isLoading: !!initialState?.isLoading,
+    isServersidePagination,
   });
 
-  const search = async (pageNumber: number, pageSize: number) => {
-    if (initialState?.onPaginate && isFunction(initialState.onPaginate)) {
-      return await initialState?.onPaginate(pageNumber, pageSize);
+  const search = (pageNumber: number, pageSize: number) => {
+    const paginationFunction =
+      initialState?.onPaginate || pagination?.onPaginate;
+
+    if (paginationFunction && isFunction(paginationFunction)) {
+      paginationFunction({ pageNumber, pageSize });
     }
   };
 
-  const setLoadingFalse = () =>
-    dispatch({ type: ActionTypes.LOADING, isLoading: false });
-
   const goToPage = (pageNumber: number) => {
+    if (isServersidePagination) {
+      return search(pageNumber, state.pageSize);
+    }
+
     dispatch({
       type: ActionTypes.PAGE_NUMBER,
       pageNumber,
-      isLoading: state.isManualPagination ? true : false,
     });
-    if (isManualPagination) {
-      return search(pageNumber, state.pageSize)?.finally(setLoadingFalse);
-    }
   };
 
   const nextPage = () => {
+    if (isServersidePagination) {
+      return search(state.pageNumber + 1, state.pageSize);
+    }
+
     dispatch({
       type: ActionTypes.NEXT,
-      isLoading: state.isManualPagination ? true : false,
     });
-    if (isManualPagination) {
-      return search(state.pageNumber + 1, state.pageSize)?.finally(
-        setLoadingFalse,
-      );
-    }
   };
 
   const previousPage = () => {
+    if (isServersidePagination) {
+      return search(state.pageNumber - 1, state.pageSize);
+    }
+
     dispatch({
       type: ActionTypes.PREVIOUS,
-      isLoading: state.isManualPagination ? true : false,
     });
-    if (isManualPagination) {
-      return search(state.pageNumber - 1, state.pageSize)?.finally(
-        setLoadingFalse,
-      );
-    }
   };
 
   const setPageSize = (pageSize: number) => {
+    if (isServersidePagination) {
+      return search(1, pageSize);
+    }
+
     dispatch({
       type: ActionTypes.PAGE_SIZE,
       pageSize,
       pageCount: getPageCount(initialState?.numberOfRecords, pageSize),
-      isLoading: state.isManualPagination ? true : false,
     });
-    if (isManualPagination) {
-      return search(1, pageSize)?.finally(setLoadingFalse);
-    }
   };
 
   return (
@@ -110,8 +108,6 @@ export const PaginationContextProvider = ({
         goToPage,
         setPageSize,
         search,
-        setLoading: (isLoading: boolean) =>
-          dispatch({ type: ActionTypes.LOADING, isLoading }),
       }}
     >
       {children}
