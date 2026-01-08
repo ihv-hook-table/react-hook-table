@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -30,23 +31,31 @@ export const PageSize = () => {
     return null;
   }
 
+  const options = pagination?.pageSizeOptions?.map(item => ({
+    label: item,
+    value: item,
+  }));
+
   return (
-    <div className="flex items-center space-x-2 pb-4">
-      <p className="text-sm font-medium">Rows per page</p>
+    <div className="flex items-center space-x-2 pb-4 relative">
+      <p className="text-sm font-normal">Rows per page</p>
       <Select
         value={String(pageSize)}
         onValueChange={value => setPageSize(Number(value))}
         disabled={isLoading}
+        items={options}
       >
-        <SelectTrigger className="h-8 w-[70px]">
-          <SelectValue placeholder={5} />
+        <SelectTrigger className="w-17.5" size="sm">
+          <SelectValue />
         </SelectTrigger>
-        <SelectContent side="top">
-          {pagination?.pageSizeOptions?.map(value => (
-            <SelectItem key={value} value={`${value}`}>
-              {value}
-            </SelectItem>
-          ))}
+        <SelectContent align="start" className="min-w-17.5">
+          <SelectGroup>
+            {pagination?.pageSizeOptions?.map(value => (
+              <SelectItem key={value} value={`${value}`}>
+                {value}
+              </SelectItem>
+            ))}
+          </SelectGroup>
         </SelectContent>
       </Select>
     </div>
@@ -73,7 +82,7 @@ export function Pagination() {
 
   return (
     <div className="flex items-center justify-end py-4">
-      <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+      <div className="flex w-25 items-center justify-center text-sm font-medium">
         {isServersidePagination
           ? `Page ${pageNumber}`
           : `Page ${pageNumber} of ${pageCount}`}
