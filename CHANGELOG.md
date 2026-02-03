@@ -1,5 +1,12 @@
 # @iff/react-hook-table
 
+## 0.6.1
+
+### Patch Changes
+
+- 9d4314d: Update example tailwind version to 4
+  Switch shadcn to base-ui components
+
 ## 0.6.0
 
 ### Minor Changes
