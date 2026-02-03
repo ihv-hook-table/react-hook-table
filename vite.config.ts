@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 // import dts from 'vite-plugin-dts';
 import dtsBundleGenerator from 'unplugin-dts-bundle-generator/vite';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   build: {
@@ -40,6 +41,7 @@ export default defineConfig({
         preferredConfigPath: './tsconfig.app.json',
       },
     }),
+    tailwindcss(),
   ],
   resolve: {
     alias: {
