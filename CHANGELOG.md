@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.6.2
+
+### Patch Changes
+
+- 4422716: Update dependencies with latest versions
+
 ## 0.6.1
 
 ### Patch Changes
