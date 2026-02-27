@@ -14,7 +14,7 @@ import {
   NoResultsProps,
   TableRowProps,
   PaginationValue,
-  RowSelectProps,
+  TableRecord,
 } from '../../types';
 
 export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
@@ -42,7 +42,10 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @param RowSelect - Component that renders the row selection checkbox.
      * @returns
      */
-    RowSelect?: ComponentType<RowSelectProps>;
+    RowSelect?: ComponentType<{
+      accessor: keyof TableRecord;
+      rowData: TableRecord;
+    }>;
     /**
      * @param Pagination - Component that renders the pagination section.
      * @returns
