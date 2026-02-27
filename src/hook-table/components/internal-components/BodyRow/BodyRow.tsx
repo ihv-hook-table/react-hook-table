@@ -3,6 +3,7 @@ import type { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 import { ColumnData } from './ColumnData';
 import { isFunction } from '../../../utils';
 import { TableData, TableRow, Expander } from '../../default-components';
+import { RowSelect } from '../../default-components/row-select';
 
 type Props<
   T extends TableRecord = TableRecord,
@@ -67,6 +68,7 @@ export const BodyRow = <
 
           const toggle = () =>
             setExpanded(expanded && isExpanded ? undefined : actionIdentifier);
+
           return (
             <TableData
               key={colIndex}
@@ -79,6 +81,12 @@ export const BodyRow = <
                   isOpen={isExpanded}
                   toggle={toggle}
                   action={actionIdentifier}
+                />
+              ) : columnRest?.select ? (
+                <RowSelect
+                  rowData={rowData}
+                  // Temproray solution to get it working, need to refactor select logic
+                  accessor={columnRest.accessor as keyof T}
                 />
               ) : (
                 <ColumnData {...columnRest} rowData={rowData} />

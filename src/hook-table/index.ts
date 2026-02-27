@@ -3,6 +3,7 @@ export { useSortingContext } from './context/sort-context/sort-context';
 export { useLoadingContext } from './context/loading-context/loading-context';
 export { usePaginationContext } from './context/pagination-context/pagination-context';
 export { useTableOptionsContext } from './context/options-context/options-context';
+export { useSelectContext } from './context/select-context/select-context';
 
 export type {
   ColumnAlignmentProps,

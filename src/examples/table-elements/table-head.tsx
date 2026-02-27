@@ -51,11 +51,15 @@ const getIcon = (direction: 'asc' | 'desc' | 'none', isSorting?: boolean) => {
 const TableHeadWrapper = ({
   children,
   alignment,
-  isSorting,
+  sortAccessor,
   ...rest
 }: ComponentProps<'button'> &
-  ColumnAlignmentProps & { isSorting: boolean }) => {
-  const { sortDirection } = useSortingContext();
+  ColumnAlignmentProps & { sortAccessor: string }) => {
+  const { sortDirection, sortAccessor: currentSortAccessor } =
+    useSortingContext();
+
+  const isSorting = sortAccessor === currentSortAccessor;
+
   return (
     <button {...rest}>
       <div
@@ -80,18 +84,13 @@ export const TableHead = ({
   sortAccessor,
   ...props
 }: Props) => {
-  const {
-    onSort,
-    sortingEnabled,
-    sortAccessor: currentSortAccessor,
-  } = useSortingContext();
-  const isSorting = currentSortAccessor === sortAccessor;
+  const { onSort, sortingEnabled } = useSortingContext();
 
   return (
     <CnTableHead
       {...props}
       // Disable wrapping text in table head cells.
-      // Add alignment props received from ihv/react-hook-table.
+      // Add alignment props received from table engine.
       className={cn(
         'text-nowrap h-min p-2',
         cellAlignment({ alignment }),
@@ -101,7 +100,7 @@ export const TableHead = ({
       {sortingEnabled && !!sortAccessor ? (
         <TableHeadWrapper
           onClick={() => onSort(sortAccessor)}
-          isSorting={isSorting}
+          sortAccessor={sortAccessor}
           alignment={alignment}
         >
           {children}

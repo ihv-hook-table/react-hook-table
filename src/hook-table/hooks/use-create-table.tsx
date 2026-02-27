@@ -33,6 +33,11 @@ type TableProps<T extends TableRecord = TableRecord> = {
         pageSize?: number;
       }
     | boolean;
+  selectActions?: {
+    action?: string;
+    label: string;
+    onClick: (selectedRows: T[]) => void | Promise<void>;
+  }[];
   sortingEnabled?: boolean;
 } & ComponentProps<'table'>;
 

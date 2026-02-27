@@ -21,6 +21,7 @@ import {
   PageSize,
   Pagination,
 } from './table-elements';
+import { RowSelect } from './table-elements/row-select';
 
 type FormatProps = {
   money: (money: MoneyType) => string;
@@ -42,6 +43,7 @@ export const useTable = <T extends TableRecord = TableRecord>() => {
     components: {
       BottomToolbar: Pagination,
       Expander,
+      RowSelect,
       TopToolbar: PageSize,
       Table,
       TableHeader,

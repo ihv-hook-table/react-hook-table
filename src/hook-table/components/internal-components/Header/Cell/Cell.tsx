@@ -11,10 +11,12 @@ type HeaderCellProps<T extends TableRecord = TableRecord> = {
 export const Cell = <T extends TableRecord = TableRecord>({
   column,
 }: HeaderCellProps<T>) => {
-  const { alignment = 'left', accessor, sortAccessor } = column || {};
+  const { alignment = 'left', accessor, sortAccessor, select } = column || {};
 
   // Determine sortAccessor key
-  const sortAccessorKey = sortAccessor ?? getFirst(accessor);
+  const sortAccessorKey = select
+    ? undefined
+    : (sortAccessor ?? getFirst(accessor));
 
   return (
     <TableHead alignment={alignment} sortAccessor={sortAccessorKey}>
@@ -27,9 +29,10 @@ const CellValue = <T extends TableRecord = TableRecord>({
   accessor,
   header,
   action,
+  select,
 }: ColumnProps<T>) => {
   const { translate } = use(TableOptionsContext) || {};
-  const headerLabel = header ?? accessor;
+  const headerLabel = select ? undefined : (header ?? accessor);
 
   const labelsArray = toArray(headerLabel) || '';
 

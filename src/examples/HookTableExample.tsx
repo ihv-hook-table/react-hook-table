@@ -46,6 +46,7 @@ export const HookTableExample = () => {
         }}
         sortingEnabled
       >
+        <Column select accessor="id" colWidth={2.1} alignment="center" />
         <Column
           action
           // defaultExpanded={({ id }) => ['Row 2', 'Row 8'].includes(id)}
@@ -69,7 +70,10 @@ export const HookTableExample = () => {
           header="Row total"
           alignment="right"
           colWidth={10}
-          footer={formatMoney({ amount: 123456.56, currency: 'EUR' })}
+          footer={{
+            value: formatMoney({ amount: 123456.56, currency: 'EUR' }),
+            colSpan: 2,
+          }}
         >
           {({ qty, price }) =>
             formatMoney({
@@ -78,6 +82,7 @@ export const HookTableExample = () => {
             })
           }
         </Column>
+        {/** Maybe implement emptyFooter prop to avoid using &nbsp; */}
         <Column action="delete" colWidth={2.1} footer="&nbsp;">
           {({ id }, { closeSubrow }) => (
             <Confirm id={id} onClose={closeSubrow} />

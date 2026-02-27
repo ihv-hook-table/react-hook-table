@@ -13,6 +13,7 @@ import {
 } from './pagination-context/pagination-provider';
 import { SortingContextProvider } from './sort-context/sort-provider';
 import { DataContext } from './data-context/data-context';
+import { SelectContextProvider } from './select-context/select-provider';
 
 type Props<
   T extends TableRecord = TableRecord,
@@ -74,7 +75,9 @@ export const TableContextProvider = <
             }}
           >
             <SortingContextProvider initialState={{ sortingEnabled }}>
-              <DataContext value={{ data }}>{children}</DataContext>
+              <SelectContextProvider>
+                <DataContext value={{ data }}>{children}</DataContext>
+              </SelectContextProvider>
             </SortingContextProvider>
           </PaginationContextProvider>
         </LoadingContext>
