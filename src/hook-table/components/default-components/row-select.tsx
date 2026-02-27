@@ -31,15 +31,15 @@ const InnerRowSelect = <T extends TableRecord = TableRecord>({
   const toggle = () => {
     if (!accessor || !rowData || !Object.keys(rowData).length) return;
 
-    return state.get(accessor)
-      ? deselectRow(accessor)
-      : selectRow(accessor, rowData);
+    return state.get(rowData[accessor])
+      ? deselectRow(rowData[accessor])
+      : selectRow(rowData[accessor], rowData);
   };
 
   return (
     <input
       type="checkbox"
-      checked={!!state.get(accessor)}
+      checked={rowData && !!state.get(rowData[accessor])}
       onChange={toggle}
       disabled={disabled}
     />
