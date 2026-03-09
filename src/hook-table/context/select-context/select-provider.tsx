@@ -1,19 +1,30 @@
-import { ReactNode, useReducer } from 'react';
+import { ReactNode, useMemo, useReducer } from 'react';
 import { TableRecord } from '@/hook-table/types';
 import { SelectContext } from './select-context';
 import { reducer } from './select-reducer';
 import { ActionTypes } from './select-actions';
 
-type Props = {
+type Props<T extends TableRecord = TableRecord> = {
   children: ReactNode;
+  selectActions?: {
+    action?: string;
+    label: string;
+    onClick: (selectedRows: T[]) => void | Promise<void>;
+  }[];
 };
 
 export const SelectContextProvider = <T extends TableRecord = TableRecord>({
   children,
-}: Props) => {
+  selectActions,
+}: Props<T>) => {
   const [state, dispatch] = useReducer(reducer<T>, {
     selectedRows: new Map<T[keyof T], T>(),
   });
+
+  const currentSelectedRows = useMemo(
+    () => Array.from(state.selectedRows.values()),
+    [state.selectedRows],
+  );
 
   const selectRow = (rowIndex: T[keyof T], row: T) => {
     dispatch({
@@ -47,6 +58,18 @@ export const SelectContextProvider = <T extends TableRecord = TableRecord>({
     });
   };
 
+  const wrappedSelectActions = useMemo(
+    () =>
+      selectActions?.map(({ onClick, ...action }) => ({
+        ...action,
+        onClick: async (selectedRows?: T[]) => {
+          await Promise.resolve(onClick(selectedRows ?? currentSelectedRows));
+          deselectAll();
+        },
+      })),
+    [currentSelectedRows, selectActions],
+  );
+
   return (
     <SelectContext
       value={{
@@ -55,6 +78,11 @@ export const SelectContextProvider = <T extends TableRecord = TableRecord>({
         deselectRow: deselectRow as (rowIndex: unknown) => void,
         selectAll: selectAll as (rows: Map<unknown, TableRecord>) => void,
         deselectAll: deselectAll as () => void,
+        selectActions: wrappedSelectActions as {
+          action?: string;
+          label: string;
+          onClick: (selectedRows?: TableRecord[]) => void | Promise<void>;
+        }[],
       }}
     >
       {children}

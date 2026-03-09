@@ -15,15 +15,18 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import {
+  TableRecord,
   useLoadingContext,
   usePaginationContext,
+  useSelectContext,
   useTableOptionsContext,
 } from '@/hook-table';
 
-export const PageSize = () => {
+export const PageSize = <T extends TableRecord = TableRecord>() => {
   const { state, setPageSize } = usePaginationContext();
   const { pagination } = useTableOptionsContext();
   const { isLoading } = useLoadingContext();
+  const { selectActions, state: selectState } = useSelectContext<T>();
 
   const { pageSize } = state;
 
@@ -36,28 +39,45 @@ export const PageSize = () => {
     value: item,
   }));
 
+  const selectedRows = Array.from(selectState.values());
+
   return (
-    <div className="flex items-center space-x-2 pb-4 relative">
-      <p className="text-sm font-normal">Rows per page</p>
-      <Select
-        value={String(pageSize)}
-        onValueChange={value => setPageSize(Number(value))}
-        disabled={isLoading}
-        items={options}
-      >
-        <SelectTrigger className="w-17.5" size="sm">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent align="start" className="min-w-17.5">
-          <SelectGroup>
-            {pagination?.pageSizeOptions?.map(value => (
-              <SelectItem key={value} value={`${value}`}>
-                {value}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+    <div className="flex justify-between">
+      <div className="flex items-center space-x-2 pb-4 relative">
+        <p className="text-sm font-normal">Rows per page</p>
+        <Select
+          value={String(pageSize)}
+          onValueChange={value => setPageSize(Number(value))}
+          disabled={isLoading}
+          items={options}
+        >
+          <SelectTrigger className="w-17.5" size="sm">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align="start" className="min-w-17.5">
+            <SelectGroup>
+              {pagination?.pageSizeOptions?.map(value => (
+                <SelectItem key={value} value={`${value}`}>
+                  {value}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="flex gap-2">
+        {selectActions &&
+          selectActions.length > 0 &&
+          selectActions?.map(({ label, onClick }) => (
+            <Button
+              onClick={() => onClick()}
+              key={label}
+              disabled={!selectedRows.length}
+            >
+              {label}
+            </Button>
+          ))}
+      </div>
     </div>
   );
 };

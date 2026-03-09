@@ -43,8 +43,11 @@ export type TableOptionsContextType<F extends FormatOptions = FormatOptions> = {
      * @returns
      */
     RowSelect?: ComponentType<{
-      accessor: keyof TableRecord;
-      rowData: TableRecord;
+      disabled?: boolean;
+      accessor: keyof TableRecord | undefined;
+      isSelected: boolean;
+      indeterminate: boolean;
+      toggle?: () => void;
     }>;
     /**
      * @param Pagination - Component that renders the pagination section.

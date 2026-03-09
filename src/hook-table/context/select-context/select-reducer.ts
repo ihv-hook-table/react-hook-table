@@ -1,7 +1,7 @@
 import { TableRecord } from '@/hook-table/types';
 import { Actions, ActionTypes } from './select-actions';
 
-export type State<T extends TableRecord> = {
+type State<T extends TableRecord> = {
   selectedRows: Map<T[keyof T], T>;
 };
 

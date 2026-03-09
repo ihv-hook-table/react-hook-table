@@ -44,6 +44,22 @@ export const HookTableExample = () => {
           pageSize: data?.pageSize,
           isLastPage: data?.isLastPage,
         }}
+        selectActions={[
+          {
+            label: 'Remove',
+            onClick: rows => {
+              const ids = rows.map(({ id }) => id);
+              console.log('Remove', ids);
+            },
+          },
+          {
+            label: 'Disable',
+            onClick: rows => {
+              const ids = rows.map(({ id }) => id);
+              console.log('Disable', ids);
+            },
+          },
+        ]}
         sortingEnabled
       >
         <Column select accessor="id" colWidth={2.1} alignment="center" />
@@ -54,15 +70,15 @@ export const HookTableExample = () => {
         >
           {({ additionalData }) => <Subtable data={additionalData} />}
         </Column>
-        <Column accessor={['id', 'item']} colWidth={10} />
+        <Column accessor={['id']} colWidth={10} />
         <Column accessor="date" format="date" colWidth={10} />
-        <Column accessor="item" />
-        <Column accessor="qty" alignment="center" colWidth={10} />
+        <Column accessor={['item', 'description']} />
+        <Column accessor="qty" alignment="right" colWidth={10} />
         <Column
           accessor="price"
           format="money"
           alignment="right"
-          footer={{ value: 'Total:', colSpan: 6 }}
+          footer={{ value: 'Total:', colSpan: 7 }}
           colWidth={10}
           sortAccessor="price.amount"
         />
@@ -72,7 +88,6 @@ export const HookTableExample = () => {
           colWidth={10}
           footer={{
             value: formatMoney({ amount: 123456.56, currency: 'EUR' }),
-            colSpan: 2,
           }}
         >
           {({ qty, price }) =>

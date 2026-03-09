@@ -56,6 +56,7 @@ export const useCreateTable = <
         hideHeader = false,
         isLoading,
         paginate,
+        selectActions,
         sortingEnabled,
         ...htmlProps
       }: TableProps<T>) => {
@@ -66,6 +67,7 @@ export const useCreateTable = <
             isLoading={isLoading}
             data={data}
             paginate={paginate}
+            selectActions={selectActions}
             sortingEnabled={sortingEnabled}
           >
             <Toolbar element="TopToolbar" />

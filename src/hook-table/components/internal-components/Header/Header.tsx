@@ -20,9 +20,7 @@ export const Header = () => {
             key={idx}
             column={{
               ...col,
-              sortAccessor: col?.select
-                ? undefined
-                : (col?.sortAccessor ?? getFirstKey(col.accessor)),
+              sortAccessor: col?.sortAccessor ?? getFirstKey(col.accessor),
             }}
           />
         ))}

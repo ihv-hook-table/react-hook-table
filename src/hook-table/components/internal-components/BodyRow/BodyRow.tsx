@@ -1,9 +1,11 @@
-import { useMemo, useState } from 'react';
 import type { ColumnProps, FormatOptions, TableRecord } from '../../../types';
 import { ColumnData } from './ColumnData';
-import { isFunction } from '../../../utils';
 import { TableData, TableRow, Expander } from '../../default-components';
 import { RowSelect } from '../../default-components/row-select';
+import { useExpandedState } from './use-expanded-state';
+import { getActionIdentifier } from './utils';
+import { useSelectedState } from './use-selected-state';
+import { getFirst } from '../../../utils';
 
 type Props<
   T extends TableRecord = TableRecord,
@@ -13,14 +15,6 @@ type Props<
   rowData: T;
 };
 
-const getActionIdentifier = (action?: boolean | string) => {
-  if (typeof action === 'string') {
-    return action;
-  }
-
-  return action ? 'default' : undefined;
-};
-
 export const BodyRow = <
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,
@@ -28,46 +22,26 @@ export const BodyRow = <
   columns,
   rowData,
 }: Props<T, F>) => {
-  const isDefaultExpanded = useMemo(() => {
-    const values = columns.filter(({ action }) => !!action);
+  const { expanded, expandableContent, toggleExpanded } = useExpandedState({
+    columns,
+    rowData,
+  });
 
-    const expandedRow = values.filter(({ defaultExpanded }) =>
-      isFunction(defaultExpanded) ? defaultExpanded(rowData) : defaultExpanded,
-    );
-
-    if (expandedRow.length > 1) {
-      console.warn(
-        'Multiple defaultExpanded rows detected. Only the first match will be expanded.',
-      );
-    }
-
-    return expandedRow?.length
-      ? getActionIdentifier(expandedRow[0]?.action)
-      : undefined;
-  }, [columns, rowData]);
-
-  const [expanded, setExpanded] = useState<string | undefined>(
-    isDefaultExpanded,
-  );
-
-  const { children } =
-    columns.find(({ action }) => expanded === getActionIdentifier(action)) ||
-    {};
-
-  const expandableContent = isFunction(children)
-    ? children(rowData, { closeSubrow: () => setExpanded(undefined) })
-    : children;
+  const { isSelected, toggle } = useSelectedState({
+    rowData,
+  });
 
   return (
     <>
-      <TableRow data-expanded={!!expanded}>
+      <TableRow
+        data-expanded={!!expanded}
+        data-selected={isSelected(
+          getFirst(columns.find(({ select }) => select)?.accessor),
+        )}
+      >
         {columns.map(({ action, ...columnRest }, colIndex) => {
           const { alignment = 'left', wrap = false } = columnRest;
           const actionIdentifier = getActionIdentifier(action);
-          const isExpanded = expanded === actionIdentifier;
-
-          const toggle = () =>
-            setExpanded(expanded && isExpanded ? undefined : actionIdentifier);
 
           return (
             <TableData
@@ -78,15 +52,16 @@ export const BodyRow = <
             >
               {action ? (
                 <Expander
-                  isOpen={isExpanded}
-                  toggle={toggle}
+                  isOpen={expanded === actionIdentifier}
+                  toggle={() => toggleExpanded(action)}
                   action={actionIdentifier}
                 />
               ) : columnRest?.select ? (
                 <RowSelect
-                  rowData={rowData}
-                  // Temproray solution to get it working, need to refactor select logic
-                  accessor={columnRest.accessor as keyof T}
+                  indeterminate={false}
+                  isSelected={isSelected(getFirst(columnRest.accessor))}
+                  accessor={getFirst(columnRest.accessor)}
+                  toggle={() => toggle(getFirst(columnRest.accessor))}
                 />
               ) : (
                 <ColumnData {...columnRest} rowData={rowData} />
