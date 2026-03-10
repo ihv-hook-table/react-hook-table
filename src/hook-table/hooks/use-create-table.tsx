@@ -33,6 +33,11 @@ type TableProps<T extends TableRecord = TableRecord> = {
         pageSize?: number;
       }
     | boolean;
+  selectActions?: {
+    action?: string;
+    label: string;
+    onClick: (selectedRows: T[]) => void | Promise<void>;
+  }[];
   sortingEnabled?: boolean;
 } & ComponentProps<'table'>;
 
@@ -51,6 +56,7 @@ export const useCreateTable = <
         hideHeader = false,
         isLoading,
         paginate,
+        selectActions,
         sortingEnabled,
         ...htmlProps
       }: TableProps<T>) => {
@@ -61,6 +67,7 @@ export const useCreateTable = <
             isLoading={isLoading}
             data={data}
             paginate={paginate}
+            selectActions={selectActions}
             sortingEnabled={sortingEnabled}
           >
             <Toolbar element="TopToolbar" />

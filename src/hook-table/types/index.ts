@@ -76,6 +76,7 @@ export type ColumnProps<
   T extends TableRecord = TableRecord,
   F extends FormatOptions = FormatOptions,
 > = {
+  select?: boolean;
   sortAccessor?: ColumnAccessor<T>;
   alignment?: ColumnAlignment;
   colWidth?: number;

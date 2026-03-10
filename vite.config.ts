@@ -1,8 +1,8 @@
 import { defineConfig, normalizePath } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
-// import dts from 'vite-plugin-dts';
 import dtsBundleGenerator from 'unplugin-dts-bundle-generator/vite';
+// import dts from 'unplugin-dts/vite'; not there yet https://github.com/qmhc/unplugin-dts
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({

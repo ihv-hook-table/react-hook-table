@@ -11,7 +11,7 @@ export const Expander = ({ isOpen, toggle, action }: TableExpanderProps) => {
   if (action === 'delete') {
     return (
       <button type="button" onClick={toggle} className="p-3">
-        <LucideCircleX size={14} className="text-muted-foreground" />
+        <LucideCircleX size={16} className="text-muted-foreground" />
       </button>
     );
   }
@@ -20,9 +20,9 @@ export const Expander = ({ isOpen, toggle, action }: TableExpanderProps) => {
     <div className="h-full flex items-center">
       <button type="button" onClick={toggle} className="p-3">
         {isOpen ? (
-          <LucideChevronDown size={14} className="text-muted-foreground" />
+          <LucideChevronDown size={20} className="text-muted-foreground" />
         ) : (
-          <LucideChevronRight size={14} className="text-muted-foreground" />
+          <LucideChevronRight size={20} className="text-muted-foreground" />
         )}
       </button>
     </div>

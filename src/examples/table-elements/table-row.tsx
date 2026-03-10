@@ -11,11 +11,13 @@ export const TableRow = ({ className, ...props }: Props) => {
   return (
     <CnTableRow
       // Customize the row style when it is expanded.
+      // Customize the row style when it is selected.
       // Customize the row style when it is a subrow.
       className={cn(
         'data-[expanded=true]:bg-muted',
-        'data-[expanded=true]:border-b-0',
+        'data-[expanded=true]:border-b-muted',
         'data-[expanded=true]:hover:bg-muted',
+        'data-[selected=true]:bg-muted',
         'data-[subrow=true]:bg-muted',
         'data-[subrow=true]:hover:bg-muted',
         className,

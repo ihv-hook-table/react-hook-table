@@ -1,9 +1,21 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": [
-    "{index,main,cli}.{js,cjs,mjs,jsx,ts,cts,mts,tsx}",
-    "src/{index,main,cli}.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"
+  "project": ["src/hook-table/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"],
+  "ignore": [
+    "src/components/**",
+    "src/examples/**",
+    "src/index.css",
+    "src/main.tsx",
+    "src/lib/**"
   ],
-  "project": ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"],
-  "ignoreDependencies": ["prettier"]
+  "ignoreDependencies": [
+    "prettier",
+    "@base-ui/react",
+    "babel-plugin-react-compiler",
+    "class-variance-authority",
+    "clsx",
+    "lucide-react",
+    "tailwind-merge",
+    "tailwindcss-animate"
+  ]
 }

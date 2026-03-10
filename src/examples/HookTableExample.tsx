@@ -44,8 +44,25 @@ export const HookTableExample = () => {
           pageSize: data?.pageSize,
           isLastPage: data?.isLastPage,
         }}
+        selectActions={[
+          {
+            label: 'Remove',
+            onClick: rows => {
+              const ids = rows.map(({ id }) => id);
+              console.log('Remove', ids);
+            },
+          },
+          {
+            label: 'Disable',
+            onClick: rows => {
+              const ids = rows.map(({ id }) => id);
+              console.log('Disable', ids);
+            },
+          },
+        ]}
         sortingEnabled
       >
+        <Column select accessor="id" colWidth={2.1} alignment="center" />
         <Column
           action
           // defaultExpanded={({ id }) => ['Row 2', 'Row 8'].includes(id)}
@@ -53,15 +70,15 @@ export const HookTableExample = () => {
         >
           {({ additionalData }) => <Subtable data={additionalData} />}
         </Column>
-        <Column accessor={['id', 'item']} colWidth={10} />
+        <Column accessor={['id']} colWidth={10} />
         <Column accessor="date" format="date" colWidth={10} />
-        <Column accessor="item" />
-        <Column accessor="qty" alignment="center" colWidth={10} />
+        <Column accessor={['item', 'description']} />
+        <Column accessor="qty" alignment="right" colWidth={10} />
         <Column
           accessor="price"
           format="money"
           alignment="right"
-          footer={{ value: 'Total:', colSpan: 6 }}
+          footer={{ value: 'Total:', colSpan: 7 }}
           colWidth={10}
           sortAccessor="price.amount"
         />
@@ -69,7 +86,9 @@ export const HookTableExample = () => {
           header="Row total"
           alignment="right"
           colWidth={10}
-          footer={formatMoney({ amount: 123456.56, currency: 'EUR' })}
+          footer={{
+            value: formatMoney({ amount: 123456.56, currency: 'EUR' }),
+          }}
         >
           {({ qty, price }) =>
             formatMoney({
@@ -78,6 +97,7 @@ export const HookTableExample = () => {
             })
           }
         </Column>
+        {/** Maybe implement emptyFooter prop to avoid using &nbsp; */}
         <Column action="delete" colWidth={2.1} footer="&nbsp;">
           {({ id }, { closeSubrow }) => (
             <Confirm id={id} onClose={closeSubrow} />

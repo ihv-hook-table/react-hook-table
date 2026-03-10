@@ -13,6 +13,7 @@ import {
 } from './pagination-context/pagination-provider';
 import { SortingContextProvider } from './sort-context/sort-provider';
 import { DataContext } from './data-context/data-context';
+import { SelectContextProvider } from './select-context/select-provider';
 
 type Props<
   T extends TableRecord = TableRecord,
@@ -25,6 +26,11 @@ type Props<
   paginate?: PaginationState | boolean;
   data?: T[];
   sortingEnabled?: boolean;
+  selectActions?: {
+    action?: string;
+    label: string;
+    onClick: (selectedRows: T[]) => void | Promise<void>;
+  }[];
 };
 
 const getPaginationProps = (paginate?: PaginationState | boolean) => {
@@ -52,6 +58,7 @@ export const TableContextProvider = <
   paginate = false,
   isLoading = false,
   sortingEnabled = false,
+  selectActions,
 }: Props<T, F>) => {
   const columnsProps = useMemo(
     () => getChildrenProps(columns) || [],
@@ -74,7 +81,9 @@ export const TableContextProvider = <
             }}
           >
             <SortingContextProvider initialState={{ sortingEnabled }}>
-              <DataContext value={{ data }}>{children}</DataContext>
+              <SelectContextProvider selectActions={selectActions}>
+                <DataContext value={{ data }}>{children}</DataContext>
+              </SelectContextProvider>
             </SortingContextProvider>
           </PaginationContextProvider>
         </LoadingContext>
