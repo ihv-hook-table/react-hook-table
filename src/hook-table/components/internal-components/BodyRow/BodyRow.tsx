@@ -48,7 +48,7 @@ export const BodyRow = <
               key={colIndex}
               alignment={alignment}
               expandable={!!action}
-              data-wrap={wrap}
+              data-wrap={action || columnRest?.select ? false : wrap}
             >
               {action ? (
                 <Expander
