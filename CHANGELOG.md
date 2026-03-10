@@ -1,5 +1,12 @@
 # @iff/react-hook-table
 
+## 0.6.3
+
+### Patch Changes
+
+- a920abc: Add basic row select functionality
+- 28d1f96: remove unused vite-plugin-dts
+
 ## 0.6.2
 
 ### Patch Changes
