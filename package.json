@@ -19,7 +19,7 @@
     "lint": "vp lint .",
     "preview": "vp preview",
     "knip": "knip",
-    "release": "vp pack && changeset publish",
+    "release": "vp pack src/hook-table/index.ts && changeset publish",
     "changeset": "changeset"
   },
   "keywords": [

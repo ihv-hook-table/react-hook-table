@@ -10,8 +10,8 @@ jobs:
     steps:
       - uses: voidzero-dev/setup-vp@v1
         with:
-          node-version: '24'
+          node-version: "lts"
           cache: true
 
       - run: vp install
-      - run: vp pack
+      - run: vp pack src/hook-table/index.ts
