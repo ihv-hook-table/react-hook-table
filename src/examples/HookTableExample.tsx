@@ -22,16 +22,31 @@ const Subtable = ({ data }: SubTableProps) => {
   );
 };
 
+const selectActions = [
+  {
+    label: 'Remove',
+    onClick: (rows: TableData[]) => {
+      const ids = rows.map(({ id }) => id);
+      console.log('Remove', ids);
+    },
+  },
+  {
+    label: 'Disable',
+    onClick: (rows: TableData[]) => {
+      const ids = rows.map(({ id }) => id);
+      console.log('Disable', ids);
+    },
+  },
+];
+
 export const HookTableExample = () => {
   const { Column, Table } = useTable<TableData>();
-  // For manual pagination testing
   const { search, data, isLoading } = useMockData(5);
 
   return (
     <div className="p-8">
       <Table
         data={data?.values}
-        // data={mockData}
         isLoading={isLoading}
         caption={{
           value: 'Example table rendering with chadcn/ui table elements',
@@ -39,27 +54,12 @@ export const HookTableExample = () => {
         }}
         paginate={{
           onPaginate: ({ pageNumber, pageSize }) =>
-            search(pageNumber, pageSize),
+            search({ pageNumber, pageSize }),
           pageNumber: data?.pageNumber,
           pageSize: data?.pageSize,
           isLastPage: data?.isLastPage,
         }}
-        selectActions={[
-          {
-            label: 'Remove',
-            onClick: rows => {
-              const ids = rows.map(({ id }) => id);
-              console.log('Remove', ids);
-            },
-          },
-          {
-            label: 'Disable',
-            onClick: rows => {
-              const ids = rows.map(({ id }) => id);
-              console.log('Disable', ids);
-            },
-          },
-        ]}
+        selectActions={selectActions}
         sortingEnabled
       >
         <Column select accessor="id" colWidth={2.1} alignment="center" />
