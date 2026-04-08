@@ -19,7 +19,8 @@
     "lint": "vp lint .",
     "preview": "vp preview",
     "knip": "knip",
-    "release": "vp pack && changeset publish"
+    "release": "vp pack && changeset publish",
+    "changeset": "changeset"
   },
   "keywords": [
     "react",
