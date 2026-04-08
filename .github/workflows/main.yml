@@ -14,4 +14,4 @@ jobs:
           cache: true
 
       - run: vp install
-      - run: vp pack ./src/hook-table/index.ts
+      - run: vp pack /src/hook-table/index.ts
