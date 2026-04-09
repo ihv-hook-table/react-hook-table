@@ -9,7 +9,6 @@
     "src/lib/**"
   ],
   "ignoreDependencies": [
-    "prettier",
     "@base-ui/react",
     "babel-plugin-react-compiler",
     "class-variance-authority",

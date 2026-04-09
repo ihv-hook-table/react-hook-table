@@ -52,7 +52,13 @@ export const useMockData = (pageSize: number) => {
     undefined,
   );
 
-  async function search(pageNumber: number, pageSize: number) {
+  async function search({
+    pageNumber,
+    pageSize,
+  }: {
+    pageNumber: number;
+    pageSize: number;
+  }) {
     setIsLoading(true);
 
     const result = await getMockData(pageNumber, pageSize);
@@ -66,7 +72,7 @@ export const useMockData = (pageSize: number) => {
 
   useEffect(() => {
     async function initialSearch() {
-      await search(1, pageSize);
+      await search({ pageNumber: 1, pageSize });
     }
 
     initialSearch();

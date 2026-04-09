@@ -5,8 +5,9 @@ export type SortState<T extends TableRecord = TableRecord> = {
   sortDirection: SortDirection;
 };
 
-export interface ISortContextProvider<T extends TableRecord = TableRecord>
-  extends SortState<T> {
+export interface ISortContextProvider<
+  T extends TableRecord = TableRecord,
+> extends SortState<T> {
   sortingEnabled?: boolean;
   onSort: (sortAccessor: ColumnAccessor<T>) => void;
 }
