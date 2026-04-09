@@ -1,5 +1,11 @@
 # @iff/react-hook-table
 
+## 0.6.4
+
+### Patch Changes
+
+- 50c81dd: Upgrade project to vite+
+
 ## 0.6.3
 
 ### Patch Changes
