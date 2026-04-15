@@ -26,7 +26,7 @@ const getData = (
   };
 };
 
-// mocal API call
+// mock API call
 const getMockData = async (
   pageNumber: number,
   pageSize: number,
@@ -75,7 +75,7 @@ export const useMockData = (pageSize: number) => {
       await search({ pageNumber: 1, pageSize });
     }
 
-    initialSearch();
+    void initialSearch();
   }, [pageSize]);
 
   return { data, search, isLoading };

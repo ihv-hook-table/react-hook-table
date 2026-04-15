@@ -44,7 +44,7 @@ const Cell = <T extends TableRecord = TableRecord>({
 
   return (
     <TableHead alignment={alignment} colSpan={colSpan}>
-      {String(value)}
+      {typeof value === 'string' ? value : JSON.stringify(value)}
     </TableHead>
   );
 };
