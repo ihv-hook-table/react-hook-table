@@ -1,5 +1,12 @@
 # @iff/react-hook-table
 
+## 0.6.5
+
+### Patch Changes
+
+- 6055e95: update dependencies
+  update workflows
+
 ## 0.6.4
 
 ### Patch Changes
