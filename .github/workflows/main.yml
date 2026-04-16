@@ -1,18 +1,50 @@
 name: CI
+
 on:
   push:
+    # Run CI for every pushed branch, including main.
     branches:
+      - main
       - '**'
+  pull_request:
+
+concurrency:
+  # Group CI runs by workflow and ref so repeated pushes to the same branch
+  # do not waste runners on outdated work.
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  # Cancel older in-progress CI runs when a newer one starts for the same ref.
+  cancel-in-progress: true
+
+permissions:
+  # CI only needs read access to repository contents.
+  contents: read
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
+    # Prevent a stuck install or test run from hanging forever.
+    timeout-minutes: 15
+
     steps:
+      # Check out the repository code that triggered this workflow.
       - uses: actions/checkout@v6
+
+      # Install Node, restore dependency cache, and install project dependencies
+      # through Vite+.
       - uses: voidzero-dev/setup-vp@v1
         with:
-          node-version: "lts"
+          node-version: lts
           cache: true
+          run-install: true
 
-      - run: vp install
-      - run: vp pack
+      # Run formatting, lint, and TypeScript checks.
+      - name: Check
+        run: vp check
+
+      # Run the automated test suite. No tests yet.
+      # - name: Test
+      #   run: vp test
+
+      # Verify the package can actually be built for publication.
+      - name: Pack
+        run: vp pack

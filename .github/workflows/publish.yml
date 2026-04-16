@@ -1,35 +1,60 @@
-name: 'Publish'
+name: Publish
+
 on:
   workflow_run:
+    # Start this workflow when the CI workflow completes.
     workflows: [CI]
+    # Only react to CI runs that were triggered from main.
     branches: [main]
+    # Only trigger after the upstream workflow has finished.
     types: [completed]
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+concurrency:
+  # Allow only one publish pipeline per source branch at a time.
+  group: publish-${{ github.event.workflow_run.head_branch }}
+  # Keep the current publish running and queue newer ones behind it.
+  cancel-in-progress: false
 
 permissions:
+  # Needed for Changesets to create tags, releases, or update repository contents.
   contents: write
+  # Needed for Changesets to open or update a release pull request.
   pull-requests: write
+  # Needed for npm trusted publishing and provenance via GitHub OIDC.
   id-token: write
 
 jobs:
   publish:
+    # Only publish if the triggering CI workflow succeeded.
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    # Prevent a stuck publish from blocking later releases indefinitely.
+    timeout-minutes: 15
+
     steps:
+      # Check out the exact commit that passed CI, not just the latest main branch
+      # head at the time this workflow starts.
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+
+      # Install Node, restore dependency cache, and install project dependencies
+      # through Vite+ so the release script can build and publish.
       - uses: voidzero-dev/setup-vp@v1
         with:
-          node-version: 'lts'
+          node-version: lts
           cache: true
+          run-install: true
 
-      - run: vp install
-
-      - name: Create Release Pull Request or Publish
+      # Ask Changesets to either open/update a release PR or publish a release,
+      # depending on whether pending release changesets already exist.
+      - name: Create release pull request or publish
         id: changesets
         uses: changesets/action@v1
         with:
+          # Build the distributable package, then publish any pending release.
           publish: vp run release
         env:
+          # Used for GitHub operations such as creating or updating the release PR.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ''

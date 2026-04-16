@@ -16,7 +16,7 @@ export const RowSelect = <T extends TableRecord = TableRecord>({
   toggle,
   isSelected,
   disabled,
-  indeterminate = false,
+  indeterminate,
 }: Props<T>) => {
   return (
     <div className="flex justify-center">
