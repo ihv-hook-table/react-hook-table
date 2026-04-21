@@ -42,8 +42,8 @@ jobs:
         run: vp check
 
       # Run the automated test suite. No tests yet.
-      # - name: Test
-      #   run: vp test
+      - name: Test
+        run: vp test
 
       # Verify the package can actually be built for publication.
       - name: Pack

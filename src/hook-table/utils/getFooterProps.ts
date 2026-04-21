@@ -6,11 +6,17 @@ type GetFooterValueProps<T extends TableRecord = TableRecord> = {
   column: ColumnProps<T>;
 };
 
-// Allow boolean value to be used as footer value.
-// Useful when second to last column has right alignment and colspan would break the alignment.
-// Last column can have footer={true} to render empty footer cell.
+/**
+ * Allow boolean value to be used as footer value.
+ * Useful when second to last column has right alignment and colspan would break the alignment.
+ * Last column can have footer={true} to render empty footer cell.
+ */
+
 const handleBoolean = (value: unknown) =>
   isBooleanType(value) && value ? ' ' : value;
+
+const getFooterValue = (value: unknown) =>
+  value === '' || value === null || value === undefined ? '-' : value;
 
 export const getFooterProps = <T extends TableRecord = TableRecord>({
   column,
@@ -24,6 +30,6 @@ export const getFooterProps = <T extends TableRecord = TableRecord>({
   return {
     footerAlignment,
     colSpan,
-    value: value || '-',
+    value: getFooterValue(value),
   };
 };

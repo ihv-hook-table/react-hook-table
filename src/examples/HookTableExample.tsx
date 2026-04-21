@@ -97,8 +97,7 @@ export const HookTableExample = () => {
             })
           }
         </Column>
-        {/** Maybe implement emptyFooter prop to avoid using &nbsp; */}
-        <Column action="delete" colWidth={2.1} footer="&nbsp;">
+        <Column action="delete" colWidth={2.1} footer>
           {({ id }, { closeSubrow }) => (
             <Confirm id={id} onClose={closeSubrow} />
           )}

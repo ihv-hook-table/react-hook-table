@@ -1,20 +1,8 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
-  "project": ["src/hook-table/**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"],
-  "ignore": [
-    "src/components/**",
-    "src/examples/**",
-    "src/index.css",
-    "src/main.tsx",
-    "src/lib/**"
-  ],
-  "ignoreDependencies": [
-    "@base-ui/react",
-    "babel-plugin-react-compiler",
-    "class-variance-authority",
-    "clsx",
-    "lucide-react",
-    "tailwind-merge",
-    "tailwindcss-animate"
-  ]
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "project": ["src/**"],
+  "entry": ["src/hook-table/index.{js,ts,tsx}", "src/main.{js,ts,tsx}"],
+  "ignore": [],
+  "ignoreDependencies": [],
+  "exclude": ["catalog"]
 }

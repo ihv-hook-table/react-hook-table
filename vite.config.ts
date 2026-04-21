@@ -8,7 +8,7 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 export default defineConfig({
   lint: {
     ignorePatterns: ['dist', 'node_modules'],
-    plugins: ['oxc', 'typescript', 'unicorn', 'react'],
+    plugins: ['oxc', 'typescript', 'unicorn', 'react', 'vitest'],
     categories: {
       correctness: 'warn',
     },
@@ -69,19 +69,13 @@ export default defineConfig({
       build: true,
     },
   },
-  plugins: [
-    react(
-      /*{
-      babel: {
-        plugins: ['babel-plugin-react-compiler'],
-      },
-    }*/
-    ),
-    tailwindcss(),
-  ],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
     },
+  },
+  test: {
+    include: ['src/**/*.test.ts'],
   },
 });
